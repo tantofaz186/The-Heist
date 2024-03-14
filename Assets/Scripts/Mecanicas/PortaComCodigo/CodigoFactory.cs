@@ -19,35 +19,27 @@ public class CodigoFactory : SingletonNetwork<CodigoFactory>
             {
                 digitos[i] = (short)random.Next(0, 10);
             }
+
             Debug.Log("Código gerado: " + digitos[0] + digitos[1] + digitos[2] + digitos[3]);
         }
         else
         {
-            AskServerForCode();
+            AskServerForCodeServerRpc();
         }
     }
-
-    public void AskServerForCode()
-    {
-        if (IsServer) return;
-        Debug.Log("Pedindo código para o servidor.");
-        ServerGiveCodeServerRpc();
-    }
-
     [ServerRpc(RequireOwnership = false)]
-    private void ServerGiveCodeServerRpc(ServerRpcParams rpcParams = default)
+    public void AskServerForCodeServerRpc(ServerRpcParams rpcParams = default)
     {
-        if (IsServer) ClientReceiveCodeClientRpc(digitos);
+        Debug.Log("Pedindo código para o servidor.");
+        SendCodeToClientRpc(digitos, rpcParams.Receive.SenderClientId);
     }
 
     [ClientRpc]
-    private void ClientReceiveCodeClientRpc(short[] code)
+    private void SendCodeToClientRpc(short[] code, ulong clientId = 0)
     {
-        if (!IsServer)
-        {
-            digitos = code;
-            Debug.Log("Código recebido: " + code[0] + code[1] + code[2] + code[3]);
-        }
+        if (clientId != NetworkManager.Singleton.LocalClientId) return;
+        digitos = code;
+        Debug.Log("Código recebido: " + code[0] + code[1] + code[2] + code[3]);
     }
 
     public short[] GetCodigo()
@@ -57,13 +49,15 @@ public class CodigoFactory : SingletonNetwork<CodigoFactory>
 
     public bool CheckCodigo(short[] codigo)
     {
-        if (codigo.Length != digitos.Length) return false;
+        //essa linha evita que o usuário envie um código vazio
+        if (codigo.Length == 0) return false;
         return !digitos.Where((t, i) => t != codigo[i]).Any();
-    }    
+    }
+
     public void CheckCodigo(string codigo)
     {
         bool isCode = CheckCodigo(codigo.Select(c => short.Parse(c.ToString())).ToArray());
-        
+
         Debug.Log(isCode ? "Código correto" : "Código incorreto");
     }
 
