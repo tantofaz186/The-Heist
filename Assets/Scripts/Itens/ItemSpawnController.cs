@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sala;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class ItemSpawnController : SingletonNetwork<ItemSpawnController> {
+public class ItemSpawnController : NetworkBehaviour {
     [SerializeField] private List<Item> itens;
     [SerializeField] private List<Transform> spawnPoints;
     [SerializeField] private float chanceToSpawn = 0.3f;

@@ -2,7 +2,7 @@ using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
-public class CodigoFactory : SingletonNetwork<CodigoFactory>
+public class CodigoFactory : NetworkBehaviour
 {
     System.Random random = new System.Random();
 
