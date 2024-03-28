@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657832, g: 0.49641222, b: 0.57481664, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -424,14 +424,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hallways:
   - {fileID: 5132577278816812498, guid: e0541b6858476b24088249e748c89212, type: 3}
-  - {fileID: 1716476272914899772, guid: 4c0ab875276e5d3438b1ffc361ca2bbc, type: 3}
   mapCenter: {fileID: 649739658}
   roomSpawnpoints: []
   roomTypes:
   - Rooms:
-    - {fileID: 4698656019238758476, guid: ac1ad842ce5a03840bb6aee4cafa42d9, type: 3}
+    - {fileID: 8576381768680591494, guid: 4c90bf3783cb32445964c2a7113c98f9, type: 3}
+    - {fileID: 8770255870503394882, guid: e56a2e8bacdc8c846910c1889f58ce72, type: 3}
+    - {fileID: 8288673120125745419, guid: 2f2934853d4f0bb43a7bc77c69f5069f, type: 3}
   - Rooms:
-    - {fileID: 4698656019238758476, guid: e44ba321d5748064493ebbeaa9180a05, type: 3}
+    - {fileID: 8576381768680591494, guid: 79083b46959ae3d4ba3658362ea2c5e2, type: 3}
+    - {fileID: 8770255870503394882, guid: 38d9300cd6c2c664697decce890cb8dd, type: 3}
+    - {fileID: 8288673120125745419, guid: cc163cb2b8f07424b98adb82cc49f207, type: 3}
+  - Rooms:
+    - {fileID: 8576381768680591494, guid: 54f8ae62f6110804fb66535949e4bac4, type: 3}
+    - {fileID: 8770255870503394882, guid: 2c1057337110ce94fa9e9b5ab64c41cf, type: 3}
+    - {fileID: 8288673120125745419, guid: 28efcaddda7b3f342b9685381d9f678f, type: 3}
 --- !u!4 &655053266
 Transform:
   m_ObjectHideFlags: 0
@@ -1195,7 +1202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9ea15065bb8524ba580e451138ed26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  digitos: 0000000000000000
 --- !u!4 &1482767226
 Transform:
   m_ObjectHideFlags: 0
