@@ -14,9 +14,9 @@ public class RoomSpawn : MonoBehaviour
    [SerializeField] List<GameObject> roomSpawnpoints = new List<GameObject>();
 
    [SerializeField] private List<RoomTypes> themeRooms = new();
-   [SerializeField]private List<int> themeRoomsused = new();
+   [SerializeField]private List<int> themeRoomsCheck = new();
    [SerializeField] private List<RoomTypes> normalRooms = new();
-   [SerializeField]private List<int> normalRoomsused = new();
+   [SerializeField]private List<int> normalRoomsCheck = new();
    [SerializeField] private GameObject securityRoom;
    
 
@@ -58,58 +58,80 @@ public class RoomSpawn : MonoBehaviour
                   break;
            }
        }
-       Debug.Log("End");
+      
    }
 
    void SpawnThemeRoom(int x)
    {
        int rnd = Random.Range(0, themeRooms.Count);
       
-       for (int i = 0; i < themeRooms.Count; i++)
-       {   
-          Debug.Log(i);
+       bool inList = false;
+       if (themeRoomsCheck.Count <= 0)
+       {
+           themeRoomsCheck = new List<int>(){0,1,2,3};
           
-           if (themeRoomsused[i]==null||rnd != themeRoomsused[i])
-           {
-               themeRoomsused.Add(rnd);
-               int rnd2 = Random.Range(0, themeRooms[rnd].Rooms.Count);
-               Instantiate(themeRooms[rnd].Rooms[rnd2], roomSpawnpoints[x].transform.position, Quaternion.identity);
-               Debug.Log("innstanciou" + themeRooms[rnd].Rooms[rnd2].name);
-               if(themeRoomsused.Count>=themeRooms.Count)
-                   themeRoomsused.Clear();
-               return;
-           }
-           
        }
-       SpawnThemeRoom(x);
+           
+       
+       for (int i=0;i<themeRoomsCheck.Count;i++)
+       {   
+           if (rnd == themeRoomsCheck[i])
+           {   
+               inList = true;
+           }  
+       }
+
+       if (inList)
+       {    
+           themeRoomsCheck.Remove(rnd);
+           
+           int rnd2 = Random.Range(0, themeRooms[rnd].Rooms.Count);
+           Instantiate(themeRooms[rnd].Rooms[rnd2], roomSpawnpoints[x].transform.position,roomSpawnpoints[x].transform.rotation);
+       }
+       else
+       {
+           SpawnThemeRoom(x);
+       }
+       
    }
 
    void SpawnNormalRoom(int x)
    {
-       int rnd = Random.Range(0, normalRooms.Count);
-       for (int i = 0; i < normalRoomsused.Count; i++)
+       int rnd = Random.Range(0, themeRooms.Count);
+      
+       bool inList = false;
+       if (normalRoomsCheck.Count <= 0)
+       {
+           normalRoomsCheck = new List<int>(){0,1,2,3};
+          
+       }
+           
+       
+       for (int i=0;i<normalRoomsCheck.Count;i++)
        {   
-           if(normalRoomsused.Count>=normalRooms.Count)
-               normalRoomsused.Clear();
-           if (rnd == normalRoomsused[i])
-           {
-               SpawnNormalRoom(x);
-           }
-           else
-           {    
-               normalRoomsused.Add(rnd);
-               int rnd2 = Random.Range(0, normalRooms[rnd].Rooms.Count);
-               Instantiate(normalRooms[rnd].Rooms[rnd2], roomSpawnpoints[x].transform.position, Quaternion.identity);
-               
-               
-           }
+           if (rnd == normalRoomsCheck[i])
+           {   
+               inList = true;
+           }  
+       }
+
+       if (inList)
+       {    
+           normalRoomsCheck.Remove(rnd);
+           
+           int rnd2 = Random.Range(0, normalRooms[rnd].Rooms.Count);
+           Instantiate(normalRooms[rnd].Rooms[rnd2], roomSpawnpoints[x].transform.position,roomSpawnpoints[x].transform.rotation);
+       }
+       else
+       {
+           SpawnThemeRoom(x);
        }
    }
 
    void SpawnSecurity()
    {
        int rnd = Random.Range(0, roomSpawnpoints.Count);
-       Instantiate(securityRoom, roomSpawnpoints[rnd].transform.position, Quaternion.identity);
+       Instantiate(securityRoom, roomSpawnpoints[rnd].transform.position, roomSpawnpoints[rnd].transform.rotation);
        roomSpawnpoints.Remove(roomSpawnpoints[rnd]);
    }
    
