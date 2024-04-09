@@ -22,7 +22,7 @@ public class CameraLook : NetworkBehaviour
 
     private void Start()
     {
-       
+       transform.position = body.position;
         
     }
 
