@@ -1236,10 +1236,10 @@ GameObject:
   - component: {fileID: 8158612619340178471}
   - component: {fileID: 5378099781923187859}
   - component: {fileID: 7949227442281882157}
-  - component: {fileID: 1581191666678793736}
   - component: {fileID: 5469415980936001624}
   - component: {fileID: 8095632287596195212}
   - component: {fileID: 2378066787956437531}
+  - component: {fileID: 7386658526742816785}
   m_Layer: 8
   m_Name: Y Bot
   m_TagString: Player
@@ -1385,37 +1385,6 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &1581191666678793736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4683445553649119281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4c2f69c916f1b4c9e6195a0bf728f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UseUnreliableDeltas: 0
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  UseQuaternionSynchronization: 0
-  UseQuaternionCompression: 0
-  UseHalfFloatPrecision: 0
-  InLocalSpace: 0
-  Interpolate: 1
-  SlerpPosition: 0
 --- !u!114 &5469415980936001624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1484,6 +1453,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1027890303564227418, guid: e924563bfaac7074b87484b12870d425, type: 3}
   head: {fileID: 2029652792931466857}
+--- !u!114 &7386658526742816785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683445553649119281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &4702746076710964278
 GameObject:
   m_ObjectHideFlags: 0
