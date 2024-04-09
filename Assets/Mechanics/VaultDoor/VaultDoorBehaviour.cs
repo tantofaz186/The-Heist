@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using JetBrains.Annotations;
-using Unity.Netcode;
 using UnityEngine;
 
 namespace Mechanics.VaultDoor
