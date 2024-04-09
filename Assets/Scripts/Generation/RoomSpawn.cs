@@ -18,13 +18,15 @@ public class RoomSpawn : MonoBehaviour
    [SerializeField] private List<RoomTypes> normalRooms = new();
    [SerializeField]private List<int> normalRoomsCheck = new();
    [SerializeField] private GameObject securityRoom;
-   
 
+   public NavMeshBake bake;
    private void Start()
    {
        SortHallay();
        roomSpawnpoints = GetRoomSpawnPoints();
        SortRooms();
+       
+       bake.Bake();
        
        
    }

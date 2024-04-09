@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6952286825614326484}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6952286825614326484
 Transform:
@@ -88,12 +88,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5739486835604286871}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5739486835604286871
 Transform:
@@ -157,12 +157,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1248911738501495268}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpawnPoint
   m_TagString: RoomSpawnPoints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1248911738501495268
 Transform:
@@ -188,12 +188,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3509380207016783100}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3509380207016783100
 Transform:
@@ -257,12 +257,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7059065553667916463}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SmallRoom
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7059065553667916463
 Transform:
@@ -335,6 +335,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -396,6 +404,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -459,6 +475,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -520,6 +544,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -583,6 +615,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -644,6 +684,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
       propertyPath: m_Name
       value: Chao_2x2_(2) (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -707,6 +755,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_ConnectionRight
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -768,6 +824,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -831,6 +895,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -892,6 +964,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -955,6 +1035,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_ConnectionLeft
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1016,6 +1104,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
       propertyPath: m_Name
       value: Chao_2x2_(2) (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1079,6 +1175,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2) (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1140,6 +1244,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1203,6 +1315,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2) (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1264,6 +1384,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1327,6 +1455,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1388,6 +1524,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1451,6 +1595,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2) (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1512,6 +1664,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1575,6 +1735,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_CenterRight
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1636,6 +1804,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (45)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1699,6 +1875,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1760,6 +1944,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1823,6 +2015,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1884,6 +2084,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1947,6 +2155,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(4) (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2008,6 +2224,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2071,6 +2295,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2132,6 +2364,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2195,6 +2435,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2) (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2256,6 +2504,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (41)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2319,6 +2575,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2380,6 +2644,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2443,6 +2715,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2) (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2504,6 +2784,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2567,6 +2855,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2628,6 +2924,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2691,6 +2995,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2752,6 +3064,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
       propertyPath: m_Name
       value: Chao_2x2_(2) (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2815,6 +3135,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(4) (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2876,6 +3204,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2939,6 +3275,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (36)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3000,6 +3344,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3063,6 +3415,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2) (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3124,6 +3484,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
       propertyPath: m_Name
       value: Chao_2x2_(2) (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3187,6 +3555,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3248,6 +3624,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (37)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3311,6 +3695,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2) (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3372,6 +3764,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3435,6 +3835,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3496,6 +3904,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3559,6 +3975,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2) (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3620,6 +4044,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3683,6 +4115,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2) (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3744,6 +4184,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3807,6 +4255,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3868,6 +4324,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (32)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3931,6 +4395,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3992,6 +4464,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
       propertyPath: m_Name
       value: Chao_2x2_CenterLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4055,6 +4535,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4116,6 +4604,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4179,6 +4675,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4240,6 +4744,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4303,6 +4815,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4364,6 +4884,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
       propertyPath: m_Name
       value: Chao_2x2_(4) (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4427,6 +4955,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(4) (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4488,6 +5024,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4551,6 +5095,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4612,6 +5164,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4675,6 +5235,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (37)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4736,6 +5304,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
       propertyPath: m_Name
       value: Chao_2x2_(2) (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4799,6 +5375,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4860,6 +5444,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4923,6 +5515,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(4) (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4984,6 +5584,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (40)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5047,6 +5655,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (39)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5108,6 +5724,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5171,6 +5795,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5232,6 +5864,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5295,6 +5935,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (46)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5356,6 +6004,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
       propertyPath: m_Name
       value: Chao_2x2_(4) (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5419,6 +6075,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5480,6 +6144,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5543,6 +6215,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5604,6 +6284,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5667,6 +6355,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2) (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5728,6 +6424,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
       propertyPath: m_Name
       value: Chao_2x2_(4) (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5791,6 +6495,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5852,6 +6564,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
       propertyPath: m_Name
       value: Chao_2x2_(4) (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5915,6 +6635,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5976,6 +6704,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6039,6 +6775,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2) (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6100,6 +6844,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
       propertyPath: m_Name
       value: Chao_2x2_(4) (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6163,6 +6915,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (42)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6224,6 +6984,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
       propertyPath: m_Name
       value: Chao_2x2_(2) (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6287,6 +7055,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6348,6 +7124,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6411,6 +7195,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6472,6 +7264,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6535,6 +7335,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6596,6 +7404,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (43)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6659,6 +7475,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6720,6 +7544,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (44)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6783,6 +7615,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2) (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6844,6 +7684,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
       propertyPath: m_Name
       value: Chao_2x2_(2) (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6907,6 +7755,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6968,6 +7824,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7031,6 +7895,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2) (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7092,6 +7964,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7155,6 +8035,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7216,6 +8104,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7279,6 +8175,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7340,6 +8244,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
       propertyPath: m_Name
       value: Chao_2x2_(1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7403,6 +8315,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(2) (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7464,6 +8384,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7527,6 +8455,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chao_2x2_(4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b85a3ea017572a44bce22b7f8aa712f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7588,6 +8524,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7651,6 +8595,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7712,6 +8664,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7775,6 +8735,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Parede_2x2 (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7836,6 +8804,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
       propertyPath: m_Name
       value: Teto_2x2 (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7899,6 +8875,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teto_2x2 (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd573c1dadb70964e8d5d217c6f2a433, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7960,6 +8944,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
       propertyPath: m_Name
       value: Parede_2x2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d25bfeb41a998fe43a5eaf03b814e452, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
