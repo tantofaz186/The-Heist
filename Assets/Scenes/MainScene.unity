@@ -446,6 +446,7 @@ MonoBehaviour:
   normalRooms: []
   normalRoomsCheck: 
   securityRoom: {fileID: 8288673120125745419, guid: 3df398c687a94b247b882c3466c07c4e, type: 3}
+  spawnPoints: []
   bake: {fileID: 1592956864}
 --- !u!4 &655053266
 Transform:
@@ -634,7 +635,6 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
-  - component: {fileID: 963194226}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -642,14 +642,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &963194226
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0
@@ -1590,7 +1582,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1891486532}
-    PlayerPrefab: {fileID: 0}
+    PlayerPrefab: {fileID: 4683445553649119281, guid: 34f188e7a9e24d04fb97a13a27c4656e, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: c4a40f4fa654b3a42bfce17f7a9deefe, type: 2}

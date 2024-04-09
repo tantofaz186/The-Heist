@@ -11,7 +11,6 @@ public class AddCam : NetworkBehaviour
 
     private void Start()
     {   if(IsOwner)
-        
-        Instantiate(cam, cam.transform.position, cam.transform.rotation, head.transform);
+        Instantiate(cam, head.transform.position, cam.transform.rotation, head.transform);
     }
 }

@@ -18,6 +18,7 @@ public class RoomSpawn : MonoBehaviour
    [SerializeField] private List<RoomTypes> normalRooms = new();
    [SerializeField]private List<int> normalRoomsCheck = new();
    [SerializeField] private GameObject securityRoom;
+   [SerializeField] public List<GameObject> spawnPoints = new();
 
    public NavMeshBake bake;
    private void Start()
@@ -40,6 +41,12 @@ public class RoomSpawn : MonoBehaviour
    List<GameObject> GetRoomSpawnPoints()
    {
      return GameObject.FindGameObjectsWithTag("RoomSpawnPoints").ToList();
+      
+   }
+   
+   List<GameObject> GetSpawnPoints()
+   {
+       return GameObject.FindGameObjectsWithTag("SpawnPoint").ToList();
       
    }
 

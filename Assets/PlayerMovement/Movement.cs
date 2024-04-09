@@ -25,15 +25,19 @@ public class Movement : NetworkBehaviour
     public bool running = false;
     public bool isCrouching = false;
     public float vel;
+    public GameObject spawnPoint;
 
     public LayerMask Ground;
     private void Awake()
     {
         controle_player = new PlayerInputActions();
+        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
     }
 
     private void Start()
     {
+        transform.position = spawnPoint.transform.position;
+        Debug.Log("SpawnPoint");
         corpo_fisico = transform.GetComponent<Rigidbody>();
         corpo_FSM = transform.GetComponent<Animator>();
         vel = walkSpeed;
