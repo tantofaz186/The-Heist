@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     {
        UpdatePlayerslist();
         agent = GetComponent<NavMeshAgent>();
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
     
     public void UpdatePlayerslist()
