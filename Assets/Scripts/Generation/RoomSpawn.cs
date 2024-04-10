@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class RoomSpawn : MonoBehaviour
+
+public class RoomSpawn : NetworkBehaviour
 {
    [SerializeField]List<GameObject> hallways = new List<GameObject>();
    [SerializeField] Transform mapCenter;
@@ -18,19 +20,24 @@ public class RoomSpawn : MonoBehaviour
    [SerializeField] private List<RoomTypes> normalRooms = new();
    [SerializeField]private List<int> normalRoomsCheck = new();
    [SerializeField] private GameObject securityRoom;
-   [SerializeField] public List<GameObject> spawnPoints = new();
+   [SerializeField] public List<GameObject> playerSpawnPoints = new();
+   
 
    public NavMeshBake bake;
+   public EnemySpawn enemySpawn;
+   public ItemSpawn itemSpawn;
    private void Start()
    {
        SortHallay();
        roomSpawnpoints = GetRoomSpawnPoints();
        SortRooms();
-       
        bake.Bake();
-       
-       
+      enemySpawn.SpawnEnemy();
+      itemSpawn.SpawnItems();
    }
+
+   
+  
 
    void SortHallay()
    {
@@ -43,6 +50,7 @@ public class RoomSpawn : MonoBehaviour
      return GameObject.FindGameObjectsWithTag("RoomSpawnPoints").ToList();
       
    }
+  
    
    List<GameObject> GetSpawnPoints()
    {

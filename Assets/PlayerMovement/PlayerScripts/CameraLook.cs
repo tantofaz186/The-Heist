@@ -15,6 +15,8 @@ public class CameraLook : NetworkBehaviour
     private Vector2 mouseLook;
     
     public Transform body;
+    public Transform head;
+    
     
 
 
@@ -22,15 +24,15 @@ public class CameraLook : NetworkBehaviour
 
     private void Start()
     {
-       transform.position = body.position;
+       transform.position = head.position;
         
     }
 
     
     private void Awake()
     {
-       
-        body = transform.parent;
+        head = transform.parent;
+        body = head.transform.parent;
         controls = new PlayerInputActions();
         Cursor.lockState = CursorLockMode.Locked;
     }
