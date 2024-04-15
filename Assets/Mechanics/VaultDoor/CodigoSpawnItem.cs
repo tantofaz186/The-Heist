@@ -1,8 +1,7 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Mecanicas.PortaComCodigo
+namespace Mechanics.VaultDoor
 {
     public class CodigoSpawnItem : MonoBehaviour
     {
