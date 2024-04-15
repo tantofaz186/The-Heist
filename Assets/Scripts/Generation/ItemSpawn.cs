@@ -9,7 +9,10 @@ public class ItemSpawn : NetworkBehaviour
    [SerializeField]public List<GameObject> items = new();
    [SerializeField]private List<GameObject> itemSpawnPoints = new();
    [SerializeField] private List<int> itemsCheck = new();
-   public void SpawnItems()
+   
+   
+   [Rpc(SendTo.Server)]
+   public void SpawnItemsRpc()
    {
       itemSpawnPoints = GetItemSpawnPoints();
       for (int n = 0; n < itemSpawnPoints.Count; n++)
@@ -43,7 +46,9 @@ public class ItemSpawn : NetworkBehaviour
          itemsCheck.Remove(rnd);
            
         
-         Instantiate(items[rnd], itemSpawnPoints[x].transform.position,items[x].transform.rotation);
+         var instance = Instantiate(items[rnd], itemSpawnPoints[x].transform.position,items[x].transform.rotation);
+         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
       }
       else
       {

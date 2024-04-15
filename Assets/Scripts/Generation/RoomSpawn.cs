@@ -26,14 +26,24 @@ public class RoomSpawn : NetworkBehaviour
    public NavMeshBake bake;
    public EnemySpawn enemySpawn;
    public ItemSpawn itemSpawn;
-   private void Start()
+  
+   public override void OnNetworkSpawn()
+   {
+       base.OnNetworkSpawn();
+       if (IsServer)
+       {
+           SpawnSceneRpc();
+       }
+       bake.Bake();
+   }
+   [Rpc(SendTo.Server)]
+   void SpawnSceneRpc()
    {
        SortHallay();
        roomSpawnpoints = GetRoomSpawnPoints();
        SortRooms();
-       bake.Bake();
-      enemySpawn.SpawnEnemy();
-      itemSpawn.SpawnItems();
+       enemySpawn.SpawnEnemyRpc();
+       itemSpawn.SpawnItemsRpc();
    }
 
    
@@ -42,7 +52,9 @@ public class RoomSpawn : NetworkBehaviour
    void SortHallay()
    {
       int rnd = Random.Range(0, hallways.Count);
-      Instantiate(hallways[rnd],mapCenter);
+      var instance = Instantiate(hallways[rnd],mapCenter);
+      var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+      instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
    }
 
    List<GameObject> GetRoomSpawnPoints()
@@ -103,7 +115,9 @@ public class RoomSpawn : NetworkBehaviour
            themeRoomsCheck.Remove(rnd);
            
            int rnd2 = Random.Range(0, themeRooms[rnd].Rooms.Count);
-           Instantiate(themeRooms[rnd].Rooms[rnd2], roomSpawnpoints[x].transform.position,roomSpawnpoints[x].transform.rotation);
+          var instance =  Instantiate(themeRooms[rnd].Rooms[rnd2], roomSpawnpoints[x].transform.position,roomSpawnpoints[x].transform.rotation);
+           var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+           instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
        }
        else
        {
@@ -137,7 +151,9 @@ public class RoomSpawn : NetworkBehaviour
            normalRoomsCheck.Remove(rnd);
            
            int rnd2 = Random.Range(0, normalRooms[rnd].Rooms.Count);
-           Instantiate(normalRooms[rnd].Rooms[rnd2], roomSpawnpoints[x].transform.position,roomSpawnpoints[x].transform.rotation);
+          var instance =  Instantiate(normalRooms[rnd].Rooms[rnd2], roomSpawnpoints[x].transform.position,roomSpawnpoints[x].transform.rotation);
+           var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+           instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
        }
        else
        {
@@ -148,7 +164,9 @@ public class RoomSpawn : NetworkBehaviour
    void SpawnSecurity()
    {
        int rnd = Random.Range(0, roomSpawnpoints.Count);
-       Instantiate(securityRoom, roomSpawnpoints[rnd].transform.position, roomSpawnpoints[rnd].transform.rotation);
+       var instance = Instantiate(securityRoom, roomSpawnpoints[rnd].transform.position, roomSpawnpoints[rnd].transform.rotation);
+       var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+       instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
        roomSpawnpoints.Remove(roomSpawnpoints[rnd]);
    }
    
