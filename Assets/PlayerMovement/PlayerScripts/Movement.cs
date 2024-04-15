@@ -31,18 +31,26 @@ public class Movement : NetworkBehaviour
     private void Awake()
     {
         controle_player = new PlayerInputActions();
-        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
     }
+    
+    
 
     private void Start()
-    {
+    {   
+        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
         transform.position = spawnPoint.transform.position;
         Debug.Log("SpawnPoint");
         corpo_fisico = transform.GetComponent<Rigidbody>();
+        corpo_fisico.isKinematic= false;
         corpo_FSM = transform.GetComponent<Animator>();
         vel = walkSpeed;
-        if(!IsOwner)
+        if (!IsOwner)
+        {
             thisScript.enabled = false;
+        }
+        
+            
+        
     }
 
     private void OnEnable()

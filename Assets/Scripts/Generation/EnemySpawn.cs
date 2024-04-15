@@ -1,21 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 
-public class EnemySpawn : MonoBehaviour
+public class EnemySpawn : NetworkBehaviour
 {
     [SerializeField] public List<GameObject> enemySpawnPoints = new();
    
     [SerializeField] public List<GameObject> enemyList = new();
-    
-   public void SpawnEnemy()
-    {
+    [Rpc(SendTo.Server)]
+   public void SpawnEnemyRpc()
+    {   
         enemySpawnPoints = GetRoomSpawnEnemy();
         for(int i=0;i<enemySpawnPoints.Count;i++)
         {
             int rnd = Random.Range(0, enemyList.Count);
-            Instantiate(enemyList[rnd], enemySpawnPoints[i].transform.position, enemySpawnPoints[i].transform.rotation);
+           var instance = Instantiate(enemyList[rnd], enemySpawnPoints[i].transform.position, enemySpawnPoints[i].transform.rotation);
+           var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+           instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
         }
        
     }
