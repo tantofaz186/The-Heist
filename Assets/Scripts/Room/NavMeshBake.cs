@@ -11,4 +11,6 @@ public class NavMeshBake : MonoBehaviour
         NavMeshBuilder.BuildNavMesh();
         Debug.Log("Baked");
     }
+   
+   
 }

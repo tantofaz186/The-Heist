@@ -1353,7 +1353,7 @@ MonoBehaviour:
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
+  ActiveSceneSynchronization: 1
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
@@ -1372,10 +1372,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thisScript: {fileID: 7949227442281882157}
   pausado: 0
-  walkSpeed: 80
-  runSpeed: 150
-  crouchSpeed: 40
-  crouchRun: 80
+  walkSpeed: 150
+  runSpeed: 250
+  crouchSpeed: 120
+  crouchRun: 170
   jumpForce: 5
   running: 0
   isCrouching: 0
