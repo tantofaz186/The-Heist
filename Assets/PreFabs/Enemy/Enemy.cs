@@ -1,18 +1,21 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 
-public class Enemy : MonoBehaviour
+public class Enemy : NetworkBehaviour
 {
     public NavMeshAgent agent;
-    public List<GameObject> players = new();
+   
     public Animator anim;
+    public Rigidbody rb;
 
-    
+    public Transform playerPos;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
@@ -26,20 +29,26 @@ public class Enemy : MonoBehaviour
 
     public float sightRange, attackRange;
     public bool playerInSight, playerInAttack;
+
+
+    public float radius;
+    public float angle;
+    
     
     
     
     private void Awake()
     {
-       UpdatePlayerslist();
+       
+        rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
     }
-    
-    public void UpdatePlayerslist()
-    {
-        players = GetPlayers();
-    }
+
+   
+
+   
+   
     
     List<GameObject> GetPlayers()
     {
@@ -50,15 +59,29 @@ public class Enemy : MonoBehaviour
     
     void Update()
     {
-        playerInSight = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttack = Physics.CheckSphere(transform.position,attackRange, whatIsPlayer);
-
-        if (!playerInSight&&!playerInAttack)Patrol();
-        if (playerInSight&&!playerInAttack)Chase();
-        if (playerInSight&&playerInAttack)Attack();
+        Collider[] col=  Physics.OverlapSphere(transform.position, attackRange, whatIsPlayer);
+        if (col.Length > 0)
+        {
+            Attack(col[0].transform);
+            return;
+        }
+        Collider[] col2=  Physics.OverlapSphere(transform.position, sightRange, whatIsPlayer);
+        if (col2.Length > 0)
+        {
+            Chase(col2[0].transform);
+            return;
+        }
+        
+        Patrol();
+        
+        
+        
+        
             
         
     }
+    
+    
 
     void Patrol()
     {
@@ -89,19 +112,19 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Chase()
+    void Chase(Transform playerPos)
     {
-        agent.SetDestination(players[0].transform.position);
+        agent.SetDestination(playerPos.position);
         agent.speed = 3f;
         anim.SetBool("run",true);
         anim.SetBool("walk",false);
         
     }
 
-    void Attack()
+    void Attack(Transform playerPos)
     {
-        agent.SetDestination(transform.position);
-        transform.LookAt(players[0].transform.position);
+        agent.SetDestination(playerPos.position);
+        transform.LookAt(playerPos.position);
         if (!attacked)
         {
             anim.SetTrigger("attack");

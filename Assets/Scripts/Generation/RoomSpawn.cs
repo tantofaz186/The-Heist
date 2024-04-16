@@ -34,14 +34,32 @@ public class RoomSpawn : NetworkBehaviour
        {
            SpawnSceneRpc();
        }
-       bake.Bake();
+
+       StartCoroutine(WaitToBake());
    }
+
+   private IEnumerator WaitToBake()
+   {
+       yield return new WaitForSeconds(1);
+       if (IsServer) bake.Bake();
+       yield return new WaitForSeconds(1);
+       if (IsServer)
+       {
+           SpawnEnemyRpc();
+       }
+   }
+
    [Rpc(SendTo.Server)]
    void SpawnSceneRpc()
    {
        SortHallay();
        roomSpawnpoints = GetRoomSpawnPoints();
        SortRooms();
+   }
+   
+   [Rpc(SendTo.Server)]
+   void SpawnEnemyRpc()
+   {
        enemySpawn.SpawnEnemyRpc();
        itemSpawn.SpawnItemsRpc();
    }
