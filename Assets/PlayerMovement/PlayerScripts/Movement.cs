@@ -97,7 +97,6 @@ public class Movement : NetworkBehaviour
             corpo_FSM.SetFloat("mover",1f);
         }
         
-
         if (isCrouching && running ==false)
         {
             vel = crouchSpeed;
@@ -118,8 +117,8 @@ public class Movement : NetworkBehaviour
 
             
         
-            velocity += transform.forward * movement.ReadValue<Vector2>().y*vel*Time.fixedDeltaTime;
-            velocity += transform.right * movement.ReadValue<Vector2>().x*vel*Time.fixedDeltaTime;
+            velocity += transform.forward * (movement.ReadValue<Vector2>().y * vel * Time.fixedDeltaTime);
+            velocity += transform.right * (movement.ReadValue<Vector2>().x * vel * Time.fixedDeltaTime);
         
         
         
