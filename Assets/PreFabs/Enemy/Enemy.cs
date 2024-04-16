@@ -26,6 +26,11 @@ public class Enemy : MonoBehaviour
 
     public float sightRange, attackRange;
     public bool playerInSight, playerInAttack;
+
+
+    public float radius;
+    public float angle;
+    
     
     
     
