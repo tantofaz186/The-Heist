@@ -26,16 +26,15 @@ public class Enemy : NetworkBehaviour
     public float timeAttack;
     private bool attacked;
 
+    public GameObject playerFound;
 
     public float sightRange, attackRange;
-    public bool playerInSight, playerInAttack;
+   
 
-
-    public float radius;
-    public float angle;
     
     
     
+    public FOV fov;
     
     private void Awake()
     {
@@ -43,22 +42,23 @@ public class Enemy : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
+       // fov = GetComponent<FOV>();
     }
-
-   
-
-   
-   
     
-    List<GameObject> GetPlayers()
+    GameObject FindPlayer(FOV sensor)
     {
-        return GameObject.FindGameObjectsWithTag("Player").ToList();
-      
+        if(sensor.Objects.Count > 0)
+        {
+            return sensor.Objects.First();
+        }
+
+        return null;
     }
+    
 
     
     void Update()
-    {
+    {   
         Collider[] col=  Physics.OverlapSphere(transform.position, attackRange, whatIsPlayer);
         if (col.Length > 0)
         {
@@ -71,20 +71,29 @@ public class Enemy : NetworkBehaviour
             Chase(col2[0].transform);
             return;
         }
-        
-        Patrol();
-        
+        /*if(fov.Objects.Count > 0)
+        {
+            playerFound = FindPlayer(fov);
+            if (playerFound)
+            {
+               Chase(playerFound.transform);
+               return;
+            }
+        }*/
+            Patrol();
         
         
         
             
+        
         
     }
     
     
 
     void Patrol()
-    {
+    {   
+        
        if(!walkPointSet)SearchWalk();
        if (walkPointSet) agent.SetDestination(walkPoint);
        agent.speed = 1f;
@@ -113,8 +122,8 @@ public class Enemy : NetworkBehaviour
     }
 
     void Chase(Transform playerPos)
-    {
-        agent.SetDestination(playerPos.position);
+    {   
+        agent.SetDestination(playerPos.transform.position);
         agent.speed = 3f;
         anim.SetBool("run",true);
         anim.SetBool("walk",false);
@@ -123,7 +132,7 @@ public class Enemy : NetworkBehaviour
 
     void Attack(Transform playerPos)
     {
-        agent.SetDestination(playerPos.position);
+        //agent.SetDestination(playerPos.position);
         transform.LookAt(playerPos.position);
         if (!attacked)
         {

@@ -9,6 +9,8 @@ using Unity.Netcode;
 public class Movement : NetworkBehaviour
 {   [SerializeField]
     public Movement thisScript;
+
+    public PlayerStats playerStats;
     public bool pausado = false;
     public PlayerInputActions controle_player;
     private InputAction movement, crouch, jump,run;
@@ -39,10 +41,10 @@ public class Movement : NetworkBehaviour
     {   
         spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
         transform.position = spawnPoint.transform.position;
-        Debug.Log("SpawnPoint");
         corpo_fisico = transform.GetComponent<Rigidbody>();
         corpo_fisico.isKinematic= false;
         corpo_FSM = transform.GetComponent<Animator>();
+        playerStats = GetComponent<PlayerStats>();
         vel = walkSpeed;
         if (!IsOwner)
         {

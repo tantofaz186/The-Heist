@@ -31,6 +31,12 @@ public class LoadSceneManager : MonoBehaviourSingletonPersistent<LoadSceneManage
         SceneManager.LoadScene("MainMenu");
         //Transition.LoadLevel("MainMenu", 0.5f, Color.black);
     }
+    
+    public void LoadGame()
+    {
+        SceneManager.LoadScene("MainScene");
+        //Transition.LoadLevel("MainMenu", 0.5f, Color.black);
+    }
 
     #if UNITY_EDITOR
     [CustomEditor(typeof(LoadSceneManager))]

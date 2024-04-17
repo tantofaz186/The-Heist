@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
+[ExecuteInEditMode]
 public class FOV : MonoBehaviour
 {
     public float viewAngle;
@@ -8,14 +10,86 @@ public class FOV : MonoBehaviour
     public float viewHeight;
     public LayerMask playerMask;
     public LayerMask obstacleMask;
-    public bool playerInSight;
+    
 
     public Color meshColor = Color.red;
 
     private Mesh mesh;
 
+    private Collider[] colliders = new Collider[50];
+    private float scanInterval;
+    private float scanTimer;
+    public int scanFrequency = 30;
+    private int count;
 
-    Mesh CreateWedgeMesh()  //Criar triangulo
+    public List<GameObject> Objects
+    {
+        get
+        {
+            objects.RemoveAll(obj=>!obj);
+            return objects;
+        }
+    }
+    [SerializeField]private List<GameObject> objects = new();
+
+    
+    private void Start()
+    {
+        scanInterval = 1.0f / scanFrequency;
+    }
+
+    private void Update()
+    {
+        scanTimer-=Time.deltaTime;
+        if (scanTimer < 0)
+        {
+            scanTimer += scanInterval;
+            Scan();
+        }
+    }
+
+    private void Scan()
+    {
+        count =Physics.OverlapSphereNonAlloc(transform.position,viewRadius,colliders,playerMask,QueryTriggerInteraction.Collide);
+        objects.Clear();
+        for (int i = 0; i <count; i++)
+        {
+            GameObject obj = colliders[i].gameObject;
+            if (InSight(obj))
+            {
+                objects.Add(obj);
+            }
+        }
+        
+    }
+
+    public bool InSight(GameObject obj)
+    {   
+        Vector3 origin = transform.position;
+        Vector3 dest = obj.transform.position;
+        Vector3 direction = dest - origin;
+        if (direction.y < 0 || direction.y > viewHeight)
+        {
+            return false;
+        }
+        direction.y=0;
+        float deltaAngle = Vector3.Angle(direction, transform.forward);
+        if (deltaAngle > viewAngle)
+        {
+            return false;
+        }
+        
+        origin.y += viewHeight/2;
+        dest.y = origin.y;
+        if (Physics.Linecast(origin,dest, obstacleMask))
+        {
+            return false;
+        }
+        
+        return true;
+    }
+
+    /*Mesh CreateWedgeMesh()  //Criar triangulo
     {
         
         Mesh mesh = new Mesh();
@@ -98,6 +172,8 @@ public class FOV : MonoBehaviour
     private void OnValidate()
     {
         mesh = CreateWedgeMesh();
+        scanInterval = 1.0f / scanFrequency;
+
     }
 
     private void OnDrawGizmos()
@@ -107,5 +183,12 @@ public class FOV : MonoBehaviour
             Gizmos.color = meshColor;
             Gizmos.DrawMesh(mesh, transform.position, transform.rotation);
         }
-    }
+        
+        
+        Gizmos.color = Color.green;
+        foreach (var obj in Objects)
+        {
+            Gizmos.DrawSphere(obj.transform.position, 0.2f);
+        }
+    }*/
 }
