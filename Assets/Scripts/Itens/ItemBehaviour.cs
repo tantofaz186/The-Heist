@@ -13,6 +13,5 @@ public class ItemBehaviour : NetworkBehaviour
     {
         base.OnOwnershipChanged(previous, current);
         
-        GetNetworkObject(previous);
     }
 }

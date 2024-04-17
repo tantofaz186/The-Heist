@@ -46,7 +46,8 @@ public class ItemSpawn : NetworkBehaviour
          itemsCheck.Remove(rnd);
            
         
-         var instance = Instantiate(items[rnd], itemSpawnPoints[x].transform.position,items[x].transform.rotation);
+         var instance = Instantiate(items[rnd],
+            itemSpawnPoints[x].transform);
          var instanceNetworkObject = instance.GetComponent<NetworkObject>();
          instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
       }

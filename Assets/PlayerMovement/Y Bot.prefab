@@ -1239,6 +1239,7 @@ GameObject:
   - component: {fileID: 8095632287596195212}
   - component: {fileID: 2378066787956437531}
   - component: {fileID: 2760499840902578224}
+  - component: {fileID: 1589825012467299251}
   m_Layer: 7
   m_Name: Y Bot
   m_TagString: Player
@@ -1372,6 +1373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisScript: {fileID: 7949227442281882157}
+  playerStats: {fileID: 0}
   pausado: 0
   walkSpeed: 150
   runSpeed: 250
@@ -1453,7 +1455,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af73522300b5ee4d8f0a23239e03ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dmgGO: {fileID: 0}
+  bagSize: 0
+  maxBagSize: 0
+  itemsList: []
+  itemTmp: {fileID: 0}
   movement: {fileID: 0}
+--- !u!114 &1589825012467299251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683445553649119281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 211dd20aaaf14581856f19a6ca619542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightHand: {fileID: 0}
 --- !u!1 &4702746076710964278
 GameObject:
   m_ObjectHideFlags: 0
