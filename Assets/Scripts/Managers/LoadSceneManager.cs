@@ -1,19 +1,24 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using DG.Tweening;
-using Mono.Cecil;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
-
+#endif
 public class LoadSceneManager : MonoBehaviourSingletonPersistent<LoadSceneManager>
 {
     //Esse script é utilizado para controlar o load das cenas no jogo (Todas as cenas)
     //private int sceneIndexToLoad = 1;
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+        //Transition.LoadLevel("MainMenu", 0.5f, Color.black);
+    }
+
+    #if UNITY_EDITOR
     public List<SceneAsset> scenes = new List<SceneAsset>();
 
     public static List<SceneAsset> GetScenes()
@@ -25,20 +30,6 @@ public class LoadSceneManager : MonoBehaviourSingletonPersistent<LoadSceneManage
     {
         Instance.scenes = scenes;
     }
-
-    public void LoadMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-        //Transition.LoadLevel("MainMenu", 0.5f, Color.black);
-    }
-    
-    public void LoadGame()
-    {
-        SceneManager.LoadScene("MainScene");
-        //Transition.LoadLevel("MainMenu", 0.5f, Color.black);
-    }
-
-    #if UNITY_EDITOR
     [CustomEditor(typeof(LoadSceneManager))]
     public class LoadSceneManagerEditor : Editor
     {

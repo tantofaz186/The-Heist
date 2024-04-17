@@ -3,22 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using Random = System.Random;
 
 namespace Mechanics.VaultDoor
 {
     public class CodigoFactory : NetworkBehaviour
     {
-        System.Random random = new System.Random();
+        Random random = new ();
 
         [SerializeField]
         private short[] digitos = new short[4];
-        List<CodigoSpawnItem> possibleItemToSpawn = new List<CodigoSpawnItem>();
-        List<CodigoSpawnItem> spawnedItems = new List<CodigoSpawnItem>();
+        [SerializeField]List<CodigoSpawnItem> possibleItemToSpawn = new List<CodigoSpawnItem>();
+        [SerializeField]List<CodigoSpawnItem> spawnedItems = new List<CodigoSpawnItem>();
+
+        [SerializeField]
+        private int[] itemsCheck;
         public event Action<bool> OnCodeChecked;
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
+            possibleItemToSpawn.AddRange(FindObjectsOfType<CodigoSpawnItem>().OrderBy((item) => item.GetInstanceID()));
             if (IsServer)
             {
                 Debug.Log("Gerando código.");
@@ -27,7 +31,6 @@ namespace Mechanics.VaultDoor
                     digitos[i] = (short)random.Next(0, 10);
                 }
                 Debug.Log("Código gerado: " + digitos[0] + digitos[1] + digitos[2] + digitos[3]);
-                possibleItemToSpawn.AddRange(FindObjectsOfType<CodigoSpawnItem>());
                 PickFourObjectsAtRandom();
             }
             else
@@ -35,19 +38,41 @@ namespace Mechanics.VaultDoor
                 AskServerForCodeServerRpc();
             }
         }
+
+        private void SetItemText()
+        {
+            for (int i = 0; i < digitos.Length; i++)
+            {
+                spawnedItems[i].setText(i, digitos[i]);
+            }
+        }
+
         [ServerRpc(RequireOwnership = false)]
         public void AskServerForCodeServerRpc(ServerRpcParams rpcParams = default)
         {
             Debug.Log("Pedindo código para o servidor.");
-            SendCodeToClientRpc(digitos, rpcParams.Receive.SenderClientId);
+            SendCodeToClientRpc(digitos, itemsCheck.ToArray(), rpcParams.Receive.SenderClientId);
         }
 
         [ClientRpc]
-        private void SendCodeToClientRpc(short[] code, ulong clientId = 0)
+        private void SendCodeToClientRpc(short[] code, int[] intList, ulong clientId = 0)
         {
-            if (clientId != NetworkManager.Singleton.LocalClientId) return;
+            if (clientId != NetworkManager.Singleton.LocalClientId)
+            {
+                return;
+            }
             digitos = code;
             Debug.Log("Código recebido: " + code[0] + code[1] + code[2] + code[3]);
+            itemsCheck = intList;
+            for (int i = 0; i < digitos.Length; i++)
+            {
+                int index = itemsCheck[i];
+                CodigoSpawnItem item = possibleItemToSpawn[index];
+                item.setText(i, digitos[i]);
+                spawnedItems.Add(item);
+            }
+            
+            Debug.Log("cheguei");
         }
 
         public short[] GetCodigo()
@@ -64,7 +89,7 @@ namespace Mechanics.VaultDoor
             if (possibleItemToSpawn.Count < digitos.Length)
             {
                 Debug.LogWarning("Não há objetos suficientes para spawnar os itens.");
-                int index = Random.Range(0, possibleItemToSpawn.Count);
+                int index = random.Next(0, possibleItemToSpawn.Count);
                 CodigoSpawnItem item = possibleItemToSpawn[index];
                 item.setText(0, digitos[0]);
                 item.setText(1, digitos[1]);
@@ -75,13 +100,19 @@ namespace Mechanics.VaultDoor
                 possibleItemToSpawn.RemoveAt(index);
                 return;
             }
+
+            itemsCheck = new int[possibleItemToSpawn.Count];
+            for(int i = 0; i < itemsCheck.Length; i++)
+            {
+                itemsCheck[i] = i;
+            }
+            itemsCheck = itemsCheck.OrderBy((item) => random.Next()).ToArray();
             for (int i = 0; i < digitos.Length; i++)
             {
-                int index = Random.Range(0, possibleItemToSpawn.Count);
+                int index = itemsCheck[i];
                 CodigoSpawnItem item = possibleItemToSpawn[index];
                 item.setText(i, digitos[i]);
                 spawnedItems.Add(item);
-                possibleItemToSpawn.RemoveAt(index);
             }
         }
         public bool CheckCodigo(short[] codigo)
