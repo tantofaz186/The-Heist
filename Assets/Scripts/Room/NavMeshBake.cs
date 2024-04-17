@@ -1,14 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEditor.AI;
-
+using Unity.AI.Navigation;
+#if UNITY_EDITOR
+using NavMeshBuilder = UnityEditor.AI.NavMeshBuilder;
+#endif
 public class NavMeshBake : MonoBehaviour
 {   
+    public NavMeshSurface surface;
    public void Bake()
     {   
+        #if UNITY_EDITOR
         NavMeshBuilder.BuildNavMesh();
+        #else
+        surface.BuildNavMesh();
+        #endif
         Debug.Log("Baked");
     }
    
