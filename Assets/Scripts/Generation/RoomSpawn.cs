@@ -41,7 +41,8 @@ public class RoomSpawn : NetworkBehaviour
    private IEnumerator WaitToBake()
    {
        yield return new WaitForSeconds(1);
-       if (IsServer) bake.Bake();
+       yield return new WaitUntil(() => bake.surface.navMeshData != null || bake.surface != null);
+       if (IsServer) bake.surface.BuildNavMesh();
        yield return new WaitForSeconds(1);
        if (IsServer)
        {
