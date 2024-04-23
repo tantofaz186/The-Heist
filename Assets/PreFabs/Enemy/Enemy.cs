@@ -32,12 +32,7 @@ public class Enemy : NetworkBehaviour
 
     GameObject FindPlayer(FOV sensor)
     {
-        if (sensor.Objects.Count > 0)
-        {
-            return sensor.Objects.First();
-        }
-
-        return null;
+        return sensor.Objects.First();
     }
 
     private void Start()
@@ -68,9 +63,8 @@ public class Enemy : NetworkBehaviour
                 {
                     Patrol();
                 }
-
-                yield return new WaitForSeconds(fov.scanInterval);
             }
+            yield return new WaitForSeconds(fov.scanInterval);
         }
     }
 

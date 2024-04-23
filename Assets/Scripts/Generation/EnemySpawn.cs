@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class EnemySpawn : NetworkBehaviour
 {
-    [SerializeField] public List<GameObject> enemySpawnPoints = new();
+     [SerializeField] public List<GameObject> enemySpawnPoints = new();
    
-    [SerializeField] public List<GameObject> enemyList = new();
+     [SerializeField] public List<GameObject> enemyList = new();
     [Rpc(SendTo.Server)]
    public void SpawnEnemyRpc()
     {   
@@ -22,8 +22,7 @@ public class EnemySpawn : NetworkBehaviour
         }
        
     }
-   
-    List<GameObject> GetRoomSpawnEnemy()
+       List<GameObject> GetRoomSpawnEnemy()
     {
         return GameObject.FindGameObjectsWithTag("EnemySpawnPoints").ToList();
       
