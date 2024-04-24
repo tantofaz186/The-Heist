@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mechanics.VaultDoor;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class buttonVault : MonoBehaviour
@@ -10,6 +8,13 @@ public class buttonVault : MonoBehaviour
     [SerializeField] private short digit;
 
     private static List<short> code = new List<short>();
+
+    private void Start()
+    {
+        startPosition = transform.localPosition;
+        targetPosition = startPosition + transform.forward * 0.03f;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -17,37 +22,52 @@ public class buttonVault : MonoBehaviour
             Coisar();
         }
     }
-
-    private static void Blarg ()
+    private static void CheckCode ()
     {
-        if (code.Count == 4)
-        {
-            CodigoFactory factory = FindObjectOfType<CodigoFactory>();
-            Debug.Log(factory.CheckCodigo(code.ToArray()));
-            code.Clear();
-        }
+        if (code.Count != 4) return;
+        CodigoFactory factory = FindObjectOfType<CodigoFactory>();
+        Debug.Log(factory.CheckCodigo(code.ToArray()));
+        code.Clear();
     }
 
     private void Coisar()
     {
-        Debug.Log("coisou");
         // com a câmera, raycast para frente
-        foreach (var VARIABLE in Camera.allCameras)
+        foreach (var _camera in Camera.allCameras)
         {
-            Ray ray = VARIABLE.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 10))
+            Ray ray = _camera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
+            if (Physics.Raycast(ray, out RaycastHit hit, 5))
             {
-                Debug.Log("coisou2");
-
-                // se atingir esse objeto, ativa um evento de abrir a porta
                 if (hit.collider.gameObject == gameObject)
                 {
-                    Debug.Log("coisou3");
                     code.Add(digit);
-                    Blarg();
+                    StartCoroutine(AnimateButton());
+                    CheckCode();
                 }
             }
         }
+    }
+
+    private Vector3 startPosition;
+    private Vector3 targetPosition;
+
+    private IEnumerator AnimateButton()
+    {
+        var time = 0f;
+        var totalTime = 0.4f;
+        while (time < totalTime)
+        {
+            transform.localPosition = Vector3.Lerp(startPosition, targetPosition, time / totalTime);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        while (time > 0)
+        {
+            transform.localPosition = Vector3.Lerp(startPosition, targetPosition, time / totalTime);
+            time -= Time.deltaTime;
+            yield return null;
+        }
+        
+        transform.localPosition = startPosition;
     }
 }

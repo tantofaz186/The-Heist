@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mechanics.VaultDoor;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -10,18 +11,29 @@ public class ItemSpawn : NetworkBehaviour
    [SerializeField]private List<GameObject> itemSpawnPoints = new();
    [SerializeField] private List<int> itemsCheck = new();
    
-   
    [Rpc(SendTo.Server)]
    public void SpawnItemsRpc()
    {
       itemSpawnPoints = GetItemSpawnPoints();
-      for (int n = 0; n < itemSpawnPoints.Count; n++)
+      for (int i = 0; i < 4; i++)
+      {
+         SortItemsCodigo(i);
+      }
+      for (int n = 4; n < itemSpawnPoints.Count; n++)
       {
          SortItems(n);
       }
 
    }
+   void SortItemsCodigo(int x)
+   {
 
+      var instance = Instantiate(items.First(item => item.TryGetComponent<CodigoSpawnItem>(out _)),
+            itemSpawnPoints[x].transform);
+         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+
+   }
    void SortItems(int x)
    {
       int rnd = Random.Range(0, items.Count);

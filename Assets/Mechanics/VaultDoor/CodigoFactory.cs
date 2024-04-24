@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
@@ -22,6 +23,12 @@ namespace Mechanics.VaultDoor
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
+            StartCoroutine(WaitToSpawn());
+        }
+
+        private IEnumerator WaitToSpawn()
+        {
+            yield return new WaitUntil(() => FindObjectsOfType<CodigoSpawnItem>().Length > 0);
             possibleItemToSpawn.AddRange(FindObjectsOfType<CodigoSpawnItem>().OrderBy((item) => item.GetInstanceID()));
             if (IsServer)
             {
@@ -31,7 +38,7 @@ namespace Mechanics.VaultDoor
                     digitos[i] = (short)random.Next(0, 10);
                 }
                 Debug.Log("Código gerado: " + digitos[0] + digitos[1] + digitos[2] + digitos[3]);
-                PickFourObjectsAtRandom();
+                StartCoroutine(PickFourObjectsAtRandom());
             }
             else
             {
@@ -79,12 +86,12 @@ namespace Mechanics.VaultDoor
         {
             return digitos;
         }
-        private void PickFourObjectsAtRandom()
+        private IEnumerator PickFourObjectsAtRandom()
         {
             if(possibleItemToSpawn.Count == 0)
             {
                 Debug.LogError("Não há objetos para spawnar os itens.");
-                return;
+                yield break;
             }
             if (possibleItemToSpawn.Count < digitos.Length)
             {
@@ -98,7 +105,7 @@ namespace Mechanics.VaultDoor
 
                 spawnedItems.AddRange(new []{item, item, item, item});
                 possibleItemToSpawn.RemoveAt(index);
-                return;
+                yield break;
             }
 
             itemsCheck = new int[possibleItemToSpawn.Count];
@@ -119,14 +126,10 @@ namespace Mechanics.VaultDoor
         {
             //essa linha evita que o usuário envie um código vazio
             if (codigo.Length == 0) return false;
-            return !digitos.Where((t, i) => t != codigo[i]).Any();
-        }
-
-        public void CheckCodigo(string codigo)
-        {
-            bool isCode = CheckCodigo(codigo.Select(c => short.Parse(c.ToString())).ToArray());
-            Debug.Log(isCode ? "Código correto" : "Código incorreto");
+            var isCode = !digitos.Where((t, i) => t != codigo[i]).Any();
             OnCodeChecked?.Invoke(isCode);
+            Debug.Log(isCode ? "Código correto" : "Código incorreto");
+            return isCode;
         }
 
         public void ChangeCodigo()

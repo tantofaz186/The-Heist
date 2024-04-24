@@ -29,6 +29,7 @@ namespace Mechanics.VaultDoor
         {
             Debug.Log("Porta aberta");
             StartCoroutine(RotateDoor());
+            codigoFactory.OnCodeChecked -= CodeCheck;
         }
 
         private IEnumerator RotateDoor()
@@ -42,6 +43,11 @@ namespace Mechanics.VaultDoor
                 totalAngle += angle;
                 yield return null;
             }
+        }
+
+        private void OnDisable()
+        {
+            codigoFactory.OnCodeChecked -= CodeCheck;
         }
     }
 }
