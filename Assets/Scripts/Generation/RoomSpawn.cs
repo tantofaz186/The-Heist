@@ -142,7 +142,6 @@ public class RoomSpawn : NetworkBehaviour
        {
            SpawnThemeRoom(x);
        }
-       
    }
 
    void SpawnNormalRoom(int x)
@@ -186,6 +185,7 @@ public class RoomSpawn : NetworkBehaviour
        var instance = Instantiate(securityRoom, roomSpawnpoints[rnd].transform.position, roomSpawnpoints[rnd].transform.rotation);
        var instanceNetworkObject = instance.GetComponent<NetworkObject>();
        instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+
        roomSpawnpoints.Remove(roomSpawnpoints[rnd]);
    }
    

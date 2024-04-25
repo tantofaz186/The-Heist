@@ -12,7 +12,6 @@ public class buttonVault : MonoBehaviour
     private void Start()
     {
         startPosition = transform.localPosition;
-        targetPosition = startPosition + transform.forward * 0.03f;
     }
 
     private void Update()
@@ -55,6 +54,7 @@ public class buttonVault : MonoBehaviour
     {
         var time = 0f;
         var totalTime = 0.4f;
+        targetPosition = startPosition + transform.forward * 0.03f;
         while (time < totalTime)
         {
             transform.localPosition = Vector3.Lerp(startPosition, targetPosition, time / totalTime);
