@@ -9,6 +9,7 @@ using UnityEngine.Serialization;
 
 public class PickupObject : NetworkBehaviour
 {
+    public Item item;
     public float GrabDistance = 2.0f;
 
     private Rigidbody m_Rigidbody;
@@ -34,12 +35,9 @@ public class PickupObject : NetworkBehaviour
 
     private void Release(InputAction.CallbackContext obj)
     {
-        if (m_IsGrabbed.Value)
+        if (m_IsGrabbed.Value && IsOwner)
         {
-            if (IsOwner)
-            {
-                ReleaseServerRpc();
-            }
+            ReleaseServerRpc();
         }
     }
 
@@ -91,9 +89,14 @@ public class PickupObject : NetworkBehaviour
             {
                 NetworkObject.ChangeOwnership(senderClientId);
 
-                transform.parent = senderPlayerObject.transform;
-                transform.localPosition = new Vector3(0.473f, 0.605f, -0.314f);
-                m_IsGrabbed.Value = true;
+                //send item to inventory
+                if(Inventory.Instance.itemCount< Inventory.SLOTS)
+                {
+                    Inventory.Instance.AddItem(item);
+                    transform.parent = senderPlayerObject.transform;
+                    transform.localPosition = new Vector3(0.473f, 0.605f, -0.314f);
+                    m_IsGrabbed.Value = true;
+                }
             }
         }
     }

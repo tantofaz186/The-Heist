@@ -42,7 +42,7 @@ public class ItemSpawnController : NetworkBehaviour {
     private void InstantiateAndAddScript(GameObject itemToSpawn, Transform point, Item item)
     {
         GameObject spawnedItem = Instantiate(itemToSpawn, point.position, point.rotation);
-        ItemBehaviour behaviour = spawnedItem.gameObject.AddComponent<ItemBehaviour>();
-        item.GetComponent<ItemBehaviour>().item = item;
+        PickupObject behaviour = spawnedItem.gameObject.AddComponent<PickupObject>();
+        item.GetComponent<PickupObject>().item = item;
     }
 }

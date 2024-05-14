@@ -3,19 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
-{   public static Inventory instance { get; private set; }
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+public class Inventory : MonoBehaviourSingletonPersistent<Inventory>
+{
     public static int SLOTS = 4;
     public List<Item> items = new ();
     public bool[] inventorySlots = new bool[SLOTS];
@@ -28,7 +17,7 @@ public class Inventory : MonoBehaviour
         if (CheckEmptySlot())
         {
             items[emptySlot] = item;
-            InventoryHud.instance.AddItem(item, emptySlot);
+            InventoryHud.Instance.AddItem(item, emptySlot);
             itemCount++;
         }
         else
@@ -45,7 +34,7 @@ public class Inventory : MonoBehaviour
         items.RemoveAt(itemPos);
         inventorySlots[itemPos] = false;
         itemCount--;
-        InventoryHud.instance.RemoveItem(itemPos);
+        InventoryHud.Instance.RemoveItem(itemPos);
         
     }
 

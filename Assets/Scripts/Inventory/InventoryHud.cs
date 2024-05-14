@@ -4,21 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryHud : MonoBehaviour
-{   public static InventoryHud instance { get; private set; }
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
+public class InventoryHud : MonoBehaviourSingletonPersistent<InventoryHud>
+{
     public Image[] slots = new Image[4];
 
     public void AddItem(Item item, int itemPos)

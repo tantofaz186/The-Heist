@@ -9,10 +9,10 @@ public class PlayerPick : MonoBehaviour
    {
       if(other.CompareTag("Item"))
       { 
-         if(Inventory.instance.itemCount< Inventory.SLOTS)
+         if(Inventory.Instance.itemCount< Inventory.SLOTS)
          {
-            Item item = other.GetComponent<ItemBehaviour>().item;
-                     Inventory.instance.AddItem(item);
+            Item item = other.GetComponent<PickupObject>().item;
+                     Inventory.Instance.AddItem(item);
                      Destroy(other.gameObject);
          }
       }
