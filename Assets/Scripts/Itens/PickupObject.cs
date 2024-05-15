@@ -10,8 +10,8 @@ using UnityEngine.Serialization;
 public class PickupObject : NetworkBehaviour
 {
     public Item item;
-    public float GrabDistance = 2.0f;
 
+    private bool canGrab;
     private Rigidbody m_Rigidbody;
     private BoxCollider m_Collider;
 
@@ -35,6 +35,23 @@ public class PickupObject : NetworkBehaviour
         _renderer = GetComponent<MeshRenderer>();
     }
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("View"))
+        {
+            canGrab = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("View"))
+        {
+            canGrab = false;
+        }
+    }
+
     private void Release(InputAction.CallbackContext obj)
     {
         if (m_IsGrabbed.Value && IsOwner)
@@ -45,14 +62,7 @@ public class PickupObject : NetworkBehaviour
 
     private void Grab(InputAction.CallbackContext obj)
     {
-        if (m_IsGrabbed.Value) return;
-        var localPlayerObject = NetworkManager?.SpawnManager?.GetLocalPlayerObject();
-        if (localPlayerObject == null) return;
-        var distance = Vector3.Distance(transform.position, localPlayerObject.transform.position);
-        var cos = Vector3.Dot(transform.forward, (localPlayerObject.transform.position - transform.position).normalized);
-        if (!(distance <= GrabDistance) && cos <= 0.5f) return;
-        
-        TryGrabServerRpc();
+        if(canGrab) TryGrabServerRpc();
         
     }
 
