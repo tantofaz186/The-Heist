@@ -18,6 +18,7 @@ public class PickupObject : NetworkBehaviour
     private NetworkVariable<bool> m_IsGrabbed = new NetworkVariable<bool>();
     private PlayerInputActions controle_player;
     private InputAction grab, release;
+    [SerializeField] private ItemSelect _itemSelect;
 
     private void Awake()
     {
@@ -90,13 +91,13 @@ public class PickupObject : NetworkBehaviour
                 NetworkObject.ChangeOwnership(senderClientId);
 
                 //send item to inventory
-                if(Inventory.Instance.itemCount< Inventory.SLOTS)
+                /*if(Inventory.Instance.itemCount< Inventory.SLOTS)
                 {
                     Inventory.Instance.AddItem(item);
                     transform.parent = senderPlayerObject.transform;
                     transform.localPosition = new Vector3(0.473f, 0.605f, -0.314f);
                     m_IsGrabbed.Value = true;
-                }
+                }*/
             }
         }
     }
@@ -111,5 +112,11 @@ public class PickupObject : NetworkBehaviour
             transform.parent = null;
             m_IsGrabbed.Value = false;
         }
+        
+        /*if(Inventory.Instance.inventorySlots[_itemSelect.currentItem]==true)
+        {   
+            Inventory.Instance.RemoveItem(_itemSelect.currentItem);
+            
+        }*/
     }
 }

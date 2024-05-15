@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviourSingletonPersistent<Inventory>
     public static int SLOTS = 4;
     public List<Item> items = new ();
     public bool[] inventorySlots = new bool[SLOTS];
-    int emptySlot;
+   [SerializeField] int emptySlot;
     public int itemCount;
     
     
@@ -19,6 +19,7 @@ public class Inventory : MonoBehaviourSingletonPersistent<Inventory>
             items[emptySlot] = item;
             InventoryHud.Instance.AddItem(item, emptySlot);
             itemCount++;
+            Debug.Log("Item Adicionado"+ " "+emptySlot);
         }
         else
         {
@@ -30,7 +31,7 @@ public class Inventory : MonoBehaviourSingletonPersistent<Inventory>
 
     public void RemoveItem(int itemPos)
     {
-        //drop item
+        Instantiate(items[itemPos].itemPrefab, transform.position, Quaternion.identity);
         items.RemoveAt(itemPos);
         inventorySlots[itemPos] = false;
         itemCount--;

@@ -12,11 +12,13 @@ public class InventoryHud : MonoBehaviourSingletonPersistent<InventoryHud>
     public void AddItem(Item item, int itemPos)
     {
       slots[itemPos].sprite = item.itemSprite;
-      
+      slots[itemPos].color = new Color(slots[itemPos].color.r, slots[itemPos].color.g, slots[itemPos].color.b, 1f);
+
     }
     public void RemoveItem(int itemPos)
-    {
+    {   slots[itemPos].color = new Color(slots[itemPos].color.r, slots[itemPos].color.g, slots[itemPos].color.b, 0f);
         slots[itemPos].sprite = null;
+        
     }
 
     public void ChangeActiveItem(int current)
