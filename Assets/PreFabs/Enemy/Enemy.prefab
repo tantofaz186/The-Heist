@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1854520841
+  GlobalObjectIdHash: 3160060308
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -127,20 +127,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 3813647409060926135}
   anim: {fileID: 0}
-  rb: {fileID: 0}
-  playerPos: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 128
+  gameStarted: 1
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 10
+  attackRange: 1
   timeAttack: 1
   playerFound: {fileID: 0}
-  sightRange: 7
-  attackRange: 1
   fov: {fileID: 142687892498455335}
 --- !u!195 &3813647409060926135
 NavMeshAgent:
@@ -246,16 +238,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d62aeae4773f88478d2a360a018d20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewAngle: 0
-  viewRadius: 0
-  viewHeight: 0
+  viewAngle: 30
+  viewRadius: 20
+  viewHeight: 2
   playerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 119
   meshColor: {r: 1, g: 0, b: 0, a: 1}
+  scanInterval: 0.033333335
   scanFrequency: 30
   objects: []
 --- !u!1001 &9025950100908674621

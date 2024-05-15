@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerPick : MonoBehaviour
 {
-   private void OnTriggerEnter(Collider other)
+   /*private void OnTriggerEnter(Collider other)
    {
       if(other.CompareTag("Item"))
       { 
@@ -16,5 +16,5 @@ public class PlayerPick : MonoBehaviour
                      Destroy(other.gameObject);
          }
       }
-   }
+   }*/
 }

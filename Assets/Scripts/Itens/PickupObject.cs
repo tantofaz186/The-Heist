@@ -18,8 +18,8 @@ public class PickupObject : NetworkBehaviour
     private NetworkVariable<bool> m_IsGrabbed = new NetworkVariable<bool>();
     private PlayerInputActions controle_player;
     private InputAction grab, release;
-    [SerializeField] private ItemSelect _itemSelect;
-
+    
+    private MeshRenderer _renderer;
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -32,6 +32,7 @@ public class PickupObject : NetworkBehaviour
         release = controle_player.Player.Release;
         release.Enable();
         release.performed += Release;
+        _renderer = GetComponent<MeshRenderer>();
     }
 
     private void Release(InputAction.CallbackContext obj)
@@ -48,7 +49,9 @@ public class PickupObject : NetworkBehaviour
         var localPlayerObject = NetworkManager?.SpawnManager?.GetLocalPlayerObject();
         if (localPlayerObject == null) return;
         var distance = Vector3.Distance(transform.position, localPlayerObject.transform.position);
-        if (!(distance <= GrabDistance)) return;
+        var cos = Vector3.Dot(transform.forward, (localPlayerObject.transform.position - transform.position).normalized);
+        if (!(distance <= GrabDistance) && cos <= 0.5f) return;
+        
         TryGrabServerRpc();
         
     }
@@ -91,13 +94,14 @@ public class PickupObject : NetworkBehaviour
                 NetworkObject.ChangeOwnership(senderClientId);
 
                 //send item to inventory
-                /*if(Inventory.Instance.itemCount< Inventory.SLOTS)
+                if(Inventory.Instance.itemCount< Inventory.SLOTS)
                 {
                     Inventory.Instance.AddItem(item);
                     transform.parent = senderPlayerObject.transform;
                     transform.localPosition = new Vector3(0.473f, 0.605f, -0.314f);
                     m_IsGrabbed.Value = true;
-                }*/
+                    _renderer.enabled = false;
+                }
             }
         }
     }
@@ -105,18 +109,19 @@ public class PickupObject : NetworkBehaviour
     [ServerRpc]
     private void ReleaseServerRpc()
     {
-        if (m_IsGrabbed.Value)
-        {
-            NetworkObject.RemoveOwnership();
-
-            transform.parent = null;
-            m_IsGrabbed.Value = false;
-        }
         
-        /*if(Inventory.Instance.inventorySlots[_itemSelect.currentItem]==true)
+        
+        if(Inventory.Instance.inventorySlots[ItemSelect.Instance.currentItem]==true)
         {   
-            Inventory.Instance.RemoveItem(_itemSelect.currentItem);
-            
-        }*/
+           
+            if (m_IsGrabbed.Value)
+                    { 
+                        Inventory.Instance.RemoveItem(ItemSelect.Instance.currentItem);
+                        NetworkObject.RemoveOwnership();
+                        transform.parent = null;
+                        m_IsGrabbed.Value = false;
+                        _renderer.enabled = true;
+                    }
+        }
     }
 }

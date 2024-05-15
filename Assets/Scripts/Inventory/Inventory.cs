@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Inventory : MonoBehaviourSingletonPersistent<Inventory>
@@ -31,8 +30,8 @@ public class Inventory : MonoBehaviourSingletonPersistent<Inventory>
 
     public void RemoveItem(int itemPos)
     {
-        Instantiate(items[itemPos].itemPrefab, transform.position, Quaternion.identity);
-        items.RemoveAt(itemPos);
+       
+        items[itemPos]  = null;
         inventorySlots[itemPos] = false;
         itemCount--;
         InventoryHud.Instance.RemoveItem(itemPos);
@@ -58,6 +57,12 @@ public class Inventory : MonoBehaviourSingletonPersistent<Inventory>
         }
         
         return false;
+    }
+
+    void ResetValues()
+    {
+        items = new List<Item>();
+        
     }
 
  

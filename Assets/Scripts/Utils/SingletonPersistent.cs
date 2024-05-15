@@ -6,12 +6,7 @@ public class MonoBehaviourSingletonPersistent<T> : MonoBehaviour
 {
     public static T Instance { get;  set; }
 
-    #if UNITY_EDITOR
-    public virtual void OnValidate()
-    {
-        if (Instance == null) Instance = this as T;
-    }
-    #else
+   
     public virtual void Awake()
     {
         if (Instance == null)
@@ -24,5 +19,5 @@ public class MonoBehaviourSingletonPersistent<T> : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    #endif
+   
 }

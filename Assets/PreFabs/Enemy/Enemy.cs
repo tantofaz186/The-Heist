@@ -59,17 +59,18 @@ public class Enemy : NetworkBehaviour
                         Chase(playerFound.transform);
                     }
                 }
-                else
-                {
-                    Patrol();
-                }
+                
+            }
+            else
+            {
+                Patrol();
             }
             yield return new WaitForSeconds(fov.scanInterval);
         }
     }
 
     void Patrol()
-    {
+    {   
         if (!walkPointSet) SearchWalk();
         if (walkPointSet) agent.SetDestination(walkPoint);
         agent.speed = 1f;
@@ -84,7 +85,7 @@ public class Enemy : NetworkBehaviour
     }
 
     void SearchWalk()
-    {
+    {   
         float randomz = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 

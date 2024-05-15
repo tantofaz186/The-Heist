@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ItemSelect : MonoBehaviour
-{
+public class ItemSelect : Singleton<ItemSelect>
+{  
    public int currentItem;
    
    PlayerInputActions controle_player;
