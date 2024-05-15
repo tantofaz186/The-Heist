@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
     private bool hit;
     public int bagSize;
     public int maxBagSize;
-    private bool canPick = false;
+    
 
     [SerializeField] Movement movement;
 

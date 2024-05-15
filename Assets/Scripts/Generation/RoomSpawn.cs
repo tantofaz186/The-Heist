@@ -146,7 +146,7 @@ public class RoomSpawn : NetworkBehaviour
 
    void SpawnNormalRoom(int x)
    {
-       int rnd = Random.Range(0, themeRooms.Count);
+       int rnd = Random.Range(0, normalRooms.Count);
       
        bool inList = false;
        if (normalRoomsCheck.Count <= 0)
@@ -175,7 +175,7 @@ public class RoomSpawn : NetworkBehaviour
        }
        else
        {
-           SpawnThemeRoom(x);
+           SpawnNormalRoom(x);
        }
    }
 

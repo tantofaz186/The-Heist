@@ -11,6 +11,7 @@ public class FOV : MonoBehaviour
     public float viewHeight;
     public LayerMask playerMask;
     public LayerMask obstacleMask;
+    
 
     public Color meshColor = Color.red;
 
@@ -49,6 +50,7 @@ public class FOV : MonoBehaviour
     public bool InSight(GameObject obj)
     {
         Vector3 origin = transform.position;
+        origin.y -= 1f;
         Vector3 dest = obj.transform.position;
         Vector3 direction = dest - origin;
         if (direction.y < 0 || direction.y > viewHeight)
