@@ -9,8 +9,7 @@ public class PlayerStats : MonoBehaviour
     public GameObject dmgGO;
     private Image dmgImg;
     private bool hit;
-    public int bagSize;
-    public int maxBagSize;
+   
     
 
     [SerializeField] Movement movement;

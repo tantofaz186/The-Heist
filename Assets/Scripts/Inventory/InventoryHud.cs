@@ -8,7 +8,8 @@ public class InventoryHud : MonoBehaviourSingletonPersistent<InventoryHud>
 {
     public Image[] slots = new Image[4];
     public GameObject[] borders = new GameObject[4];
-    
+    public Slider weighSlider;
+    public Text moneyText;
     public void AddItem(Item item, int itemPos)
     {
       slots[itemPos].sprite = item.itemSprite;
@@ -19,6 +20,16 @@ public class InventoryHud : MonoBehaviourSingletonPersistent<InventoryHud>
     {   slots[itemPos].color = new Color(slots[itemPos].color.r, slots[itemPos].color.g, slots[itemPos].color.b, 0f);
         slots[itemPos].sprite = null;
         
+    }
+
+    public void AddRelic(Item item)
+    {
+        weighSlider.value+= item.itemWeight;
+    }
+    
+    public void RemoveRelic(Item item)
+    {
+        weighSlider.value-= item.itemWeight;
     }
 
     public void ChangeActiveItem(int current)

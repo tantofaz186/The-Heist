@@ -112,6 +112,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DropRelic",
+                    "type": "Button",
+                    "id": "ff3edaad-50e3-4329-a1e4-8c2dd811027a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -387,6 +396,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Item4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "917a2bd5-0ed2-4eaf-b315-4d3e221049c9",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "DropRelic",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

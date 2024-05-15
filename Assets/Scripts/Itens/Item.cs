@@ -3,11 +3,12 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
 public class Item : ScriptableObject
-{
+{ 
+    public bool isRelic;
     public string itemName;
     public Sprite itemSprite;
-    public float itemValue;
-    public float itemWeight;
+    public int itemValue;
+    public int itemWeight;
     public GameObject itemPrefab;
     
 

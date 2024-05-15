@@ -134,6 +134,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DropRelic"",
+                    ""type"": ""Button"",
+                    ""id"": ""ff3edaad-50e3-4329-a1e4-8c2dd811027a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -409,6 +418,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Item4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""917a2bd5-0ed2-4eaf-b315-4d3e221049c9"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""DropRelic"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1008,6 +1028,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Item2 = m_Player.FindAction("Item2", throwIfNotFound: true);
         m_Player_Item3 = m_Player.FindAction("Item3", throwIfNotFound: true);
         m_Player_Item4 = m_Player.FindAction("Item4", throwIfNotFound: true);
+        m_Player_DropRelic = m_Player.FindAction("DropRelic", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1093,6 +1114,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Item2;
     private readonly InputAction m_Player_Item3;
     private readonly InputAction m_Player_Item4;
+    private readonly InputAction m_Player_DropRelic;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1109,6 +1131,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Item2 => m_Wrapper.m_Player_Item2;
         public InputAction @Item3 => m_Wrapper.m_Player_Item3;
         public InputAction @Item4 => m_Wrapper.m_Player_Item4;
+        public InputAction @DropRelic => m_Wrapper.m_Player_DropRelic;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1154,6 +1177,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Item4.started += instance.OnItem4;
             @Item4.performed += instance.OnItem4;
             @Item4.canceled += instance.OnItem4;
+            @DropRelic.started += instance.OnDropRelic;
+            @DropRelic.performed += instance.OnDropRelic;
+            @DropRelic.canceled += instance.OnDropRelic;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1194,6 +1220,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Item4.started -= instance.OnItem4;
             @Item4.performed -= instance.OnItem4;
             @Item4.canceled -= instance.OnItem4;
+            @DropRelic.started -= instance.OnDropRelic;
+            @DropRelic.performed -= instance.OnDropRelic;
+            @DropRelic.canceled -= instance.OnDropRelic;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1388,6 +1417,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnItem2(InputAction.CallbackContext context);
         void OnItem3(InputAction.CallbackContext context);
         void OnItem4(InputAction.CallbackContext context);
+        void OnDropRelic(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
