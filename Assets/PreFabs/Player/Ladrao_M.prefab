@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3387281291
+  GlobalObjectIdHash: 2782027916
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1170,8 +1170,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmgGO: {fileID: 0}
-  bagSize: 0
-  maxBagSize: 0
   movement: {fileID: 0}
 --- !u!114 &4901498251451599289
 MonoBehaviour:
@@ -1205,6 +1203,9 @@ MonoBehaviour:
   inventorySlots: 00000000
   emptySlot: 0
   itemCount: 0
+  bagWeight: 0
+  relics: []
+  totalMoney: 0
 --- !u!114 &-5401163062824662830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2818,7 +2819,7 @@ Transform:
   m_GameObject: {fileID: 8282491224398637130}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.6818349, z: 0.04557419}
+  m_LocalPosition: {x: 0, y: 1.6818349, z: 0.184}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -183,8 +183,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.51, y: 0.42, z: 1.58}
-  m_Center: {x: 0, y: 0, z: 1.27}
+  m_Size: {x: 1.12779, y: 0.6199009, z: 2.3460846}
+  m_Center: {x: 0.014561057, y: 0.09995046, z: 1.6530423}
 --- !u!1 &6867205733204239299
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,8 +321,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 20}
+  m_AnchoredPosition: {x: 0, y: 0.000026226}
+  m_SizeDelta: {x: 13.287, y: 13.287}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3456924455638244823
 CanvasRenderer:
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

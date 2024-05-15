@@ -40,7 +40,7 @@ public class ItemSpawn : NetworkBehaviour
       bool inList = false;
       if (itemsCheck.Count <= 0)
       {
-         itemsCheck = new List<int>(){0,1,2,3};
+         itemsCheck = new List<int>(){0,1,2,3,4,5};
           
       }
            
