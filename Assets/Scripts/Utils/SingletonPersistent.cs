@@ -4,8 +4,9 @@ using UnityEngine;
 public class MonoBehaviourSingletonPersistent<T> : MonoBehaviour
     where T : Component
 {
-    public static T Instance { get; private set; }
+    public static T Instance { get;  set; }
 
+   
     public virtual void Awake()
     {
         if (Instance == null)
@@ -18,4 +19,5 @@ public class MonoBehaviourSingletonPersistent<T> : MonoBehaviour
             Destroy(gameObject);
         }
     }
+   
 }
