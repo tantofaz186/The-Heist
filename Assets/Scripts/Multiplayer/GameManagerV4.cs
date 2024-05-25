@@ -14,7 +14,6 @@ public class GameManagerV4 : MonoBehaviour
     [SerializeField] private Button hostButton;
     [SerializeField] private Button clientButton;
     [SerializeField] public TMP_InputField inputField;
-    [SerializeField] public Text textField;
 
     [SerializeField] public GameObject m_Prefab;
 
@@ -28,10 +27,9 @@ public class GameManagerV4 : MonoBehaviour
     private void Setup()
     {
         instance = this;
-
-
+        
         NetworkManager.Singleton.NetworkConfig.ConnectionApproval = true;
-        NetworkManager.Singleton.ConnectionApprovalCallback = ApprovalCheck;
+        NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
         hostButton.interactable = true;
         serverButton.interactable = true;
         clientButton.interactable = true;
@@ -46,7 +44,6 @@ public class GameManagerV4 : MonoBehaviour
 
         hostButton.onClick.AddListener(() =>
         {
-            
             NetworkManager.Singleton.StartHost();
         });
 
@@ -61,7 +58,7 @@ public class GameManagerV4 : MonoBehaviour
     private void TryConnectClient()
     {
         string ipAddress = inputField.text;
-        if (ipAddress == null || ipAddress.Length == 0)
+        if (string.IsNullOrEmpty(ipAddress))
         {
             ipAddress = "127.0.0.1";
         }
