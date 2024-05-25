@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using Unity.Netcode;
@@ -18,6 +19,7 @@ public class Enemy : NetworkBehaviour
     public float attackRange;
     public float timeAttack;
     private bool attacked;
+    public event Action<GameObject> OnAttack;
 
     public GameObject playerFound;
 
@@ -106,15 +108,16 @@ public class Enemy : NetworkBehaviour
         anim.SetBool("walk", false);
     }
 
-    void Attack(Transform _playerPos)
+    void Attack(Transform targetTransform)
     {
-        var position = _playerPos.position;
+        var position = targetTransform.position;
         agent.SetDestination(position);
         transform.LookAt(position);
         if (!attacked)
         {
             anim.SetTrigger("attack");
             attacked = true;
+            OnAttack?.Invoke(targetTransform.gameObject);
             Invoke(nameof(ResetAttack), timeAttack);
         }
     }
