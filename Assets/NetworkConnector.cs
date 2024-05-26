@@ -46,7 +46,7 @@ public class NetworkConnector : MonoBehaviour
         if (runningRegex) yield break;
         runningRegex = true;
         ipInput.text = Regex.Replace(ipInput.text, "[^\\d]", "");
-        ipInput.text = Regex.Replace(ipInput.text, match, "$1.$4.$7.$10:$12");
+        ipInput.text = Regex.Replace(ipInput.text, match, subtitution);
         ipInput.text = ipInput.text.Trim(':', '.');
         ipInput.stringPosition = ipInput.text.Length;
         runningRegex = false;

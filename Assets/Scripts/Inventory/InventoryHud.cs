@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryHud : MonoBehaviourSingletonPersistent<InventoryHud>
+public class InventoryHud : Singleton<InventoryHud>
 {
     public Image[] slots = new Image[4];
     public GameObject[] borders = new GameObject[4];

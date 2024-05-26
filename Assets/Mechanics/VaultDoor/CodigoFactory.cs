@@ -61,7 +61,7 @@ namespace Mechanics.VaultDoor
             SendCodeToClientRpc(digitos, itemsCheck.ToArray(), rpcParams.Receive.SenderClientId);
         }
 
-        [ClientRpc]
+        [Rpc(SendTo.NotServer)]
         private void SendCodeToClientRpc(short[] code, int[] intList, ulong clientId = 0)
         {
             if (clientId != NetworkManager.Singleton.LocalClientId)
