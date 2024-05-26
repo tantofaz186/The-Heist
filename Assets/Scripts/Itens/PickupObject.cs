@@ -108,7 +108,7 @@ public class PickupObject : NetworkBehaviour
         }
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void TryGrabServerRpc(ServerRpcParams serverRpcParams = default)
     {
         if (!m_IsGrabbed.Value)
