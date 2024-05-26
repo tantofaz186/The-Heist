@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviourSingletonPersistent<Inventory>
+public class Inventory : Singleton<Inventory>
 {
     public static int SLOTS = 4;
     public static int MaxWeight = 10000;

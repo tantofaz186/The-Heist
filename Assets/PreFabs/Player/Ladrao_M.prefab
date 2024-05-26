@@ -944,16 +944,16 @@ GameObject:
   - component: {fileID: 7751843900547165181}
   - component: {fileID: 5621512635020069585}
   - component: {fileID: 6180432129009384576}
-  - component: {fileID: 7322679468951808490}
+  - component: {fileID: 2815995893020728263}
   - component: {fileID: 4586447672509110361}
-  - component: {fileID: 849503577975003922}
   - component: {fileID: 1903253925923160731}
   - component: {fileID: 88759529031686857}
   - component: {fileID: 4901498251451599289}
   - component: {fileID: -6749964110250010635}
   - component: {fileID: -5401163062824662830}
-  - component: {fileID: 2437854026283915191}
-  - component: {fileID: -1454947525995249289}
+  - component: {fileID: -6366847050831217327}
+  - component: {fileID: 4978302783566256905}
+  - component: {fileID: -7792924013397962774}
   m_Layer: 7
   m_Name: Ladrao_M
   m_TagString: Player
@@ -970,7 +970,7 @@ Transform:
   m_GameObject: {fileID: 2921256980024346588}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.4652767, y: 0.0853138, z: -5.293736}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1055,7 +1055,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &7322679468951808490
+--- !u!114 &2815995893020728263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1067,14 +1067,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3387281291
+  GlobalObjectIdHash: 282280595
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
+  ActiveSceneSynchronization: 1
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
+  DontDestroyWithOwner: 1
   AutoObjectParentSync: 1
 --- !u!114 &4586447672509110361
 MonoBehaviour:
@@ -1103,48 +1103,6 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &849503577975003922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2921256980024346588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c017efdc54cff2143be1a926df9c7cfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TransitionStateInfoList:
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 2081823275
-    DestinationState: 125937960
-    TransitionDuration: 0.25
-    TriggerNameHash: -533643314
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -201779296
-    DestinationState: 125937960
-    TransitionDuration: 0.25
-    TriggerNameHash: -533643314
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -2051410350
-    DestinationState: 125937960
-    TransitionDuration: 0.25
-    TriggerNameHash: -533643314
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -737396462
-    DestinationState: 125937960
-    TransitionDuration: 0.25
-    TriggerNameHash: -533643314
-    TransitionIndex: 1
-  m_Animator: {fileID: 5621512635020069585}
 --- !u!114 &1903253925923160731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1221,7 +1179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentItem: 0
---- !u!114 &2437854026283915191
+--- !u!114 &-6366847050831217327
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1230,7 +1188,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2921256980024346588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 885e13c45af81da4d821a716ac75b228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UseUnreliableDeltas: 0
@@ -1252,7 +1210,7 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &-1454947525995249289
+--- !u!114 &4978302783566256905
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1264,6 +1222,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-7792924013397962774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2921256980024346588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c017efdc54cff2143be1a926df9c7cfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 2081823275
+    DestinationState: 125937960
+    TransitionDuration: 0.25
+    TriggerNameHash: -533643314
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -201779296
+    DestinationState: 125937960
+    TransitionDuration: 0.25
+    TriggerNameHash: -533643314
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -2051410350
+    DestinationState: 125937960
+    TransitionDuration: 0.25
+    TriggerNameHash: -533643314
+    TransitionIndex: 2
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -737396462
+    DestinationState: 125937960
+    TransitionDuration: 0.25
+    TriggerNameHash: -533643314
+    TransitionIndex: 1
+  m_Animator: {fileID: 5621512635020069585}
 --- !u!1 &3630191770823890894
 GameObject:
   m_ObjectHideFlags: 0
