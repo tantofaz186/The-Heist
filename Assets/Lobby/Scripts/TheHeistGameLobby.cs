@@ -132,7 +132,7 @@ public class TheHeistGameLobby : MonoBehaviour
             TheHeistGameMultiplayer.Instance.StartHost();
             Loader.LoadNetwork(Loader.Scene.CharacterSelectScene);
         }
-        catch (LobbyServiceException e)
+        catch (LobbyServiceException)
         {
             OnCreateLobbyFailed?.Invoke(this, EventArgs.Empty);
         }
@@ -153,7 +153,7 @@ public class TheHeistGameLobby : MonoBehaviour
             
             TheHeistGameMultiplayer.Instance.StartClient();
         }
-        catch (LobbyServiceException e)
+        catch (LobbyServiceException)
         {
             OnQuickJoinFailed?.Invoke(this, EventArgs.Empty);
         }
@@ -174,7 +174,7 @@ public class TheHeistGameLobby : MonoBehaviour
             
             TheHeistGameMultiplayer.Instance.StartClient();
         }
-        catch (LobbyServiceException e)
+        catch (LobbyServiceException)
         {
             OnJoinFailed?.Invoke(this, EventArgs.Empty);
         }
@@ -195,7 +195,7 @@ public class TheHeistGameLobby : MonoBehaviour
             
             TheHeistGameMultiplayer.Instance.StartClient();
         }
-        catch (LobbyServiceException e)
+        catch (LobbyServiceException)
         {
             OnJoinFailed?.Invoke(this, EventArgs.Empty);
         }
