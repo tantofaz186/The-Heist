@@ -6,11 +6,14 @@ using UnityEngine;
 
 public class AddCam : NetworkBehaviour
 {
-    [SerializeField] GameObject cam;
-    [SerializeField] GameObject head;
+    [SerializeField]
+    GameObject cam;
+
+    [SerializeField]
+    GameObject head;
 
     private void Start()
-    {   if(IsOwner)
-        Instantiate(cam, head.transform.position, cam.transform.rotation, head.transform);
+    {
+        if (IsOwner) Instantiate(cam, head.transform.position, cam.transform.rotation, head.transform);
     }
 }

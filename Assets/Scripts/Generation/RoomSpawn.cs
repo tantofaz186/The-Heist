@@ -42,7 +42,7 @@ public class RoomSpawn : NetworkBehaviour
    {
        yield return new WaitForSeconds(1);
        yield return new WaitUntil(() => bake.surface.navMeshData != null || bake.surface != null);
-       if (IsServer) bake.surface.BuildNavMesh();
+       bake.Bake();
        yield return new WaitForSeconds(1);
        if (IsServer)
        {
@@ -50,7 +50,7 @@ public class RoomSpawn : NetworkBehaviour
        }
    }
 
-   [Rpc(SendTo.Server)]
+   [Rpc(SendTo.Everyone)]
    void SpawnSceneRpc()
    {
        SortHallay();
@@ -58,7 +58,7 @@ public class RoomSpawn : NetworkBehaviour
        SortRooms();
    }
    
-   [Rpc(SendTo.Server)]
+   [Rpc(SendTo.Everyone)]
    void SpawnEnemyRpc()
    {
        enemySpawn.SpawnEnemyRpc();
