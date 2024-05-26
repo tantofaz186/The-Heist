@@ -18,8 +18,9 @@ public class PickupObject : NetworkBehaviour
     private NetworkVariable<bool> m_IsGrabbed = new NetworkVariable<bool>();
     private PlayerInputActions controle_player;
     private InputAction grab, release, dropRelic;
-    
+
     private MeshRenderer _renderer;
+
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -33,16 +34,15 @@ public class PickupObject : NetworkBehaviour
         release.Enable();
         release.performed += Release;
         _renderer = GetComponent<MeshRenderer>();
-        
+
         dropRelic = controle_player.Player.DropRelic;
         dropRelic.Enable();
         dropRelic.performed += DropRelic;
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("View"))
+        if (other.CompareTag("View"))
         {
             canGrab = true;
         }
@@ -50,7 +50,7 @@ public class PickupObject : NetworkBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("View"))
+        if (other.CompareTag("View"))
         {
             canGrab = false;
         }
@@ -62,9 +62,8 @@ public class PickupObject : NetworkBehaviour
         {
             if (item.isRelic)
             {
-                 DropRelicServerRpc();
+                DropRelicServerRpc();
             }
-           
         }
     }
 
@@ -78,8 +77,7 @@ public class PickupObject : NetworkBehaviour
 
     private void Grab(InputAction.CallbackContext obj)
     {
-        if(canGrab) TryGrabServerRpc();
-        
+        if (canGrab) TryGrabServerRpc();
     }
 
     private void FixedUpdate()
@@ -99,7 +97,7 @@ public class PickupObject : NetworkBehaviour
             m_Collider.isTrigger = !IsServer || m_IsGrabbed.Value;
         }
     }
-    
+
     public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)
     {
         if (parentNetworkObject != null && (IsOwner || IsServer))
@@ -111,68 +109,52 @@ public class PickupObject : NetworkBehaviour
     [ServerRpc]
     private void TryGrabServerRpc(ServerRpcParams serverRpcParams = default)
     {
-        if (!m_IsGrabbed.Value)
-        {   
-            var senderClientId = serverRpcParams.Receive.SenderClientId;
-            var senderPlayerObject = PlayerPickup.Players[senderClientId].NetworkObject;
-            if (senderPlayerObject != null)
-            {
-                NetworkObject.ChangeOwnership(senderClientId);
-                if (item.isRelic==false)
-                {
-                    if(Inventory.Instance.itemCount< Inventory.SLOTS)
-                    {
-                        Inventory.Instance.AddItem(item);
-                        transform.parent = senderPlayerObject.transform;
-                        transform.localPosition = new Vector3(0.473f, 0.605f, -0.314f);
-                        m_IsGrabbed.Value = true;
-                        _renderer.enabled = false;
-                        
-                    }
-                }
-                else
-                {
-                   if( Inventory.Instance.bagWeight+item.itemWeight<= Inventory.MaxWeight)
-                    {
-                        Inventory.Instance.AddRelic(item);
-                        transform.parent = senderPlayerObject.transform;
-                        transform.localPosition = new Vector3(0.473f, 0.605f, -0.314f);
-                        m_IsGrabbed.Value = true;
-                        _renderer.enabled = false;
-                    }
-                }
-                
-               
-            }
+        if (m_IsGrabbed.Value) return;
+        var senderClientId = serverRpcParams.Receive.SenderClientId;
+        var senderPlayerObject = PlayerPickup.Players[senderClientId].NetworkObject;
+        if (senderPlayerObject == null) return;
+        NetworkObject.ChangeOwnership(senderClientId);
+        if (item.isRelic == false && Inventory.Instance.itemCount < Inventory.SLOTS)
+        {
+            Inventory.Instance.AddItem(item);
+            transform.parent = senderPlayerObject.transform;
+            transform.localPosition = new Vector3(0.473f, 0.605f, -0.314f);
+            m_IsGrabbed.Value = true;
+            _renderer.enabled = false;
+        }
+        else if (Inventory.Instance.bagWeight + item.itemWeight <= Inventory.MaxWeight)
+        {
+            Inventory.Instance.AddRelic(item);
+            transform.parent = senderPlayerObject.transform;
+            transform.localPosition = new Vector3(0.473f, 0.605f, -0.314f);
+            m_IsGrabbed.Value = true;
+            _renderer.enabled = false;
         }
     }
-    
 
     [ServerRpc]
     private void ReleaseServerRpc()
     {
-
         if (item.isRelic == false)
         {
-             if(Inventory.Instance.inventorySlots[ItemSelect.Instance.currentItem]==true)
-                    {   
-                       
-                        if (m_IsGrabbed.Value)
-                                { 
-                                    Inventory.Instance.RemoveItem(ItemSelect.Instance.currentItem);
-                                    NetworkObject.RemoveOwnership();
-                                    transform.parent = null;
-                                    m_IsGrabbed.Value = false;
-                                    _renderer.enabled = true;
-                                }
-                    }
+            if (Inventory.Instance.inventorySlots[ItemSelect.Instance.currentItem] == true)
+            {
+                if (m_IsGrabbed.Value)
+                {
+                    Inventory.Instance.RemoveItem(ItemSelect.Instance.currentItem);
+                    NetworkObject.RemoveOwnership();
+                    transform.parent = null;
+                    m_IsGrabbed.Value = false;
+                    _renderer.enabled = true;
+                }
+            }
         }
-       
     }
+
     [ServerRpc]
-   void DropRelicServerRpc()
+    void DropRelicServerRpc()
     {
-        if(Inventory.Instance.relics.Count>0)
+        if (Inventory.Instance.relics.Count > 0)
         {
             Inventory.Instance.RemoveRelic();
             NetworkObject.RemoveOwnership();
