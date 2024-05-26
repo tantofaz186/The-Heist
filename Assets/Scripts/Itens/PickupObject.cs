@@ -82,11 +82,6 @@ public class PickupObject : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (NetworkManager == null)
-        {
-            return;
-        }
-
         if (m_Rigidbody)
         {
             m_Rigidbody.isKinematic = !IsServer || m_IsGrabbed.Value;
@@ -106,48 +101,55 @@ public class PickupObject : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void TryGrabServerRpc(ServerRpcParams serverRpcParams = default)
     {
         if (m_IsGrabbed.Value) return;
-        var senderClientId = serverRpcParams.Receive.SenderClientId;
-        var senderPlayerObject = PlayerPickup.Players[senderClientId].NetworkObject;
+        ulong senderClientId = serverRpcParams.Receive.SenderClientId;
+        NetworkObject senderPlayerObject = PlayerPickup.Players[senderClientId].NetworkObject;
         if (senderPlayerObject == null) return;
         NetworkObject.ChangeOwnership(senderClientId);
-        if (item.isRelic == false && Inventory.Instance.itemCount < Inventory.SLOTS)
+        if (!item.isRelic && Inventory.Instance.itemCount < Inventory.SLOTS)
         {
-            Inventory.Instance.AddItem(item);
-            transform.parent = senderPlayerObject.transform;
-            transform.localPosition = new Vector3(0.473f, 0.605f, -0.314f);
-            m_IsGrabbed.Value = true;
-            _renderer.enabled = false;
+            TryGrabItemOwnerRpc();
         }
         else if (Inventory.Instance.bagWeight + item.itemWeight <= Inventory.MaxWeight)
         {
-            Inventory.Instance.AddRelic(item);
-            transform.parent = senderPlayerObject.transform;
-            transform.localPosition = new Vector3(0.473f, 0.605f, -0.314f);
-            m_IsGrabbed.Value = true;
-            _renderer.enabled = false;
+            TryGrabRelicOwnerRpc();
         }
+        else
+        {
+            return;
+        }
+
+        transform.parent = senderPlayerObject.transform;
+        transform.localPosition = new Vector3(0.473f, 0.605f, -0.314f);
+        m_IsGrabbed.Value = true;
+        _renderer.enabled = false;
+    }
+
+    [Rpc(SendTo.Owner)]
+    private void TryGrabItemOwnerRpc()
+    {
+        Inventory.Instance.AddItem(item);
+    }
+
+    [Rpc(SendTo.Owner)]
+    private void TryGrabRelicOwnerRpc()
+    {
+        Inventory.Instance.AddRelic(item);
     }
 
     [ServerRpc]
     private void ReleaseServerRpc()
     {
-        if (item.isRelic == false)
+        if (!item.isRelic && Inventory.Instance.inventorySlots[ItemSelect.Instance.currentItem] && m_IsGrabbed.Value)
         {
-            if (Inventory.Instance.inventorySlots[ItemSelect.Instance.currentItem] == true)
-            {
-                if (m_IsGrabbed.Value)
-                {
-                    Inventory.Instance.RemoveItem(ItemSelect.Instance.currentItem);
-                    NetworkObject.RemoveOwnership();
-                    transform.parent = null;
-                    m_IsGrabbed.Value = false;
-                    _renderer.enabled = true;
-                }
-            }
+            ReleaseItemOwnerRpc();
+            NetworkObject.RemoveOwnership();
+            transform.parent = null;
+            m_IsGrabbed.Value = false;
+            _renderer.enabled = true;
         }
     }
 
@@ -156,11 +158,23 @@ public class PickupObject : NetworkBehaviour
     {
         if (Inventory.Instance.relics.Count > 0)
         {
-            Inventory.Instance.RemoveRelic();
+            ReleaseRelicOwnerRpc();
             NetworkObject.RemoveOwnership();
             transform.parent = null;
             m_IsGrabbed.Value = false;
             _renderer.enabled = true;
         }
+    }
+
+    [Rpc(SendTo.Owner)]
+    public void ReleaseItemOwnerRpc()
+    {
+        Inventory.Instance.RemoveItem(ItemSelect.Instance.currentItem);
+    }
+
+    [Rpc(SendTo.Owner)]
+    public void ReleaseRelicOwnerRpc()
+    {
+        Inventory.Instance.RemoveRelic();
     }
 }
