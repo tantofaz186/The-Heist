@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
+[RequireComponent(typeof(Outline))]
 public class PickupObject : NetworkBehaviour
 {
     public Item item;
@@ -19,6 +20,8 @@ public class PickupObject : NetworkBehaviour
     private PlayerInputActions controle_player;
     private InputAction grab, release, dropRelic;
 
+    [SerializeField]
+    private Outline outline;
     private MeshRenderer _renderer;
 
     private void Awake()
@@ -38,6 +41,8 @@ public class PickupObject : NetworkBehaviour
         dropRelic = controle_player.Player.DropRelic;
         dropRelic.Enable();
         dropRelic.performed += DropRelic;
+        outline = GetComponent<Outline>();
+        outline.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,6 +50,7 @@ public class PickupObject : NetworkBehaviour
         if (other.CompareTag("View"))
         {
             canGrab = true;
+            outline.enabled = true;
         }
     }
 
@@ -53,6 +59,7 @@ public class PickupObject : NetworkBehaviour
         if (other.CompareTag("View"))
         {
             canGrab = false;
+            outline.enabled = false;
         }
     }
 
