@@ -81,6 +81,7 @@ public class RoomSpawn : NetworkBehaviour
      return GameObject.FindGameObjectsWithTag("RoomSpawnPoints").ToList();
       
    }
+   
   
    
    List<GameObject> GetSpawnPoints()
@@ -182,11 +183,20 @@ public class RoomSpawn : NetworkBehaviour
    void SpawnSecurity()
    {
        int rnd = Random.Range(0, roomSpawnpoints.Count);
-       var instance = Instantiate(securityRoom, roomSpawnpoints[rnd].transform.position, roomSpawnpoints[rnd].transform.rotation);
-       var instanceNetworkObject = instance.GetComponent<NetworkObject>();
-       instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
-
-       roomSpawnpoints.Remove(roomSpawnpoints[rnd]);
+       int roomType =roomSpawnpoints[rnd].GetComponent<SpawnInfo>().spawnType;
+       if (roomType == 1)
+       {
+           SpawnSecurity();
+       }
+       else
+       {
+           var instance = Instantiate(securityRoom, roomSpawnpoints[rnd].transform.position, roomSpawnpoints[rnd].transform.rotation);
+                  var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+                  instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+           
+                  roomSpawnpoints.Remove(roomSpawnpoints[rnd]);
+       }
+       
    }
    
    
