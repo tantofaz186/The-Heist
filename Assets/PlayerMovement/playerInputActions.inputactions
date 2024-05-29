@@ -121,6 +121,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Use",
+                    "type": "Button",
+                    "id": "5a093cc7-2982-49ac-ac4b-deb8f7246182",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -407,6 +416,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "DropRelic",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "abf33c5b-9acf-4369-8637-2725fe6e8b5b",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Use",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
