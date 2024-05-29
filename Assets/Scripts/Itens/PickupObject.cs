@@ -122,11 +122,20 @@ public class PickupObject : NetworkBehaviour
             return;
         }
 
+        ParentObjectRpc(senderClientId);
+
+    }
+    
+    [Rpc(SendTo.Everyone
+    )]
+    private void ParentObjectRpc(ulong senderClientId)
+    {
+        NetworkObject senderPlayerObject = PlayerPickup.Players[senderClientId].NetworkObject;
+
         transform.parent = senderPlayerObject.transform;
         transform.localPosition = new Vector3(0.473f, 0.605f, -0.314f);
         m_IsGrabbed.Value = true;
-        _renderer.enabled = false;
-    }
+        _renderer.enabled = false;    }
 
     [Rpc(SendTo.Owner)]
     private void TryGrabItemOwnerRpc()

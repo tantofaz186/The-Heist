@@ -10,7 +10,22 @@ public class TheHeistGameManager : NetworkBehaviour
 {
   [SerializeField] List<GameObject> playerspawns= new List<GameObject>();
 
-   List<GameObject> GetSpawnPoints()
+  private void Start()
+  {
+      NetworkManager.Singleton.ConnectionApprovalCallback+= ApprovalCheck;
+  }
+  
+  void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request,NetworkManager.ConnectionApprovalResponse callback)
+  {
+      bool approve = true;
+      bool createPlayerObject = true;
+      ulong? prefabHash = null;
+      
+    
+      
+  }
+
+  List<GameObject> GetSpawnPoints()
    {
        return GameObject.FindGameObjectsWithTag("SpawnPoint").ToList();
    }

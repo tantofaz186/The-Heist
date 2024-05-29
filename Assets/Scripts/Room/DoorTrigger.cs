@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class DoorTrigger : MonoBehaviour
+public class DoorTrigger : NetworkBehaviour
 {
    [SerializeField] private Door door;
 
@@ -11,9 +12,9 @@ public class DoorTrigger : MonoBehaviour
    {
       if (other.TryGetComponent(out Inventory inventory))
       {
-         if (!door.isOpen)
+         if (!door.isOpen.Value)
          {
-            door.Open(other.transform.position);
+            door.OpenServerRpc(other.transform.position);
          }
       }
    }
@@ -22,9 +23,9 @@ public class DoorTrigger : MonoBehaviour
    {
       if (other.TryGetComponent(out Inventory inventory))
       {
-         if (door.isOpen)
+         if (door.isOpen.Value)
          {
-            door.Close();
+            door.CloseServerRpc();
          }
       }
    }

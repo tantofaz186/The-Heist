@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerActions : MonoBehaviour
+public class PlayerActions : NetworkBehaviour
 {
     [SerializeField] private TextMeshPro useText;
     [SerializeField] public Camera camera;
@@ -20,13 +21,13 @@ public class PlayerActions : MonoBehaviour
             if(hit.collider.TryGetComponent<Door>(out Door door))
             {   
                 
-               if(door.isOpen)
+               if(door.isOpen.Value)
                {
-                   door.Close();
+                   door.CloseServerRpc();
                }
                else
                {
-                   door.Open(transform.position);
+                   door.OpenServerRpc(transform.position);
                }
             }
         }
@@ -37,7 +38,7 @@ public class PlayerActions : MonoBehaviour
         if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, maxDistance,
                 useLayers) && hit.collider.TryGetComponent<Door>(out Door door))
         {
-            if (door.isOpen)
+            if (door.isOpen.Value)
             {
                 useText.SetText("Close \"E\"");
             }

@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Door : MonoBehaviour
-{
-    public bool isOpen = false;
+public class Door : NetworkBehaviour{
+    
+   public NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false);
     [SerializeField] bool isRotatingDoor = true;
     [SerializeField] private float speed = 1f;
 
@@ -33,10 +34,22 @@ public class Door : MonoBehaviour
         StartPosition = transform.position;
         
     }
-
-  public  void Open(Vector3 UserPosition)
+    [Rpc(SendTo.Server)]
+    public void OpenServerRpc(Vector3 UserPosition)
+    {
+        OpenRpc(UserPosition);
+    }
+    
+    [Rpc(SendTo.Server)]
+    public void CloseServerRpc()
+    {
+        CloseRpc();
+    }
+    
+    [Rpc(SendTo.Everyone)]
+    public  void OpenRpc(Vector3 UserPosition)
     { 
-        if (!isOpen)
+        if (!isOpen.Value)
         {
             if (AnimationCoroutine != null)
             {
@@ -70,7 +83,7 @@ public class Door : MonoBehaviour
             endRotation = Quaternion.Euler(new Vector3(0,StartRotation.y+rotationAmount,0));
         }
 
-        isOpen = true;
+        isOpen.Value = true;
         float time = 0;
         while (time < 1)
         {
@@ -80,11 +93,11 @@ public class Door : MonoBehaviour
             
         }
     }
-
-    public void Close()
+    [Rpc(SendTo.Everyone)]
+    public void CloseRpc()
     {
         
-        if (isOpen)
+        if (isOpen.Value)
         {
             if(AnimationCoroutine!=null)
             {
@@ -105,7 +118,7 @@ public class Door : MonoBehaviour
     {
         Vector3 endPosition = StartPosition + slideAmount * slideDirection;
         Vector3 startPosition = transform.position;
-        isOpen = true;
+        isOpen.Value=true;
         float time = 0;
         while (time < 1)
         {
@@ -119,7 +132,7 @@ public class Door : MonoBehaviour
     {
         Quaternion startRotation = transform.rotation;
         Quaternion endRotation = Quaternion.Euler(StartRotation);
-        isOpen = false;
+        isOpen.Value = false;
         float time = 0;
         while (time < 1)
         {
@@ -133,7 +146,7 @@ public class Door : MonoBehaviour
     {
         Vector3 endPosition = StartPosition;
         Vector3 startPosition = transform.position;
-        isOpen = false;
+        isOpen.Value = false;
         float time = 0;
         while (time < 1)
         {
