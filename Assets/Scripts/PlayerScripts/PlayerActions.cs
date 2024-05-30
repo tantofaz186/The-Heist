@@ -7,16 +7,17 @@ using UnityEngine;
 
 public class PlayerActions : NetworkBehaviour
 {
-    [SerializeField] private TextMeshPro useText;
+    [SerializeField] public TMP_Text useText;
     [SerializeField] public Camera camera;
     [SerializeField] float maxDistance = 5f;
     [SerializeField] private LayerMask useLayers;
     [SerializeField] private float textDistance = 0.01f;
+    public bool ready = false;
 
 
     public void OnUse()
     {
-        if(Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, maxDistance, useLayers))
+        if(Physics.Raycast(this.transform.position, camera.transform.forward, out RaycastHit hit, maxDistance, useLayers))
         {
             if(hit.collider.TryGetComponent<Door>(out Door door))
             {   
@@ -33,9 +34,21 @@ public class PlayerActions : NetworkBehaviour
         }
     }
 
+    private void Start()
+    {
+        if(!IsOwner)
+        {
+            this.enabled= false;
+        }
+    }
+
     private void Update()
     {
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, maxDistance,
+        if (!ready)
+        {
+            return;
+        }
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, maxDistance,
                 useLayers) && hit.collider.TryGetComponent<Door>(out Door door))
         {
             if (door.isOpen.Value)
@@ -46,9 +59,9 @@ public class PlayerActions : NetworkBehaviour
             {
                 useText.SetText("Open \"E\"");
             }
+
             useText.gameObject.SetActive(true);
-            useText.transform.position= hit.point-(hit.point-camera.transform.position).normalized*textDistance;
-            useText.transform.rotation = Quaternion.LookRotation(hit.point - camera.transform.position).normalized;
+
         }
         else
         {
