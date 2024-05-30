@@ -30,7 +30,7 @@ public class Door : NetworkBehaviour{
     private void Awake()
     {
         StartRotation = transform.rotation.eulerAngles;
-        Forward = transform.right;
+        Forward = -transform.forward;
         StartPosition = transform.position;
         
     }
@@ -59,6 +59,7 @@ public class Door : NetworkBehaviour{
             if (isRotatingDoor)
             {   
                 float dot = Vector3.Dot(Forward, (UserPosition - transform.position).normalized);
+                Debug.Log(dot);
                 AnimationCoroutine = StartCoroutine(RotateDoor(dot));
             }
             else

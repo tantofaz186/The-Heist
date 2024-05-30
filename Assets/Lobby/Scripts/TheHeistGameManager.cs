@@ -12,10 +12,10 @@ public class TheHeistGameManager : NetworkBehaviour
 
   private void Start()
   {
-      NetworkManager.Singleton.ConnectionApprovalCallback+= ApprovalCheck;
+     // NetworkManager.Singleton.ConnectionApprovalCallback+= ApprovalCheck;
   }
   
-  void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request,NetworkManager.ConnectionApprovalResponse callback)
+  /*void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request,NetworkManager.ConnectionApprovalResponse callback)
   {
       bool approve = true;
       bool createPlayerObject = true;
@@ -23,7 +23,7 @@ public class TheHeistGameManager : NetworkBehaviour
       
     
       
-  }
+  }*/
 
   List<GameObject> GetSpawnPoints()
    {

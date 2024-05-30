@@ -13,16 +13,17 @@ public class RoomSpawn : NetworkBehaviour
 {
    [SerializeField]List<GameObject> hallways = new List<GameObject>();
    [SerializeField] Transform mapCenter;
-   [SerializeField] List<GameObject> roomSpawnpoints = new List<GameObject>();
-
+   [SerializeField] List<GameObject> roomSpawnpoints = new ();
+    [SerializeField] private List<GameObject> doorPrefabs = new();
    [SerializeField] private List<RoomTypes> themeRooms = new();
    [SerializeField]private List<int> themeRoomsCheck = new();
    [SerializeField] private List<RoomTypes> normalRooms = new();
    [SerializeField]private List<int> normalRoomsCheck = new();
    [SerializeField] private GameObject securityRoom;
    [SerializeField] public List<GameObject> playerSpawnPoints = new();
+   [SerializeField] List<GameObject> doorSpawnPoints = new();
    
-
+    
    public NavMeshBake bake;
    public EnemySpawn enemySpawn;
    public ItemSpawn itemSpawn;
@@ -56,6 +57,7 @@ public class RoomSpawn : NetworkBehaviour
        SortHallay();
        roomSpawnpoints = GetRoomSpawnPoints();
        SortRooms();
+       SpawnDoors();
    }
    
    [Rpc(SendTo.Server)]
@@ -65,9 +67,20 @@ public class RoomSpawn : NetworkBehaviour
        itemSpawn.SpawnItemsRpc();
    }
 
-   
-  
 
+
+   void SpawnDoors()
+   {
+       doorSpawnPoints = GetDoorSpawnPoints();
+         for (int i = 0; i < doorSpawnPoints.Count; i++)
+         {
+              int rnd = Random.Range(0, doorPrefabs.Count);
+              var instance = Instantiate(doorPrefabs[rnd], doorSpawnPoints[i].transform.position,doorPrefabs[rnd].transform.rotation);
+              var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+              instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+         }
+       
+   }
    void SortHallay()
    {
       int rnd = Random.Range(0, hallways.Count);
@@ -79,6 +92,12 @@ public class RoomSpawn : NetworkBehaviour
    List<GameObject> GetRoomSpawnPoints()
    {
      return GameObject.FindGameObjectsWithTag("RoomSpawnPoints").ToList();
+      
+   }
+   
+   List<GameObject> GetDoorSpawnPoints()
+   {
+       return GameObject.FindGameObjectsWithTag("DoorSpawnPoints").ToList();
       
    }
    
