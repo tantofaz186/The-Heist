@@ -830,6 +830,7 @@ GameObject:
   - component: {fileID: 655053265}
   - component: {fileID: 655053269}
   - component: {fileID: 655053268}
+  - component: {fileID: 655053270}
   m_Layer: 0
   m_Name: RoomSpawn
   m_TagString: Untagged
@@ -853,8 +854,6 @@ MonoBehaviour:
   - {fileID: 5132577278816812498, guid: e0541b6858476b24088249e748c89212, type: 3}
   mapCenter: {fileID: 649739658}
   roomSpawnpoints: []
-  doorPrefabs:
-  - {fileID: 4479617148857913601, guid: 6daf5e68c8b55c247900ee19590b19f9, type: 3}
   themeRooms:
   - Rooms:
     - {fileID: 8576381768680591494, guid: 4c90bf3783cb32445964c2a7113c98f9, type: 3}
@@ -878,10 +877,10 @@ MonoBehaviour:
   normalRoomsCheck: 00000000010000000200000003000000
   securityRoom: {fileID: 8288673120125745419, guid: 3df398c687a94b247b882c3466c07c4e, type: 3}
   playerSpawnPoints: []
-  doorSpawnPoints: []
   bake: {fileID: 1592956864}
   enemySpawn: {fileID: 655053269}
   itemSpawn: {fileID: 655053268}
+  doorSpawn: {fileID: 655053270}
 --- !u!4 &655053266
 Transform:
   m_ObjectHideFlags: 0
@@ -955,6 +954,21 @@ MonoBehaviour:
   enemyList:
   - {fileID: 9063663753828564867, guid: b1db01b3ba5da4d44b29b58272a133b0, type: 3}
   - {fileID: 5219918199060101991, guid: 098b160e92811f94b83c13729e23288c, type: 3}
+--- !u!114 &655053270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655053264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c609edff33b2e43a0608b145517aad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorSpawnPoints: []
+  doorPrefabs:
+  - {fileID: 4479617148857913601, guid: 6daf5e68c8b55c247900ee19590b19f9, type: 3}
 --- !u!1 &664645905
 GameObject:
   m_ObjectHideFlags: 0

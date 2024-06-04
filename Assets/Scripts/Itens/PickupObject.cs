@@ -29,7 +29,7 @@ public class PickupObject : NetworkBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Collider = GetComponent<BoxCollider>();
         controle_player = new PlayerInputActions();
-        grab = controle_player.Player.Grab;
+        grab = controle_player.Player.Use;
         grab.Enable();
         grab.performed += Grab;
 

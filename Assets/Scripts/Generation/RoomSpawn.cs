@@ -14,19 +14,19 @@ public class RoomSpawn : NetworkBehaviour
    [SerializeField]List<GameObject> hallways = new List<GameObject>();
    [SerializeField] Transform mapCenter;
    [SerializeField] List<GameObject> roomSpawnpoints = new ();
-    [SerializeField] private List<GameObject> doorPrefabs = new();
+   
    [SerializeField] private List<RoomTypes> themeRooms = new();
    [SerializeField]private List<int> themeRoomsCheck = new();
    [SerializeField] private List<RoomTypes> normalRooms = new();
    [SerializeField]private List<int> normalRoomsCheck = new();
    [SerializeField] private GameObject securityRoom;
    [SerializeField] public List<GameObject> playerSpawnPoints = new();
-   [SerializeField] List<GameObject> doorSpawnPoints = new();
    
     
    public NavMeshBake bake;
    public EnemySpawn enemySpawn;
    public ItemSpawn itemSpawn;
+   public DoorSpawn doorSpawn; 
   
    public override void OnNetworkSpawn()
    {
@@ -43,45 +43,47 @@ public class RoomSpawn : NetworkBehaviour
    {
        yield return new WaitForSeconds(1);
        yield return new WaitUntil(() => bake.surface.navMeshData != null || bake.surface != null);
-       if (IsServer) bake.surface.BuildNavMesh();
+       bake.surface.BuildNavMesh();
        yield return new WaitForSeconds(1);
        if (IsServer)
        {
            SpawnEnemyRpc();
+           SpawnItemRpc();
+           SpawnDoorRpc();
        }
    }
 
    [Rpc(SendTo.Server)]
    void SpawnSceneRpc()
    {
-       SortHallay();
+       SortHallway();
        roomSpawnpoints = GetRoomSpawnPoints();
        SortRooms();
-       SpawnDoors();
+       
    }
    
    [Rpc(SendTo.Server)]
    void SpawnEnemyRpc()
    {
        enemySpawn.SpawnEnemyRpc();
-       itemSpawn.SpawnItemsRpc();
-   }
-
-
-
-   void SpawnDoors()
-   {
-       doorSpawnPoints = GetDoorSpawnPoints();
-         for (int i = 0; i < doorSpawnPoints.Count; i++)
-         {
-              int rnd = Random.Range(0, doorPrefabs.Count);
-              var instance = Instantiate(doorPrefabs[rnd], doorSpawnPoints[i].transform.position,doorPrefabs[rnd].transform.rotation);
-              var instanceNetworkObject = instance.GetComponent<NetworkObject>();
-              instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
-         }
        
    }
-   void SortHallay()
+
+   [Rpc(SendTo.Server)]
+   void SpawnDoorRpc()
+   {
+       doorSpawn.SpawnDoorsRpc();
+   }
+   
+   
+    [Rpc(SendTo.Server)]
+   void SpawnItemRpc()
+   {
+       itemSpawn.SpawnItemsRpc();
+   }
+   
+   
+   void SortHallway()
    {
       int rnd = Random.Range(0, hallways.Count);
       var instance = Instantiate(hallways[rnd],mapCenter);
@@ -95,11 +97,7 @@ public class RoomSpawn : NetworkBehaviour
       
    }
    
-   List<GameObject> GetDoorSpawnPoints()
-   {
-       return GameObject.FindGameObjectsWithTag("DoorSpawnPoints").ToList();
-      
-   }
+  
    
   
    

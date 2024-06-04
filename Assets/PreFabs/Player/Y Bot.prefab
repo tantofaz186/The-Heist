@@ -1236,7 +1236,6 @@ GameObject:
   - component: {fileID: 8158612619340178471}
   - component: {fileID: 5378099781923187859}
   - component: {fileID: 7949227442281882157}
-  - component: {fileID: 8095632287596195212}
   - component: {fileID: 2378066787956437531}
   - component: {fileID: 2760499840902578224}
   - component: {fileID: 1589825012467299251}
@@ -1244,6 +1243,8 @@ GameObject:
   - component: {fileID: 4646088691601779323}
   - component: {fileID: 7703530654532988250}
   - component: {fileID: 1818456277318172245}
+  - component: {fileID: -8121630274821537507}
+  - component: {fileID: -2311228984563323672}
   m_Layer: 7
   m_Name: Y Bot
   m_TagString: Player
@@ -1355,7 +1356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3296062899
+  GlobalObjectIdHash: 2840481788
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1391,48 +1392,6 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &8095632287596195212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4683445553649119281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c017efdc54cff2143be1a926df9c7cfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TransitionStateInfoList:
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 2081823275
-    DestinationState: 125937960
-    TransitionDuration: 0.25
-    TriggerNameHash: -533643314
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -201779296
-    DestinationState: 125937960
-    TransitionDuration: 0.25
-    TriggerNameHash: -533643314
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -2051410350
-    DestinationState: 125937960
-    TransitionDuration: 0.25
-    TriggerNameHash: -533643314
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -737396462
-    DestinationState: 125937960
-    TransitionDuration: 0.25
-    TriggerNameHash: -533643314
-    TransitionIndex: 1
-  m_Animator: {fileID: 3460067788831044766}
 --- !u!114 &2378066787956437531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1447,6 +1406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1027890303564227418, guid: e924563bfaac7074b87484b12870d425, type: 3}
   head: {fileID: 2029652792931466857}
+  useText: {fileID: 0}
 --- !u!114 &2760499840902578224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1552,6 +1512,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8121630274821537507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683445553649119281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 875804c9811911944a8b8eb82d7adfc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 2081823275
+    DestinationState: 125937960
+    TransitionDuration: 0.25
+    TriggerNameHash: -533643314
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -201779296
+    DestinationState: 125937960
+    TransitionDuration: 0.25
+    TriggerNameHash: -533643314
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -2051410350
+    DestinationState: 125937960
+    TransitionDuration: 0.25
+    TriggerNameHash: -533643314
+    TransitionIndex: 2
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -737396462
+    DestinationState: 125937960
+    TransitionDuration: 0.25
+    TriggerNameHash: -533643314
+    TransitionIndex: 1
+  m_Animator: {fileID: 3460067788831044766}
+--- !u!114 &-2311228984563323672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683445553649119281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e406f3a7ed72454faa2cf881208fbf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useText: {fileID: 0}
+  camera: {fileID: 0}
+  useLayers:
+    serializedVersion: 2
+    m_Bits: 1792
+  maxDistance: 5
+  ready: 0
+  keySprite: {fileID: 0}
+  keyE: {fileID: 21300000, guid: ff8787da6d52237408b94fb7b224be4f, type: 3}
+  keyF: {fileID: 21300000, guid: 45cdbb9519ebf9942a540a0ee9349d6b, type: 3}
 --- !u!1 &4702746076710964278
 GameObject:
   m_ObjectHideFlags: 0

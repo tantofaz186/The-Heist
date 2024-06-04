@@ -34,19 +34,19 @@ public class Door : NetworkBehaviour{
         StartPosition = transform.position;
         
     }
-    [Rpc(SendTo.Server)]
+    [Rpc(SendTo.Server,RequireOwnership = false)]
     public void OpenServerRpc(Vector3 UserPosition)
     {
         OpenRpc(UserPosition);
     }
     
-    [Rpc(SendTo.Server)]
+    [Rpc(SendTo.Server,RequireOwnership = false)]
     public void CloseServerRpc()
     {
         CloseRpc();
     }
     
-    [Rpc(SendTo.Everyone)]
+    [Rpc(SendTo.Everyone,RequireOwnership = false)]
     public  void OpenRpc(Vector3 UserPosition)
     { 
         if (!isOpen.Value)
@@ -94,7 +94,7 @@ public class Door : NetworkBehaviour{
             
         }
     }
-    [Rpc(SendTo.Everyone)]
+    [Rpc(SendTo.Everyone,RequireOwnership = false)]
     public void CloseRpc()
     {
         
