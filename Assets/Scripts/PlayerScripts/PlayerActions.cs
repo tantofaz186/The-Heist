@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PlayerActions : NetworkBehaviour
@@ -14,10 +15,11 @@ public class PlayerActions : NetworkBehaviour
     [SerializeField] private float maxDistance = 5f;
     public bool ready = false;
     [SerializeField] public Image keySprite;
-    
-    
+
+    private PlayerInputActions playerInputActions;
 
 
+    
     public void OnUse()
     {   if(!IsOwner)return;
         Debug.Log("E");
@@ -44,6 +46,17 @@ public class PlayerActions : NetworkBehaviour
         {
             this.enabled= false;
         }
+        else
+        {
+            playerInputActions = new PlayerInputActions();
+            playerInputActions.Enable();
+playerInputActions.Player.Use.performed += OnUse;
+        }
+    }
+
+    private void OnUse(InputAction.CallbackContext obj)
+    {
+        OnUse();
     }
 
     private void Update()

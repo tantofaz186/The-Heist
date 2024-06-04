@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Door : NetworkBehaviour{
+public class Door : NetworkBehaviour {
     
    public NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false);
     [SerializeField] bool isRotatingDoor = true;
