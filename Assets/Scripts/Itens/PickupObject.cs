@@ -76,7 +76,7 @@ public class PickupObject : NetworkBehaviour
 
     private void Release(InputAction.CallbackContext obj)
     {
-        if (m_IsGrabbed.Value && IsOwner)
+        if (IsOwner && !item.isRelic && Inventory.Instance.inventorySlots[ItemSelect.Instance.currentItem] && m_IsGrabbed.Value)
         {
             ReleaseServerRpc();
         }
@@ -133,8 +133,7 @@ public class PickupObject : NetworkBehaviour
 
     }
     
-    [Rpc(SendTo.Everyone
-    )]
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
     private void ParentObjectRpc(ulong senderClientId)
     {
         NetworkObject senderPlayerObject = PlayerPickup.Players[senderClientId].NetworkObject;
@@ -142,7 +141,8 @@ public class PickupObject : NetworkBehaviour
         transform.parent = senderPlayerObject.transform;
         transform.localPosition = new Vector3(0.473f, 0.605f, -0.314f);
         m_IsGrabbed.Value = true;
-        _renderer.enabled = false;    }
+        _renderer.enabled = false;    
+    }
 
     [Rpc(SendTo.Owner)]
     private void TryGrabItemOwnerRpc()
@@ -159,16 +159,19 @@ public class PickupObject : NetworkBehaviour
     [ServerRpc]
     private void ReleaseServerRpc()
     {
-        if (!item.isRelic && Inventory.Instance.inventorySlots[ItemSelect.Instance.currentItem] && m_IsGrabbed.Value)
-        {
-            ReleaseItemOwnerRpc();
-            NetworkObject.RemoveOwnership();
-            transform.parent = null;
-            m_IsGrabbed.Value = false;
-            _renderer.enabled = true;
-        }
+        ReleaseItemOwnerRpc();
+        NetworkObject.RemoveOwnership();
+        UnparentObjectRpc();
     }
 
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
+    private void UnparentObjectRpc()
+    {
+        transform.parent = null;
+        m_IsGrabbed.Value = false;
+        _renderer.enabled = true;
+    }
+    
     [ServerRpc]
     void DropRelicServerRpc()
     {
@@ -176,9 +179,7 @@ public class PickupObject : NetworkBehaviour
         {
             ReleaseRelicOwnerRpc();
             NetworkObject.RemoveOwnership();
-            transform.parent = null;
-            m_IsGrabbed.Value = false;
-            _renderer.enabled = true;
+            UnparentObjectRpc();
         }
     }
 
