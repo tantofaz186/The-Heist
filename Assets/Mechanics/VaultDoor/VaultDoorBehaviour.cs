@@ -11,10 +11,10 @@ namespace Mechanics.VaultDoor
         private CodigoFactory codigoFactory;    
 
         public event Action OnAlarmTrigger;
-
-        public void Awake()
+        
+        public void Initialize(CodigoFactory codigoFactory)
         {
-            codigoFactory = FindObjectOfType<CodigoFactory>();
+            this.codigoFactory = codigoFactory;
             codigoFactory.OnCodeChecked += CodeCheck;
         }
 

@@ -80,6 +80,20 @@ namespace Mechanics.VaultDoor
             }
             
             Debug.Log("cheguei");
+            EndSetupRpc();
+        }
+
+        [Rpc(SendTo.Server,RequireOwnership = false)]
+        private void EndSetupRpc()
+        {
+            SetupCodigoFactoryRpc();
+        }
+        
+        [Rpc(SendTo.Everyone)]
+        private void SetupCodigoFactoryRpc()
+        {
+            FindObjectOfType<VaultDoorBehaviour>().Initialize(this);
+            Debug.Log("Código recebido e objetos spawnados.");
         }
 
         public short[] GetCodigo()
@@ -134,6 +148,7 @@ namespace Mechanics.VaultDoor
         [Rpc(SendTo.Everyone)]
         public void SendEventToClientsRpc(bool isCorrectCode)
         {
+            Debug.Log("Evento enviado");
             OnCodeChecked?.Invoke(isCorrectCode);
         }
         public void ChangeCodigo()
