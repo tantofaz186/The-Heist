@@ -7,15 +7,14 @@ using Unity.Netcode;
 
 
 public class Movement : NetworkBehaviour
-{   [SerializeField]
-    public Movement thisScript;
+{   
 
     public PlayerStats playerStats;
     public bool pausado = false;
     public PlayerInputActions controle_player;
     private InputAction movement, crouch, jump,run;
 
-    private Animator corpo_FSM;
+    private OwnerNetworkAnimator corpo_FSM;
     private Rigidbody corpo_fisico;
 
     public float walkSpeed;
@@ -43,12 +42,12 @@ public class Movement : NetworkBehaviour
         transform.position = spawnPoint.transform.position;
         corpo_fisico = transform.GetComponent<Rigidbody>();
         corpo_fisico.isKinematic= false;
-        corpo_FSM = transform.GetComponent<Animator>();
+        corpo_FSM = transform.GetComponent<OwnerNetworkAnimator>();
         playerStats = GetComponent<PlayerStats>();
         vel = walkSpeed;
         if (!IsOwner)
         {
-            thisScript.enabled = false;
+            enabled = false;
         }
         
             
@@ -83,7 +82,7 @@ public class Movement : NetworkBehaviour
     }
 
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (pausado == false)
         {
@@ -96,40 +95,29 @@ public class Movement : NetworkBehaviour
         if (running && isCrouching ==false)
         {   
             vel = runSpeed;
-            corpo_FSM.SetFloat("mover",1f);
+            corpo_FSM.Animator.SetFloat("mover",1f);
         }
         
         if (isCrouching && running ==false)
         {
             vel = crouchSpeed;
-            corpo_FSM.SetFloat("mover",0f);
+            corpo_FSM.Animator.SetFloat("mover",0f);
         }
         else if (isCrouching && running)
         {
             vel = crouchRun;
-            corpo_FSM.SetFloat("mover",0f);
+            corpo_FSM.Animator.SetFloat("mover",0f);
         }
         else if(running==false&&isCrouching==false)
         {
             vel = walkSpeed;
-            corpo_FSM.SetFloat("mover",0f);
+            corpo_FSM.Animator.SetFloat("mover",0f);
         }
         
         Vector3 velocity = Vector3.zero;
-
-            
         
             velocity += transform.forward * (movement.ReadValue<Vector2>().y * vel * Time.fixedDeltaTime);
             velocity += transform.right * (movement.ReadValue<Vector2>().x * vel * Time.fixedDeltaTime);
-        
-        
-        
-        bool can_restore = Physics.CheckSphere(transform.GetChild(0).transform.position, 0.5f, Ground,
-            QueryTriggerInteraction.Ignore);
-        if (can_restore)
-        {
-            corpo_FSM.speed = 1f;
-        }
             
             
 
@@ -138,15 +126,15 @@ public class Movement : NetworkBehaviour
         
         if (movement.ReadValue<Vector2>().y != 0)
         {
-            corpo_FSM.SetBool("movimentando",true);
+            corpo_FSM.Animator.SetBool("movimentando",true);
         }
         else if (movement.ReadValue<Vector2>().x != 0)
         {
-            corpo_FSM.SetBool("movimentando",true);
+            corpo_FSM.Animator.SetBool("movimentando",true);
         }
         else
         {
-            corpo_FSM.SetBool("movimentando",false);
+            corpo_FSM.Animator.SetBool("movimentando",false);
         }
         
        
@@ -166,7 +154,7 @@ public class Movement : NetworkBehaviour
 
     public void freeze()
     {
-        corpo_FSM.speed = .2f;
+        //corpo_FSM.Animator.speed = .2f;
     }
     public void Crouch(InputAction.CallbackContext context)
     {
@@ -174,13 +162,13 @@ public class Movement : NetworkBehaviour
         if (isCrouching)
         {
             isCrouching = false;
-            corpo_FSM.SetBool("crouch",false);
+            corpo_FSM.Animator.SetBool("crouch",false);
             
         }
         else
         {
             isCrouching = true;
-            corpo_FSM.SetBool("crouch",true);
+            corpo_FSM.Animator.SetBool("crouch",true);
         }
 
         running = false;

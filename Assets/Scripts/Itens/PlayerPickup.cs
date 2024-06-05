@@ -11,7 +11,6 @@ public class PlayerPickup : NetworkBehaviour
 {
 
     public static Dictionary<ulong, PlayerPickup> Players = new Dictionary<ulong, PlayerPickup>();
-    private PlayerInputActions controle_player;
     public override void OnNetworkSpawn()
     {
         Players[OwnerClientId] = this;
