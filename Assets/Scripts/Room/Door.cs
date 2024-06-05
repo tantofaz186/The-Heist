@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Door : NetworkBehaviour{
+public class Door : NetworkBehaviour {
     
    public NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false);
     [SerializeField] bool isRotatingDoor = true;
@@ -34,19 +34,19 @@ public class Door : NetworkBehaviour{
         StartPosition = transform.position;
         
     }
-    [Rpc(SendTo.Server)]
+    [Rpc(SendTo.Server,RequireOwnership = false)]
     public void OpenServerRpc(Vector3 UserPosition)
     {
         OpenRpc(UserPosition);
     }
     
-    [Rpc(SendTo.Server)]
+    [Rpc(SendTo.Server,RequireOwnership = false)]
     public void CloseServerRpc()
     {
         CloseRpc();
     }
     
-    [Rpc(SendTo.Everyone)]
+    [Rpc(SendTo.Everyone,RequireOwnership = false)]
     public  void OpenRpc(Vector3 UserPosition)
     { 
         if (!isOpen.Value)
@@ -85,8 +85,7 @@ public class Door : NetworkBehaviour{
         }
 
         ServerOpenRpc();
-        
-        float time = 0;
+float time = 0;
         while (time < 1)
         {
             transform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
@@ -95,7 +94,7 @@ public class Door : NetworkBehaviour{
             
         }
     }
-    [Rpc(SendTo.Everyone)]
+    [Rpc(SendTo.Everyone,RequireOwnership = false)]
     public void CloseRpc()
     {
         
@@ -115,13 +114,23 @@ public class Door : NetworkBehaviour{
             }
         }
     }
-
+    [Rpc(SendTo.Server)]
+    private void ServerCloseRpc()
+    {
+        isOpen.Value = false;
+        
+    }    
+    [Rpc(SendTo.Server)]
+    private void ServerOpenRpc()
+    {
+        isOpen.Value=true;
+    }
     IEnumerator SlideOpen()
     {
         Vector3 endPosition = StartPosition + slideAmount * slideDirection;
         Vector3 startPosition = transform.position;
-        isOpen.Value=true;
         float time = 0;
+        ServerOpenRpc();
         while (time < 1)
         {
             transform.position = Vector3.Lerp(startPosition, endPosition, time);
@@ -134,8 +143,8 @@ public class Door : NetworkBehaviour{
     {
         Quaternion startRotation = transform.rotation;
         Quaternion endRotation = Quaternion.Euler(StartRotation);
-        isOpen.Value = false;
         float time = 0;
+        ServerCloseRpc();
         while (time < 1)
         {
             transform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
@@ -148,7 +157,7 @@ public class Door : NetworkBehaviour{
     {
         Vector3 endPosition = StartPosition;
         Vector3 startPosition = transform.position;
-        isOpen.Value = false;
+        ServerCloseRpc();
         float time = 0;
         while (time < 1)
         {

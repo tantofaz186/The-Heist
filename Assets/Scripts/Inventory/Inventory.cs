@@ -29,8 +29,6 @@ public class Inventory : Singleton<Inventory>
         {
             Debug.Log("Inventory Full");
         }
-        
-        
     }
 
     public void AddRelic(Item item)

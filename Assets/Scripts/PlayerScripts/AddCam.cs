@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AddCam : NetworkBehaviour
 {
@@ -11,8 +12,8 @@ public class AddCam : NetworkBehaviour
     [SerializeField] GameObject head;
     private PlayerActions _actions;
     public TMP_Text useText;
-    [SerializeField] private GameObject canvas;
-    [SerializeField]GameObject useTextobj;
+    
+    
     private void Start()
     {
         if (IsOwner)
@@ -20,10 +21,12 @@ public class AddCam : NetworkBehaviour
             var thisCam = Instantiate(cam, head.transform.position, cam.transform.rotation, head.transform);
              _actions = GetComponent<PlayerActions>();
              _actions.camera = thisCam.GetComponent<Camera>();
-             canvas = thisCam.gameObject.transform.GetChild(0).gameObject;
-             useTextobj = canvas.transform.GetChild(0).gameObject;
+             GameObject canvas = thisCam.gameObject.transform.GetChild(0).gameObject;
+             GameObject useTextobj = canvas.transform.GetChild(0).gameObject;
              useText= useTextobj.GetComponent<TMP_Text>();
+             Image keySprite = useTextobj.transform.GetChild(0).gameObject.GetComponent<Image>();
              _actions.useText = useText;
+             _actions.keySprite = keySprite;
              _actions.ready = true;
         }
        
