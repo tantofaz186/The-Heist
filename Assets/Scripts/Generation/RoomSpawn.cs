@@ -108,7 +108,8 @@ public class RoomSpawn : NetworkBehaviour
    }
 
    void SortRooms()
-   {    SpawnSecurity();
+   {    
+       SpawnSecurity();
        for (int n = 0; n < roomSpawnpoints.Count; n++)
        {    
            int type = roomSpawnpoints[n].GetComponent<SpawnInfo>().spawnType;
