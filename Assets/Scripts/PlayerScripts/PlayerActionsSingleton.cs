@@ -12,7 +12,7 @@ public class PlayerActionsSingleton : Singleton<PlayerActionsSingleton>
     private PlayerInputActions playerInputActions;
 
     public PlayerInputActions PlayerInputActions => playerInputActions;
-    
+    public Camera _camera;
     private void OnEnable()
     {
             playerInputActions = new PlayerInputActions();

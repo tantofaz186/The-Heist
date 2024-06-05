@@ -8,7 +8,7 @@ using Random = System.Random;
 
 namespace Mechanics.VaultDoor
 {
-    public class CodigoFactory : SingletonNetwork<CodigoFactory>
+    public class CodigoFactory : NetworkBehaviour
     {
         Random random = new ();
 
@@ -127,11 +127,15 @@ namespace Mechanics.VaultDoor
             //essa linha evita que o usuário envie um código vazio
             if (codigo.Length == 0) return false;
             var isCode = !digitos.Where((t, i) => t != codigo[i]).Any();
-            OnCodeChecked?.Invoke(isCode);
-            Debug.Log(isCode ? "Código correto" : "Código incorreto");
+            SendEventToClientsRpc(isCode);
             return isCode;
         }
 
+        [Rpc(SendTo.Everyone)]
+        public void SendEventToClientsRpc(bool isCorrectCode)
+        {
+            OnCodeChecked?.Invoke(isCorrectCode);
+        }
         public void ChangeCodigo()
         {
             for (int i = 0; i < digitos.Length; i++)
