@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mechanics.VaultDoor;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,20 +11,16 @@ public class buttonVault : MonoBehaviour
     [SerializeField] private short digit;
 
     private static List<short> code = new List<short>();
-    PlayerInputActions.PlayerActions inputActions;
 
     private void Start()
     {
-        inputActions = new PlayerInputActions().Player;
-        inputActions.Grab.Enable();
-        inputActions.Grab.performed += AtivarBotão;
+        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed += AtivarBotão;
         startPosition = transform.localPosition;
     }
 
     private void OnDestroy()
     {
-        inputActions.Grab.performed -= AtivarBotão;
-        inputActions.Grab.Disable();
+        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed -= AtivarBotão;
     }
 
     private static void CheckCode ()

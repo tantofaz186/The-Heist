@@ -1093,8 +1093,8 @@ MonoBehaviour:
   thisScript: {fileID: 4586447672509110361}
   playerStats: {fileID: 0}
   pausado: 0
-  walkSpeed: 150
-  runSpeed: 250
+  walkSpeed: 300
+  runSpeed: 500
   crouchSpeed: 120
   crouchRun: 170
   jumpForce: 5
@@ -1236,7 +1236,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 2921256980024346588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c017efdc54cff2143be1a926df9c7cfb, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e406f3a7ed72454faa2cf881208fbf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useText: {fileID: 0}
+  camera: {fileID: 0}
+  useLayers:
+    serializedVersion: 2
+    m_Bits: 1792
+  maxDistance: 5
+  ready: 0
+  keySprite: {fileID: 0}
+--- !u!114 &-1677473552928529444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2921256980024346588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: aad68cd9b45574540950147ba267b85a, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &-8465009735412332650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2921256980024346588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 875804c9811911944a8b8eb82d7adfc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionStateInfoList:

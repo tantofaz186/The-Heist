@@ -8,7 +8,7 @@ using Random = System.Random;
 
 namespace Mechanics.VaultDoor
 {
-    public class CodigoFactory : NetworkBehaviour
+    public class CodigoFactory : SingletonNetwork<CodigoFactory>
     {
         Random random = new ();
 

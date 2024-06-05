@@ -1,22 +1,28 @@
 using System;
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Mechanics.VaultDoor
 {
-    public class VaultDoorBehaviour: MonoBehaviour
+    public class VaultDoorBehaviour: NetworkBehaviour
     {
-        [SerializeField] private CodigoFactory codigoFactory;
         public event Action OnAlarmTrigger;
         public void Awake()
         {
-            codigoFactory = FindObjectOfType<CodigoFactory>();
-            codigoFactory.OnCodeChecked += CodeCheck;
+            StartCoroutine(WaitToSpawn());
         }
         private void CodeCheck(bool isCorrectCode)
         {
             if (isCorrectCode) Open();
             else Alarm();
+        }
+
+        private IEnumerator WaitToSpawn()
+        {
+            yield return new WaitUntil(() => CodigoFactory.Instance != null);
+            CodigoFactory.Instance.OnCodeChecked += CodeCheck;
+
         }
 
         private void Alarm()
@@ -28,8 +34,13 @@ namespace Mechanics.VaultDoor
         private void Open()
         {
             Debug.Log("Porta aberta");
+            OpenRpc();
+            CodigoFactory.Instance.OnCodeChecked -= CodeCheck;
+        }
+        [Rpc(SendTo.Everyone,RequireOwnership = false)]
+        private void OpenRpc()
+        { 
             StartCoroutine(RotateDoor());
-            codigoFactory.OnCodeChecked -= CodeCheck;
         }
 
         private IEnumerator RotateDoor()
@@ -47,7 +58,7 @@ namespace Mechanics.VaultDoor
 
         private void OnDisable()
         {
-            codigoFactory.OnCodeChecked -= CodeCheck;
+            CodigoFactory.Instance.OnCodeChecked -= CodeCheck;
         }
     }
 }

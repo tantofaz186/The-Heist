@@ -14,33 +14,49 @@ public class PlayerActions : NetworkBehaviour
     [SerializeField] private float textDistance = 0.01f;
     public bool ready = false;
 
+    [SerializeField] public Image keySprite;
 
-    public void OnUse()
-    {
-        if(Physics.Raycast(this.transform.position, camera.transform.forward, out RaycastHit hit, maxDistance, useLayers))
-        {
-            if(hit.collider.TryGetComponent<Door>(out Door door))
-            {   
-                
-               if(door.isOpen.Value)
-               {
-                   door.CloseServerRpc();
-               }
-               else
-               {
-                   door.OpenServerRpc(transform.position);
-               }
-            }
-        }
-    }
+    
 
     private void Start()
     {
         if(!IsOwner)
         {
-            this.enabled= false;
+            enabled = false;
+        }
+        else
+        {
+           PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed += OpenCloseDoor;
         }
     }
+
+    private void OnDisable()
+    {
+        if(!IsOwner) return;
+        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed -= OpenCloseDoor;
+    }
+
+    private void OpenCloseDoor(InputAction.CallbackContext obj)
+    {
+        if(!IsOwner)return; 
+        Debug.Log("E");
+        if(Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, maxDistance, useLayers))
+        {
+            if(hit.collider.TryGetComponent<Door>(out Door door))
+            {   
+                
+                if(door.isOpen.Value)
+                {
+                    door.CloseServerRpc();
+                }
+                else
+                {
+                    door.OpenServerRpc(transform.position);
+                }
+            }
+        }
+    }
+
 
     private void Update()
     {

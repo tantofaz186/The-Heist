@@ -84,7 +84,8 @@ public class Door : NetworkBehaviour{
             endRotation = Quaternion.Euler(new Vector3(0,StartRotation.y+rotationAmount,0));
         }
 
-        isOpen.Value = true;
+        ServerOpenRpc();
+        
         float time = 0;
         while (time < 1)
         {
