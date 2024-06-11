@@ -10,6 +10,8 @@ public class PlayerStats : MonoBehaviour
     private Image dmgImg;
     private bool hit;
     private bool injured;
+    public bool isSafe;
+    public bool canDrop;
     
 
     [SerializeField] Movement movement;
