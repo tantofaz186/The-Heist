@@ -10,6 +10,8 @@ public class ItemSelect : Singleton<ItemSelect>
    
    PlayerInputActions controle_player;
    private InputAction item1,item2,item3,item4;
+
+   public BaseItem itemInHand;
    
    private void Awake()
    {
@@ -44,17 +46,35 @@ public class ItemSelect : Singleton<ItemSelect>
    void SelectItem1(InputAction.CallbackContext context){
       currentItem = 0;
       InventoryHud.Instance.ChangeActiveItem(currentItem);
+      UpdateBaseItem(0);
    }
    void SelectItem2  (InputAction.CallbackContext context){
       currentItem = 1;
       InventoryHud.Instance.ChangeActiveItem(currentItem);
+      UpdateBaseItem(1);
    } 
    void SelectItem3  (InputAction.CallbackContext context){
       currentItem = 2;
       InventoryHud.Instance.ChangeActiveItem(currentItem);
+      UpdateBaseItem(2);
    }
    void SelectItem4  (InputAction.CallbackContext context){
       currentItem = 3;
       InventoryHud.Instance.ChangeActiveItem(currentItem);
+      UpdateBaseItem(3);
+   }
+
+
+   void UpdateBaseItem(int x)
+   {
+      if (Inventory.Instance.items[x] != null)
+      {
+         Inventory.Instance.itemsInHand[Inventory.Instance.items[x].prefabIndex].SetActive(true);
+         itemInHand = Inventory.Instance.itemsInHand[Inventory.Instance.items[x].prefabIndex].GetComponent<BaseItem>();
+      }
+      else
+      {
+         itemInHand = null;
+      }
    }
 }

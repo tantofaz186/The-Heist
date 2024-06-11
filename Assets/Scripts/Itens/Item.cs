@@ -10,7 +10,7 @@ public class Item : ScriptableObject
     public int itemValue;
     public int itemWeight;
     public GameObject itemPrefab;
-    
+    public int prefabIndex;
 
     public override string ToString()
     {

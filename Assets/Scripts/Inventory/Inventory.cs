@@ -13,7 +13,8 @@ public class Inventory : Singleton<Inventory>
     public int bagWeight;
     public List<Item> relics = new ();
     public int totalMoney;
-    
+
+    public GameObject[] itemsInHand;
     
     
    public void AddItem(Item item)
