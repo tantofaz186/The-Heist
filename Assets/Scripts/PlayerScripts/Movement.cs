@@ -15,6 +15,7 @@ public class Movement : NetworkBehaviour
     private InputAction movement, crouch, jump,run;
 
     private OwnerNetworkAnimator corpo_FSM;
+   [SerializeField] Animator headFSM;
     private Rigidbody corpo_fisico;
 
     public float walkSpeed;
@@ -163,12 +164,14 @@ public class Movement : NetworkBehaviour
         {
             isCrouching = false;
             corpo_FSM.Animator.SetBool("crouch",false);
+            headFSM.SetBool("crouch",false);
             
         }
         else
         {
             isCrouching = true;
             corpo_FSM.Animator.SetBool("crouch",true);
+            headFSM.SetBool("crouch",true);
         }
 
         running = false;
