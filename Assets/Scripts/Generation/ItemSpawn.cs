@@ -8,31 +8,88 @@ using UnityEngine;
 public class ItemSpawn : NetworkBehaviour
 {
    [SerializeField]public List<GameObject> items = new();
+   [SerializeField]public List<GameObject> relics = new();
    [SerializeField]private List<GameObject> itemSpawnPoints = new();
    [SerializeField] private List<int> itemsCheck = new();
+   [SerializeField] private List<int> relicsCheck = new();
+   [SerializeField] GameObject codigo;
    
    [Rpc(SendTo.Server)]
    public void SpawnItemsRpc()
    {
       itemSpawnPoints = GetItemSpawnPoints();
-      for (int i = 0; i < 4; i++)
+      for(int i = 0; i < itemSpawnPoints.Count; i++)
       {
-         SortItemsCodigo(i);
+         int type = itemSpawnPoints[i].GetComponent<itemSpawnType>().spawnType;
+         SpawnItems(type,i);
       }
-      for (int n = 4; n < itemSpawnPoints.Count; n++)
-      {
-         SortItems(n);
-      }
+      
 
    }
+   
+   
+
+
+   void SpawnItems(int type, int spawnPointIndex)
+   {
+      switch (type)
+      {
+         case 0:
+            SortItems(spawnPointIndex);
+            break;
+         case 1:
+            SortRelics(spawnPointIndex);
+            break;
+         case 2:
+            SortItemsCodigo(spawnPointIndex);
+            break;
+      }
+   }
+   
+   
    void SortItemsCodigo(int x)
    {
 
-      var instance = Instantiate(items.First(item => item.TryGetComponent<CodigoSpawnItem>(out _)),
-            itemSpawnPoints[x].transform);
+      var instance = Instantiate(codigo,itemSpawnPoints[x].transform);
+      // items.First(item => item.TryGetComponent<CodigoSpawnItem>(out _)
          var instanceNetworkObject = instance.GetComponent<NetworkObject>();
          instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
 
+   }
+   
+   void SortRelics(int x)
+   {
+      int rnd = Random.Range(0, relics.Count);
+      bool inList = false;
+      if (relicsCheck.Count <= 0)
+      {
+         relicsCheck = new List<int>(){0,1};
+          
+      }
+           
+       
+      for (int i=0;i<relicsCheck.Count;i++)
+      {   
+         if (rnd == relicsCheck[i])
+         {   
+            inList = true;
+         }  
+      }
+
+      if (inList)
+      {    
+         relicsCheck.Remove(rnd);
+           
+        
+         var instance = Instantiate(relics[rnd],
+            itemSpawnPoints[x].transform);
+         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+      }
+      else
+      {
+         SortRelics(x);
+      }
    }
    void SortItems(int x)
    {
@@ -40,7 +97,7 @@ public class ItemSpawn : NetworkBehaviour
       bool inList = false;
       if (itemsCheck.Count <= 0)
       {
-         itemsCheck = new List<int>(){0,1,2,3,4,5};
+         itemsCheck = new List<int>(){0,1,2,3};
           
       }
            

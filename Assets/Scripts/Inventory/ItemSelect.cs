@@ -6,55 +6,45 @@ using UnityEngine.InputSystem;
 
 public class ItemSelect : Singleton<ItemSelect>
 {  
-   public int currentItem;
-   
-   PlayerInputActions controle_player;
-   private InputAction item1,item2,item3,item4;
-   
-   private void Awake()
-   {
-      controle_player = new PlayerInputActions();
-   }
-   
-   void OnEnable(){
-      item1=controle_player.Player.Item1;
-      item1.Enable();
-      item1.performed += SelectItem1;
-      item2=controle_player.Player.Item2;
-      item2.Enable();
-      item2.performed += SelectItem2;
-      item3=controle_player.Player.Item3;
-      item3.Enable();
-      item3.performed += SelectItem3;
-      item4=controle_player.Player.Item4;
-      item4.Enable();
-      item4.performed += SelectItem4;
-   }
+   public BaseItem itemInHand;
 
-   private void OnDisable()
-   {
-      item1.Disable();
-      item2.Disable();
-      item3.Disable();
-      item4.Disable();
-      
+   public int currentItemIndex;
+   void Start() {
+      PlayerActionsSingleton.Instance.PlayerInputActions.Player.Item1.performed += SelectItem1;
+      PlayerActionsSingleton.Instance.PlayerInputActions.Player.Item2.performed += SelectItem2;
+      PlayerActionsSingleton.Instance.PlayerInputActions.Player.Item3.performed += SelectItem3;
+      PlayerActionsSingleton.Instance.PlayerInputActions.Player.Item4.performed += SelectItem4;
    }
-
 
    void SelectItem1(InputAction.CallbackContext context){
-      currentItem = 0;
-      InventoryHud.Instance.ChangeActiveItem(currentItem);
+      currentItemIndex = 0;
+      UpdateBaseItem();
    }
    void SelectItem2  (InputAction.CallbackContext context){
-      currentItem = 1;
-      InventoryHud.Instance.ChangeActiveItem(currentItem);
+      currentItemIndex = 1;
+      UpdateBaseItem();
    } 
    void SelectItem3  (InputAction.CallbackContext context){
-      currentItem = 2;
-      InventoryHud.Instance.ChangeActiveItem(currentItem);
+      currentItemIndex = 2;
+      UpdateBaseItem();
    }
    void SelectItem4  (InputAction.CallbackContext context){
-      currentItem = 3;
-      InventoryHud.Instance.ChangeActiveItem(currentItem);
+      currentItemIndex = 3;
+      UpdateBaseItem();
+   }
+
+
+   void UpdateBaseItem()
+   {
+      InventoryHud.Instance.ChangeActiveItem(currentItemIndex);
+      if (Inventory.Instance.items[currentItemIndex] != null)
+      {
+         Inventory.Instance.itemsInHand[Inventory.Instance.items[currentItemIndex].prefabIndex].SetActive(true);
+         itemInHand = Inventory.Instance.itemsInHand[Inventory.Instance.items[currentItemIndex].prefabIndex].GetComponent<BaseItem>();
+      }
+      else
+      {
+         itemInHand = null;
+      }
    }
 }

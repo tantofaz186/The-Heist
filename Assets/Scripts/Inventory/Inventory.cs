@@ -6,24 +6,22 @@ public class Inventory : Singleton<Inventory>
 {
     public static int SLOTS = 4;
     public static int MaxWeight = 10000;
-    public List<Item> items = new ();
-    public bool[] inventorySlots = new bool[SLOTS];
-   [SerializeField] int emptySlot;
-    public int itemCount;
+    public Item[] items = new Item[SLOTS];
     public int bagWeight;
     public List<Item> relics = new ();
     public int totalMoney;
-    
+
+    public GameObject[] itemsInHand;
     
     
    public void AddItem(Item item)
-    {
-        if (CheckEmptySlot())
+   {
+       int emptySlotIndex = CheckEmptySlot();
+        if (emptySlotIndex > -1)
         {
-            items[emptySlot] = item;
-            InventoryHud.Instance.AddItem(item, emptySlot);
-            itemCount++;
-            Debug.Log("Item Adicionado"+ " "+emptySlot);
+            items[emptySlotIndex] = item;
+            InventoryHud.Instance.AddItem(item, emptySlotIndex);
+            Debug.Log("Item Adicionado"+ " " + emptySlotIndex);
         }
         else
         {
@@ -51,10 +49,11 @@ public class Inventory : Singleton<Inventory>
     {
         if (relics.Count > 0)
         {
-            bagWeight -= relics[relics.Count - 1].itemWeight;
-            totalMoney -= relics[relics.Count - 1].itemValue;
-            InventoryHud.Instance.RemoveRelic(relics[relics.Count - 1]);
-            relics.RemoveAt(relics.Count - 1);
+            bagWeight -= relics[^1].itemWeight;
+            totalMoney -= relics[^1].itemValue;
+            InventoryHud.Instance.RemoveRelic(relics[^1]);
+            relics[^1] = null;
+            relics.RemoveAll((i) => i == null);
         }
     }
 
@@ -62,37 +61,24 @@ public class Inventory : Singleton<Inventory>
     {
        
         items[itemPos]  = null;
-        inventorySlots[itemPos] = false;
-        itemCount--;
         InventoryHud.Instance.RemoveItem(itemPos);
         
     }
-
-   
-    
-        
-    
-
-    bool CheckEmptySlot()
+    int CheckEmptySlot()
     {
         for (int i = 0; i < SLOTS; i++)
         {
-            if (inventorySlots[i] == false)
+            if (items[i] == null)
             {
-                emptySlot = i;
-                inventorySlots[i]= true;
-                return true;
-                
+                return i;
             }
         }
         
-        return false;
+        return -1;
     }
-
-    void ResetValues()
+    public bool hasEmptySlot()
     {
-        items = new List<Item>();
-        
+        return CheckEmptySlot() > -1;
     }
 
  

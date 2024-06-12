@@ -41,7 +41,6 @@ public class PlayerActions : NetworkBehaviour
     private void OpenCloseDoor(InputAction.CallbackContext obj)
     {
         if(!IsOwner)return; 
-        Debug.Log("E");
         if(Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, maxDistance, useLayers))
         {
             if(hit.collider.TryGetComponent<Door>(out Door door))
@@ -65,25 +64,37 @@ public class PlayerActions : NetworkBehaviour
         if (!ready)
         {
             return;
-        }
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, maxDistance,
-                useLayers) && hit.collider.TryGetComponent<Door>(out Door door))
+        } 
+        
+        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, maxDistance,
+                useLayers))
         {
-            if (door.isOpen.Value)
-            {
-                useText.SetText("Close \"E\"");
+            
+            if (hit.collider.TryGetComponent(out PickupObject _))
+            {   
+                
+                useText.SetText("Pick \"E\"");
+                
+                useText.gameObject.SetActive(true);
             }
-            else
+            if (hit.collider.TryGetComponent(out Door door))
             {
-                useText.SetText("Open \"E\"");
+                if (door.isOpen.Value)
+                {
+                    useText.SetText("Close \"E\"");
+                }
+                else
+                {
+                    useText.SetText("Open \"E\"");
+                }
+                useText.gameObject.SetActive(true);
             }
-
-            useText.gameObject.SetActive(true);
-
+            
         }
         else
         {
             useText.gameObject.SetActive(false);
         }
+
     }
 }

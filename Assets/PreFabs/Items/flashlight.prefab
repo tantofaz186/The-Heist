@@ -88,6 +88,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8b22bdc166da50249bc5ad92cd554f4e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8737720847140767633}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8b22bdc166da50249bc5ad92cd554f4e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8711701016193800113}
   m_SourcePrefab: {fileID: 100100000, guid: 8b22bdc166da50249bc5ad92cd554f4e, type: 3}
 --- !u!1 &2624156876777093871 stripped
 GameObject:
@@ -106,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3070222078
+  GlobalObjectIdHash: 763785973
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -261,3 +264,17 @@ MonoBehaviour:
   bakeValues: []
   outlineMaskMaterial: {fileID: 0}
   outlineFillMaterial: {fileID: 0}
+--- !u!114 &8711701016193800113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2624156876777093871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5deefac7acb0cb24b97650606cf662a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn: 0
+  light: {fileID: 0}

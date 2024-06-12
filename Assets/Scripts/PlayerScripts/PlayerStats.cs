@@ -10,6 +10,8 @@ public class PlayerStats : MonoBehaviour
     private Image dmgImg;
     private bool hit;
     private bool injured;
+    public bool isSafe;
+    public bool canDrop;
     
 
     [SerializeField] Movement movement;
@@ -28,7 +30,6 @@ public class PlayerStats : MonoBehaviour
     {
         if (other.CompareTag("Hit"))
         {
-            Debug.Log("Hit");
             Hit();
         }
 
@@ -48,6 +49,7 @@ public class PlayerStats : MonoBehaviour
             dmgImg.color = new Color(dmgImg.color.r, dmgImg.color.g, dmgImg.color.b, 1f);
             yield return new WaitForSeconds(0.3f);
             dmgImg.color = new Color(dmgImg.color.r, dmgImg.color.g, dmgImg.color.b, 0f);
+            yield return new WaitForSeconds(0.7f);
             hit = false;
         }
 
