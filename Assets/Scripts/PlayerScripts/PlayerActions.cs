@@ -41,7 +41,6 @@ public class PlayerActions : NetworkBehaviour
     private void OpenCloseDoor(InputAction.CallbackContext obj)
     {
         if(!IsOwner)return; 
-        Debug.Log("E");
         if(Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, maxDistance, useLayers))
         {
             if(hit.collider.TryGetComponent<Door>(out Door door))
@@ -90,7 +89,7 @@ public class PlayerActions : NetworkBehaviour
                 }
                 useText.gameObject.SetActive(true);
             }
-            Debug.Log("SEE");
+            
         }
         else
         {
