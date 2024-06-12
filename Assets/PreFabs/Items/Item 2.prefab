@@ -17,7 +17,8 @@ GameObject:
   - component: {fileID: 6876587961425427397}
   - component: {fileID: 3947967712476162588}
   - component: {fileID: -6786249943097199485}
-  m_Layer: 0
+  - component: {fileID: 3591155961279999845}
+  m_Layer: 10
   m_Name: Item 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 3dd8293e690c7a3469b9b540f16cd325, type: 2}
+  outline: {fileID: 0}
 --- !u!54 &6876587961425427397
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -214,3 +216,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3591155961279999845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509773701853694132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+  outlineMaskMaterial: {fileID: 0}
+  outlineFillMaterial: {fileID: 0}

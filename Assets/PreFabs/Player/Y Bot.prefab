@@ -1236,12 +1236,15 @@ GameObject:
   - component: {fileID: 8158612619340178471}
   - component: {fileID: 5378099781923187859}
   - component: {fileID: 7949227442281882157}
-  - component: {fileID: 8095632287596195212}
   - component: {fileID: 2378066787956437531}
   - component: {fileID: 2760499840902578224}
   - component: {fileID: 1589825012467299251}
   - component: {fileID: 6270210330259810016}
   - component: {fileID: 4646088691601779323}
+  - component: {fileID: 7703530654532988250}
+  - component: {fileID: 1818456277318172245}
+  - component: {fileID: -8121630274821537507}
+  - component: {fileID: -2311228984563323672}
   m_Layer: 7
   m_Name: Y Bot
   m_TagString: Player
@@ -1258,7 +1261,7 @@ Transform:
   m_GameObject: {fileID: 4683445553649119281}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.59, y: 2.61, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1360,7 +1363,7 @@ MonoBehaviour:
   ActiveSceneSynchronization: 1
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
+  DontDestroyWithOwner: 1
   AutoObjectParentSync: 1
 --- !u!114 &7949227442281882157
 MonoBehaviour:
@@ -1389,48 +1392,6 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &8095632287596195212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4683445553649119281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c017efdc54cff2143be1a926df9c7cfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TransitionStateInfoList:
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 2081823275
-    DestinationState: 125937960
-    TransitionDuration: 0.25
-    TriggerNameHash: -533643314
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -201779296
-    DestinationState: 125937960
-    TransitionDuration: 0.25
-    TriggerNameHash: -533643314
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -2051410350
-    DestinationState: 125937960
-    TransitionDuration: 0.25
-    TriggerNameHash: -533643314
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -737396462
-    DestinationState: 125937960
-    TransitionDuration: 0.25
-    TriggerNameHash: -533643314
-    TransitionIndex: 1
-  m_Animator: {fileID: 3460067788831044766}
 --- !u!114 &2378066787956437531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1445,6 +1406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1027890303564227418, guid: e924563bfaac7074b87484b12870d425, type: 3}
   head: {fileID: 2029652792931466857}
+  useText: {fileID: 0}
 --- !u!114 &2760499840902578224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1458,8 +1420,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmgGO: {fileID: 0}
-  bagSize: 0
-  maxBagSize: 0
   movement: {fileID: 0}
 --- !u!114 &1589825012467299251
 MonoBehaviour:
@@ -1493,6 +1453,9 @@ MonoBehaviour:
   inventorySlots: 00000000
   emptySlot: 0
   itemCount: 0
+  bagWeight: 0
+  relics: []
+  totalMoney: 0
 --- !u!114 &4646088691601779323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1506,6 +1469,113 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentItem: 0
+--- !u!114 &7703530654532988250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683445553649119281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885e13c45af81da4d821a716ac75b228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
+--- !u!114 &1818456277318172245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683445553649119281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8121630274821537507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683445553649119281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 875804c9811911944a8b8eb82d7adfc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 2081823275
+    DestinationState: 125937960
+    TransitionDuration: 0.25
+    TriggerNameHash: -533643314
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -201779296
+    DestinationState: 125937960
+    TransitionDuration: 0.25
+    TriggerNameHash: -533643314
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -2051410350
+    DestinationState: 125937960
+    TransitionDuration: 0.25
+    TriggerNameHash: -533643314
+    TransitionIndex: 2
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -737396462
+    DestinationState: 125937960
+    TransitionDuration: 0.25
+    TriggerNameHash: -533643314
+    TransitionIndex: 1
+  m_Animator: {fileID: 3460067788831044766}
+--- !u!114 &-2311228984563323672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683445553649119281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e406f3a7ed72454faa2cf881208fbf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useText: {fileID: 0}
+  camera: {fileID: 0}
+  useLayers:
+    serializedVersion: 2
+    m_Bits: 1792
+  maxDistance: 5
+  ready: 0
+  keySprite: {fileID: 0}
+  keyE: {fileID: 21300000, guid: ff8787da6d52237408b94fb7b224be4f, type: 3}
+  keyF: {fileID: 21300000, guid: 45cdbb9519ebf9942a540a0ee9349d6b, type: 3}
 --- !u!1 &4702746076710964278
 GameObject:
   m_ObjectHideFlags: 0

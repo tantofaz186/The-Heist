@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -22,9 +23,10 @@ public class Enemy : NetworkBehaviour
     public event Action<GameObject> OnAttack;
 
     public GameObject playerFound;
-
+    
     public FOV fov;
 
+    public GameObject hitCollider;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -40,6 +42,7 @@ public class Enemy : NetworkBehaviour
     private void Start()
     {
         StartCoroutine(FovScan());
+        hitCollider.SetActive(false);
     }
 
     private IEnumerator FovScan()
@@ -109,9 +112,9 @@ public class Enemy : NetworkBehaviour
     }
 
     void Attack(Transform targetTransform)
-    {
+    {   hitCollider.SetActive(true);
         var position = targetTransform.position;
-        agent.SetDestination(position);
+        //agent.SetDestination(position);
         transform.LookAt(position);
         if (!attacked)
         {
@@ -125,5 +128,6 @@ public class Enemy : NetworkBehaviour
     void ResetAttack()
     {
         attacked = false;
+        hitCollider.SetActive(false);
     }
 }

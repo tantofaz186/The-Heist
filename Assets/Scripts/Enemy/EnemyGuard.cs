@@ -18,10 +18,7 @@ public class EnemyGuard : NetworkBehaviour
 
     private void OnAttack(GameObject obj)
     {
-        if (IsServer)
-        {
-            SendToPrision(obj);
-        }
+        SendToPrision(obj);
     }
 
     private void SendToPrision(GameObject obj)

@@ -1,22 +1,29 @@
 using System;
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Mechanics.VaultDoor
 {
-    public class VaultDoorBehaviour: MonoBehaviour
+    public class VaultDoorBehaviour : MonoBehaviour
     {
-        [SerializeField] private CodigoFactory codigoFactory;
+        [SerializeField]
+        private CodigoFactory codigoFactory;    
+
         public event Action OnAlarmTrigger;
-        public void Awake()
+        
+        public void Initialize(CodigoFactory codigoFactory)
         {
-            codigoFactory = FindObjectOfType<CodigoFactory>();
+            this.codigoFactory = codigoFactory;
             codigoFactory.OnCodeChecked += CodeCheck;
         }
+
         private void CodeCheck(bool isCorrectCode)
         {
-            if (isCorrectCode) Open();
-            else Alarm();
+            if (isCorrectCode)
+                Open();
+            else
+                Alarm();
         }
 
         private void Alarm()
@@ -34,7 +41,6 @@ namespace Mechanics.VaultDoor
 
         private IEnumerator RotateDoor()
         {
-
             int totalAngle = 90;
             while (totalAngle > 0)
             {
@@ -47,7 +53,7 @@ namespace Mechanics.VaultDoor
 
         private void OnDisable()
         {
-            codigoFactory.OnCodeChecked -= CodeCheck;
+            if (codigoFactory != null) codigoFactory.OnCodeChecked -= CodeCheck;
         }
     }
 }

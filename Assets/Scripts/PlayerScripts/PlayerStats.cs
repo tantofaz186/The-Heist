@@ -9,7 +9,7 @@ public class PlayerStats : MonoBehaviour
     public GameObject dmgGO;
     private Image dmgImg;
     private bool hit;
-   
+    private bool injured;
     
 
     [SerializeField] Movement movement;

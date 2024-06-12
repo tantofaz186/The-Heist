@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class FOV : MonoBehaviour
 {
     public float viewAngle;
@@ -150,11 +149,13 @@ public class FOV : MonoBehaviour
         return mesh;
     }
 
+    /*
     private void OnValidate()
     {
         mesh = CreateWedgeMesh();
         scanInterval = 1.0f / scanFrequency;
     }
+    */
 
     private void OnDrawGizmos()
     {
