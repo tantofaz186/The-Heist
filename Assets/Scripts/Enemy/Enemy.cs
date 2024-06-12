@@ -73,6 +73,13 @@ public class Enemy : NetworkBehaviour
             yield return new WaitForSeconds(fov.scanInterval);
         }
     }
+    
+    
+    public void CheckLocation(Vector3 target)
+    {
+        walkPointSet = true;
+        walkPoint = target;
+    }
 
     void Patrol()
     {   
