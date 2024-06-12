@@ -12,64 +12,58 @@ public class ItemSpawn : NetworkBehaviour
    [SerializeField]private List<GameObject> itemSpawnPoints = new();
    [SerializeField] private List<int> itemsCheck = new();
    [SerializeField] private List<int> relicsCheck = new();
+   [SerializeField] GameObject codigo;
    
    [Rpc(SendTo.Server)]
    public void SpawnItemsRpc()
    {
       itemSpawnPoints = GetItemSpawnPoints();
-      /*for(int i = 0; i < itemSpawnPoints.Count; i++)
+      for(int i = 0; i < itemSpawnPoints.Count; i++)
       {
          int type = itemSpawnPoints[i].GetComponent<itemSpawnType>().spawnType;
-         SpawnItems(type);
-      }*/
-      for (int i = 0; i < 4; i++)
-      {
-         SortItemsCodigo(i);
+         SpawnItems(type,i);
       }
-      for (int n = 4; n < itemSpawnPoints.Count; n++)
-      {
-         SortItems(n);
-      }
+      
 
    }
    
    
 
 
-   /*void SpawnItems(int type)
+   void SpawnItems(int type, int spawnPointIndex)
    {
       switch (type)
       {
          case 0:
-            //SortItems();
+            SortItems(spawnPointIndex);
             break;
          case 1:
-           // SortRelics();
+            SortRelics(spawnPointIndex);
             break;
          case 2:
-           // SortSenhas();
+            SortItemsCodigo(spawnPointIndex);
             break;
       }
-   }*/
+   }
    
    
    void SortItemsCodigo(int x)
    {
 
-      var instance = Instantiate(items.First(item => item.TryGetComponent<CodigoSpawnItem>(out _)),
-            itemSpawnPoints[x].transform);
+      var instance = Instantiate(codigo,itemSpawnPoints[x].transform);
+      // items.First(item => item.TryGetComponent<CodigoSpawnItem>(out _)
          var instanceNetworkObject = instance.GetComponent<NetworkObject>();
          instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
 
    }
    
-   /*void SortRelics(int x)
+   void SortRelics(int x)
    {
       int rnd = Random.Range(0, relics.Count);
       bool inList = false;
       if (relicsCheck.Count <= 0)
       {
-         relicsCheck = new List<int>(){0,1,2,3,4,5};
+         relicsCheck = new List<int>(){0,1};
           
       }
            
@@ -96,14 +90,14 @@ public class ItemSpawn : NetworkBehaviour
       {
          SortRelics(x);
       }
-   }*/
+   }
    void SortItems(int x)
    {
       int rnd = Random.Range(0, items.Count);
       bool inList = false;
       if (itemsCheck.Count <= 0)
       {
-         itemsCheck = new List<int>(){0,1,2,3,4,5};
+         itemsCheck = new List<int>(){0,1,2,3};
           
       }
            
