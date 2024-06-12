@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
@@ -27,7 +28,7 @@ public class PrisonDoor : NetworkBehaviour
         if(Physics.Raycast(PlayerActionsSingleton.Instance._camera.transform.position, PlayerActionsSingleton.Instance._camera.transform.forward, out RaycastHit hit, 4f))
         {
             if (hit.collider.gameObject != gameObject) return;
-            int lockpickIndex = Inventory.Instance.items.FindIndex((i) => i.itemName == "Lockpick");
+            int lockpickIndex = Inventory.Instance.items.ToList().FindIndex((i) => i.itemName == "Lockpick");
             if (lockpickIndex > -1)
             {
                 OpenServerRpc();

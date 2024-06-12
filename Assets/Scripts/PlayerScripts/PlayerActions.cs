@@ -65,12 +65,13 @@ public class PlayerActions : NetworkBehaviour
         if (!ready)
         {
             return;
-        }
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, maxDistance,
+        } 
+        
+        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, maxDistance,
                 useLayers))
         {
             
-            if (hit.collider.TryGetComponent(out PickupObject pick))
+            if (hit.collider.TryGetComponent(out PickupObject _))
             {   
                 
                 useText.SetText("Pick \"E\"");
@@ -89,14 +90,12 @@ public class PlayerActions : NetworkBehaviour
                 }
                 useText.gameObject.SetActive(true);
             }
-            
             Debug.Log("SEE");
-            
-            
         }
         else
         {
             useText.gameObject.SetActive(false);
         }
+
     }
 }

@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Outline))]
 public class PickupObject : NetworkBehaviour
@@ -17,8 +12,6 @@ public class PickupObject : NetworkBehaviour
     private BoxCollider m_Collider;
 
     private NetworkVariable<bool> m_IsGrabbed = new NetworkVariable<bool>();
-    private PlayerInputActions controle_player;
-    private InputAction grab, release, dropRelic;
 
     [SerializeField]
     private Outline outline;
@@ -28,19 +21,11 @@ public class PickupObject : NetworkBehaviour
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Collider = GetComponent<BoxCollider>();
-        controle_player = new PlayerInputActions();
-        grab = controle_player.Player.Use;
-        grab.Enable();
-        grab.performed += Grab;
-
-        release = controle_player.Player.Release;
-        release.Enable();
-        release.performed += Release;
+        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Grab.performed += Grab;
+        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Release.performed += Release;
+        PlayerActionsSingleton.Instance.PlayerInputActions.Player.DropRelic.performed += DropRelic;
+        
         _renderer = GetComponent<MeshRenderer>();
-
-        dropRelic = controle_player.Player.DropRelic;
-        dropRelic.Enable();
-        dropRelic.performed += DropRelic;
         outline = GetComponent<Outline>();
         outline.enabled = false;
     }
@@ -76,9 +61,9 @@ public class PickupObject : NetworkBehaviour
 
     private void Release(InputAction.CallbackContext obj)
     {
-        if (IsOwner && !item.isRelic && Inventory.Instance.inventorySlots[ItemSelect.Instance.currentItem] && m_IsGrabbed.Value)
+        if (IsOwner && !item.isRelic && m_IsGrabbed.Value)
         {
-            ReleaseServerRpc();
+            ReleaseServerRpc(ItemSelect.Instance.currentItemIndex);
         }
     }
 
@@ -116,7 +101,7 @@ public class PickupObject : NetworkBehaviour
         NetworkObject senderPlayerObject = PlayerPickup.Players[senderClientId].NetworkObject;
         if (senderPlayerObject == null) return;
         NetworkObject.ChangeOwnership(senderClientId);
-        if (!item.isRelic && Inventory.Instance.itemCount < Inventory.SLOTS)
+        if (!item.isRelic && Inventory.Instance.hasEmptySlot())
         {
             TryGrabItemOwnerRpc();
         }
@@ -157,11 +142,11 @@ public class PickupObject : NetworkBehaviour
     }
 
     [ServerRpc]
-    private void ReleaseServerRpc()
+    private void ReleaseServerRpc(int index)
     {
-        ReleaseItemOwnerRpc();
-        NetworkObject.RemoveOwnership();
+        ReleaseItemOwnerRpc(index);
         UnparentObjectRpc();
+        NetworkObject.RemoveOwnership();
     }
 
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
@@ -184,9 +169,9 @@ public class PickupObject : NetworkBehaviour
     }
 
     [Rpc(SendTo.Owner)]
-    public void ReleaseItemOwnerRpc()
+    public void ReleaseItemOwnerRpc(int index)
     {
-        Inventory.Instance.RemoveItem(ItemSelect.Instance.currentItem);
+        Inventory.Instance.RemoveItem(index);
     }
 
     [Rpc(SendTo.Owner)]
