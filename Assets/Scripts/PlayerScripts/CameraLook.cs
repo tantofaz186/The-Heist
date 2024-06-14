@@ -8,7 +8,6 @@ using Unity.Netcode;
 
 public class CameraLook : NetworkBehaviour
 {
-    public PlayerInputActions controls;
     
     public float mouseSensitivity = 50f;
     
@@ -33,7 +32,6 @@ public class CameraLook : NetworkBehaviour
     {
         head = transform.parent;
         body = head.transform.parent;
-        controls = new PlayerInputActions();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -41,7 +39,7 @@ public class CameraLook : NetworkBehaviour
     {
         
        
-             mouseLook = controls.Player.Mouse.ReadValue<Vector2>();
+             mouseLook = PlayerActionsSingleton.Instance.PlayerInputActions.Player.Mouse.ReadValue<Vector2>();
             
                     float mouseX = mouseLook.x * mouseSensitivity * Time.deltaTime;
                     float mouseY = mouseLook.y * mouseSensitivity * Time.deltaTime;
@@ -60,16 +58,5 @@ public class CameraLook : NetworkBehaviour
     {   
         Look();
     }
-
-    private void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Disable();
-    }
-    
     
 }

@@ -11,7 +11,6 @@ public class Movement : NetworkBehaviour
 
     public PlayerStats playerStats;
     public bool pausado = false;
-    public PlayerInputActions controle_player;
     private InputAction movement, crouch, jump,run;
 
     private OwnerNetworkAnimator corpo_FSM;
@@ -30,12 +29,6 @@ public class Movement : NetworkBehaviour
     public GameObject spawnPoint;
 
     public LayerMask Ground;
-    private void Awake()
-    {
-        controle_player = new PlayerInputActions();
-    }
-    
-    
 
     private void Start()
     {   
@@ -51,35 +44,21 @@ public class Movement : NetworkBehaviour
             enabled = false;
         }
         
-            
-        
-    }
-
-    private void OnEnable()
-    {
-        movement = controle_player.Player.Move;
+        movement = PlayerActionsSingleton.Instance.PlayerInputActions.Player.Move;
         movement.Enable();
         
-        run = controle_player.Player.Run;
+        run = PlayerActionsSingleton.Instance.PlayerInputActions.Player.Run;
         run.Enable();
         run.performed += Run;
 
-        jump = controle_player.Player.Jump;
+        jump = PlayerActionsSingleton.Instance.PlayerInputActions.Player.Jump;
         jump.Enable();
         jump.performed += Jump;
         
-        crouch = controle_player.Player.Crouch;
+        crouch = PlayerActionsSingleton.Instance.PlayerInputActions.Player.Crouch;
         crouch.Enable();
         crouch.performed += Crouch;
         
-    }
-
-    private void OnDisable()
-    {
-        movement.Disable();
-        jump.Disable();
-        crouch.Disable();
-        run.Disable();
     }
 
 
