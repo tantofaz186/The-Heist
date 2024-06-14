@@ -18,7 +18,7 @@ public class PlayerActions : NetworkBehaviour
 
     [SerializeField] public Image keySprite;
 
-    
+    public Transform drop;
 
     private void Start()
     {

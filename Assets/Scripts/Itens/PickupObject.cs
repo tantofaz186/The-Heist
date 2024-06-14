@@ -124,7 +124,8 @@ public class PickupObject : NetworkBehaviour
         NetworkObject senderPlayerObject = PlayerPickup.Players[senderClientId].NetworkObject;
 
         transform.parent = senderPlayerObject.transform;
-        transform.localPosition = new Vector3(0.473f, 0.605f, -0.314f);
+        Transform playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
+        transform.localPosition = playerTransform.position;
         m_IsGrabbed.Value = true;
         _renderer.enabled = false;    
     }
@@ -155,6 +156,7 @@ public class PickupObject : NetworkBehaviour
         transform.parent = null;
         m_IsGrabbed.Value = false;
         _renderer.enabled = true;
+        m_Rigidbody.AddForce(transform.up * 2, ForceMode.Impulse);
     }
     
     [ServerRpc]

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -8,16 +9,19 @@ using TMPro;
 
 public class TotalMoney : NetworkBehaviour
 {
-    public static TotalMoney instance;
-    
+    public static TotalMoney instance { get; private set; }
+    private void Awake()
+    {
+        instance = this;
+    } 
    public NetworkVariable<int> totalMoney = new NetworkVariable<int>(0);
    public TMP_Text moneyText;
    
-   
-   public void AddMoney(int money)
+   [Rpc(SendTo.Server,RequireOwnership = false)]
+   public void AddMoneyRpc(int money)
    {
        totalMoney.Value += money;
-         UpdateText();
+       UpdateText();
    }
 
    void UpdateText()

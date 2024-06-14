@@ -11,7 +11,7 @@ public class GetTime : MonoBehaviour
     [SerializeField] TextMeshProUGUI timerText;
     
     private void Start()
-    {
+    {   
         timerText.gameObject.SetActive(true);
     }
 

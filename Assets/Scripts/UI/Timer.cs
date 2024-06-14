@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using TMPro;
 using Unity.Netcode;
 
 public class Timer : NetworkBehaviour
@@ -11,26 +10,28 @@ public class Timer : NetworkBehaviour
    private void Awake()
    {
          instance = this;
+         Invoke(nameof(ChangeTime), 1f);
    }
 
+
+   void ChangeTime()
+   {
+       if(!IsServer) return;
+       if (remainingTime.Value > 0)
+       {
+           remainingTime.Value-= Time.deltaTime;
+       }
+
+       if (remainingTime.Value <= 0)
+       {
+           StopGameRpc();
+       }
+   }
    
-
-   void Update()
-    {   if(!IsServer) return;
-        if (remainingTime.Value > 0)
-        {
-            remainingTime.Value-= Time.deltaTime;
-        }
-
-        if (remainingTime.Value <= 0)
-        {
-            StopGameRpc();
-        }
-    }
-    [Rpc(SendTo.Everyone)]
+    [Rpc(SendTo.Everyone,RequireOwnership = false)]
     void StopGameRpc()
     {
-        Debug.Log("Game Over");
+        Loader.Load(Loader.Scene.GameOver);
         remainingTime.Value = 0;
     }
    

@@ -9,7 +9,7 @@ public class DropLocation : MonoBehaviour
     if (other.CompareTag("Item"))
     {
         other.TryGetComponent(out Item item);
-        TotalMoney.instance.AddMoney(item.itemValue);
+        TotalMoney.instance.AddMoneyRpc(item.itemValue);
         other.GetComponent<PickupObject>().enabled = false;
 
     }
