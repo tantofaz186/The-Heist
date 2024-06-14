@@ -21,11 +21,11 @@ public class Enemy : NetworkBehaviour
     public float timeAttack;
     private bool attacked;
     public event Action<GameObject> OnAttack;
-
+    private float tempSpeed;
     public GameObject playerFound;
     
     public FOV fov;
-
+    
     public GameObject hitCollider;
     private void Awake()
     {
@@ -43,6 +43,7 @@ public class Enemy : NetworkBehaviour
     {
         StartCoroutine(FovScan());
         hitCollider.SetActive(false);
+        tempSpeed = agent.speed;
     }
 
     private IEnumerator FovScan()
@@ -126,8 +127,9 @@ public class Enemy : NetworkBehaviour
         if (!attacked)
         {
             anim.SetTrigger("attack");
+            agent.speed = 0f;
             attacked = true;
-            OnAttack?.Invoke(targetTransform.gameObject);
+            //OnAttack?.Invoke(targetTransform.gameObject);
             Invoke(nameof(ResetAttack), timeAttack);
         }
     }
@@ -136,5 +138,6 @@ public class Enemy : NetworkBehaviour
     {
         attacked = false;
         hitCollider.SetActive(false);
+        agent.speed = tempSpeed;
     }
 }

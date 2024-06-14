@@ -1509,6 +1509,7 @@ GameObject:
   - component: {fileID: 809826054880962579}
   - component: {fileID: 548747275383972723}
   - component: {fileID: -5217689139977811531}
+  - component: {fileID: -3495483110025164087}
   m_Layer: 0
   m_Name: GuardaComTopete
   m_TagString: Untagged
@@ -1592,7 +1593,7 @@ MonoBehaviour:
   timeAttack: 1
   playerFound: {fileID: 0}
   fov: {fileID: -2851631060527253863}
-  hitCollider: {fileID: 0}
+  hitCollider: {fileID: 735278406403369850}
 --- !u!114 &-2851631060527253863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1731,6 +1732,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &-3495483110025164087
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219918199060101991}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4681363
+  m_Height: 2.0323846
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.97503006, z: 0.03186369}
 --- !u!1 &5224084738189517016
 GameObject:
   m_ObjectHideFlags: 0
