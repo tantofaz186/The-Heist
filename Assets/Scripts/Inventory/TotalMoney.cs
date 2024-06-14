@@ -15,17 +15,14 @@ public class TotalMoney : NetworkBehaviour
         instance = this;
     } 
    public NetworkVariable<int> totalMoney = new NetworkVariable<int>(0);
-   public TMP_Text moneyText;
+   
    
    [Rpc(SendTo.Server,RequireOwnership = false)]
    public void AddMoneyRpc(int money)
    {
        totalMoney.Value += money;
-       UpdateText();
+       
    }
 
-   void UpdateText()
-   {
-       moneyText.text = totalMoney.Value.ToString();
-   }
+   
 }
