@@ -9,9 +9,8 @@ using UnityEngine.InputSystem;
 
 public class PrisonDoor : NetworkBehaviour
 {
-
     NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false);
-    
+
     private void Awake()
     {
         PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed += TryOpenDoor;
@@ -19,13 +18,14 @@ public class PrisonDoor : NetworkBehaviour
 
     private void OnDisable()
     {
-        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed -= TryOpenDoor;
+        if (PlayerActionsSingleton.Instance != null) PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed -= TryOpenDoor;
     }
 
     private void TryOpenDoor(InputAction.CallbackContext obj)
     {
         // if has lockpick, open, otherwise return
-        if(Physics.Raycast(PlayerActionsSingleton.Instance._camera.transform.position, PlayerActionsSingleton.Instance._camera.transform.forward, out RaycastHit hit, 4f))
+        if (Physics.Raycast(PlayerActionsSingleton.Instance._camera.transform.position,
+                PlayerActionsSingleton.Instance._camera.transform.forward, out RaycastHit hit, 4f))
         {
             if (hit.collider.gameObject != gameObject) return;
             int lockpickIndex = Inventory.Instance.items.ToList().FindIndex((i) => i.itemName == "Lockpick");
@@ -35,23 +35,23 @@ public class PrisonDoor : NetworkBehaviour
                 Inventory.Instance.RemoveItem(lockpickIndex);
             }
         }
-        
     }
 
     [Rpc(SendTo.Server)]
     public void OpenServerRpc()
     {
-        if(!isOpen.Value)
+        if (!isOpen.Value)
         {
             StartCoroutine(RotateDoor(90));
             isOpen.Value = true;
             Invoke(nameof(CloseServerRpc), 5f);
         }
     }
+
     [Rpc(SendTo.Server)]
     public void CloseServerRpc()
     {
-        if(isOpen.Value)
+        if (isOpen.Value)
         {
             StartCoroutine(RotateDoor(-90));
             isOpen.Value = false;
@@ -70,10 +70,12 @@ public class PrisonDoor : NetworkBehaviour
             time += Time.deltaTime;
             yield return null;
         }
+
         gameObject.transform.rotation = endRotation;
     }
 
     #region editor
+
     #if UNITY_EDITOR
     [CustomEditor(typeof(PrisonDoor))]
     public class PrisionDoorEditor : Editor
@@ -87,6 +89,7 @@ public class PrisonDoor : NetworkBehaviour
                 PrisonDoor door = (target as PrisonDoor)!;
                 door.OpenServerRpc();
             }
+
             if (GUILayout.Button("Close"))
             {
                 PrisonDoor door = (target as PrisonDoor)!;
@@ -95,5 +98,6 @@ public class PrisonDoor : NetworkBehaviour
         }
     }
     #endif
+
     #endregion
 }
