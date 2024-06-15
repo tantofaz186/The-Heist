@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,7 +8,7 @@ public class PickupObject : NetworkBehaviour
 {
     public Item item;
 
-    private bool canGrab;
+    public bool canGrab { get; private set; }
     private Rigidbody m_Rigidbody;
     private BoxCollider m_Collider;
 
@@ -15,6 +16,7 @@ public class PickupObject : NetworkBehaviour
 
     [SerializeField]
     private Outline outline;
+
     private MeshRenderer _renderer;
 
     public bool alreadyCollected;
@@ -23,13 +25,24 @@ public class PickupObject : NetworkBehaviour
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Collider = GetComponent<BoxCollider>();
-        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed += Grab;
-        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Release.performed += Release;
-        PlayerActionsSingleton.Instance.PlayerInputActions.Player.DropRelic.performed += DropRelic;
-        
+
         _renderer = GetComponent<MeshRenderer>();
         outline = GetComponent<Outline>();
         outline.enabled = false;
+    }
+
+    private void Start()
+    {
+        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed += Grab;
+        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Release.performed += Release;
+        PlayerActionsSingleton.Instance.PlayerInputActions.Player.DropRelic.performed += DropRelic;
+    }
+
+    private void OnDisable()
+    {
+        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed -= Grab;
+        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Release.performed -= Release;
+        PlayerActionsSingleton.Instance.PlayerInputActions.Player.DropRelic.performed -= DropRelic;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -65,10 +78,12 @@ public class PickupObject : NetworkBehaviour
     {
         if (IsOwner && !item.isRelic && m_IsGrabbed.Value)
         {
+            Debug.Log($"Called {++calledTimes} times");
             ReleaseServerRpc(ItemSelect.Instance.currentItemIndex);
         }
     }
 
+    private static int calledTimes = 0;
     private void Grab(InputAction.CallbackContext obj)
     {
         if (canGrab) TryGrabServerRpc();
@@ -96,17 +111,15 @@ public class PickupObject : NetworkBehaviour
         }
 
         ParentObjectRpc(senderClientId);
-
     }
-    
+
     [Rpc(SendTo.Server, RequireOwnership = false)]
     private void ParentObjectRpc(ulong senderClientId)
     {
         NetworkObject senderPlayerObject = PlayersManager.Players[senderClientId].NetworkObject;
-
-        transform.parent = senderPlayerObject.transform;
         Transform playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
-        transform.position = playerTransform.position;
+        transform.parent = senderPlayerObject.transform;
+        transform.localPosition = playerTransform.localPosition;
         m_IsGrabbed.Value = true;
         m_Collider.enabled = false;
         SomeRpc(false);
@@ -119,6 +132,7 @@ public class PickupObject : NetworkBehaviour
         m_Rigidbody.isKinematic = !_enabled;
         m_Collider.isTrigger = !_enabled;
     }
+
     [Rpc(SendTo.Owner)]
     private void TryGrabItemOwnerRpc()
     {
@@ -149,7 +163,7 @@ public class PickupObject : NetworkBehaviour
         SomeRpc(true);
         m_Rigidbody.AddForce(transform.forward * 0.5f, ForceMode.Impulse);
     }
-    
+
     [ServerRpc]
     void DropRelicServerRpc()
     {

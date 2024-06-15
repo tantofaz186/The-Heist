@@ -11,7 +11,7 @@ public class PrisonDoor : NetworkBehaviour
 {
     NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false);
 
-    private void Awake()
+    private void Start()
     {
         PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed += TryOpenDoor;
     }

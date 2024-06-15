@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ItemSelect : Singleton<ItemSelect>
+public class ItemSelect : SingletonPerPlayer<ItemSelect>
 {  
    public BaseItem itemInHand;
 

@@ -15,8 +15,8 @@ public class CameraLook : NetworkBehaviour
     
     public Transform body;
     public Transform head;
-    
-    
+
+    private InputAction mouse;
 
 
     private float xRotation = 0f;
@@ -24,7 +24,7 @@ public class CameraLook : NetworkBehaviour
     private void Start()
     {
        transform.position = head.position;
-        
+       mouse = PlayerActionsSingleton.Instance.PlayerInputActions.Player.Mouse;
     }
 
     
@@ -39,7 +39,7 @@ public class CameraLook : NetworkBehaviour
     {
         
        
-             mouseLook = PlayerActionsSingleton.Instance.PlayerInputActions.Player.Mouse.ReadValue<Vector2>();
+             mouseLook = mouse.ReadValue<Vector2>();
             
                     float mouseX = mouseLook.x * mouseSensitivity * Time.deltaTime;
                     float mouseY = mouseLook.y * mouseSensitivity * Time.deltaTime;

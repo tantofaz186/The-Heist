@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerActions : NetworkBehaviour
@@ -72,7 +68,6 @@ public class PlayerActions : NetworkBehaviour
             
             if (hit.collider.TryGetComponent(out PickupObject _))
             {   
-                
                 useText.SetText("Pick \"E\"");
                 
                 useText.gameObject.SetActive(true);

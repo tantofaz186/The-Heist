@@ -57,12 +57,16 @@ public class Inventory : SingletonPerPlayer<Inventory>
         }
     }
 
-    public void RemoveItem(int itemPos)
+    public bool RemoveItem(int itemPos)
     {
-       
+        if (items[itemPos] == null)
+        {
+            return false;
+        }
+        Debug.Log($"Item Removido {itemPos}");
         items[itemPos]  = null;
         InventoryHud.Instance.RemoveItem(itemPos);
-        
+        return true;
     }
     int CheckEmptySlot()
     {

@@ -17,9 +17,10 @@ public class InventoryHud : Singleton<InventoryHud>
 
     }
     public void RemoveItem(int itemPos)
-    {   slots[itemPos].color = new Color(slots[itemPos].color.r, slots[itemPos].color.g, slots[itemPos].color.b, 0f);
+    {
+        Debug.Log($"removed item at pos: {itemPos}");
+        slots[itemPos].color = new Color(slots[itemPos].color.r, slots[itemPos].color.g, slots[itemPos].color.b, 0f);
         slots[itemPos].sprite = null;
-        
     }
 
     public void AddRelic(Item item)

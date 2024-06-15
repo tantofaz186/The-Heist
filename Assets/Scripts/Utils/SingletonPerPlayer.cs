@@ -14,7 +14,19 @@ public class SingletonPerPlayer<T> : NetworkBehaviour
 {
     public static Dictionary<ulong, SingletonPerPlayer<T>> Players = new Dictionary<ulong, SingletonPerPlayer<T>>();
 
-    public static T Instance => Players.TryGetValue(NetworkManager.Singleton.LocalClientId, out SingletonPerPlayer<T> player) ? player.GetComponent<T>() : null;
+    public static T Instance {
+        get
+        {
+            foreach (var kvp in Players)
+            {
+                Debug.Log($"Player: {kvp.Key} - {kvp.Value.name}");  
+            }
+            
+            return Players.TryGetValue(NetworkManager.Singleton.LocalClientId, out SingletonPerPlayer<T> player) ?
+                player.GetComponent<T>() :
+                null;
+        }
+    }
 
     public override void OnNetworkSpawn()
     {
