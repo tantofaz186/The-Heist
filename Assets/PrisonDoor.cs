@@ -13,6 +13,13 @@ public class PrisonDoor : NetworkBehaviour
 
     private void Start()
     {
+        StartCoroutine(WaitUntilSingleton());
+    }
+
+    private IEnumerator WaitUntilSingleton()
+    {
+        yield return new WaitUntil(() => PlayerActionsSingleton.Instance != null);
+
         PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed += TryOpenDoor;
     }
 
