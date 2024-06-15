@@ -10,11 +10,11 @@ public class Timer : NetworkBehaviour
    private void Awake()
    {
          instance = this;
-         Invoke(nameof(ChangeTime), 1f);
+         
    }
 
 
-   void ChangeTime()
+   void Update()
    {
        if(!IsServer) return;
        if (remainingTime.Value > 0)
@@ -31,7 +31,7 @@ public class Timer : NetworkBehaviour
     [Rpc(SendTo.Everyone,RequireOwnership = false)]
     void StopGameRpc()
     {
-        Loader.Load(Loader.Scene.GameOver);
+        Loader.Load(Loader.Scene.CombatReport);
         remainingTime.Value = 0;
     }
    

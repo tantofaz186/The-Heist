@@ -17,6 +17,8 @@ public class PickupObject : NetworkBehaviour
     private Outline outline;
     private MeshRenderer _renderer;
 
+    public bool alreadyCollected;
+
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -104,8 +106,9 @@ public class PickupObject : NetworkBehaviour
 
         transform.parent = senderPlayerObject.transform;
         Transform playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
-        transform.localPosition = playerTransform.position;
+        transform.position = playerTransform.position;
         m_IsGrabbed.Value = true;
+        m_Collider.enabled = false;
         SomeRpc(false);
     }
 
@@ -142,8 +145,9 @@ public class PickupObject : NetworkBehaviour
         transform.parent = null;
         m_IsGrabbed.Value = false;
         _renderer.enabled = true;
+        m_Collider.enabled = true;
         SomeRpc(true);
-        m_Rigidbody.AddForce(transform.up * 2, ForceMode.Impulse);
+        m_Rigidbody.AddForce(transform.forward * 0.5f, ForceMode.Impulse);
     }
     
     [ServerRpc]

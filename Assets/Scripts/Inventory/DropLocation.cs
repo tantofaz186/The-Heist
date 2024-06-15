@@ -8,11 +8,12 @@ public class DropLocation : MonoBehaviour
   {
     if (other.CompareTag("Item"))
     {
-        other.TryGetComponent(out Item item);
-        if (item.isRelic)
+        other.TryGetComponent(out PickupObject item);
+        if (item.item.isRelic&& item.alreadyCollected==false)
         {Debug.Log("Relic Dropped");
-            TotalMoney.instance.AddMoneyRpc(item.itemValue);
-            other.GetComponent<PickupObject>().enabled = false;
+            TotalMoney.instance.AddMoneyRpc(item.item.itemValue);
+            item.enabled=false;
+            item.alreadyCollected=true;
             
         }
         

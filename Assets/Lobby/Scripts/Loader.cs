@@ -12,7 +12,7 @@ public static class Loader
         LoadingScene,
         LobbyScene,
         CharacterSelectScene,
-        GameOver
+        CombatReport
     }
 
     private static Scene targetScene;
