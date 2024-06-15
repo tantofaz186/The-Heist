@@ -13,7 +13,7 @@ public class TotalMoney : NetworkBehaviour
     private void Awake()
     {
         instance = this;
-        DontDestroyOnLoad(this);
+        
     } 
    public NetworkVariable<int> totalMoney = new NetworkVariable<int>(0);
    

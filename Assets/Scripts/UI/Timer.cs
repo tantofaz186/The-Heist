@@ -10,16 +10,17 @@ public class Timer : NetworkBehaviour
    private void Awake()
    {
          instance = this;
+       InvokeRepeating(nameof(CointTime), 1, 1);
          
    }
 
 
-   void Update()
+   void CointTime()
    {
        if(!IsServer) return;
        if (remainingTime.Value > 0)
        {
-           remainingTime.Value-= Time.deltaTime;
+           remainingTime.Value--;
        }
 
        if (remainingTime.Value <= 0)

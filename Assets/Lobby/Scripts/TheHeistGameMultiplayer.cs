@@ -162,6 +162,11 @@ public class TheHeistGameMultiplayer : NetworkBehaviour
         return default;
     }
     
+    public PlayerData GetPlayerDataFromClient(ulong id)
+    {
+        return GetPlayerDataFromClientId(id);
+    }
+    
     public PlayerData GetPlayerData()
     {
         return GetPlayerDataFromClientId(NetworkManager.Singleton.LocalClientId);
