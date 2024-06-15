@@ -44,6 +44,7 @@ public class RoomSpawn : NetworkBehaviour
        yield return new WaitForSeconds(1);
        yield return new WaitUntil(() => bake.surface.navMeshData != null || bake.surface != null);
        bake.surface.BuildNavMesh();
+       Prison.instance.FindPrison();
        yield return new WaitForSeconds(1);
        if (IsServer)
        {

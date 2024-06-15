@@ -31,7 +31,7 @@ public class Timer : NetworkBehaviour
    
     [Rpc(SendTo.Everyone,RequireOwnership = false)]
     void StopGameRpc()
-    {
+    {      Debug.Log("StopGameRpc");
         Loader.Load(Loader.Scene.CombatReport);
         remainingTime.Value = 0;
     }

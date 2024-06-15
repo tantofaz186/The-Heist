@@ -33,6 +33,7 @@ public class PrisonDoor : NetworkBehaviour
             {
                 OpenServerRpc();
                 Inventory.Instance.RemoveItem(lockpickIndex);
+                Prison.instance.ReleasePrisonerRpc();
             }
         }
     }

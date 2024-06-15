@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7124086482716100284
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8951816917795881402}
-  m_Layer: 0
-  m_Name: "Pris\xE3oSpawn"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8951816917795881402
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7124086482716100284}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.808, y: 0.445, z: -0.752}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4191066608385345059}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4441413025545724360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -185,10 +154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e161e0611c5ba4f40aaad0500cb6a445, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8951816917795881402}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -7098234554645274878, guid: e161e0611c5ba4f40aaad0500cb6a445, type: 3}
       insertIndex: -1
@@ -305,11 +271,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.94113976, y: 1.6083554, z: 3.3790505}
   m_Center: {x: 0.00000014901168, y: -0.45829028, z: 0.025146376}
---- !u!4 &4191066608385345059 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e161e0611c5ba4f40aaad0500cb6a445, type: 3}
-  m_PrefabInstance: {fileID: 4441413025545724360}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4427892738162865189 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 58574700527785453, guid: e161e0611c5ba4f40aaad0500cb6a445, type: 3}

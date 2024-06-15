@@ -9,7 +9,7 @@ public class PlayerStats : MonoBehaviour
     public GameObject dmgGO;
     private Image dmgImg;
     private bool hit;
-    private bool injured;
+    [SerializeField] bool injured;
     public bool isSafe;
     public bool canDrop;
     
@@ -22,6 +22,13 @@ public class PlayerStats : MonoBehaviour
         dmgGO = GameObject.Find("DamageImage");
         dmgImg = dmgGO.GetComponent<Image>();
         Debug.Log("Start");
+    }
+
+
+    void SendToPrison()
+    {   
+        transform.position = Prison.instance.prisonTransform.position;
+        Prison.instance.AddPrisonerRpc();
     }
 
 
@@ -40,6 +47,14 @@ public class PlayerStats : MonoBehaviour
             if (!hit)
             {
                 StartCoroutine(TakeDamage());
+                if (!injured)
+                {
+                    injured = true;
+                }
+                else
+                {
+                    SendToPrison();
+                }
             }
         }
 
@@ -49,7 +64,7 @@ public class PlayerStats : MonoBehaviour
             dmgImg.color = new Color(dmgImg.color.r, dmgImg.color.g, dmgImg.color.b, 1f);
             yield return new WaitForSeconds(0.3f);
             dmgImg.color = new Color(dmgImg.color.r, dmgImg.color.g, dmgImg.color.b, 0f);
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(1.7f);
             hit = false;
         }
 

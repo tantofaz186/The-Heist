@@ -23,6 +23,7 @@ public class TotalMoney : NetworkBehaviour
    {
        totalMoney.Value += money;
        
+       
    }
 
    
