@@ -18,7 +18,7 @@ public class PlayerActionsSingleton : SingletonPerPlayer<PlayerActionsSingleton>
 
     public override void OnNetworkDespawn()
     {
-        base.OnNetworkDespawn();
         playerInputActions.Disable();
+        base.OnNetworkDespawn();
     }
 }

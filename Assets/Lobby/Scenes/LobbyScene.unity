@@ -1633,7 +1633,6 @@ GameObject:
   - component: {fileID: 756077061}
   - component: {fileID: 756077062}
   - component: {fileID: 756077063}
-  - component: {fileID: 756077064}
   m_Layer: 0
   m_Name: TheHeistGameMultiplayer
   m_TagString: Untagged
@@ -1700,19 +1699,6 @@ MonoBehaviour:
   - {r: 0.051041294, g: 0.0883327, b: 0.2924528, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
---- !u!114 &756077064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 756077058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d57360d7441f80444a2e6a73e06b57b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToInvoke: 2
 --- !u!1 &822892608
 GameObject:
   m_ObjectHideFlags: 0
