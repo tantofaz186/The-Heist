@@ -101,10 +101,10 @@ public class PickupObject : NetworkBehaviour
     private void ParentObjectRpc(ulong senderClientId)
     {
         NetworkObject senderPlayerObject = PlayersManager.Players[senderClientId].NetworkObject;
+        Transform playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
 
         transform.parent = senderPlayerObject.transform;
-        Transform playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
-        transform.localPosition = playerTransform.position;
+        transform.localPosition = playerTransform.localPosition;
         m_IsGrabbed.Value = true;
         SomeRpc(false);
     }
@@ -143,7 +143,7 @@ public class PickupObject : NetworkBehaviour
         m_IsGrabbed.Value = false;
         _renderer.enabled = true;
         SomeRpc(true);
-        m_Rigidbody.AddForce(transform.up * 2, ForceMode.Impulse);
+        m_Rigidbody.AddForce(transform.up * 6, ForceMode.Impulse);
     }
     
     [ServerRpc]

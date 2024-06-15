@@ -948,7 +948,6 @@ GameObject:
   - component: {fileID: 4586447672509110361}
   - component: {fileID: 1903253925923160731}
   - component: {fileID: 88759529031686857}
-  - component: {fileID: 4901498251451599289}
   - component: {fileID: -6749964110250010635}
   - component: {fileID: -5401163062824662830}
   - component: {fileID: -6366847050831217327}
@@ -956,6 +955,7 @@ GameObject:
   - component: {fileID: 3435334008085865456}
   - component: {fileID: -1677473552928529444}
   - component: {fileID: -8465009735412332650}
+  - component: {fileID: 8217642086363946404}
   m_Layer: 7
   m_Name: Ladrao_M
   m_TagString: Player
@@ -1138,18 +1138,6 @@ MonoBehaviour:
   isSafe: 0
   canDrop: 0
   movement: {fileID: 0}
---- !u!114 &4901498251451599289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2921256980024346588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 211dd20aaaf14581856f19a6ca619542, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-6749964110250010635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1242,14 +1230,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useText: {fileID: 0}
-  camera: {fileID: 0}
+  _camera: {fileID: 0}
   maxDistance: 5
   useLayers:
     serializedVersion: 2
     m_Bits: 1792
-  textDistance: 0.01
   ready: 0
   keySprite: {fileID: 0}
+  drop: {fileID: 6806175025025360472}
 --- !u!114 &-1677473552928529444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,6 +1310,18 @@ MonoBehaviour:
     TriggerNameHash: -533643314
     TransitionIndex: 1
   m_Animator: {fileID: 5621512635020069585}
+--- !u!114 &8217642086363946404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2921256980024346588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcbf37c37d46464999403a6a9f65af96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3176451439943722420
 GameObject:
   m_ObjectHideFlags: 0
