@@ -21,7 +21,7 @@ public class buttonVault : MonoBehaviour
 
     private void OnDisable()
     {
-        if(PlayerActionsSingleton.Instance != null ) PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed -= AtivarBotão;
+        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed -= AtivarBotão;
     }
 
     private static void CheckCode()

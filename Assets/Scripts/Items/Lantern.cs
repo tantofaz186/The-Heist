@@ -1,8 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Lantern : BaseItem
 {   public bool isOn = false;
-    public GameObject _light;
+    public GameObject light;
     public override void UseItem()
     {
         if (!isOn)

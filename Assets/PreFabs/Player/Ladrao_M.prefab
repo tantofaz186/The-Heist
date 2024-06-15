@@ -1230,11 +1230,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useText: {fileID: 0}
-  _camera: {fileID: 0}
+  camera: {fileID: 0}
   maxDistance: 5
   useLayers:
     serializedVersion: 2
     m_Bits: 1792
+  textDistance: 0.01
   ready: 0
   keySprite: {fileID: 0}
   drop: {fileID: 6806175025025360472}

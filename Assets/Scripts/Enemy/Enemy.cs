@@ -122,14 +122,14 @@ public class Enemy : NetworkBehaviour
     void Attack(Transform targetTransform)
     {   hitCollider.SetActive(true);
         var position = targetTransform.position;
-        agent.SetDestination(position);
+        //agent.SetDestination(position);
         transform.LookAt(position);
         if (!attacked)
         {
             anim.SetTrigger("attack");
             agent.speed = 0f;
             attacked = true;
-            OnAttack?.Invoke(targetTransform.gameObject);
+            //OnAttack?.Invoke(targetTransform.gameObject);
             Invoke(nameof(ResetAttack), timeAttack);
         }
     }
