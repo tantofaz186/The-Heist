@@ -13,6 +13,7 @@ public class PlayerActionsSingleton : SingletonPerPlayer<PlayerActionsSingleton>
         base.OnNetworkSpawn();
         playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
+        playerInputActions.Player.Enable();
     }
 
     public override void OnNetworkDespawn()

@@ -8,7 +8,7 @@ public class PickupObject : NetworkBehaviour
 {
     public Item item;
 
-    public bool canGrab { get; private set; }
+    private bool canGrab;
     private Rigidbody m_Rigidbody;
     private BoxCollider m_Collider;
 
