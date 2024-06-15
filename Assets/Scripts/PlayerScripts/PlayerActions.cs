@@ -5,16 +5,16 @@ using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerActions : NetworkBehaviour
 {
     [SerializeField] public TMP_Text useText;
-    [SerializeField] public Camera camera;
+    [SerializeField] public Camera _camera;
     [SerializeField] float maxDistance = 5f;
     [SerializeField] private LayerMask useLayers;
-    [SerializeField] private float textDistance = 0.01f;
-    public bool ready = false;
+    public bool ready;
 
     [SerializeField] public Image keySprite;
 
@@ -41,7 +41,7 @@ public class PlayerActions : NetworkBehaviour
     private void OpenCloseDoor(InputAction.CallbackContext obj)
     {
         if(!IsOwner)return; 
-        if(Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, maxDistance, useLayers))
+        if(Physics.Raycast(_camera.transform.position, _camera.transform.forward, out RaycastHit hit, maxDistance, useLayers))
         {
             if(hit.collider.TryGetComponent<Door>(out Door door))
             {   
@@ -66,7 +66,7 @@ public class PlayerActions : NetworkBehaviour
             return;
         } 
         
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit, maxDistance,
+        if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out RaycastHit hit, maxDistance,
                 useLayers))
         {
             

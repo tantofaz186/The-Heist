@@ -20,8 +20,8 @@ public class AddCam : NetworkBehaviour
         {   
             var thisCam = Instantiate(cam, head.transform.position, cam.transform.rotation, head.transform);
              _actions = GetComponent<PlayerActions>();
-             _actions.camera = thisCam.GetComponent<Camera>();
-             PlayerActionsSingleton.Instance._camera = _actions.camera;
+             _actions._camera = thisCam.GetComponent<Camera>();
+             PlayerActionsSingleton.Instance._camera = _actions._camera;
              GameObject canvas = thisCam.gameObject.transform.GetChild(0).gameObject;
              GameObject useTextobj = canvas.transform.GetChild(0).gameObject;
              useText= useTextobj.GetComponent<TMP_Text>();
