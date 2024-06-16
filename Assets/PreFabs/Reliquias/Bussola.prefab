@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -7711737538711931765}
   - component: {fileID: 3591155961279999845}
   m_Layer: 10
-  m_Name: Relic1
+  m_Name: Bussola
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -47,7 +47,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 509773701853694132}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4507303394194184309, guid: 7b2b77266406acc488366a7e2c1610e2, type: 3}
 --- !u!23 &1054775625766420712
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fe739e2178faed4498d3fa85abfd70b6, type: 2}
+  - {fileID: 2100000, guid: c338cb023e337224abd56cd3856e7fa9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,8 +109,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.18952376, y: 0.24517505, z: 0.06709538}
+  m_Center: {x: 0, y: 0.027825646, z: -0.03354769}
 --- !u!114 &5427403352177432812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 147815669
+  GlobalObjectIdHash: 2943682597
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -214,8 +214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee6e75deef25054f5baa78aec6070381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 6e9615261ad9b0b4aa2c47d6d5ee8bdd, type: 2}
+  item: {fileID: 11400000, guid: c2439b9d0f4614441803bdcf85c48d81, type: 2}
   outline: {fileID: 0}
+  alreadyCollected: 0
 --- !u!114 &3591155961279999845
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -63,7 +63,7 @@ public class ItemSpawn : NetworkBehaviour
       bool inList = false;
       if (relicsCheck.Count <= 0)
       {
-         relicsCheck = new List<int>(){0,1};
+         relicsCheck = new List<int>(){0,1,2,3};
           
       }
            
