@@ -6,7 +6,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class buttonVault : MonoBehaviour
+public class buttonVault : NetworkBehaviour
 {
     [SerializeField]
     private short digit;
