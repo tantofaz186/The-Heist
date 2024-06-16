@@ -10,26 +10,26 @@ using UnityEngine;
 public class SingletonPerPlayer<T> : NetworkBehaviour
     where T : Component
 {
-    public static Dictionary<ulong, SingletonPerPlayer<T>> Players = new Dictionary<ulong, SingletonPerPlayer<T>>();
-
-    public static T Instance =>
-        Players.TryGetValue(NetworkManager.Singleton.LocalClientId, out SingletonPerPlayer<T> player) ?
-            player.GetComponent<T>() :
-            null;
-
-    public override void OnNetworkSpawn()
-    {
-        Players[OwnerClientId] = this;
-
-        base.OnNetworkSpawn();
-    }
-
-    public override void OnNetworkDespawn()
-    {
-        if (Players.ContainsKey(OwnerClientId))
-        {
-            Players.Remove(OwnerClientId);
-        }
-        base.OnNetworkDespawn();
-    }
+    // public static Dictionary<ulong, SingletonPerPlayer<T>> Players = new Dictionary<ulong, SingletonPerPlayer<T>>();
+    //
+    // public static T Instance =>
+    //     Players.TryGetValue(NetworkManager.Singleton.LocalClientId, out SingletonPerPlayer<T> player) ?
+    //         player.GetComponent<T>() :
+    //         null;
+    //
+    // public override void OnNetworkSpawn()
+    // {
+    //     Players[OwnerClientId] = this;
+    //
+    //     base.OnNetworkSpawn();
+    // }
+    //
+    // public override void OnNetworkDespawn()
+    // {
+    //     if (Players.ContainsKey(OwnerClientId))
+    //     {
+    //         Players.Remove(OwnerClientId);
+    //     }
+    //     base.OnNetworkDespawn();
+    // }
 }

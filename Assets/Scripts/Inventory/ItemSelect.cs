@@ -4,16 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ItemSelect : SingletonPerPlayer<ItemSelect>
+public class ItemSelect : Singleton<ItemSelect>
 {  
    public BaseItem itemInHand;
 
    public int currentItemIndex;
-   void Start() {
-      PlayerActionsSingleton.Instance.PlayerInputActions.Player.Item1.performed += SelectItem1;
-      PlayerActionsSingleton.Instance.PlayerInputActions.Player.Item2.performed += SelectItem2;
-      PlayerActionsSingleton.Instance.PlayerInputActions.Player.Item3.performed += SelectItem3;
-      PlayerActionsSingleton.Instance.PlayerInputActions.Player.Item4.performed += SelectItem4;
+   private PlayerInputActions playerInputActions;
+
+   private void Start()
+   {
+      playerInputActions = new PlayerInputActions();
+      playerInputActions.Enable();
+      playerInputActions.Player.Enable();
+      playerInputActions.Player.Item1.performed += SelectItem1;
+      playerInputActions.Player.Item2.performed += SelectItem2;
+      playerInputActions.Player.Item3.performed += SelectItem3;
+      playerInputActions.Player.Item4.performed += SelectItem4;
    }
 
    void SelectItem1(InputAction.CallbackContext context){

@@ -2,23 +2,21 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerActionsSingleton : SingletonPerPlayer<PlayerActionsSingleton>
+public class PlayerActionsSingleton : Singleton<PlayerActionsSingleton>
 {
     private PlayerInputActions playerInputActions;
 
     public PlayerInputActions PlayerInputActions => playerInputActions;
     public Camera _camera;
-    public override void OnNetworkSpawn()
+    private void OnEnable()
     {
-        base.OnNetworkSpawn();
         playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
         playerInputActions.Player.Enable();
     }
 
-    public override void OnNetworkDespawn()
+    public void OnDisable()
     {
         playerInputActions.Disable();
-        base.OnNetworkDespawn();
     }
 }

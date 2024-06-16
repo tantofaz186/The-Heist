@@ -30,19 +30,24 @@ public class PickupObject : NetworkBehaviour
         outline = GetComponent<Outline>();
         outline.enabled = false;
     }
+    private PlayerInputActions playerInputActions;
 
     private void Start()
     {
-        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed += Grab;
-        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Release.performed += Release;
-        PlayerActionsSingleton.Instance.PlayerInputActions.Player.DropRelic.performed += DropRelic;
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Enable();
+        playerInputActions.Player.Enable();
+        playerInputActions.Player.Use.performed += Grab;
+        playerInputActions.Player.Release.performed += Release;
+        playerInputActions.Player.DropRelic.performed += DropRelic;
     }
 
     private void OnDisable()
     {
-        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed -= Grab;
-        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Release.performed -= Release;
-        PlayerActionsSingleton.Instance.PlayerInputActions.Player.DropRelic.performed -= DropRelic;
+        playerInputActions.Player.Use.performed -= Grab;
+        playerInputActions.Player.Release.performed -= Release;
+        playerInputActions.Player.DropRelic.performed -= DropRelic;
+        playerInputActions.Disable();
     }
 
     private void OnTriggerEnter(Collider other)

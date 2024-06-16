@@ -13,19 +13,16 @@ public class PrisonDoor : NetworkBehaviour
 
     private void Start()
     {
-        StartCoroutine(WaitUntilSingleton());
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Enable();
+        playerInputActions.Player.Enable();
+        playerInputActions.Player.Use.performed += TryOpenDoor;
+
     }
-
-    private IEnumerator WaitUntilSingleton()
-    {
-        yield return new WaitUntil(() => PlayerActionsSingleton.Instance != null);
-
-        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed += TryOpenDoor;
-    }
-
+    private PlayerInputActions playerInputActions;
     private void OnDisable()
     {
-        if (PlayerActionsSingleton.Instance != null) PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed -= TryOpenDoor;
+        playerInputActions.Player.Use.performed -= TryOpenDoor;
     }
 
     private void TryOpenDoor(InputAction.CallbackContext obj)
