@@ -20,7 +20,7 @@ public class Enemy : NetworkBehaviour
     public float attackRange;
     public float timeAttack;
     private bool attacked;
-    public event Action<GameObject> OnAttack;
+   // public event Action<GameObject> OnAttack;
     private float tempSpeed;
     public GameObject playerFound;
     

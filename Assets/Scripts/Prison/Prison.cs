@@ -12,6 +12,7 @@ public class Prison : NetworkBehaviour
         instance = this;
     }
     public NetworkVariable<int> totalPrisoners = new NetworkVariable<int>(0);
+    public NetworkVariable<int> vezesPreso = new NetworkVariable<int>(0);
     public Transform prisonTransform;
 
     public void FindPrison()
@@ -24,6 +25,7 @@ public class Prison : NetworkBehaviour
     public void AddPrisonerRpc()
     {   Debug.Log("AddPrisonerRpc");
         totalPrisoners.Value++;
+        vezesPreso.Value++;
         if(totalPrisoners.Value>=NetworkManager.Singleton.ConnectedClientsList.Count)
         {
             StopGameRpc();
@@ -42,8 +44,9 @@ public class Prison : NetworkBehaviour
     
     [Rpc(SendTo.Everyone,RequireOwnership = false)]
     void StopGameRpc()
-    {     Debug.Log("EveryOneInPrison");
-        Loader.Load(Loader.Scene.CombatReport);
+    {    Debug.Log("EveryOneInPrison");
+        CombatReportData.instance.AtualzarDados();
+        Loader.Load(Loader.Scene.CombatReportScene);
         
     }
 

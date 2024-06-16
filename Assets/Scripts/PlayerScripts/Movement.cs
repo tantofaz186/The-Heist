@@ -26,14 +26,13 @@ public class Movement : NetworkBehaviour
     public bool running = false;
     public bool isCrouching = false;
     public float vel;
-    public GameObject spawnPoint;
+    
 
     public LayerMask Ground;
 
     private void Start()
     {   
-        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
-        transform.position = spawnPoint.transform.position;
+        
         corpo_fisico = transform.GetComponent<Rigidbody>();
         corpo_fisico.isKinematic= false;
         corpo_FSM = transform.GetComponent<OwnerNetworkAnimator>();

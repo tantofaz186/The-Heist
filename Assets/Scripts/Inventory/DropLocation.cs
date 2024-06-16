@@ -12,12 +12,11 @@ public class DropLocation : MonoBehaviour
         if (item.item.isRelic&& item.alreadyCollected==false)
         {Debug.Log("Relic Dropped");
             TotalMoney.instance.AddMoneyRpc(item.item.itemValue);
+            TotalMoney.instance.AddItemsCountRpc(1);
             item.enabled=false;
             item.alreadyCollected=true;
             
         }
-        
-
     }
   }
 

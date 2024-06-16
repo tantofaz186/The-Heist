@@ -16,6 +16,7 @@ public class TotalMoney : NetworkBehaviour
         
     } 
    public NetworkVariable<int> totalMoney = new NetworkVariable<int>(0);
+   public NetworkVariable<int> totalItems = new NetworkVariable<int>(0);
    
    
    [Rpc(SendTo.Server,RequireOwnership = false)]
@@ -25,6 +26,14 @@ public class TotalMoney : NetworkBehaviour
        
        
    }
+   [Rpc(SendTo.Server,RequireOwnership = false)]
+   public void AddItemsCountRpc(int items)
+   {
+       totalItems.Value += items;
+       
+   }
+  
+   
 
    
 }

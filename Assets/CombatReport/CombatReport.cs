@@ -20,29 +20,10 @@ public class CombatReport : NetworkBehaviour
     {
         players = new Dictionary<ulong, PlayerWithData>();
         players.Add(NetworkManager.Singleton.LocalClientId, new PlayerWithData(NetworkManager.Singleton.LocalClient));
-        Invoke(nameof(NewMethod), timeToInvoke);
+        
     }
 
-    private void NewMethod()
-    {
-        // Debug.Log("players.Keys");
-        // foreach (var key in players.Keys)
-        // {
-        //     Debug.Log(key);
-        // }
-        // Debug.Log("players.Values");
-        //
-        // foreach (var value in players.Values)
-        // {
-        //     Debug.Log(value.client);
-        // }
-        // Debug.Log("players.Values.Select(p => p.data)");
-        // foreach (var player in players.Values)
-        // {
-        //     Debug.Log(player.data);
-        // }
-        Invoke(nameof(NewMethod), timeToInvoke);
-    }
+    
 
     private class PlayerWithData
     {

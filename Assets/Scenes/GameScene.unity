@@ -582,6 +582,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalPrisoners:
     m_InternalValue: 0
+  vezesPreso:
+    m_InternalValue: 0
   prisonTransform: {fileID: 0}
 --- !u!4 &447467748
 Transform:
@@ -592,7 +594,7 @@ Transform:
   m_GameObject: {fileID: 447467745}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44.97156, y: 1.8318167, z: -37.417458}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -646,7 +648,7 @@ Transform:
   m_GameObject: {fileID: 508609896}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00004786253, y: 0.8667936, z: 0.0114341825}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1289,6 +1291,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &771374983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 771374985}
+  - component: {fileID: 771374984}
+  m_Layer: 0
+  m_Name: CombatReportData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &771374984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771374983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55954df88eec6a458050f66a5b38f84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reliquiasColetadas: 0
+  dinheiroTotal: 0
+  vezesPreso: 0
+  tempoRun: 0
+--- !u!4 &771374985
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771374983}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &873220061
 GameObject:
   m_ObjectHideFlags: 0
@@ -2884,6 +2934,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalMoney:
     m_InternalValue: 0
+  totalItems:
+    m_InternalValue: 0
 --- !u!4 &1380536701
 Transform:
   m_ObjectHideFlags: 0
@@ -2893,7 +2945,7 @@ Transform:
   m_GameObject: {fileID: 1380536698}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.743686, y: -10.732694, z: -14.959795}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3248,7 +3300,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   remainingTime:
-    m_InternalValue: 70
+    m_InternalValue: 0
+  totalTime:
+    m_InternalValue: 0
+  startTime: 420
 --- !u!4 &1610830877
 Transform:
   m_ObjectHideFlags: 0
@@ -4048,3 +4103,4 @@ SceneRoots:
   - {fileID: 1610830877}
   - {fileID: 1380536701}
   - {fileID: 447467748}
+  - {fileID: 771374985}
