@@ -30,7 +30,7 @@ public class TheHeistGameManager : NetworkBehaviour
        return GameObject.FindGameObjectsWithTag("SpawnPoint").ToList();
    }
 
-    [SerializeField] private GameObject[] playerPrefab;
+    [SerializeField] private PlayerPrefab playerPrefab = new();
     private int count;
     public override void OnNetworkSpawn()
     {
@@ -44,14 +44,24 @@ public class TheHeistGameManager : NetworkBehaviour
     private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut) {
         playerspawns = GetSpawnPoints();
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds) {
-            GameObject playerTransform = Instantiate(playerPrefab[count], playerspawns[count].transform.position, playerspawns[count].transform.rotation);
+            int colorIndex = TheHeistGameMultiplayer.Instance.GetPlayerDataFromClient(clientId).colorId;
+            GameObject playerTransform = Instantiate(playerPrefab.prefabColors[colorIndex], playerspawns[count].transform.position, playerspawns[count].transform.rotation);
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
             count++;
-            // int colorIndex = TheHeistGameMultiplayer.Instance.GetPlayerDataFromClient(clientId).colorId;
-            // Color colorPlayer = TheHeistGameMultiplayer.Instance.GetPlayerColor(colorIndex);
-            // playerTransform.transform.GetChild(3).GetComponent<SkinnedMeshRenderer>().material.color = colorPlayer;
-            
+           
+           // Color colorPlayer = TheHeistGameMultiplayer.Instance.GetPlayerColor(colorIndex);
+           // SkinnedMeshRenderer playerMesh = playerTransform.transform.GetChild(3).GetComponent<SkinnedMeshRenderer>();
+           // playerMesh.material.color = colorPlayer;
             Debug.Log("Spawned " + playerTransform.name + " for client " + clientId);
         }
     }
+
+   
+    
+}
+
+[Serializable]
+public class PlayerPrefab
+{
+    public List<GameObject> prefabColors = new();
 }
