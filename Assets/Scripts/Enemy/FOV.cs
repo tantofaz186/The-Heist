@@ -21,8 +21,10 @@ public class FOV : MonoBehaviour
     private float scanTimer;
     public int scanFrequency = 30;
     private int count;
-    private int secondPass;
 
+    const float TimeToLosePlayer = 3f;
+    private float timeToLosePlayer;
+    
     public List<GameObject> Objects => objects;
 
     [SerializeField]
@@ -31,11 +33,17 @@ public class FOV : MonoBehaviour
     private void Awake()
     {
         scanInterval = 1.0f / scanFrequency;
+        timeToLosePlayer = TimeToLosePlayer;
     }
 
     public void Scan()
     {
-        objects.Clear();
+        timeToLosePlayer -= Time.deltaTime;
+        if (timeToLosePlayer <= 0)
+        {
+            objects.Clear();
+            timeToLosePlayer = TimeToLosePlayer;
+        }
         count = Physics.OverlapSphereNonAlloc(transform.position, viewRadius, colliders, playerMask, QueryTriggerInteraction.Collide);
         for (int i = 0; i < count; i++)
         {
@@ -45,12 +53,6 @@ public class FOV : MonoBehaviour
                 objects.Add(obj);
             }
         }
-        secondPass = Physics.OverlapSphereNonAlloc(transform.position, viewRadius/5f, colliders, playerMask, QueryTriggerInteraction.Collide);
-        for (int i = 0; i < secondPass; i++)
-        {
-            objects.Add(colliders[i].gameObject);
-        }
-
     }
 
     public bool InSight(GameObject obj)
