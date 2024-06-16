@@ -16,19 +16,19 @@ public class buttonVault : MonoBehaviour
     private void Start()
     {
         startPosition = transform.localPosition;
-        StartCoroutine(WaitUntilSingleton());
-    }
 
-    private IEnumerator WaitUntilSingleton()
-    {
-        yield return new WaitUntil(() => PlayerActionsSingleton.Instance != null);
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Enable();
+        playerInputActions.Player.Enable();
+        playerInputActions.Player.Use.performed += AtivarBotão;
 
-        PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed += AtivarBotão;
     }
+    private PlayerInputActions playerInputActions;
 
     private void OnDisable()
     {
-        if (PlayerActionsSingleton.Instance != null) PlayerActionsSingleton.Instance.PlayerInputActions.Player.Use.performed -= AtivarBotão;
+        playerInputActions.Player.Use.performed -= AtivarBotão;
+        playerInputActions.Disable();
     }
 
     private static void CheckCode()
