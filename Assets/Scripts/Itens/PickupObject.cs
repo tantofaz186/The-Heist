@@ -30,6 +30,7 @@ public class PickupObject : NetworkBehaviour
         outline = GetComponent<Outline>();
         outline.enabled = false;
     }
+
     private PlayerInputActions playerInputActions;
 
     private void Start()
@@ -84,11 +85,13 @@ public class PickupObject : NetworkBehaviour
         if (IsOwner && !item.isRelic && m_IsGrabbed.Value)
         {
             Debug.Log($"Called {++calledTimes} times");
-            ReleaseServerRpc(ItemSelect.Instance.currentItemIndex);
+            if(Inventory.Instance.items[ItemSelect.Instance.currentItemIndex] == item)
+                ReleaseServerRpc(ItemSelect.Instance.currentItemIndex);
         }
     }
 
     private static int calledTimes = 0;
+
     private void Grab(InputAction.CallbackContext obj)
     {
         if (canGrab) TryGrabServerRpc();
@@ -154,8 +157,8 @@ public class PickupObject : NetworkBehaviour
     private void ReleaseServerRpc(int index)
     {
         ReleaseItemOwnerRpc(index);
-        UnparentObjectRpc();
         NetworkObject.RemoveOwnership();
+        UnparentObjectRpc();
     }
 
     [Rpc(SendTo.Server, RequireOwnership = false)]

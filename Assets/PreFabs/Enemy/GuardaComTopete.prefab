@@ -1501,7 +1501,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3522646463288110461}
   - component: {fileID: -3525884011065926622}
-  - component: {fileID: 5169863501720098073}
   - component: {fileID: 6640964632351064669}
   - component: {fileID: -2851631060527253863}
   - component: {fileID: 6469180679517515467}
@@ -1560,18 +1559,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &5169863501720098073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5219918199060101991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d711988756866c4fae1e99f6c1891a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6640964632351064669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1592,6 +1579,8 @@ MonoBehaviour:
   attackRange: 1.5
   timeAttack: 2
   playerFound: {fileID: 0}
+  patrolSpeed: 3
+  chaseSpeed: 8
   fov: {fileID: -2851631060527253863}
   hitCollider: {fileID: 735278406403369850}
 --- !u!114 &-2851631060527253863

@@ -29,7 +29,17 @@ public class Movement : NetworkBehaviour
     
 
     public LayerMask Ground;
-
+    private void OnEnable()
+    {
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Enable();
+        playerInputActions.Player.Enable();
+    }
+    private PlayerInputActions playerInputActions;
+    public void OnDisable()
+    {
+        playerInputActions.Disable();
+    }
     private void Start()
     {   
         
@@ -43,18 +53,18 @@ public class Movement : NetworkBehaviour
             enabled = false;
         }
         
-        movement = PlayerActionsSingleton.Instance.PlayerInputActions.Player.Move;
+        movement = playerInputActions.Player.Move;
         movement.Enable();
         
-        run = PlayerActionsSingleton.Instance.PlayerInputActions.Player.Run;
+        run = playerInputActions.Player.Run;
         run.Enable();
         run.performed += Run;
 
-        jump = PlayerActionsSingleton.Instance.PlayerInputActions.Player.Jump;
+        jump = playerInputActions.Player.Jump;
         jump.Enable();
         jump.performed += Jump;
         
-        crouch = PlayerActionsSingleton.Instance.PlayerInputActions.Player.Crouch;
+        crouch = playerInputActions.Player.Crouch;
         crouch.Enable();
         crouch.performed += Crouch;
         

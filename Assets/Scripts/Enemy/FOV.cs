@@ -21,6 +21,7 @@ public class FOV : MonoBehaviour
     private float scanTimer;
     public int scanFrequency = 30;
     private int count;
+    private int secondPass;
 
     public List<GameObject> Objects => objects;
 
@@ -44,6 +45,12 @@ public class FOV : MonoBehaviour
                 objects.Add(obj);
             }
         }
+        secondPass = Physics.OverlapSphereNonAlloc(transform.position, viewRadius/5f, colliders, playerMask, QueryTriggerInteraction.Collide);
+        for (int i = 0; i < secondPass; i++)
+        {
+            objects.Add(colliders[i].gameObject);
+        }
+
     }
 
     public bool InSight(GameObject obj)
