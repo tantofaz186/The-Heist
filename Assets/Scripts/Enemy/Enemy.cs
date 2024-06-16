@@ -23,6 +23,8 @@ public class Enemy : NetworkBehaviour
    // public event Action<GameObject> OnAttack;
     private float tempSpeed;
     public GameObject playerFound;
+    public float patrolSpeed = 3f;
+    public float chaseSpeed = 8f;
     
     public FOV fov;
     
@@ -86,7 +88,7 @@ public class Enemy : NetworkBehaviour
     {   
         if (!walkPointSet) SearchWalk();
         if (walkPointSet) agent.SetDestination(walkPoint);
-        agent.speed = 1f;
+        agent.speed = patrolSpeed;
         anim.SetBool("walk", true);
         anim.SetBool("run", false);
         Vector3 distance = transform.position - walkPoint;
@@ -114,7 +116,7 @@ public class Enemy : NetworkBehaviour
     void Chase(Transform _playerPos)
     {
         agent.SetDestination(_playerPos.transform.position);
-        agent.speed = 3f;
+        agent.speed = chaseSpeed;
         anim.SetBool("run", true);
         anim.SetBool("walk", false);
     }
