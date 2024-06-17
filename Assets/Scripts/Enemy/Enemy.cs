@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using Unity.Netcode.Components;
@@ -15,7 +16,7 @@ public class Enemy : NetworkBehaviour
     public Animator anim;
     public bool gameStarted = true;
     public Vector3 walkPoint;
-    private bool walkPointSet;
+    [SerializeField] bool walkPointSet;
     public float walkPointRange;
     public float attackRange;
     public float timeAttack;
@@ -25,7 +26,7 @@ public class Enemy : NetworkBehaviour
     public GameObject playerFound;
     public float patrolSpeed = 3f;
     public float chaseSpeed = 8f;
-    
+    public List<GameObject> waypoints = new List<GameObject>();
     public FOV fov;
     
     public GameObject hitCollider;
@@ -34,6 +35,7 @@ public class Enemy : NetworkBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         fov = GetComponent<FOV>();
+        waypoints = GetWaypoints();
     }
 
     GameObject FindPlayer(FOV sensor)
@@ -46,6 +48,7 @@ public class Enemy : NetworkBehaviour
         StartCoroutine(FovScan());
         hitCollider.SetActive(false);
         tempSpeed = agent.speed;
+        
     }
 
     private IEnumerator FovScan()
@@ -101,11 +104,10 @@ public class Enemy : NetworkBehaviour
 
     void SearchWalk()
     {   
-        float randomz = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
+        int rnd = Random.Range(0, waypoints.Count);;
 
-        var position = transform.position;
-        walkPoint = new Vector3(position.x + randomX, position.y, position.z + randomz);
+        
+        walkPoint = waypoints[rnd].transform.position;
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f))
         {
@@ -146,5 +148,11 @@ public class Enemy : NetworkBehaviour
         attacked = false;
         hitCollider.SetActive(false);
         agent.speed = tempSpeed;
+    }
+    
+    List<GameObject> GetWaypoints()
+    {
+        return GameObject.FindGameObjectsWithTag("Waypoints").ToList();
+      
     }
 }
