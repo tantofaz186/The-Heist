@@ -6,7 +6,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class buttonVault : NetworkBehaviour
+public class buttonVault : MonoBehaviour
 {
     [SerializeField]
     private short digit;
@@ -43,7 +43,16 @@ public class buttonVault : NetworkBehaviour
     {
         // com a câmera, raycast para frente
 
-        Ray ray = PlayerActionsSingleton.Instance._camera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
+        Camera __camera = null;
+        foreach (var pa in FindObjectsByType<PlayerActions>(FindObjectsSortMode.None))
+        {
+            if (pa.IsOwner)
+            {
+                __camera = pa._camera;
+            }
+        }
+        if(__camera == null) return;
+        Ray ray = __camera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
         if (Physics.Raycast(ray, out RaycastHit hit, 100, LayerMask.GetMask("Keypad")))
         {
             if (hit.collider.gameObject == gameObject && !pressed)
