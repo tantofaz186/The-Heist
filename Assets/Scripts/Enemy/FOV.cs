@@ -22,7 +22,7 @@ public class FOV : MonoBehaviour
     public int scanFrequency = 30;
     private int count;
 
-    const float TimeToLosePlayer = 3f;
+    const float TimeToLosePlayer = 1.5f;
     private float timeToLosePlayer;
     
     public List<GameObject> Objects => objects;
