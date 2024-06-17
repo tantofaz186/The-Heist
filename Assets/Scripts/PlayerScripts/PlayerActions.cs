@@ -37,15 +37,21 @@ public class PlayerActions : NetworkBehaviour
 
     private void OnEnable()
     {
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Enable();
-        playerInputActions.Player.Enable();
-        playerInputActions.Player.Use.performed += OpenCloseDoor;
+        if (IsOwner)
+        {
+            playerInputActions = new PlayerInputActions();
+            playerInputActions.Enable();
+            playerInputActions.Player.Enable();
+            playerInputActions.Player.Use.performed += OpenCloseDoor;
+        }
     }
 
     private void OnDisable()
     {
-        playerInputActions.Player.Use.performed -= OpenCloseDoor;
+        if (IsOwner)
+        {
+            playerInputActions.Player.Use.performed -= OpenCloseDoor;
+        }
     }
 
     private void OpenCloseDoor(InputAction.CallbackContext obj)
