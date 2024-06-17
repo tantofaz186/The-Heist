@@ -35,8 +35,9 @@ public class PlayerActions : NetworkBehaviour
         }
     }
 
-    private void OnEnable()
+    public override void OnNetworkSpawn()
     {
+        base.OnNetworkSpawn();
         if (IsOwner)
         {
             playerInputActions = new PlayerInputActions();
@@ -46,8 +47,9 @@ public class PlayerActions : NetworkBehaviour
         }
     }
 
-    private void OnDisable()
+    public override void OnNetworkDespawn()
     {
+        base.OnNetworkDespawn();
         if (IsOwner)
         {
             playerInputActions.Player.Use.performed -= OpenCloseDoor;

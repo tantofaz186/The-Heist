@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : Singleton<Inventory>
+public class Inventory : MonoBehaviour
 {
     public static int SLOTS = 4;
     public static int MaxWeight = 10000;
@@ -12,7 +13,7 @@ public class Inventory : Singleton<Inventory>
     public int totalMoney;
 
     public GameObject[] itemsInHand;
-    
+    public static Inventory Instance { get; private set; }
     
    public void AddItem(Item item)
    {
@@ -85,5 +86,11 @@ public class Inventory : Singleton<Inventory>
         return CheckEmptySlot() > -1;
     }
 
- 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
 }

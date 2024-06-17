@@ -33,8 +33,9 @@ public class PickupObject : NetworkBehaviour
 
     private PlayerInputActions playerInputActions;
 
-    private void Start()
+    public override void OnNetworkSpawn()
     {
+        base.OnNetworkSpawn();
         playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
         playerInputActions.Player.Enable();
@@ -43,8 +44,9 @@ public class PickupObject : NetworkBehaviour
         playerInputActions.Player.DropRelic.performed += DropRelic;
     }
 
-    private void OnDisable()
+    public override void OnNetworkDespawn()
     {
+        base.OnNetworkDespawn();
         playerInputActions.Player.Use.performed -= Grab;
         playerInputActions.Player.Release.performed -= Release;
         playerInputActions.Player.DropRelic.performed -= DropRelic;
@@ -85,7 +87,7 @@ public class PickupObject : NetworkBehaviour
         if (IsOwner && !item.isRelic && m_IsGrabbed.Value)
         {
             Debug.Log($"Called {++calledTimes} times");
-            if(Inventory.Instance.items[ItemSelect.Instance.currentItemIndex] == item)
+            if (Inventory.Instance.items[ItemSelect.Instance.currentItemIndex] == item)
                 ReleaseServerRpc(ItemSelect.Instance.currentItemIndex);
         }
     }
@@ -175,12 +177,9 @@ public class PickupObject : NetworkBehaviour
     [ServerRpc]
     void DropRelicServerRpc()
     {
-        if (Inventory.Instance.relics.Count > 0)
-        {
-            ReleaseRelicOwnerRpc();
-            NetworkObject.RemoveOwnership();
-            UnparentObjectRpc();
-        }
+        ReleaseRelicOwnerRpc();
+        NetworkObject.RemoveOwnership();
+        UnparentObjectRpc();
     }
 
     [Rpc(SendTo.Owner)]
