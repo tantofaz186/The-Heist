@@ -28,8 +28,17 @@ public class PrisonDoor : NetworkBehaviour
     private void TryOpenDoor(InputAction.CallbackContext obj)
     {
         // if has lockpick, open, otherwise return
-        if (Physics.Raycast(PlayerActionsSingleton.Instance._camera.transform.position,
-                PlayerActionsSingleton.Instance._camera.transform.forward, out RaycastHit hit, 4f))
+        Camera __camera = null;
+        foreach (var pa in FindObjectsByType<PlayerActions>(FindObjectsSortMode.None))
+        {
+            if (pa.IsOwner)
+            {
+                __camera = pa._camera;
+            }
+        }
+        if(__camera == null) return;
+        Ray ray = __camera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
+        if (Physics.Raycast(ray, out RaycastHit hit, 4f))
         {
             if (hit.collider.gameObject != gameObject) return;
             int lockpickIndex = Inventory.Instance.items.ToList().FindIndex((i) => i.itemName == "Lockpick");

@@ -20,11 +20,12 @@ public class CameraLook : NetworkBehaviour
 
 
     private float xRotation = 0f;
+    private PlayerInputActions playerInputActions;
 
     private void Start()
     {
        transform.position = head.position;
-       mouse = PlayerActionsSingleton.Instance.PlayerInputActions.Player.Mouse;
+       mouse = playerInputActions.Player.Mouse;
     }
 
     
@@ -32,7 +33,15 @@ public class CameraLook : NetworkBehaviour
     {
         head = transform.parent;
         body = head.transform.parent;
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Enable();
+        playerInputActions.Player.Enable();
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void OnDisable()
+    {
+        playerInputActions.Disable();
     }
 
     void Look()
