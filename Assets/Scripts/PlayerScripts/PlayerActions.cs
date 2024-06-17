@@ -25,7 +25,7 @@ public class PlayerActions : NetworkBehaviour
     public Image keySprite;
 
     public Transform drop;
-    private PlayerInputActions playerInputActions;
+    public PlayerInputActions playerInputActions;
 
     private void Start()
     {
@@ -37,7 +37,6 @@ public class PlayerActions : NetworkBehaviour
 
     private void OnEnable()
     {
-        if (!IsOwner) return;
         playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
         playerInputActions.Player.Enable();
@@ -46,7 +45,6 @@ public class PlayerActions : NetworkBehaviour
 
     private void OnDisable()
     {
-        if (!IsOwner) return;
         playerInputActions.Player.Use.performed -= OpenCloseDoor;
     }
 

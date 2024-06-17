@@ -9,7 +9,8 @@ public class EnemySpawn : NetworkBehaviour
      [SerializeField] public List<GameObject> enemySpawnPoints = new();
    
      [SerializeField] public List<GameObject> enemyList = new();
-    [Rpc(SendTo.Server)]
+     
+   [Rpc(SendTo.Server)]
    public void SpawnEnemyRpc()
     {   
         enemySpawnPoints = GetRoomSpawnEnemy();

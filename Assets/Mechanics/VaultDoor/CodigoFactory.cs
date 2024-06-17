@@ -61,7 +61,7 @@ namespace Mechanics.VaultDoor
             SendCodeToClientRpc(digitos, itemsCheck.ToArray(), rpcParams.Receive.SenderClientId);
         }
 
-        [Rpc(SendTo.NotServer)]
+        [Rpc(SendTo.Everyone,RequireOwnership = false)]
         private void SendCodeToClientRpc(short[] code, int[] intList, ulong clientId = 0)
         {
             if (clientId != NetworkManager.Singleton.LocalClientId)
@@ -150,6 +150,7 @@ namespace Mechanics.VaultDoor
         {
             Debug.Log("Evento enviado");
             OnCodeChecked?.Invoke(isCorrectCode);
+            FindObjectOfType<VaultDoorBehaviour>().CodeCheck(isCorrectCode);
         }
         public void ChangeCodigo()
         {

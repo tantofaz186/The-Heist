@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Mechanics.VaultDoor
 {
-    public class VaultDoorBehaviour : MonoBehaviour
+    public class VaultDoorBehaviour : NetworkBehaviour  
     {
         [SerializeField]
         private CodigoFactory codigoFactory;    
@@ -17,7 +18,7 @@ namespace Mechanics.VaultDoor
             codigoFactory.OnCodeChecked += CodeCheck;
         }
 
-        private void CodeCheck(bool isCorrectCode)
+        public void CodeCheck(bool isCorrectCode)
         {
             if (isCorrectCode)
                 Open();

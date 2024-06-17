@@ -24,7 +24,7 @@ public class Enemy : NetworkBehaviour
     private float tempSpeed;
     public GameObject playerFound;
     public float patrolSpeed = 3f;
-    public float chaseSpeed = 8f;
+    public float chaseSpeed = 6f;
     
     public FOV fov;
     

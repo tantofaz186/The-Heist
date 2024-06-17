@@ -67,7 +67,6 @@ public class RoomSpawn : NetworkBehaviour
    void SpawnEnemyRpc()
    {
        enemySpawn.SpawnEnemyRpc();
-       
    }
 
    [Rpc(SendTo.Server)]

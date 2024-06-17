@@ -127,6 +127,7 @@ float time = 0;
     }
     IEnumerator SlideOpen()
     {
+        Debug.Log("tentei");
         Vector3 endPosition = StartPosition + slideAmount * slideDirection;
         Vector3 startPosition = transform.position;
         float time = 0;

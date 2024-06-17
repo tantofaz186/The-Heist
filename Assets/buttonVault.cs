@@ -35,7 +35,7 @@ public class buttonVault : MonoBehaviour
     {
         if (code.Count != 4) return;
         CodigoFactory factory = FindObjectOfType<CodigoFactory>();
-        Debug.Log(factory.CheckCodigo(code.ToArray()));
+        factory.CheckCodigo(code.ToArray());
         code.Clear();
     }
 
@@ -49,6 +49,7 @@ public class buttonVault : MonoBehaviour
             if (pa.IsOwner)
             {
                 __camera = pa._camera;
+                break;
             }
         }
         if(__camera == null) return;
