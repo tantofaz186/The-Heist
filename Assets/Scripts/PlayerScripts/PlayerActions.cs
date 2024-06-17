@@ -25,7 +25,7 @@ public class PlayerActions : NetworkBehaviour
     public Image keySprite;
 
     public Transform drop;
-    public PlayerInputActions playerInputActions;
+    private PlayerInputActions playerInputActions;
 
     private void Start()
     {
