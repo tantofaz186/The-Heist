@@ -1,35 +1,34 @@
 using System.Collections.Generic;
-using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
 //só derivar o objeto Singleton dessa classe, ou de SingletonPersistent se não for pra destruir on load
 /*[DefaultExecutionOrder(-1)]*/
-[RequireComponent(typeof(ClientNetworkTransform))]
-[RequireComponent(typeof(PlayersManager))]
-public class SingletonPerPlayer<T> : NetworkBehaviour
+public abstract class SingletonPerPlayer<T> : NetworkBehaviour
     where T : Component
 {
-    // public static Dictionary<ulong, SingletonPerPlayer<T>> Players = new Dictionary<ulong, SingletonPerPlayer<T>>();
-    //
-    // public static T Instance =>
-    //     Players.TryGetValue(NetworkManager.Singleton.LocalClientId, out SingletonPerPlayer<T> player) ?
-    //         player.GetComponent<T>() :
-    //         null;
-    //
-    // public override void OnNetworkSpawn()
-    // {
-    //     Players[OwnerClientId] = this;
-    //
-    //     base.OnNetworkSpawn();
-    // }
-    //
-    // public override void OnNetworkDespawn()
-    // {
-    //     if (Players.ContainsKey(OwnerClientId))
-    //     {
-    //         Players.Remove(OwnerClientId);
-    //     }
-    //     base.OnNetworkDespawn();
-    // }
+    public static Dictionary<ulong, T> Players = new Dictionary<ulong, T>();
+    public static T Instance { get; private set; }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        if (IsServer)
+        {        
+            foreach (var keyValuePair in NetworkManager.ConnectedClients)
+            {
+                Players[keyValuePair.Key] = keyValuePair.Value.PlayerObject.GetComponent<T>();
+                
+            }
+            SendToClientRpc();
+        }
+    }
+
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
+    private void SendToClientRpc()
+    {
+        NetworkClient client = NetworkManager.Singleton.LocalClient;
+        Instance = client.PlayerObject.GetComponent<T>();
+    }
 }
