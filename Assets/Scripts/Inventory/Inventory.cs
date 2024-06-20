@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
-public class Inventory : MonoBehaviour
+public class Inventory : SingletonPerPlayer<Inventory>
 {
     public static int SLOTS = 4;
     public static int MaxWeight = 10000;

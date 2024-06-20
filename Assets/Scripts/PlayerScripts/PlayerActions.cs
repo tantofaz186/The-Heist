@@ -1,11 +1,10 @@
-using System;
 using TMPro;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Utils;
 
-public class PlayerActions : NetworkBehaviour
+public class PlayerActions : SingletonPerPlayer<PlayerActions>
 {
     [SerializeField]
     public TMP_Text useText;
@@ -26,6 +25,7 @@ public class PlayerActions : NetworkBehaviour
 
     public Transform drop;
     private PlayerInputActions playerInputActions;
+    public PlayerInputActions PlayerInputActions => playerInputActions;
 
     private void Start()
     {
@@ -34,17 +34,30 @@ public class PlayerActions : NetworkBehaviour
             enabled = false;
         }
     }
-
+    public void setActions()
+    {
+        Instance.playerInputActions.Player.Move.performed += Movement.Instance.Move;
+        Instance.playerInputActions.Player.Run.performed += Movement.Instance.Run;
+        Instance.playerInputActions.Player.Jump.performed += Movement.Instance.Jump;
+        Instance.playerInputActions.Player.Crouch.performed += Movement.Instance.Crouch;
+    }
+    public void unsetActions()
+    {
+        Instance.playerInputActions.Player.Move.performed -= Movement.Instance.Move;
+        Instance.playerInputActions.Player.Run.performed -= Movement.Instance.Run;
+        Instance.playerInputActions.Player.Jump.performed -= Movement.Instance.Jump;
+        Instance.playerInputActions.Player.Crouch.performed -= Movement.Instance.Crouch;
+    }
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        if (IsOwner)
-        {
-            playerInputActions = new PlayerInputActions();
-            playerInputActions.Enable();
-            playerInputActions.Player.Enable();
-            playerInputActions.Player.Use.performed += OpenCloseDoor;
-        }
+
+        Instance.playerInputActions = new PlayerInputActions();
+        Instance.playerInputActions.Enable();
+        Instance.playerInputActions.Player.Enable();
+        Instance.playerInputActions.Player.Use.performed += PLayerInteract;
+        setActions();
+
     }
 
     public override void OnNetworkDespawn()
@@ -52,59 +65,46 @@ public class PlayerActions : NetworkBehaviour
         base.OnNetworkDespawn();
         if (IsOwner)
         {
-            playerInputActions.Player.Use.performed -= OpenCloseDoor;
+            playerInputActions.Player.Use.performed -= PLayerInteract;
+            unsetActions();
+            playerInputActions.Player.Disable();
         }
     }
 
-    private void OpenCloseDoor(InputAction.CallbackContext obj)
+    private void PLayerInteract(InputAction.CallbackContext obj)
     {
         if (!IsOwner) return;
         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out RaycastHit hit, maxDistance, useLayers))
         {
-            if (hit.collider.TryGetComponent<Door>(out Door door))
+            if (hit.collider.TryGetComponent(out Interactable interactable))
             {
-                if (door.isOpen.Value)
-                {
-                    door.CloseServerRpc();
-                }
-                else
-                {
-                    door.OpenServerRpc(transform.position);
-                }
+                interactable.Interact();
             }
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!ready)
         {
             return;
         }
 
+        RaycastToInteractable();
+    }
+
+    private void RaycastToInteractable()
+    {
         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out RaycastHit hit, maxDistance,
                 useLayers))
         {
-            if (hit.collider.TryGetComponent(out PickupObject _))
+            if (hit.collider.TryGetComponent(out Interactable interactable))
             {
-                useText.SetText("Pick \"E\"");
-
+                useText.SetText(interactable.getDisplayText());
                 useText.gameObject.SetActive(true);
             }
-
-            if (hit.collider.TryGetComponent(out Door door))
-            {
-                if (door.isOpen.Value)
-                {
-                    useText.SetText("Close \"E\"");
-                }
-                else
-                {
-                    useText.SetText("Open \"E\"");
-                }
-
-                useText.gameObject.SetActive(true);
-            }
+            else
+                useText.gameObject.SetActive(false);
         }
         else
         {
