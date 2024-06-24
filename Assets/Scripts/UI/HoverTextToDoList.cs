@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class HoverTextToDoList : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class HoverTextToDoList : MonoBehaviour
 {
     //Utilizado para ativar e desativar as checkbox no menu de seleção
     public List<GameObject> child;
@@ -17,7 +17,7 @@ public class HoverTextToDoList : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
     }
     
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerEnter()
     {
         foreach (var child in child)
         {
@@ -25,7 +25,7 @@ public class HoverTextToDoList : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
     }
     
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnPointerExit()
     {
         foreach (var child in child)
         {
