@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Mechanics.VaultDoor;
 using Unity.Netcode;
 using UnityEngine;
@@ -33,7 +34,6 @@ public class buttonVault : MonoBehaviour
 
     private static void CheckCode()
     {
-        if (code.Count != 4) return;
         CodigoFactory factory = FindObjectOfType<CodigoFactory>();
         factory.CheckCodigo(code.ToArray());
         code.Clear();
@@ -43,24 +43,27 @@ public class buttonVault : MonoBehaviour
     {
         // com a câmera, raycast para frente
 
-        Camera __camera = null;
-        foreach (var pa in FindObjectsByType<PlayerActions>(FindObjectsSortMode.None))
-        {
-            if (pa.IsOwner)
-            {
-                __camera = pa._camera;
-                break;
-            }
-        }
+        Camera __camera = (from pa in FindObjectsByType<PlayerActions>(FindObjectsSortMode.None) where pa.IsOwner select pa._camera).FirstOrDefault();
         if(__camera == null) return;
         Ray ray = __camera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
         if (Physics.Raycast(ray, out RaycastHit hit, 100, LayerMask.GetMask("Keypad")))
         {
             if (hit.collider.gameObject == gameObject && !pressed)
             {
-                code.Add(digit);
-                StartCoroutine(AnimateButton());
-                CheckCode();
+                switch (digit)
+                {
+                    case -1:
+                        code.Clear();
+                        break;
+                    case 10:
+                        CheckCode();
+                        break;
+                    default:
+                        code.Add(digit);
+                        StartCoroutine(AnimateButton());
+                        break;
+                    
+                }
             }
         }
     }
