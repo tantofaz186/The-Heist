@@ -12,7 +12,7 @@ public class ItemSpawn : NetworkBehaviour
    [SerializeField]private List<GameObject> itemSpawnPoints = new();
    [SerializeField] private List<int> itemsCheck = new();
    [SerializeField] private List<int> relicsCheck = new();
-   [SerializeField] GameObject codigo;
+   [SerializeField] private List<GameObject>codigo;
    
    [Rpc(SendTo.Server)]
    public void SpawnItemsRpc()
@@ -49,8 +49,8 @@ public class ItemSpawn : NetworkBehaviour
    
    void SortItemsCodigo(int x)
    {
-
-      var instance = Instantiate(codigo,itemSpawnPoints[x].transform);
+      int rnd = Random.Range(0, codigo.Count);
+      var instance = Instantiate(codigo[rnd],itemSpawnPoints[x].transform);
       // items.First(item => item.TryGetComponent<CodigoSpawnItem>(out _)
          var instanceNetworkObject = instance.GetComponent<NetworkObject>();
          instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
