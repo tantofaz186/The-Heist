@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6390605197114743626}
   - component: {fileID: 7778256076605481230}
   - component: {fileID: 1196289499336982166}
-  - component: {fileID: 4692872072870341932}
+  - component: {fileID: 6254482138062358489}
   m_Layer: 12
   m_Name: Esfinge
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4692872072870341932
-BoxCollider:
+--- !u!64 &6254482138062358489
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,9 +102,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5900948, y: 4.251563, z: 6.0910234}
-  m_Center: {x: 0, y: 2.1027093, z: 3.0455117}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7057600219071416253, guid: 0f7dcfa107c2b1344ab13b7eacf1ff9f, type: 3}
 --- !u!1 &3214930810881806741
 GameObject:
   m_ObjectHideFlags: 0
