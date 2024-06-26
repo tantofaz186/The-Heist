@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -10,31 +11,25 @@ namespace Utils
     public abstract class SingletonPerPlayer<T> : NetworkBehaviour
         where T : Component
     {
-        public static Dictionary<ulong, T> Players = new Dictionary<ulong, T>();
         public static T Instance { get; private set; }
 
         public override void OnNetworkSpawn()
         {
-            base.OnNetworkSpawn();
-            if (IsServer)
-            {        
-                foreach (var keyValuePair in NetworkManager.ConnectedClients)
-                {
-                    Players[keyValuePair.Key] = keyValuePair.Value.PlayerObject.GetComponent<T>();
-                
-                }
-                SendToClientRpc();
-            }
-            if(!IsOwner)
+            if (!IsOwner)
+            {
                 enabled = false;
-        }
-
-        [Rpc(SendTo.Everyone, RequireOwnership = false)]
-        private void SendToClientRpc()
-        {
+                return;
+            }
             NetworkClient client = NetworkManager.Singleton.LocalClient;
             Instance = client.PlayerObject.GetComponent<T>();
         }
 
+        // [Rpc(SendTo.Everyone, RequireOwnership = false)]
+        // private void SendToClientRpc()
+        // {
+        //     NetworkClient client = NetworkManager.Singleton.LocalClient;
+        //     Instance = client.PlayerObject.GetComponent<T>();
+        //     Ready = true;
+        // }
     }
 }

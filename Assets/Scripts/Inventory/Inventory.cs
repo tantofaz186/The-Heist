@@ -14,8 +14,7 @@ public class Inventory : SingletonPerPlayer<Inventory>
     public int totalMoney;
 
     public GameObject[] itemsInHand;
-    public static Inventory Instance { get; private set; }
-    
+
    public void AddItem(Item item)
    {
        int emptySlotIndex = CheckEmptySlot();
@@ -85,13 +84,5 @@ public class Inventory : SingletonPerPlayer<Inventory>
     public bool hasEmptySlot()
     {
         return CheckEmptySlot() > -1;
-    }
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
     }
 }
