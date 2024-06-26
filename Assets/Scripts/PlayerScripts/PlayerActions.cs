@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,37 +28,16 @@ public class PlayerActions : SingletonPerPlayer<PlayerActions>
     private PlayerInputActions playerInputActions;
     public PlayerInputActions PlayerInputActions => playerInputActions;
 
-    private void Start()
-    {
-        if (!IsOwner)
-        {
-            enabled = false;
-        }
-    }
-    public void setActions()
-    {
-        Instance.playerInputActions.Player.Move.performed += Movement.Instance.Move;
-        Instance.playerInputActions.Player.Run.performed += Movement.Instance.Run;
-        Instance.playerInputActions.Player.Jump.performed += Movement.Instance.Jump;
-        Instance.playerInputActions.Player.Crouch.performed += Movement.Instance.Crouch;
-    }
-    public void unsetActions()
-    {
-        Instance.playerInputActions.Player.Move.performed -= Movement.Instance.Move;
-        Instance.playerInputActions.Player.Run.performed -= Movement.Instance.Run;
-        Instance.playerInputActions.Player.Jump.performed -= Movement.Instance.Jump;
-        Instance.playerInputActions.Player.Crouch.performed -= Movement.Instance.Crouch;
-    }
+
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
 
-        Instance.playerInputActions = new PlayerInputActions();
-        Instance.playerInputActions.Enable();
-        Instance.playerInputActions.Player.Enable();
-        Instance.playerInputActions.Player.Use.performed += PLayerInteract;
-        setActions();
-
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Enable();
+        playerInputActions.Player.Enable();
+        playerInputActions.Player.Use.performed += PLayerInteract;
     }
 
     public override void OnNetworkDespawn()
@@ -66,7 +46,6 @@ public class PlayerActions : SingletonPerPlayer<PlayerActions>
         if (IsOwner)
         {
             playerInputActions.Player.Use.performed -= PLayerInteract;
-            unsetActions();
             playerInputActions.Player.Disable();
         }
     }

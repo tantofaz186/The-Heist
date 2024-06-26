@@ -25,7 +25,7 @@ public class Timer : NetworkBehaviour
        if(!IsServer) return;
        if (remainingTime.Value > 0)
        {
-           remainingTime.Value--;
+           remainingTime.Value -= 1;
        }
 
        if (remainingTime.Value <= 0)

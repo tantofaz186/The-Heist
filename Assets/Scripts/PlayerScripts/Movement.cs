@@ -10,7 +10,7 @@ public class Movement : SingletonPerPlayer<Movement>
 {
     public PlayerStats playerStats;
     public bool pausado = false;
-    private Vector2 movement;
+    public InputAction movement;
 
     private OwnerNetworkAnimator corpo_FSM;
 
@@ -31,27 +31,30 @@ public class Movement : SingletonPerPlayer<Movement>
 
     public LayerMask Ground;
 
-    public void Move(InputAction.CallbackContext callbackContext)
-    {
-        movement = callbackContext.action.ReadValue<Vector2>();
-    }
-
-    private void Start()
+    protected void Start()
     {
         corpo_fisico = transform.GetComponent<Rigidbody>();
         corpo_fisico.isKinematic = false;
         corpo_FSM = transform.GetComponent<OwnerNetworkAnimator>();
         playerStats = GetComponent<PlayerStats>();
         vel = walkSpeed;
+        movement = PlayerActions.Instance.PlayerInputActions.Player.Move;
+        PlayerActions.Instance.PlayerInputActions.Player.Run.performed += Run;
+        PlayerActions.Instance.PlayerInputActions.Player.Jump.performed += Jump;
+        PlayerActions.Instance.PlayerInputActions.Player.Crouch.performed += Crouch;
     }
 
-
-
-    public bool ready { get; set; }
+    protected void OnDisable()
+    {
+        if (!IsOwner) return;
+        PlayerActions.Instance.PlayerInputActions.Player.Run.performed -= Run;
+        PlayerActions.Instance.PlayerInputActions.Player.Jump.performed -= Jump;
+        PlayerActions.Instance.PlayerInputActions.Player.Crouch.performed -= Crouch;
+    }
 
     private void Update()
     {
-        if (!pausado && ready)
+        if (!pausado)
         {
             Movimentar();
         }
@@ -83,19 +86,19 @@ public class Movement : SingletonPerPlayer<Movement>
         }
 
         Vector3 velocity = Vector3.zero;
-
-        velocity += transform.forward * (movement.y * vel * Time.fixedDeltaTime);
-        velocity += transform.right * (movement.x * vel * Time.fixedDeltaTime);
+        Vector2 valueRead = movement.ReadValue<Vector2>();
+        velocity += transform.forward * (valueRead.y * vel * Time.fixedDeltaTime);
+        velocity += transform.right * (valueRead.x * vel * Time.fixedDeltaTime);
 
 
         velocity.y = (corpo_fisico.velocity.y < 0) ? corpo_fisico.velocity.y * 1.03f : corpo_fisico.velocity.y;
         corpo_fisico.velocity = velocity;
 
-        if (movement.y != 0)
+        if (valueRead.y != 0)
         {
             corpo_FSM.Animator.SetBool("movimentando", true);
         }
-        else if (movement.x != 0)
+        else if (valueRead.x != 0)
         {
             corpo_FSM.Animator.SetBool("movimentando", true);
         }
