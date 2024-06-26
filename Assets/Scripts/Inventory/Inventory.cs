@@ -1,28 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using Utils;
 
-public class Inventory : Singleton<Inventory>
+public class Inventory : NetworkBehaviour
 {
     public static int SLOTS = 4;
     public static int MaxWeight = 10000;
     public Item[] items = new Item[SLOTS];
     public int bagWeight;
-    public List<Item> relics = new ();
+    public List<Item> relics = new();
     public int totalMoney;
 
     public GameObject[] itemsInHand;
 
-   public void AddItem(Item item)
-   {
-       int emptySlotIndex = CheckEmptySlot();
+    public static Inventory Instance;
+
+    public void AddItem(Item item)
+    {
+        int emptySlotIndex = CheckEmptySlot();
         if (emptySlotIndex > -1)
         {
             items[emptySlotIndex] = item;
             InventoryHud.Instance.AddItem(item, emptySlotIndex);
-            Debug.Log("Item Adicionado"+ " " + emptySlotIndex);
+            Debug.Log("Item Adicionado" + " " + emptySlotIndex);
         }
         else
         {
@@ -32,13 +35,12 @@ public class Inventory : Singleton<Inventory>
 
     public void AddRelic(Item item)
     {
-        if(bagWeight+item.itemWeight<=MaxWeight)
+        if (bagWeight + item.itemWeight <= MaxWeight)
         {
             relics.Add(item);
             bagWeight += item.itemWeight;
-            totalMoney+= item.itemValue;
+            totalMoney += item.itemValue;
             InventoryHud.Instance.AddRelic(item);
-            
         }
         else
         {
@@ -64,11 +66,13 @@ public class Inventory : Singleton<Inventory>
         {
             return false;
         }
+
         Debug.Log($"Item Removido {itemPos}");
-        items[itemPos]  = null;
+        items[itemPos] = null;
         InventoryHud.Instance.RemoveItem(itemPos);
         return true;
     }
+
     int CheckEmptySlot()
     {
         for (int i = 0; i < SLOTS; i++)
@@ -78,11 +82,20 @@ public class Inventory : Singleton<Inventory>
                 return i;
             }
         }
-        
+
         return -1;
     }
+
     public bool hasEmptySlot()
     {
         return CheckEmptySlot() > -1;
+    }
+
+    private void Awake()
+    {
+        if (IsOwner)
+        {
+            Instance = this;
+        }
     }
 }
