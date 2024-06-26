@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 184757505750481092}
   - component: {fileID: 482372874417571337}
   - component: {fileID: 2668559889115826881}
-  m_Layer: 0
+  - component: {fileID: 6396409666344815667}
+  m_Layer: 10
   m_Name: "Quadro com C\xF3digo"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,6 +86,27 @@ MonoBehaviour:
   isOpen:
     m_InternalValue: 0
   portraitAnimator: {fileID: 2029890457735631839}
+--- !u!65 &6396409666344815667
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026076246764966706}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.6712422, z: 0.13697386}
+  m_Center: {x: 0, y: -0.007990956, z: -0.47945893}
 --- !u!1 &6120996878857226495
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,7 +118,7 @@ GameObject:
   - component: {fileID: 5550968781880455352}
   - component: {fileID: 2756837483708362130}
   - component: {fileID: 4819600701605003289}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +253,7 @@ GameObject:
   - component: {fileID: 237790070918919363}
   - component: {fileID: 8351826249554998796}
   - component: {fileID: 4309280358718149297}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,6 +354,10 @@ PrefabInstance:
     - target: {fileID: 2418460530550321252, guid: 0b72a2092b9f8e849a30dd3818a208be, type: 3}
       propertyPath: m_Name
       value: Quadro Portrait 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418460530550321252, guid: 0b72a2092b9f8e849a30dd3818a208be, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3088283681617439454, guid: 0b72a2092b9f8e849a30dd3818a208be, type: 3}
       propertyPath: m_LocalPosition.x

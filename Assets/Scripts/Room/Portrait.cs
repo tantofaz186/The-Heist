@@ -21,19 +21,15 @@ public class Portrait :NetworkBehaviour, Interactable
     if (!isOpen.Value)
     {
       portraitAnimator.SetTrigger("interact");
+      this.gameObject.layer = 0;
     }
   }
   
   
-  [Rpc(SendTo.Server)]
-  private void ServerOpenRpc()
-  {
-    isOpen.Value=true;
-  }
   
   public string getDisplayText()
   {
-    return isOpen.Value?"": "Interact \"E\"";
+    return "Interact \"E\"";
   }
 
   public void Interact()
