@@ -21,7 +21,7 @@ public class DoorSpawn : NetworkBehaviour
         for (int i = 0; i < doorSpawnPoints.Count; i++)
         {
             int rnd = Random.Range(0, doorPrefabs.Count);
-            var instance = Instantiate(doorPrefabs[rnd], doorSpawnPoints[i].transform.position,doorPrefabs[rnd].transform.rotation);
+            var instance = Instantiate(doorPrefabs[rnd], doorSpawnPoints[i].transform.position,doorSpawnPoints[i].transform.rotation);
             var instanceNetworkObject = instance.GetComponent<NetworkObject>();
             instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
         }
