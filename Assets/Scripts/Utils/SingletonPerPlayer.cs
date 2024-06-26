@@ -9,7 +9,7 @@ namespace Utils
 {
     [DefaultExecutionOrder(-1)]
     public abstract class SingletonPerPlayer<T> : NetworkBehaviour
-        where T : Component
+        where T : NetworkBehaviour
     {
         public static T Instance { get; private set; }
 

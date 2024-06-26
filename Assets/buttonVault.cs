@@ -46,25 +46,21 @@ public class buttonVault : MonoBehaviour
         Camera __camera = (from pa in FindObjectsByType<PlayerActions>(FindObjectsSortMode.None) where pa.IsOwner select pa._camera).FirstOrDefault();
         if(__camera == null) return;
         Ray ray = __camera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
-        if (Physics.Raycast(ray, out RaycastHit hit, 100, LayerMask.GetMask("Keypad")))
+        if (!Physics.Raycast(ray, out RaycastHit hit, 100, LayerMask.GetMask("Keypad"))) return;
+        if (hit.collider.gameObject != gameObject || pressed) return;
+        switch (digit)
         {
-            if (hit.collider.gameObject == gameObject && !pressed)
-            {
-                switch (digit)
-                {
-                    case -1:
-                        code.Clear();
-                        break;
-                    case 10:
-                        CheckCode();
-                        break;
-                    default:
-                        code.Add(digit);
-                        StartCoroutine(AnimateButton());
-                        break;
+            case -1:
+                code.Clear();
+                break;
+            case 10:
+                CheckCode();
+                break;
+            default:
+                code.Add(digit);
+                StartCoroutine(AnimateButton());
+                break;
                     
-                }
-            }
         }
     }
 
