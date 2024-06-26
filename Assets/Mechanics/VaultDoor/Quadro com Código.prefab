@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 482372874417571337}
   - component: {fileID: 2361579526012484938}
   - component: {fileID: 1830566029310886244}
+  - component: {fileID: 4342123179839419869}
   m_Layer: 10
   m_Name: "Quadro com C\xF3digo"
   m_TagString: Untagged
@@ -107,6 +108,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.669187, y: 0.9998103, z: 0.1246714}
   m_Center: {x: -0.0009955764, y: -0.0013500154, z: -0.45503363}
+--- !u!114 &4342123179839419869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026076246764966706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14b07a281ff4e7e83036ee236742465, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 4819600701605003289}
 --- !u!1 &6120996878857226495
 GameObject:
   m_ObjectHideFlags: 0

@@ -81,7 +81,7 @@ public class PickupObject : NetworkBehaviour, Interactable
     {
         if (m_IsGrabbed.Value) return;
         ulong senderClientId = serverRpcParams.Receive.SenderClientId;
-        NetworkObject senderPlayerObject = PlayersManager.Players[senderClientId].NetworkObject;
+        NetworkObject senderPlayerObject = NetworkManager.Singleton.ConnectedClients[senderClientId].PlayerObject;
         if (senderPlayerObject == null) return;
         NetworkObject.ChangeOwnership(senderClientId);
         if (!item.isRelic && Inventory.Instance.hasEmptySlot())
@@ -103,7 +103,7 @@ public class PickupObject : NetworkBehaviour, Interactable
     [Rpc(SendTo.Server, RequireOwnership = false)]
     private void ParentObjectRpc(ulong senderClientId)
     {
-        NetworkObject senderPlayerObject = PlayersManager.Players[senderClientId].NetworkObject;
+        NetworkObject senderPlayerObject = NetworkManager.Singleton.ConnectedClients[senderClientId].PlayerObject;
         Transform playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
         transform.parent = senderPlayerObject.transform;
         transform.localPosition = playerTransform.localPosition;
