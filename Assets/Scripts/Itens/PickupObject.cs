@@ -1,14 +1,13 @@
-using System;
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Outline))]
-public class PickupObject : NetworkBehaviour
+public class PickupObject : NetworkBehaviour, Interactable
 {
     public Item item;
 
-    private bool canGrab;
     private Rigidbody m_Rigidbody;
     private BoxCollider m_Collider;
 
@@ -25,50 +24,22 @@ public class PickupObject : NetworkBehaviour
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Collider = GetComponent<BoxCollider>();
-
         _renderer = GetComponent<MeshRenderer>();
         outline = GetComponent<Outline>();
         outline.enabled = false;
     }
-
-    private PlayerInputActions playerInputActions;
-
-    public override void OnNetworkSpawn()
+    public IEnumerator Start()
     {
-        base.OnNetworkSpawn();
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Enable();
-        playerInputActions.Player.Enable();
-        playerInputActions.Player.Use.performed += Grab;
-        playerInputActions.Player.Release.performed += Release;
-        playerInputActions.Player.DropRelic.performed += DropRelic;
+        yield return new WaitUntil(() => PlayerActions.Instance != null);
+        yield return new WaitUntil(() => PlayerActions.Instance.ready);
+        PlayerActions.Instance.PlayerInputActions.Player.Release.performed += DropItem;
+        PlayerActions.Instance.PlayerInputActions.Player.DropRelic.performed += DropRelic;
     }
 
-    public override void OnNetworkDespawn()
+    private void OnDisable()
     {
-        base.OnNetworkDespawn();
-        playerInputActions.Player.Use.performed -= Grab;
-        playerInputActions.Player.Release.performed -= Release;
-        playerInputActions.Player.DropRelic.performed -= DropRelic;
-        playerInputActions.Disable();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("View"))
-        {
-            canGrab = true;
-            outline.enabled = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("View"))
-        {
-            canGrab = false;
-            outline.enabled = false;
-        }
+        PlayerActions.Instance.PlayerInputActions.Player.Release.performed -= DropItem;
+        PlayerActions.Instance.PlayerInputActions.Player.DropRelic.performed -= DropRelic;
     }
 
     private void DropRelic(InputAction.CallbackContext obj)
@@ -82,7 +53,7 @@ public class PickupObject : NetworkBehaviour
         }
     }
 
-    private void Release(InputAction.CallbackContext obj)
+    private void DropItem(InputAction.CallbackContext obj)
     {
         if (IsOwner && !item.isRelic && m_IsGrabbed.Value)
         {
@@ -94,9 +65,15 @@ public class PickupObject : NetworkBehaviour
 
     private static int calledTimes = 0;
 
-    private void Grab(InputAction.CallbackContext obj)
+    public string getDisplayText()
     {
-        if (canGrab) TryGrabServerRpc();
+        return "Pick \"E\"";
+
+    }
+
+    public void Interact()
+    {
+        TryGrabServerRpc();
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -104,7 +81,7 @@ public class PickupObject : NetworkBehaviour
     {
         if (m_IsGrabbed.Value) return;
         ulong senderClientId = serverRpcParams.Receive.SenderClientId;
-        NetworkObject senderPlayerObject = PlayersManager.Players[senderClientId].NetworkObject;
+        NetworkObject senderPlayerObject = NetworkManager.Singleton.ConnectedClients[senderClientId].PlayerObject;
         if (senderPlayerObject == null) return;
         NetworkObject.ChangeOwnership(senderClientId);
         if (!item.isRelic && Inventory.Instance.hasEmptySlot())
@@ -126,7 +103,7 @@ public class PickupObject : NetworkBehaviour
     [Rpc(SendTo.Server, RequireOwnership = false)]
     private void ParentObjectRpc(ulong senderClientId)
     {
-        NetworkObject senderPlayerObject = PlayersManager.Players[senderClientId].NetworkObject;
+        NetworkObject senderPlayerObject = NetworkManager.Singleton.ConnectedClients[senderClientId].PlayerObject;
         Transform playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
         transform.parent = senderPlayerObject.transform;
         transform.localPosition = playerTransform.localPosition;
@@ -174,6 +151,12 @@ public class PickupObject : NetworkBehaviour
         m_Rigidbody.AddForce(transform.forward * 0.5f, ForceMode.Impulse);
     }
 
+    [Rpc(SendTo.Owner)]
+    public void ReleaseItemOwnerRpc(int index)
+    {
+        Inventory.Instance.RemoveItem(index);
+    }
+
     [ServerRpc]
     void DropRelicServerRpc()
     {
@@ -181,13 +164,6 @@ public class PickupObject : NetworkBehaviour
         NetworkObject.RemoveOwnership();
         UnparentObjectRpc();
     }
-
-    [Rpc(SendTo.Owner)]
-    public void ReleaseItemOwnerRpc(int index)
-    {
-        Inventory.Instance.RemoveItem(index);
-    }
-
     [Rpc(SendTo.Owner)]
     public void ReleaseRelicOwnerRpc()
     {

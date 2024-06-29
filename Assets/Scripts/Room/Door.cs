@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Door : NetworkBehaviour {
+public class Door : NetworkBehaviour, Interactable {
     
    public NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false);
     [SerializeField] bool isRotatingDoor = true;
@@ -165,6 +165,23 @@ float time = 0;
             transform.position = Vector3.Lerp(startPosition, endPosition, time);
             yield return null;
             time += Time.deltaTime * speed;
+        }
+    }
+
+    public string getDisplayText()
+    {
+        return isOpen.Value ? "Close \"E\"" : "Open \"E\"";
+    }
+
+    public void Interact()
+    {
+        if (isOpen.Value)
+        {
+            CloseServerRpc();
+        }
+        else
+        {
+            OpenServerRpc(transform.position);
         }
     }
 }

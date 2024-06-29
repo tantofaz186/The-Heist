@@ -42,6 +42,7 @@ public class TheHeistGameManager : NetworkBehaviour
     }
     
     private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut) {
+        if(sceneName == Loader.Scene.CombatReportScene.ToString()) return;
         playerspawns = GetSpawnPoints();
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds) {
             int colorIndex = TheHeistGameMultiplayer.Instance.GetPlayerDataFromClient(clientId).colorId;

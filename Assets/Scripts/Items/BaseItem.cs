@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseItem : MonoBehaviour
+public abstract class BaseItem : MonoBehaviour
 {
-    public virtual void UseItem()
+    [SerializeField] protected Item item;
+    public abstract void UseItem();
+
+    public virtual void DropItem()
     {
         
     }
