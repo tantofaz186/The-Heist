@@ -13,7 +13,8 @@ public static class Loader
         LoadingScene,
         LobbyScene,
         CharacterSelectScene,
-        CombatReportScene
+        CombatReportScene,
+        TestArea,
     }
 
     private static Scene targetScene;

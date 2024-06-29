@@ -33,7 +33,7 @@ public class CharacterSelectUI : MonoBehaviour
    {
       Lobby lobby = TheHeistGameLobby.Instance.GetLobby();
       
-      lobbyNameText.text = "Lobby Name: " + lobby.Name;
-      lobbyCodeText.text = "Lobby Code: " + lobby.LobbyCode;
+      lobbyNameText.text = lobby.Name;
+      lobbyCodeText.text = lobby.LobbyCode;
    }
 }
