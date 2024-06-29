@@ -22,8 +22,8 @@ public class buttonVault : MonoBehaviour
         playerInputActions.Enable();
         playerInputActions.Player.Enable();
         playerInputActions.Player.Use.performed += AtivarBotão;
-
     }
+
     private PlayerInputActions playerInputActions;
 
     private void OnDisable()
@@ -43,8 +43,9 @@ public class buttonVault : MonoBehaviour
     {
         // com a câmera, raycast para frente
 
-        Camera __camera = (from pa in FindObjectsByType<PlayerActions>(FindObjectsSortMode.None) where pa.IsOwner select pa._camera).FirstOrDefault();
-        if(__camera == null) return;
+        Camera __camera = (from pa in FindObjectsByType<PlayerActions>(FindObjectsSortMode.None) where pa.IsOwner select pa._camera)
+            .FirstOrDefault();
+        if (__camera == null) return;
         Ray ray = __camera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
         if (!Physics.Raycast(ray, out RaycastHit hit, 100, LayerMask.GetMask("Keypad"))) return;
         if (hit.collider.gameObject != gameObject || pressed) return;
@@ -58,10 +59,10 @@ public class buttonVault : MonoBehaviour
                 break;
             default:
                 code.Add(digit);
-                StartCoroutine(AnimateButton());
                 break;
-                    
         }
+
+        StartCoroutine(AnimateButton());
     }
 
     private Vector3 startPosition;

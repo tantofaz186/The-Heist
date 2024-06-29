@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -28,8 +29,6 @@ public class PlayerActions : SingletonPerPlayer<PlayerActions>
     private PlayerInputActions playerInputActions;
     public PlayerInputActions PlayerInputActions => playerInputActions;
 
-
-
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -38,6 +37,13 @@ public class PlayerActions : SingletonPerPlayer<PlayerActions>
         playerInputActions.Enable();
         playerInputActions.Player.Enable();
         playerInputActions.Player.Use.performed += PLayerInteract;
+
+        foreach (NetworkBehaviour networkBehaviour in FindObjectsByType<NetworkBehaviour>(FindObjectsSortMode.None))
+        {
+            if (!networkBehaviour.IsOwner) continue;
+            IUseAction behaviour;
+            if (networkBehaviour.TryGetComponent<IUseAction>(out behaviour)) behaviour.setActions();
+        }
     }
 
     public override void OnNetworkDespawn()
@@ -45,6 +51,15 @@ public class PlayerActions : SingletonPerPlayer<PlayerActions>
         base.OnNetworkDespawn();
         if (IsOwner)
         {
+            foreach (NetworkBehaviour networkBehaviour in FindObjectsByType<NetworkBehaviour>(FindObjectsSortMode.None))
+            {
+                if (networkBehaviour.IsOwner)
+                {
+                    IUseAction behaviour;
+                    if (networkBehaviour.TryGetComponent<IUseAction>(out behaviour)) behaviour.unsetActions();
+                }
+            }
+
             playerInputActions.Player.Use.performed -= PLayerInteract;
             playerInputActions.Player.Disable();
         }

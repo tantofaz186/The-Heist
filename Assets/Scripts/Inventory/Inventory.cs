@@ -93,7 +93,7 @@ public class Inventory : NetworkBehaviour
 
     private void Awake()
     {
-        if (IsOwner)
+        if (NetworkObject.IsOwner)
         {
             Instance = this;
         }

@@ -955,8 +955,6 @@ GameObject:
   - component: {fileID: 3435334008085865456}
   - component: {fileID: -1677473552928529444}
   - component: {fileID: -8465009735412332650}
-  - component: {fileID: 8217642086363946404}
-  - component: {fileID: 2190416919434183300}
   m_Layer: 7
   m_Name: LadraoBlack
   m_TagString: Player
@@ -1095,6 +1093,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
   pausado: 0
+  movement:
+    m_Name: Movement
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7805f521-b40f-4bc6-8229-a75bd7b0e928
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   headFSM: {fileID: 6387561064190934831}
   walkSpeed: 270
   runSpeed: 450
@@ -1174,7 +1181,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemInHand: {fileID: 0}
-  currentItemIndex: 0
 --- !u!114 &-6366847050831217327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1311,31 +1317,6 @@ MonoBehaviour:
     TriggerNameHash: -533643314
     TransitionIndex: 1
   m_Animator: {fileID: 5621512635020069585}
---- !u!114 &8217642086363946404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2921256980024346588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcbf37c37d46464999403a6a9f65af96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2190416919434183300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2921256980024346588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cbe14ceb62a4557a6bae6202b7b8d50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _camera: {fileID: 0}
 --- !u!1 &3176451439943722420
 GameObject:
   m_ObjectHideFlags: 0
