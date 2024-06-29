@@ -18,6 +18,11 @@ public class Timer : NetworkBehaviour
     private void Awake()
     {
         instance = this;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
         totalTime.Value = startTime;
         remainingTime.Value = startTime;
         combatReport = FindObjectOfType<CombatReport>();

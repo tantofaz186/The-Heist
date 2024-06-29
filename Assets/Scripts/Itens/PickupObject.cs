@@ -28,6 +28,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         outline = GetComponent<Outline>();
         outline.enabled = false;
     }
+
     public IEnumerator Start()
     {
         yield return new WaitUntil(() => PlayerActions.Instance != null);
@@ -68,7 +69,6 @@ public class PickupObject : NetworkBehaviour, Interactable
     public string getDisplayText()
     {
         return "Pick \"E\"";
-
     }
 
     public void Interact()
@@ -84,18 +84,15 @@ public class PickupObject : NetworkBehaviour, Interactable
         NetworkObject senderPlayerObject = NetworkManager.Singleton.ConnectedClients[senderClientId].PlayerObject;
         if (senderPlayerObject == null) return;
         NetworkObject.ChangeOwnership(senderClientId);
-        if (!item.isRelic && Inventory.Instance.hasEmptySlot())
+        if (!item.isRelic)
         {
             TryGrabItemOwnerRpc();
         }
-        else if (Inventory.Instance.bagWeight + item.itemWeight <= Inventory.MaxWeight)
+        else
         {
             TryGrabRelicOwnerRpc();
         }
-        else
-        {
-            return;
-        }
+
 
         ParentObjectRpc(senderClientId);
     }
@@ -123,13 +120,13 @@ public class PickupObject : NetworkBehaviour, Interactable
     [Rpc(SendTo.Owner)]
     private void TryGrabItemOwnerRpc()
     {
-        Inventory.Instance.AddItem(item);
+        if (Inventory.Instance.hasEmptySlot()) Inventory.Instance.AddItem(item);
     }
 
     [Rpc(SendTo.Owner)]
     private void TryGrabRelicOwnerRpc()
     {
-        Inventory.Instance.AddRelic(item);
+        if (Inventory.Instance.bagWeight + item.itemWeight <= Inventory.MaxWeight) Inventory.Instance.AddRelic(item);
     }
 
     [ServerRpc]
@@ -164,6 +161,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         NetworkObject.RemoveOwnership();
         UnparentObjectRpc();
     }
+
     [Rpc(SendTo.Owner)]
     public void ReleaseRelicOwnerRpc()
     {

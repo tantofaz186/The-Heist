@@ -1085,10 +1085,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 2624156876777093871, guid: f81a9187a1161744681061c8fef4f754, type: 3}
+  - {fileID: 1297427633307367052, guid: f81a9187a1161744681061c8fef4f754, type: 3}
   - {fileID: 509773701853694132, guid: 4bd318a0578fa2748a0518da1a780bb2, type: 3}
   - {fileID: 509773701853694132, guid: d76ffcf46ee97a143b60b8e2dda2ac05, type: 3}
-  - {fileID: 5831514968308116420, guid: 6f1fee3f1718f59b6968500896ce2db8, type: 3}
+  - {fileID: 3347303742097464921, guid: 6f1fee3f1718f59b6968500896ce2db8, type: 3}
   relics:
   - {fileID: 5831514968308116420, guid: b55cbb0c60ef1bd4d9c8a5082dee2a16, type: 3}
   - {fileID: 509773701853694132, guid: cff23f4bd8b77dd43a21ef3ac8e17350, type: 3}
@@ -3423,50 +3423,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1656913042
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1656913044}
-  - component: {fileID: 1656913043}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1656913043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1656913042}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1728787fd125cc4ebe56278eefb5234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1656913044
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1656913042}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1695905619
 GameObject:
   m_ObjectHideFlags: 0
@@ -4196,7 +4152,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 1482767226}
-  - {fileID: 1656913044}
   - {fileID: 655053266}
   - {fileID: 373291127}
   - {fileID: 917740607}
