@@ -26,12 +26,10 @@ public class PlayerActions : NetworkBehaviour
     public Transform drop;
     private PlayerInputActions playerInputActions;
     public PlayerInputActions PlayerInputActions => playerInputActions;
-    
-    public static PlayerActions Instance;
-    private void Awake()
-    {
 
-    }
+    public static PlayerActions Instance;
+    private void Awake() { }
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -40,8 +38,9 @@ public class PlayerActions : NetworkBehaviour
             enabled = false;
             return;
         }
+
         Instance = this;
-                    
+
         playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
         playerInputActions.Player.Enable();
@@ -50,8 +49,14 @@ public class PlayerActions : NetworkBehaviour
         foreach (NetworkBehaviour networkBehaviour in FindObjectsByType<NetworkBehaviour>(FindObjectsSortMode.None))
         {
             if (!networkBehaviour.IsOwner) continue;
-            IUseAction behaviour;
-            if (networkBehaviour.TryGetComponent<IUseAction>(out behaviour)) behaviour.setActions();
+            IUseAction action;
+            if (networkBehaviour.TryGetComponent<IUseAction>(out action)) action.setActions();
+        }
+
+        foreach (MonoBehaviour behaviour in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
+        {
+            IUseAction action;
+            if (behaviour.TryGetComponent<IUseAction>(out action)) action.setActions();
         }
     }
 
@@ -64,9 +69,15 @@ public class PlayerActions : NetworkBehaviour
             {
                 if (networkBehaviour.IsOwner)
                 {
-                    IUseAction behaviour;
-                    if (networkBehaviour.TryGetComponent<IUseAction>(out behaviour)) behaviour.unsetActions();
+                    IUseAction action;
+                    if (networkBehaviour.TryGetComponent<IUseAction>(out action)) action.unsetActions();
                 }
+            }
+
+            foreach (MonoBehaviour behaviour in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
+            {
+                IUseAction action;
+                if (behaviour.TryGetComponent<IUseAction>(out action)) action.unsetActions();
             }
 
             playerInputActions.Player.Use.performed -= PLayerInteract;
