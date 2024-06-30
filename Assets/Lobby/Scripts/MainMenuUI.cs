@@ -23,7 +23,7 @@ public class MainMenuUI : MonoBehaviour
         });
         controlsButton.onClick.AddListener(() => 
         { 
-            controlsPanel.SetActive(true);
+            Loader.Load(Loader.Scene.Tutorial);
         });
         featuresButton.onClick.AddListener(() => 
         { 

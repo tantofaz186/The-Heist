@@ -15,6 +15,7 @@ public static class Loader
         CharacterSelectScene,
         CombatReportScene,
         TestArea,
+        Tutorial,
     }
 
     private static Scene targetScene;
