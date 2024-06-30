@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : NetworkBehaviour
 {
     public GameObject dmgGO;
     private Image dmgImg;
@@ -15,6 +16,12 @@ public class PlayerStats : MonoBehaviour
     
 
     [SerializeField] Movement movement;
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        if(!IsOwner) enabled = false;
+    }
 
     void Start()
     {

@@ -9,7 +9,7 @@ public class ItemSpawn : NetworkBehaviour
 {
    [SerializeField]public List<GameObject> items = new();
    [SerializeField]public List<GameObject> relics = new();
-   [SerializeField]private List<GameObject> itemSpawnPoints = new();
+   [SerializeField] private List<GameObject> itemSpawnPoints;
    [SerializeField] private List<int> itemsCheck = new();
    [SerializeField] private List<int> relicsCheck = new();
    [SerializeField] private List<GameObject>codigo;
@@ -17,19 +17,20 @@ public class ItemSpawn : NetworkBehaviour
    [Rpc(SendTo.Server)]
    public void SpawnItemsRpc()
    {
+      
       itemSpawnPoints = GetItemSpawnPoints();
       for(int i = 0; i < itemSpawnPoints.Count; i++)
       {
-         int type = itemSpawnPoints[i].GetComponent<itemSpawnType>().spawnType;
-         SpawnItems(type,i);
+         // int type = itemSpawnPoints[i].GetComponent<itemSpawnType>().spawnType;
+         int rnd = Random.Range(0, codigo.Count);
+         var instance = Instantiate(codigo[rnd],itemSpawnPoints[i].transform);
+         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
       }
-      
-
    }
    
    
-
-
+   
    void SpawnItems(int type, int spawnPointIndex)
    {
       switch (type)
@@ -51,45 +52,9 @@ public class ItemSpawn : NetworkBehaviour
    {
       int rnd = Random.Range(0, codigo.Count);
       var instance = Instantiate(codigo[rnd],itemSpawnPoints[x].transform);
-      // items.First(item => item.TryGetComponent<CodigoSpawnItem>(out _)
          var instanceNetworkObject = instance.GetComponent<NetworkObject>();
          instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
 
-   }
-   
-   void SortRelics(int x)
-   {
-      int rnd = Random.Range(0, relics.Count);
-      bool inList = false;
-      if (relicsCheck.Count <= 0)
-      {
-         relicsCheck = new List<int>(){0,1,2,3,4,5,6,7,8,9,10,11,12};
-          
-      }
-           
-       
-      for (int i=0;i<relicsCheck.Count;i++)
-      {   
-         if (rnd == relicsCheck[i])
-         {   
-            inList = true;
-         }  
-      }
-
-      if (inList)
-      {    
-         relicsCheck.Remove(rnd);
-           
-        
-         var instance = Instantiate(relics[rnd],
-            itemSpawnPoints[x].transform);
-         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
-         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
-      }
-      else
-      {
-         SortRelics(x);
-      }
    }
    void SortItems(int x)
    {
@@ -125,8 +90,43 @@ public class ItemSpawn : NetworkBehaviour
          SortItems(x);
       }
    }
+   void SortRelics(int x)
+   {
+      int rnd = Random.Range(0, relics.Count);
+      bool inList = false;
+      if (relicsCheck.Count <= 0)
+      {
+         relicsCheck = new List<int>(){0,1,2,3,4,5,6,7};
+          
+      }
+           
+       
+      for (int i=0;i<relicsCheck.Count;i++)
+      {   
+         if (rnd == relicsCheck[i])
+         {   
+            inList = true;
+         }  
+      }
+
+      if (inList)
+      {    
+         relicsCheck.Remove(rnd);
+           
+        
+         var instance = Instantiate(relics[rnd],
+            itemSpawnPoints[x].transform);
+         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+      }
+      else
+      {
+         SortRelics(x);
+      }
+   }
+
    
-   List<GameObject> GetItemSpawnPoints()
+   public List<GameObject> GetItemSpawnPoints()
    {
       return GameObject.FindGameObjectsWithTag("ItemSpawnPoints").ToList();
       

@@ -127,7 +127,7 @@ MonoBehaviour:
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
+  ActiveSceneSynchronization: 1
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 3dd8293e690c7a3469b9b540f16cd325, type: 2}
   outline: {fileID: 0}
+  alreadyCollected: 0
 --- !u!54 &6876587961425427397
 Rigidbody:
   m_ObjectHideFlags: 0
