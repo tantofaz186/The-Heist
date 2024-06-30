@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2208798007635083576}
   - component: {fileID: 6894091299296673987}
   - component: {fileID: 4062377373338048327}
-  - component: {fileID: 2570674962822198636}
+  - component: {fileID: -6870458589785453815}
   m_Layer: 10
   m_Name: EndgameButton
   m_TagString: Untagged
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2499519024
+  GlobalObjectIdHash: 1817307312
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPressed:
     m_InternalValue: 0
---- !u!114 &2570674962822198636
+--- !u!114 &-6870458589785453815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5024019028752569953}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 885e13c45af81da4d821a716ac75b228, type: 3}
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UseUnreliableDeltas: 0
