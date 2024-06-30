@@ -58,6 +58,12 @@ public class PlayerActions : NetworkBehaviour
             IUseAction action;
             if (behaviour.TryGetComponent<IUseAction>(out action)) action.setActions();
         }
+
+        foreach (PickupObject item in FindObjectsByType<PickupObject>(FindObjectsSortMode.None))
+        {
+            IUseAction action;
+            if (item.TryGetComponent<IUseAction>(out action)) action.setActions();
+        }
     }
 
     public override void OnNetworkDespawn()
@@ -80,6 +86,11 @@ public class PlayerActions : NetworkBehaviour
                 if (behaviour.TryGetComponent<IUseAction>(out action)) action.unsetActions();
             }
 
+            foreach (PickupObject item in FindObjectsByType<PickupObject>(FindObjectsSortMode.None))
+            {
+                IUseAction action;
+                if (item.TryGetComponent<IUseAction>(out action)) action.unsetActions();
+            }
             playerInputActions.Player.Use.performed -= PLayerInteract;
             playerInputActions.Player.Disable();
         }

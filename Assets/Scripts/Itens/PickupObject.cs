@@ -90,9 +90,6 @@ public class PickupObject : NetworkBehaviour, Interactable, IUseAction
         {
             TryGrabRelicOwnerRpc(senderClientId);
         }
-       
-        
-         
     }
 
     [Rpc(SendTo.Server, RequireOwnership = false)]
