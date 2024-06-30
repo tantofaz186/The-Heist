@@ -46,12 +46,11 @@ public class RoomSpawn : NetworkBehaviour
        bake.surface.BuildNavMesh();
        Prison.instance.FindPrison();
        yield return new WaitForSeconds(1);
-       if (IsServer)
-       {
-           SpawnEnemyRpc();
-           SpawnItemRpc();
-           SpawnDoorRpc();
-       }
+       if (IsServer) SpawnDoorRpc();       
+       yield return new WaitForSeconds(1);
+       if (IsServer) SpawnEnemyRpc();
+       yield return new WaitForSeconds(2);
+       if (IsServer) SpawnItemRpc();
    }
 
    [Rpc(SendTo.Server)]
@@ -76,7 +75,7 @@ public class RoomSpawn : NetworkBehaviour
    }
    
    
-    [Rpc(SendTo.Server)]
+   [Rpc(SendTo.Server)]
    void SpawnItemRpc()
    {
        itemSpawn.SpawnItemsRpc();

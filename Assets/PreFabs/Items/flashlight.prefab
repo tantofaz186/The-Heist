@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 4002468334188677302}
   - component: {fileID: 4523067256275963284}
   - component: {fileID: 8798492661385110776}
+  - component: {fileID: 7280920699985078200}
   - component: {fileID: 2243554379265499535}
   - component: {fileID: 2081613662905994648}
   - component: {fileID: 8291745171887574457}
-  - component: {fileID: 7280920699985078200}
   m_Layer: 10
   m_Name: flashlight
   m_TagString: Item
@@ -107,7 +107,7 @@ MonoBehaviour:
   InScenePlacedSourceGlobalObjectIdHash: 3070222078
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
+  ActiveSceneSynchronization: 1
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
@@ -182,6 +182,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7280920699985078200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297427633307367052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5deefac7acb0cb24b97650606cf662a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 292410a663af88a40a62005e5ce3322b, type: 2}
+  isOn: 0
+  _light: {fileID: 0}
 --- !u!114 &2243554379265499535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,18 +253,3 @@ MonoBehaviour:
   bakeValues: []
   outlineMaskMaterial: {fileID: 0}
   outlineFillMaterial: {fileID: 0}
---- !u!114 &7280920699985078200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297427633307367052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5deefac7acb0cb24b97650606cf662a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 292410a663af88a40a62005e5ce3322b, type: 2}
-  isOn: 0
-  _light: {fileID: 0}
