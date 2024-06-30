@@ -22,7 +22,7 @@ public class EndGame : NetworkBehaviour,Interactable
    {
       isPressed.Value = true;
       Timer.instance.ChangeTimeRpc(10f);
-      this.gameObject.layer = 0;
+      gameObject.layer = 0;
       StartCoroutine(AnimateButton());
    }
    
