@@ -45,14 +45,7 @@ public class PlayerActions : NetworkBehaviour
         playerInputActions.Enable();
         playerInputActions.Player.Enable();
         playerInputActions.Player.Use.performed += PLayerInteract;
-
-        foreach (PickupObject item in FindObjectsByType<PickupObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
-        {
-            IUseAction action;
-            if (item.TryGetComponent<IUseAction>(out action)) action.setActions();
-        }
-
-
+        
         foreach (var action in GetComponents<IUseAction>())
         {
             action.setActions();
@@ -72,13 +65,6 @@ public class PlayerActions : NetworkBehaviour
         base.OnNetworkDespawn();
         if (IsOwner)
         {
-            foreach (PickupObject item in FindObjectsByType<PickupObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
-            {
-                IUseAction action;
-                if (item.TryGetComponent<IUseAction>(out action)) action.unsetActions();
-            }
-
-
             foreach (var action in GetComponents<IUseAction>())
             {
                 action.unsetActions();

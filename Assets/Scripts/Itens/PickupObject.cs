@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Outline))]
-public class PickupObject : NetworkBehaviour, Interactable, IUseAction
+public class PickupObject : NetworkBehaviour, Interactable
 {
     public Item item;
 
@@ -27,18 +27,21 @@ public class PickupObject : NetworkBehaviour, Interactable, IUseAction
         _renderer = GetComponent<MeshRenderer>();
         outline = GetComponent<Outline>();
         outline.enabled = false;
+        StartCoroutine(setActions());
     }
 
-    public void setActions()
+    public IEnumerator setActions()
     {
+        yield return new WaitUntil(() => PlayerActions.Instance != null);
         PlayerActions.Instance.PlayerInputActions.Player.Release.performed += DropItem;
         PlayerActions.Instance.PlayerInputActions.Player.DropRelic.performed += DropRelic;
     }
 
-    public void unsetActions()
+    public override void OnDestroy()
     {
         PlayerActions.Instance.PlayerInputActions.Player.Release.performed -= DropItem;
         PlayerActions.Instance.PlayerInputActions.Player.DropRelic.performed -= DropRelic;
+        base.OnDestroy();
     }
 
     private void DropRelic(InputAction.CallbackContext obj)
