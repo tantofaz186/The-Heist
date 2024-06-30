@@ -83,18 +83,18 @@ public class PickupObject : NetworkBehaviour, Interactable
         ulong senderClientId = serverRpcParams.Receive.SenderClientId;
         NetworkObject senderPlayerObject = NetworkManager.Singleton.ConnectedClients[senderClientId].PlayerObject;
         if (senderPlayerObject == null) return;
-        NetworkObject.ChangeOwnership(senderClientId);
+         NetworkObject.ChangeOwnership(senderClientId);
         if (!item.isRelic)
         {
-            TryGrabItemOwnerRpc();
+            TryGrabItemOwnerRpc(senderClientId);
         }
         else
         {
-            TryGrabRelicOwnerRpc();
+            TryGrabRelicOwnerRpc(senderClientId);
         }
-
-
-        ParentObjectRpc(senderClientId);
+       
+        
+         
     }
 
     [Rpc(SendTo.Server, RequireOwnership = false)]
@@ -118,15 +118,26 @@ public class PickupObject : NetworkBehaviour, Interactable
     }
 
     [Rpc(SendTo.Owner)]
-    private void TryGrabItemOwnerRpc()
+    private void TryGrabItemOwnerRpc(ulong senderClientId)
     {
-        if (Inventory.Instance.hasEmptySlot()) Inventory.Instance.AddItem(item);
+        if (Inventory.Instance.hasEmptySlot())
+        {
+            Inventory.Instance.AddItem(item);
+            
+            ParentObjectRpc(senderClientId);
+        }
     }
 
     [Rpc(SendTo.Owner)]
-    private void TryGrabRelicOwnerRpc()
+    private void TryGrabRelicOwnerRpc(ulong senderClientId)
     {
-        if (Inventory.Instance.bagWeight + item.itemWeight <= Inventory.MaxWeight) Inventory.Instance.AddRelic(item);
+        if (Inventory.Instance.bagWeight + item.itemWeight <= Inventory.MaxWeight)
+        {
+            Inventory.Instance.AddRelic(item);
+            
+            ParentObjectRpc(senderClientId);
+        }
+            
     }
 
     [ServerRpc]
