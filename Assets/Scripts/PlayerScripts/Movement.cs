@@ -1,12 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
-using Utils;
 
-public class Movement : SingletonPerPlayer<Movement>
+public class Movement : NetworkBehaviour, IUseAction
 {
     public PlayerStats playerStats;
     public bool pausado = false;
@@ -30,6 +26,7 @@ public class Movement : SingletonPerPlayer<Movement>
     public float vel;
 
     public LayerMask Ground;
+    public static Movement Instance;
 
     protected void Start()
     {
@@ -38,18 +35,6 @@ public class Movement : SingletonPerPlayer<Movement>
         corpo_FSM = transform.GetComponent<OwnerNetworkAnimator>();
         playerStats = GetComponent<PlayerStats>();
         vel = walkSpeed;
-        movement = PlayerActions.Instance.PlayerInputActions.Player.Move;
-        PlayerActions.Instance.PlayerInputActions.Player.Run.performed += Run;
-        PlayerActions.Instance.PlayerInputActions.Player.Jump.performed += Jump;
-        PlayerActions.Instance.PlayerInputActions.Player.Crouch.performed += Crouch;
-    }
-
-    protected void OnDisable()
-    {
-        if (!IsOwner) return;
-        PlayerActions.Instance.PlayerInputActions.Player.Run.performed -= Run;
-        PlayerActions.Instance.PlayerInputActions.Player.Jump.performed -= Jump;
-        PlayerActions.Instance.PlayerInputActions.Player.Crouch.performed -= Crouch;
     }
 
     private void Update()
@@ -146,5 +131,31 @@ public class Movement : SingletonPerPlayer<Movement>
     public void Run(InputAction.CallbackContext context)
     {
         running = !running;
+    }
+
+    public void setActions()
+    {
+        movement = PlayerActions.Instance.PlayerInputActions.Player.Move;
+        PlayerActions.Instance.PlayerInputActions.Player.Run.performed += Run;
+        PlayerActions.Instance.PlayerInputActions.Player.Jump.performed += Jump;
+        PlayerActions.Instance.PlayerInputActions.Player.Crouch.performed += Crouch;
+    }
+
+    public void unsetActions()
+    {
+        PlayerActions.Instance.PlayerInputActions.Player.Run.performed -= Run;
+        PlayerActions.Instance.PlayerInputActions.Player.Jump.performed -= Jump;
+        PlayerActions.Instance.PlayerInputActions.Player.Crouch.performed -= Crouch;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        if (!IsOwner)
+        {
+            enabled = false;
+            return;
+        }
+        Instance = this;
     }
 }
