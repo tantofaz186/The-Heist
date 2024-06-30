@@ -18,10 +18,9 @@ public class CombatReport : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+        DontDestroyOnLoad(this);
         if (IsServer)
         {
-            
-            DontDestroyOnLoad(this);
             SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
         }
     }
