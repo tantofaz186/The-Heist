@@ -33,7 +33,7 @@ public class EndGame : NetworkBehaviour,Interactable
      
       var time = 0f;
       var totalTime = 0.4f;
-      targetPosition = startPosition + Vector3.forward * 0.03f;
+      targetPosition = startPosition + Vector3.forward * -0.06f;
       while (time < totalTime)
       {
          transform.localPosition = Vector3.Lerp(startPosition, targetPosition, time / totalTime);
