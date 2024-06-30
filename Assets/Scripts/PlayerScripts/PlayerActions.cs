@@ -46,23 +46,24 @@ public class PlayerActions : NetworkBehaviour
         playerInputActions.Player.Enable();
         playerInputActions.Player.Use.performed += PLayerInteract;
 
-        foreach (NetworkBehaviour networkBehaviour in FindObjectsByType<NetworkBehaviour>(FindObjectsSortMode.None))
+        foreach (PickupObject item in FindObjectsByType<PickupObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
+        {
+            IUseAction action;
+            if (item.TryGetComponent<IUseAction>(out action)) action.setActions();
+        }
+
+
+        foreach (var action in GetComponents<IUseAction>())
+        {
+            action.setActions();
+        }
+
+        foreach (NetworkBehaviour networkBehaviour in FindObjectsByType<NetworkBehaviour>(FindObjectsInactive.Exclude,
+                     FindObjectsSortMode.None))
         {
             if (!networkBehaviour.IsOwner) continue;
             IUseAction action;
             if (networkBehaviour.TryGetComponent<IUseAction>(out action)) action.setActions();
-        }
-
-        foreach (MonoBehaviour behaviour in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
-        {
-            IUseAction action;
-            if (behaviour.TryGetComponent<IUseAction>(out action)) action.setActions();
-        }
-
-        foreach (PickupObject item in FindObjectsByType<PickupObject>(FindObjectsSortMode.None))
-        {
-            IUseAction action;
-            if (item.TryGetComponent<IUseAction>(out action)) action.setActions();
         }
     }
 
@@ -71,25 +72,24 @@ public class PlayerActions : NetworkBehaviour
         base.OnNetworkDespawn();
         if (IsOwner)
         {
-            foreach (NetworkBehaviour networkBehaviour in FindObjectsByType<NetworkBehaviour>(FindObjectsSortMode.None))
-            {
-                if (networkBehaviour.IsOwner)
-                {
-                    IUseAction action;
-                    if (networkBehaviour.TryGetComponent<IUseAction>(out action)) action.unsetActions();
-                }
-            }
-
-            foreach (MonoBehaviour behaviour in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
-            {
-                IUseAction action;
-                if (behaviour.TryGetComponent<IUseAction>(out action)) action.unsetActions();
-            }
-
-            foreach (PickupObject item in FindObjectsByType<PickupObject>(FindObjectsSortMode.None))
+            foreach (PickupObject item in FindObjectsByType<PickupObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
             {
                 IUseAction action;
                 if (item.TryGetComponent<IUseAction>(out action)) action.unsetActions();
+            }
+
+
+            foreach (var action in GetComponents<IUseAction>())
+            {
+                action.unsetActions();
+            }
+
+            foreach (NetworkBehaviour networkBehaviour in FindObjectsByType<NetworkBehaviour>(FindObjectsInactive.Exclude,
+                         FindObjectsSortMode.None))
+            {
+                if (!networkBehaviour.IsOwner) continue;
+                IUseAction action;
+                if (networkBehaviour.TryGetComponent<IUseAction>(out action)) action.unsetActions();
             }
             playerInputActions.Player.Use.performed -= PLayerInteract;
             playerInputActions.Player.Disable();
