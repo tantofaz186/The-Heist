@@ -19,7 +19,6 @@ namespace Mechanics.VaultDoor
 
         [SerializeField]
         private int[] itemsCheck;
-        public event Action<bool> OnCodeChecked;
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
@@ -149,7 +148,6 @@ namespace Mechanics.VaultDoor
         public void SendEventToClientsRpc(bool isCorrectCode)
         {
             Debug.Log("Evento enviado");
-            OnCodeChecked?.Invoke(isCorrectCode);
             FindObjectOfType<VaultDoorBehaviour>().CodeCheck(isCorrectCode);
         }
         public void ChangeCodigo()

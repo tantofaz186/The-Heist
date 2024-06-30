@@ -8,5 +8,4 @@ public interface IUseAction
 {
     void setActions();
     void unsetActions();
-    bool ready { get; set; }
 }

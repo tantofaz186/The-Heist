@@ -1,12 +1,10 @@
-using System.Collections;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using Utils;
 
-public class PlayerActions : SingletonPerPlayer<PlayerActions>
+public class PlayerActions : NetworkBehaviour
 {
     [SerializeField]
     public TMP_Text useText;
@@ -28,11 +26,22 @@ public class PlayerActions : SingletonPerPlayer<PlayerActions>
     public Transform drop;
     private PlayerInputActions playerInputActions;
     public PlayerInputActions PlayerInputActions => playerInputActions;
+    
+    public static PlayerActions Instance;
+    private void Awake()
+    {
 
+    }
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-
+        if (!IsOwner)
+        {
+            enabled = false;
+            return;
+        }
+        Instance = this;
+                    
         playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
         playerInputActions.Player.Enable();
