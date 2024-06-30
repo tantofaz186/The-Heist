@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using Utils;
 
 public class Inventory : NetworkBehaviour
 {
@@ -91,11 +88,15 @@ public class Inventory : NetworkBehaviour
         return CheckEmptySlot() > -1;
     }
 
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
-        if (NetworkObject.IsOwner)
+        base.OnNetworkSpawn();
+        
+        if (!IsOwner)
         {
-            Instance = this;
+            enabled = false;
+            return;
         }
+        Instance = this;
     }
 }

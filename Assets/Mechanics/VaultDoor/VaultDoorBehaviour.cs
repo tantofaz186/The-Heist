@@ -15,7 +15,6 @@ namespace Mechanics.VaultDoor
         public void Initialize(CodigoFactory codigoFactory)
         {
             this.codigoFactory = codigoFactory;
-            codigoFactory.OnCodeChecked += CodeCheck;
         }
 
         public void CodeCheck(bool isCorrectCode)
@@ -36,7 +35,6 @@ namespace Mechanics.VaultDoor
         {
             Debug.Log("Porta aberta");
             StartCoroutine(RotateDoor());
-            codigoFactory.OnCodeChecked -= CodeCheck;
         }
 
         private IEnumerator RotateDoor()
@@ -49,11 +47,6 @@ namespace Mechanics.VaultDoor
                 totalAngle += angle;
                 yield return null;
             }
-        }
-
-        private void OnDisable()
-        {
-            if (codigoFactory != null) codigoFactory.OnCodeChecked -= CodeCheck;
         }
     }
 }

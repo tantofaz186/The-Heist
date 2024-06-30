@@ -25,8 +25,6 @@ public class ItemSelect : Singleton<ItemSelect>, IUseAction
         PlayerActions.Instance.PlayerInputActions.Player.Item4.performed -= SelectItem4;
     }
 
-    public bool ready { get; set; }
-
     void SelectItem1(InputAction.CallbackContext context)
     {
         currentItemIndex = 0;

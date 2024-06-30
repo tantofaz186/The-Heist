@@ -8,9 +8,12 @@ public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button playButton;
     [SerializeField] private Button controlsButton;
-    [SerializeField] private Button backButton;
+    [SerializeField] private Button featuresButton;
+    [SerializeField] private Button backButtonControls;
+    [SerializeField] private Button backButtonFeatures;
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject controlsPanel;
+    [SerializeField] private GameObject featuresPanel;
 
     private void Awake()
     {
@@ -22,9 +25,17 @@ public class MainMenuUI : MonoBehaviour
         { 
             controlsPanel.SetActive(true);
         });
-        backButton.onClick.AddListener(() => 
+        featuresButton.onClick.AddListener(() => 
+        { 
+            featuresPanel.SetActive(true);
+        });
+        backButtonControls.onClick.AddListener(() => 
         { 
             controlsPanel.SetActive(false);
+        });
+        backButtonFeatures.onClick.AddListener(() => 
+        { 
+            featuresPanel.SetActive(false);
         });
         quitButton.onClick.AddListener(() => 
         { 
