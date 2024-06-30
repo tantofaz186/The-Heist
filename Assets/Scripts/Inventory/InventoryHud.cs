@@ -26,11 +26,31 @@ public class InventoryHud : Singleton<InventoryHud>
     public void AddRelic(Item item)
     {
         weighSlider.value+= item.itemWeight;
+        CheckColor(weighSlider.value);
+        
+    }
+
+    void CheckColor(float weight)
+    {
+        if (weight<Inventory.MaxWeight/3)
+        {
+            weighSlider.fillRect.GetComponent<Image>().color = new Color(164,164,164,170);
+        }
+        else if (weight>=Inventory.MaxWeight/3&&weight<=Inventory.MaxWeight/1.5f)
+        {
+            weighSlider.fillRect.GetComponent<Image>().color = new Color(210,187,39,170);
+        }
+        else if (weight>Inventory.MaxWeight/1.5f)
+        {
+            weighSlider.fillRect.GetComponent<Image>().color = new Color(307, 36, 31, 170);
+        }
+        
     }
     
     public void RemoveRelic(Item item)
     {
         weighSlider.value-= item.itemWeight;
+        CheckColor(weighSlider.value);
     }
 
     public void ChangeActiveItem(int current)
