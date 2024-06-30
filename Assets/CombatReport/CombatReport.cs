@@ -55,29 +55,6 @@ public class CombatReport : NetworkBehaviour
     {
         AskForDataRpc();
     }
-    // private class PlayerWithData
-    // {
-    //     internal NetworkClient client;
-    //     internal CombatReportData data;
-    //
-    //     internal PlayerWithData(NetworkClient client, CombatReportData data)
-    //     {
-    //         this.client = client;
-    //         this.data = data;
-    //     }
-    //
-    //     internal PlayerWithData(NetworkClient client)
-    //     {
-    //         this.client = client;
-    //         data = new CombatReportData
-    //         {
-    //             reliquiasColetadas = 0,
-    //             itensColetados = 0,
-    //             dinheiroRecebido = 0,
-    //             vezesPreso = 0
-    //         };
-    //     }
-    // }
 
     [Serializable]
     public struct CombatReportData
