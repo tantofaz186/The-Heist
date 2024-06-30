@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Outline))]
-public class PickupObject : NetworkBehaviour, Interactable, IUseAction
+public class PickupObject : NetworkBehaviour, Interactable
 {
     public Item item;
 
@@ -18,7 +18,7 @@ public class PickupObject : NetworkBehaviour, Interactable, IUseAction
 
     private MeshRenderer _renderer;
 
-    public bool alreadyCollected;
+    public NetworkVariable<bool> alreadyCollected = new();
 
     private void Awake()
     {
@@ -27,18 +27,21 @@ public class PickupObject : NetworkBehaviour, Interactable, IUseAction
         _renderer = GetComponent<MeshRenderer>();
         outline = GetComponent<Outline>();
         outline.enabled = false;
+        StartCoroutine(setActions());
     }
 
-    public void setActions()
+    public IEnumerator setActions()
     {
+        yield return new WaitUntil(() => PlayerActions.Instance != null);
         PlayerActions.Instance.PlayerInputActions.Player.Release.performed += DropItem;
         PlayerActions.Instance.PlayerInputActions.Player.DropRelic.performed += DropRelic;
     }
 
-    public void unsetActions()
+    public override void OnDestroy()
     {
         PlayerActions.Instance.PlayerInputActions.Player.Release.performed -= DropItem;
         PlayerActions.Instance.PlayerInputActions.Player.DropRelic.performed -= DropRelic;
+        base.OnDestroy();
     }
 
     private void DropRelic(InputAction.CallbackContext obj)
@@ -58,7 +61,9 @@ public class PickupObject : NetworkBehaviour, Interactable, IUseAction
         {
             Debug.Log($"Called {++calledTimes} times");
             if (Inventory.Instance.items[ItemSelect.Instance.currentItemIndex] == item)
+            {
                 ReleaseServerRpc(ItemSelect.Instance.currentItemIndex);
+            }
         }
     }
 
@@ -81,7 +86,7 @@ public class PickupObject : NetworkBehaviour, Interactable, IUseAction
         ulong senderClientId = serverRpcParams.Receive.SenderClientId;
         NetworkObject senderPlayerObject = NetworkManager.Singleton.ConnectedClients[senderClientId].PlayerObject;
         if (senderPlayerObject == null) return;
-         NetworkObject.ChangeOwnership(senderClientId);
+        NetworkObject.ChangeOwnership(senderClientId);
         if (!item.isRelic)
         {
             TryGrabItemOwnerRpc(senderClientId);
@@ -118,9 +123,15 @@ public class PickupObject : NetworkBehaviour, Interactable, IUseAction
         if (Inventory.Instance.hasEmptySlot())
         {
             Inventory.Instance.AddItem(item);
-            
             ParentObjectRpc(senderClientId);
+            AddItemToCombatReportRpc();
         }
+    }
+
+    [Rpc(SendTo.Server, RequireOwnership = false)]
+    private void AddItemToCombatReportRpc()
+    {
+        CombatReport.Instance.data.itensColetados++;
     }
 
     [Rpc(SendTo.Owner)]
@@ -129,15 +140,15 @@ public class PickupObject : NetworkBehaviour, Interactable, IUseAction
         if (Inventory.Instance.bagWeight + item.itemWeight <= Inventory.MaxWeight)
         {
             Inventory.Instance.AddRelic(item);
-            
+
             ParentObjectRpc(senderClientId);
         }
-            
     }
 
     [ServerRpc]
     private void ReleaseServerRpc(int index)
     {
+        CombatReport.Instance.data.itensColetados--;
         ReleaseItemOwnerRpc(index);
         NetworkObject.RemoveOwnership();
         UnparentObjectRpc();
@@ -174,4 +185,16 @@ public class PickupObject : NetworkBehaviour, Interactable, IUseAction
         Inventory.Instance.RemoveRelic();
     }
 
+    [Rpc(SendTo.Server, RequireOwnership = false)]
+    public void CollectRpc()
+    {
+        if (item.isRelic && !alreadyCollected.Value)
+        {
+            alreadyCollected.Value = true;
+            Debug.Log("Relic Dropped");
+            CombatReport.Instance.data.reliquiasColetadas++;
+            CombatReport.Instance.data.dinheiroRecebido += item.itemValue;
+            enabled = false;
+        }
+    }
 }

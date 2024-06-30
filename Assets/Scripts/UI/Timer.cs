@@ -25,15 +25,16 @@ public class Timer : NetworkBehaviour
         base.OnNetworkSpawn();
         totalTime.Value = startTime;
         remainingTime.Value = startTime;
-        combatReport = FindObjectOfType<CombatReport>();
         InvokeRepeating(nameof(CountTime), 1, 1);
     }
 
-    CombatReport combatReport;
-
     public override void OnDestroy()
     {
-        if (IsServer) combatReport.data.totalRunTime = totalTime.Value - remainingTime.Value;
+        if (IsServer)
+        {
+            CombatReport.Instance.data.totalRunTime = totalTime.Value - remainingTime.Value;
+        }
+
         base.OnDestroy();
     }
 
@@ -50,6 +51,7 @@ public class Timer : NetworkBehaviour
             StopGameRpc();
         }
     }
+
     [Rpc(SendTo.Server, RequireOwnership = false)]
     public void ChangeTimeRpc(float time)
     {
@@ -63,6 +65,4 @@ public class Timer : NetworkBehaviour
         Loader.LoadCombatReportScene();
         remainingTime.Value = 0;
     }
-    
-    
 }

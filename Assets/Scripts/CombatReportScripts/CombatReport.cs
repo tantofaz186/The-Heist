@@ -15,12 +15,15 @@ public class CombatReport : NetworkBehaviour
     [SerializeField]
     CombatReportUI combatReportUI;
 
+    public static CombatReport Instance { get; private set; }
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
         DontDestroyOnLoad(this);
         if (IsServer)
         {
+            data = new CombatReportData();
+            Instance = this;
             SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
         }
     }
@@ -33,12 +36,7 @@ public class CombatReport : NetworkBehaviour
             SetUI();
         }
     }
-
-    [Rpc(SendTo.Server, RequireOwnership = false)]
-    public void SendDataToServerRpc()
-    {
-        
-    }
+    
     [Rpc(SendTo.Server, RequireOwnership = false)]
     public void AskForDataRpc()
     {
