@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8549662579049680996}
   - component: {fileID: 1049962838856103791}
   - component: {fileID: 6305687203349434494}
+  - component: {fileID: 3899394886876341434}
   m_Layer: 0
   m_Name: BauAnubis
   m_TagString: Untagged
@@ -41,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1277434577835268278}
-  m_Mesh: {fileID: 8365922742014696201, guid: 8449c18e629aef641922e71db199cbfe, type: 3}
+  m_Mesh: {fileID: -4434760756020603459, guid: 06e843c2316d40c4490b90f0d67ad990, type: 3}
 --- !u!23 &6305687203349434494
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 46787e5706aae2a4593a6004243574e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,6 +85,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3899394886876341434
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277434577835268278}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7725071, y: 0.83011407, z: 2.961957}
+  m_Center: {x: 0, y: 0.41494295, z: 0}
 --- !u!1 &3400216244780722869
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +167,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 8256314533186613319, guid: 5ce0120402a81964e84c176c2a2aef96, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
