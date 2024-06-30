@@ -18,16 +18,16 @@ public class ItemSpawn : NetworkBehaviour
    public void SpawnItemsRpc()
    {
       
+      
       itemSpawnPoints = GetItemSpawnPoints();
       for(int i = 0; i < itemSpawnPoints.Count; i++)
       {
-         // int type = itemSpawnPoints[i].GetComponent<itemSpawnType>().spawnType;
-         int rnd = Random.Range(0, codigo.Count);
-         var instance = Instantiate(codigo[rnd],itemSpawnPoints[i].transform);
-         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
-         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+          int type = itemSpawnPoints[i].GetComponent<itemSpawnType>().spawnType;
+          SpawnItems(type, i);
+        
       }
    }
+  
    
    
    
@@ -52,8 +52,8 @@ public class ItemSpawn : NetworkBehaviour
    {
       int rnd = Random.Range(0, codigo.Count);
       var instance = Instantiate(codigo[rnd],itemSpawnPoints[x].transform);
-         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
-         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+      var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+      instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
 
    }
    void SortItems(int x)
@@ -62,8 +62,10 @@ public class ItemSpawn : NetworkBehaviour
       bool inList = false;
       if (itemsCheck.Count <= 0)
       {
-         itemsCheck = new List<int>(){0,1,2,3};
-          
+         for (int i = 0; i < items.Count; i++)
+         {
+            itemsCheck.Add(i);
+         }
       }
            
        
@@ -96,9 +98,13 @@ public class ItemSpawn : NetworkBehaviour
       bool inList = false;
       if (relicsCheck.Count <= 0)
       {
-         relicsCheck = new List<int>(){0,1,2,3,4,5,6,7};
-          
+           for (int i = 0; i < relics.Count; i++)
+           {
+               relicsCheck.Add(i);
+           }
       }
+
+     
            
        
       for (int i=0;i<relicsCheck.Count;i++)
