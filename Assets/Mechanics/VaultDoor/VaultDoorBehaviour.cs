@@ -8,7 +8,9 @@ namespace Mechanics.VaultDoor
     public class VaultDoorBehaviour : NetworkBehaviour  
     {
         [SerializeField]
-        private CodigoFactory codigoFactory;    
+        private CodigoFactory codigoFactory;
+
+        public Transform door;
 
         public event Action OnAlarmTrigger;
         
@@ -43,7 +45,7 @@ namespace Mechanics.VaultDoor
             while (totalAngle > 0)
             {
                 int angle = -3;
-                gameObject.transform.Rotate(Vector3.up, angle);
+                door.transform.Rotate(Vector3.up, angle);
                 totalAngle += angle;
                 yield return null;
             }
