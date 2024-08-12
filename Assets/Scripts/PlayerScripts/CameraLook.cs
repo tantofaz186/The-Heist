@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
+using Utils;
 
 public class CameraLook : NetworkBehaviour
 {
@@ -29,23 +30,16 @@ public class CameraLook : NetworkBehaviour
     {
         head = transform.parent;
         body = head.transform.parent;
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Enable();
-        playerInputActions.Player.Enable();
+        playerInputActions = ActionManager.Instance.playerInputActions;
         Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    private void OnDisable()
-    {
-        playerInputActions.Disable();
     }
 
     void Look()
     {
         mouseLook = mouse.ReadValue<Vector2>();
 
-        float mouseX = mouseLook.x * mouseSensitivity * Time.deltaTime;
-        float mouseY = mouseLook.y * mouseSensitivity * Time.deltaTime;
+        float mouseX = mouseLook.x * mouseSensitivity * Time.deltaTime * SaveSystem.Settings.mouseSensitivity;
+        float mouseY = mouseLook.y * mouseSensitivity * Time.deltaTime * SaveSystem.Settings.mouseSensitivity;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);

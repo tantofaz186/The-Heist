@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class AddCam : NetworkBehaviour
 {
     [SerializeField] GameObject cam;
+    [SerializeField] GameObject mapCamera;
     [SerializeField] GameObject head;
     private PlayerActions _actions;
     public TMP_Text useText;
@@ -24,6 +25,7 @@ public class AddCam : NetworkBehaviour
              Image keySprite = useTextobj.transform.GetChild(0).gameObject.GetComponent<Image>();
              _actions.useText = useText;
              _actions.keySprite = keySprite;
+             Instantiate(mapCamera, head.transform.position + Vector3.up, mapCamera.transform.rotation, head.transform);
              _actions.ready = true;
         }
     }

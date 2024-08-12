@@ -4,6 +4,7 @@ using System.Linq;
 using Mechanics.VaultDoor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utils;
 
 public class buttonVault : MonoBehaviour
 {
@@ -16,9 +17,7 @@ public class buttonVault : MonoBehaviour
     {
         startPosition = transform.localPosition;
 
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Enable();
-        playerInputActions.Player.Enable();
+        playerInputActions = ActionManager.Instance.playerInputActions;
         playerInputActions.Player.Use.performed += AtivarBotão;
     }
 
@@ -27,7 +26,6 @@ public class buttonVault : MonoBehaviour
     private void OnDisable()
     {
         playerInputActions.Player.Use.performed -= AtivarBotão;
-        playerInputActions.Disable();
     }
 
     private static void CheckCode()

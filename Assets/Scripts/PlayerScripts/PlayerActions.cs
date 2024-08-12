@@ -3,6 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Utils;
 
 public class PlayerActions : NetworkBehaviour
 {
@@ -41,9 +42,7 @@ public class PlayerActions : NetworkBehaviour
 
         Instance = this;
 
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Enable();
-        playerInputActions.Player.Enable();
+        playerInputActions = ActionManager.Instance.playerInputActions;
         playerInputActions.Player.Use.performed += PLayerInteract;
         
         foreach (var action in GetComponents<IUseAction>())
@@ -78,7 +77,6 @@ public class PlayerActions : NetworkBehaviour
                 if (networkBehaviour.TryGetComponent<IUseAction>(out action)) action.unsetActions();
             }
             playerInputActions.Player.Use.performed -= PLayerInteract;
-            playerInputActions.Player.Disable();
         }
     }
 

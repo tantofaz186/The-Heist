@@ -4,6 +4,7 @@ using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utils;
 
 public class PrisonDoor : NetworkBehaviour
 {
@@ -11,9 +12,7 @@ public class PrisonDoor : NetworkBehaviour
 
     private void Start()
     {
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Enable();
-        playerInputActions.Player.Enable();
+        playerInputActions = ActionManager.Instance.playerInputActions;
         playerInputActions.Player.Use.performed += TryOpenDoor;
 
     }

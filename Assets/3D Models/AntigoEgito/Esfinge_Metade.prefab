@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7778256076605481230}
   - component: {fileID: 1196289499336982166}
   - component: {fileID: 6254482138062358489}
+  - component: {fileID: 7960076903941925285}
   m_Layer: 12
   m_Name: Esfinge
   m_TagString: Untagged
@@ -106,6 +107,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7057600219071416253, guid: 0f7dcfa107c2b1344ab13b7eacf1ff9f, type: 3}
+--- !u!208 &7960076903941925285
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300672350647875538}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.7950001, y: 2.1260002, z: 3.0460002}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 2.1030002, z: 3.0460002}
+  m_TimeToStationary: 0.5
 --- !u!1 &3214930810881806741
 GameObject:
   m_ObjectHideFlags: 0

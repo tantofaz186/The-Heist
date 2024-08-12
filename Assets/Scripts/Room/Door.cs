@@ -4,23 +4,30 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Door : NetworkBehaviour, Interactable {
-    
-   public NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false);
-    [SerializeField] bool isRotatingDoor = true;
-    [SerializeField] private float speed = 1f;
+public class Door : NetworkBehaviour, Interactable
+{
+    public NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false);
 
-    [Header("Rotation Configs")] 
-    [SerializeField] private float rotationAmount = 90f;
+    [SerializeField]
+    bool isRotatingDoor = true;
 
-    [SerializeField] private float forwardDirection = 0;
-    
-    
-    [Header("Sliding Configs")] 
-    [SerializeField] Vector3 slideDirection  = Vector3.back;
-    [SerializeField] float slideAmount = 1.9f;
-    
-    
+    [SerializeField]
+    private float speed = 1f;
+
+    [Header("Rotation Configs")]
+    [SerializeField]
+    private float rotationAmount = 90f;
+
+    [SerializeField]
+    private float forwardDirection = 0;
+
+    [Header("Sliding Configs")]
+    [SerializeField]
+    Vector3 slideDirection = Vector3.back;
+
+    [SerializeField]
+    float slideAmount = 1.9f;
+
     private Vector3 StartRotation;
     private Vector3 Forward;
     private Vector3 StartPosition;
@@ -32,23 +39,23 @@ public class Door : NetworkBehaviour, Interactable {
         StartRotation = transform.rotation.eulerAngles;
         Forward = -transform.forward;
         StartPosition = transform.position;
-        
     }
-    [Rpc(SendTo.Server,RequireOwnership = false)]
+
+    [Rpc(SendTo.Server, RequireOwnership = false)]
     public void OpenServerRpc(Vector3 UserPosition)
     {
         OpenRpc(UserPosition);
     }
-    
-    [Rpc(SendTo.Server,RequireOwnership = false)]
+
+    [Rpc(SendTo.Server, RequireOwnership = false)]
     public void CloseServerRpc()
     {
         CloseRpc();
     }
-    
-    [Rpc(SendTo.Everyone,RequireOwnership = false)]
-    public  void OpenRpc(Vector3 UserPosition)
-    { 
+
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
+    public void OpenRpc(Vector3 UserPosition)
+    {
         if (!isOpen.Value)
         {
             if (AnimationCoroutine != null)
@@ -57,7 +64,7 @@ public class Door : NetworkBehaviour, Interactable {
             }
 
             if (isRotatingDoor)
-            {   
+            {
                 float dot = Vector3.Dot(Forward, (UserPosition - transform.position).normalized);
                 Debug.Log(dot);
                 AnimationCoroutine = StartCoroutine(RotateDoor(dot));
@@ -68,42 +75,40 @@ public class Door : NetworkBehaviour, Interactable {
             }
         }
     }
-  
-  
-    
+
     IEnumerator RotateDoor(float forwardAmount)
-    {       
+    {
         Quaternion startRotation = transform.rotation;
         Quaternion endRotation;
-        if(forwardAmount>=forwardDirection)
+        if (forwardAmount >= forwardDirection)
         {
-            endRotation = Quaternion.Euler(new Vector3(0,StartRotation.y-rotationAmount,0));
+            endRotation = Quaternion.Euler(new Vector3(0, StartRotation.y - rotationAmount, 0));
         }
         else
         {
-            endRotation = Quaternion.Euler(new Vector3(0,StartRotation.y+rotationAmount,0));
+            endRotation = Quaternion.Euler(new Vector3(0, StartRotation.y + rotationAmount, 0));
         }
 
         ServerOpenRpc();
-float time = 0;
+        float time = 0;
         while (time < 1)
         {
             transform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
             yield return null;
             time += Time.deltaTime * speed;
-            
         }
     }
-    [Rpc(SendTo.Everyone,RequireOwnership = false)]
+
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
     public void CloseRpc()
     {
-        
         if (isOpen.Value)
         {
-            if(AnimationCoroutine!=null)
+            if (AnimationCoroutine != null)
             {
                 StopCoroutine(AnimationCoroutine);
             }
+
             if (isRotatingDoor)
             {
                 AnimationCoroutine = StartCoroutine(RotateClose());
@@ -114,17 +119,19 @@ float time = 0;
             }
         }
     }
+
     [Rpc(SendTo.Server)]
     private void ServerCloseRpc()
     {
         isOpen.Value = false;
-        
-    }    
+    }
+
     [Rpc(SendTo.Server)]
     private void ServerOpenRpc()
     {
-        isOpen.Value=true;
+        isOpen.Value = true;
     }
+
     IEnumerator SlideOpen()
     {
         Debug.Log("tentei");
@@ -184,4 +191,30 @@ float time = 0;
             OpenServerRpc(transform.position);
         }
     }
+
+    #region Editor
+
+    #if UNITY_EDITOR
+    [UnityEditor.CustomEditor(typeof(Door))]
+    public class DoorEditor : UnityEditor.Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            Door door = (target as Door)!;
+            if (GUILayout.Button("Open"))
+            {
+                door.OpenServerRpc(door.Forward);
+            }
+
+            if (GUILayout.Button("Close"))
+            {
+                door.CloseServerRpc();
+            }
+        }
+    }
+
+    #endif
+
+    #endregion
 }
