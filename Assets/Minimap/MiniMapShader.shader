@@ -3,7 +3,7 @@ Shader "Unlit/MiniMapShader"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Radius ("Radius", Float) = 0
+        _Radius ("Radius", Float) = 0.5
         _BorderCol ("Border Color", Color) = (0,0,1,1)
     }
     SubShader
