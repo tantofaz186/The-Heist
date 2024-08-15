@@ -3,8 +3,9 @@ Shader "Unlit/MiniMapShader"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Radius ("Radius", Float) = 0.5
+        _Radius ("Radius", Range(0,1)) = 0.5
         _BorderCol ("Border Color", Color) = (0,0,1,1)
+        _BorderThickness ("Border Thickness", Range(0,0.05)) = 0.01
     }
     SubShader
     {
@@ -40,6 +41,7 @@ Shader "Unlit/MiniMapShader"
             float4 _MainTex_ST;
             float1 _Radius;
             float4 _BorderCol;
+            float1 _BorderThickness;
 
             v2f vert(appdata v)
             {
@@ -60,10 +62,12 @@ Shader "Unlit/MiniMapShader"
                 float2 uv = i.uv.xy - center;
                 float radius = length(uv);
 
+                //make outside of border transparent
+                col = col * (1 - ceil(radius - _Radius));
+
                 // apply border
-                if (radius > _Radius)
-                    col = transparent;
-                if (radius - _Radius <= 0.01 && radius - _Radius >= -0.01)
+
+                if (sqrt(pow(radius - _Radius, 2)) <= _BorderThickness)
                     col = _BorderCol;
                 return col;
             }
