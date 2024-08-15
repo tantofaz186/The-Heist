@@ -39,6 +39,7 @@ public class CombatReportUI : MonoBehaviour
         float totalRunTime = data.totalRunTime;
         int minutes = Mathf.FloorToInt( totalRunTime / 60);
         int seconds = Mathf.FloorToInt(totalRunTime% 60);
-        totalTimeText.text = "Run Time: " +string.Format("{0:00}:{1:00}", minutes, seconds);
+        totalTimeText.text = $"Run Time: {minutes:00}:{seconds:00}";
+        GetComponent<Image>().color = data.playerColor;
     }
 }

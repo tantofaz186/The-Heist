@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &988632025676433356
+--- !u!1 &9199147105091688603
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5949318176657672224}
-  - component: {fileID: 1197751597302795203}
-  - component: {fileID: 426226277329203103}
+  - component: {fileID: 1169456623107710104}
+  - component: {fileID: 8715951269452927301}
+  - component: {fileID: 6543996729386881348}
   m_Layer: 0
-  m_Name: CombatReportData
+  m_Name: TheHeistGameMultiplayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5949318176657672224
+--- !u!4 &1169456623107710104
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988632025676433356}
+  m_GameObject: {fileID: 9199147105091688603}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,44 +33,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1197751597302795203
+--- !u!114 &8715951269452927301
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988632025676433356}
+  m_GameObject: {fileID: 9199147105091688603}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1693587687
-  InScenePlacedSourceGlobalObjectIdHash: 1693587687
+  GlobalObjectIdHash: 3052920621
+  InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 0
-  ActiveSceneSynchronization: 1
-  SceneMigrationSynchronization: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &426226277329203103
+--- !u!114 &6543996729386881348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988632025676433356}
+  m_GameObject: {fileID: 9199147105091688603}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d57360d7441f80444a2e6a73e06b57b2, type: 3}
+  m_Script: {fileID: 11500000, guid: d8e607f345920df46a34e6da2e6de337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
-    playerColor: {r: 0, g: 0, b: 0, a: 1}
-    reliquiasColetadas: 18
-    itensColetados: 11
-    dinheiroRecebido: 48
-    vezesPreso: 12
-    totalRunTime: 0.5
-  combatReportUI: {fileID: 0}
+  playerColorList:
+  - {r: 1, g: 0.72638464, b: 0, a: 1}
+  - {r: 0.13751912, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.37814653, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0.9489832, b: 1, a: 1}
+  - {r: 0.5049739, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0.74655247, a: 1}
+  - {r: 0.051041294, g: 0.0883327, b: 0.2924528, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
