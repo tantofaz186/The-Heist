@@ -1,4 +1,5 @@
 using System;
+using CombatReportScripts;
 using UnityEngine;
 using Unity.Netcode;
 
@@ -11,7 +12,10 @@ public class Timer : NetworkBehaviour
 
     [SerializeField]
     public NetworkVariable<float> totalTime;
-
+    
+    [SerializeField]
+    private NetworkVariable<float> timeRan;
+    
     [SerializeField]
     private float startTime;
 
@@ -25,27 +29,17 @@ public class Timer : NetworkBehaviour
         base.OnNetworkSpawn();
         totalTime.Value = startTime;
         remainingTime.Value = startTime;
-        InvokeRepeating(nameof(CountTime), 1, 1);
-    }
-
-    public override void OnDestroy()
-    {
-        if (IsServer)
-        {
-            CombatReport.Instance.data.totalRunTime = totalTime.Value - remainingTime.Value;
-        }
-
-        base.OnDestroy();
+        timeRan.Value = 0;
+        if (IsServer) InvokeRepeating(nameof(CountTime), 1, 1);
     }
 
     void CountTime()
     {
-        if (!IsServer) return;
         if (remainingTime.Value > 0)
         {
             remainingTime.Value -= 1;
+            timeRan.Value += 1;
         }
-
         if (remainingTime.Value <= 0)
         {
             StopGameRpc();

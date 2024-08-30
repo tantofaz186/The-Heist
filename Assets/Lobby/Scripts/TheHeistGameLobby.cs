@@ -142,6 +142,41 @@ public class TheHeistGameLobby : MonoBehaviour
             OnCreateLobbyFailed?.Invoke(this, EventArgs.Empty);
         }
     }
+
+    #if UNITY_EDITOR
+    public async void CreateLobby_NoSceneChange(string lobbyName, bool isPrivate)
+    {
+        OnCreateLobbyStarted?.Invoke(this, EventArgs.Empty);
+        try
+        {
+            joinedLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName,
+                TheHeistGameMultiplayer.MAX_PLAYER_AMOUNT, new CreateLobbyOptions
+                {
+                    IsPrivate = isPrivate,
+                });
+            
+            Allocation allocation = await AllocateRelay();
+            
+            string relayJoinCode = await GetRelayJoinCode(allocation);
+            
+            await LobbyService.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+            {
+                Data = new Dictionary<string, DataObject>
+                {
+                    {KEY_RELAY_JOIN_CODE, new DataObject(DataObject.VisibilityOptions.Member,relayJoinCode)}
+                }
+            });
+            
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(allocation,"dtls"));
+            
+            TheHeistGameMultiplayer.Instance.StartHost();
+        }
+        catch (LobbyServiceException)
+        {
+            OnCreateLobbyFailed?.Invoke(this, EventArgs.Empty);
+        }
+    }
+    #endif
     
     public async void QuickJoin()
     {

@@ -1,4 +1,5 @@
 using System.Collections;
+using CombatReportScripts;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -192,8 +193,8 @@ public class PickupObject : NetworkBehaviour, Interactable
         {
             alreadyCollected.Value = true;
             Debug.Log("Relic Dropped");
-            CombatReport.Instance.data.reliquiasColetadas++;
-            CombatReport.Instance.data.dinheiroRecebido += item.itemValue;
+            CombatReportController.Instance.AddRelicCollected();
+            CombatReportController.Instance.AddMoneyReceived(item.itemValue);
             enabled = false;
         }
     }
