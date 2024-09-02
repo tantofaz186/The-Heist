@@ -27,6 +27,11 @@ public class Enemy : NetworkBehaviour
     public float chaseSpeed = 6f;
     public List<GameObject> waypoints = new List<GameObject>();
     public FOV fov;
+    
+   [SerializeField] float stamina = 100f;
+    public float staminaSpeed;
+    
+    private bool isRunning;
 
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
@@ -54,6 +59,11 @@ public class Enemy : NetworkBehaviour
         while (gameStarted)
         {
             fov.Scan();
+            if (isRunning)
+            {
+                ConsumeStamina();
+            }
+            
             if (fov.Objects.Count > 0)
             {
                 playerFound = FindPlayer(fov);
@@ -77,6 +87,24 @@ public class Enemy : NetworkBehaviour
             yield return new WaitForSeconds(fov.scanInterval);
         }
     }
+
+    void ConsumeStamina()
+    {
+        stamina -= staminaSpeed * Time.deltaTime;
+        if (stamina <= 0)
+        {
+            stamina = 0f;
+            StartCoroutine(RegenerateStamina());
+        }
+    }
+
+    IEnumerator RegenerateStamina()
+    {   anim.SetBool("tired", true);
+        yield return new WaitForSeconds(3f);
+        stamina = 100f;
+        anim.SetBool("tired", false);
+    }
+    
     
     
     public void CheckLocation(Vector3 target)
@@ -87,6 +115,7 @@ public class Enemy : NetworkBehaviour
 
     void Patrol()
     {   if (shooting)return;
+        isRunning = false;
         if (!walkPointSet) SearchWalk();
         if (walkPointSet) agent.SetDestination(walkPoint);
         agent.speed = patrolSpeed;
@@ -103,10 +132,7 @@ public class Enemy : NetworkBehaviour
     void SearchWalk()
     {   
         int rnd = Random.Range(0, waypoints.Count);;
-
-        
         walkPoint = waypoints[rnd].transform.position;
-
         if (Physics.Raycast(walkPoint, -transform.up, 2f))
         {
             walkPointSet = true;
@@ -115,6 +141,7 @@ public class Enemy : NetworkBehaviour
 
     void Chase(Transform _playerPos)
     {   if (shooting)return;
+        isRunning = true;
         agent.SetDestination(_playerPos.transform.position);
         agent.speed = chaseSpeed;
         anim.SetBool("run", true);
@@ -122,9 +149,8 @@ public class Enemy : NetworkBehaviour
     }
 
     void Attack(Transform targetTransform)
-    {   
+    {   isRunning = false;
         var position = targetTransform.position;
-       
         transform.LookAt(position);
         if (!shooting)
         {  
