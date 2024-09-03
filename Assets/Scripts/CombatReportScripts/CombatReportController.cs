@@ -24,11 +24,13 @@ namespace CombatReportScripts
             {
                 Destroy(gameObject);
             }
-
-            DontDestroyOnLoad(this);
-            Instance = this;
-            ResetController();
-            SceneManager.sceneLoaded += OnGameStart;
+            else
+            {
+                DontDestroyOnLoad(this);
+                Instance = this;
+                ResetController();
+                SceneManager.sceneLoaded += OnGameStart;
+            }
         }
 
         private void OnGameStart(Scene arg0, LoadSceneMode arg1)
