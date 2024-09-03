@@ -185,7 +185,7 @@ public class Enemy : NetworkBehaviour
        
     }
 
-    [Rpc(SendTo.Everyone,RequireOwnership = false)]
+    [Rpc(SendTo.Server)]
     public void InstantiateBulletRpc()
     {  Debug.Log("Shoot");
         
