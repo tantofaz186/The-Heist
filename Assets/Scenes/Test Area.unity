@@ -563,22 +563,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2345154068040548337, guid: e0541b6858476b24088249e748c89212, type: 3}
   m_PrefabInstance: {fileID: 2028001417}
   m_PrefabAsset: {fileID: 0}
---- !u!208 &840773056
-NavMeshObstacle:
+--- !u!114 &840773055
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840773054}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 2.403, y: 2.114, z: 5.464}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: -0.19800001, y: 2.114, z: 0.652}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 4, y: 3, z: 10.87}
+  m_Center: {x: 0, y: 1, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &983133978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -892,7 +892,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4095
+    m_Bits: 8191
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -1240,15 +1240,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7888351260095170653, guid: e0541b6858476b24088249e748c89212, type: 3}
       propertyPath: m_Convex
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5340211577237089205, guid: e0541b6858476b24088249e748c89212, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2345154068040548337, guid: e0541b6858476b24088249e748c89212, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 840773056}
+      addedObject: {fileID: 840773055}
   m_SourcePrefab: {fileID: 100100000, guid: e0541b6858476b24088249e748c89212, type: 3}
 --- !u!1001 &2065557990
 PrefabInstance:
