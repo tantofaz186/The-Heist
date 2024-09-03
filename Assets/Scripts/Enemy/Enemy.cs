@@ -17,10 +17,9 @@ public class Enemy : NetworkBehaviour
     public bool gameStarted = true;
     public Vector3 walkPoint;
     [SerializeField] bool walkPointSet;
-    public float walkPointRange;
     public float attackRange;
-    public float timeAttack;
-    private bool attacked;
+   
+    private bool shooting = false;
    // public event Action<GameObject> OnAttack;
     private float tempSpeed;
     public GameObject playerFound;
@@ -28,8 +27,15 @@ public class Enemy : NetworkBehaviour
     public float chaseSpeed = 6f;
     public List<GameObject> waypoints = new List<GameObject>();
     public FOV fov;
+
+    public NetworkVariable<float> stamina = new NetworkVariable<float>(100f);
+    public float staminaSpeed;
     
-    public GameObject hitCollider;
+    [SerializeField]private bool isRunning;
+   [SerializeField] private bool isRegenerating;
+
+    public GameObject bulletPrefab;
+    public Transform bulletSpawn;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -46,9 +52,7 @@ public class Enemy : NetworkBehaviour
     private void Start()
     {
         StartCoroutine(FovScan());
-        hitCollider.SetActive(false);
         tempSpeed = agent.speed;
-        
     }
 
     private IEnumerator FovScan()
@@ -56,13 +60,20 @@ public class Enemy : NetworkBehaviour
         while (gameStarted)
         {
             fov.Scan();
+            
+            if (isRunning)
+            {
+                ConsumeStamina();
+            }
+            yield return new WaitUntil(()=>!isRegenerating);
             if (fov.Objects.Count > 0)
             {
                 playerFound = FindPlayer(fov);
                 if (playerFound)
                 {
+                    
                     if (Vector3.Distance(transform.position, playerFound.transform.position) < attackRange)
-                    {
+                    {   
                         Attack(playerFound.transform);
                     }
                     else
@@ -70,7 +81,6 @@ public class Enemy : NetworkBehaviour
                         Chase(playerFound.transform);
                     }
                 }
-                
             }
             else
             {
@@ -79,6 +89,29 @@ public class Enemy : NetworkBehaviour
             yield return new WaitForSeconds(fov.scanInterval);
         }
     }
+
+    void ConsumeStamina()
+    {
+        stamina.Value -= staminaSpeed * Time.deltaTime;
+        if (stamina.Value <= 0)
+        {
+            
+            StartCoroutine(RegenerateStamina());
+        }
+    }
+
+    IEnumerator RegenerateStamina()
+    {   isRegenerating = true;
+        agent.SetDestination(transform.position);
+        anim.SetBool("tired", true);
+        yield return new WaitForSeconds(3f);
+        stamina.Value = 100f;
+        anim.SetBool("tired", false);
+        isRegenerating = false;
+        
+        
+    }
+    
     
     
     public void CheckLocation(Vector3 target)
@@ -88,7 +121,8 @@ public class Enemy : NetworkBehaviour
     }
 
     void Patrol()
-    {   
+    {   if (shooting)return;
+        isRunning = false;
         if (!walkPointSet) SearchWalk();
         if (walkPointSet) agent.SetDestination(walkPoint);
         agent.speed = patrolSpeed;
@@ -105,10 +139,7 @@ public class Enemy : NetworkBehaviour
     void SearchWalk()
     {   
         int rnd = Random.Range(0, waypoints.Count);;
-
-        
         walkPoint = waypoints[rnd].transform.position;
-
         if (Physics.Raycast(walkPoint, -transform.up, 2f))
         {
             walkPointSet = true;
@@ -116,7 +147,8 @@ public class Enemy : NetworkBehaviour
     }
 
     void Chase(Transform _playerPos)
-    {
+    {   if (shooting)return;
+        isRunning = true;
         agent.SetDestination(_playerPos.transform.position);
         agent.speed = chaseSpeed;
         anim.SetBool("run", true);
@@ -124,31 +156,48 @@ public class Enemy : NetworkBehaviour
     }
 
     void Attack(Transform targetTransform)
-    {   
-        var position = targetTransform.position;
-        //agent.SetDestination(position);
-        transform.LookAt(position);
-        if (!attacked)
-        {   Invoke(nameof(ColliderActivate), 0.5f);
-            anim.SetTrigger("attack");
-            agent.speed = 0f;
-            attacked = true;
-            //OnAttack?.Invoke(targetTransform.gameObject);
-            Invoke(nameof(ResetAttack), timeAttack);
+    {   isRunning = false;
+        Transform position = targetTransform;
+        agent.SetDestination(transform.position);
+        
+        if (!shooting)
+        {  
+            shooting = true;
+            StartCoroutine(Shoot(position));
         }
     }
 
-    void ColliderActivate()
-    {
-        hitCollider.SetActive(true);
+    IEnumerator Shoot(Transform position)
+    {   
+       anim.SetTrigger("shoot");
+       yield return new WaitForSeconds(1f);
+       transform.LookAt(position);
+       Vector3 direction = position.transform.position - bulletSpawn.transform.position;
+       direction.Normalize();
+       float angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+       bulletSpawn.transform.rotation = Quaternion.Euler(0, angleY, 0);
+       if (IsServer)
+       {
+           InstantiateBulletRpc();
+       }
+       
+       yield return new WaitForSeconds(2f);
+       shooting = false;
+       
     }
 
-    void ResetAttack()
-    {
-        attacked = false;
-        hitCollider.SetActive(false);
-        agent.speed = tempSpeed;
+    [Rpc(SendTo.Server)]
+    public void InstantiateBulletRpc()
+    {  Debug.Log("Shoot");
+        
+        var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        var bulletNetworkObject = bullet.GetComponent<NetworkObject>();
+        bulletNetworkObject.SpawnWithOwnership(OwnerClientId);
+        bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 10f, ForceMode.Impulse);
+        
     }
+
+  
     
     List<GameObject> GetWaypoints()
     {
