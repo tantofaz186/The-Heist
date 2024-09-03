@@ -18,7 +18,7 @@ public class Enemy : NetworkBehaviour
     public Vector3 walkPoint;
     [SerializeField] bool walkPointSet;
     public float attackRange;
-    public float timeAttack;
+   
     private bool shooting = false;
    // public event Action<GameObject> OnAttack;
     private float tempSpeed;
@@ -31,7 +31,7 @@ public class Enemy : NetworkBehaviour
     public NetworkVariable<float> stamina = new NetworkVariable<float>(100f);
     public float staminaSpeed;
     
-    private bool isRunning;
+    [SerializeField]private bool isRunning;
    [SerializeField] private bool isRegenerating;
 
     public GameObject bulletPrefab;
@@ -159,22 +159,23 @@ public class Enemy : NetworkBehaviour
     {   isRunning = false;
         Transform position = targetTransform;
         agent.SetDestination(transform.position);
-        transform.LookAt(position);
-        Vector3 direction = position.transform.position - bulletSpawn.transform.position;
-        direction.Normalize();
-        float angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-        bulletSpawn.transform.rotation = Quaternion.Euler(0, angleY, 0);
+        
         if (!shooting)
         {  
             shooting = true;
-            StartCoroutine(Shoot());
+            StartCoroutine(Shoot(position));
         }
     }
 
-    IEnumerator Shoot()
+    IEnumerator Shoot(Transform position)
     {   
        anim.SetTrigger("shoot");
        yield return new WaitForSeconds(1f);
+       transform.LookAt(position);
+       Vector3 direction = position.transform.position - bulletSpawn.transform.position;
+       direction.Normalize();
+       float angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+       bulletSpawn.transform.rotation = Quaternion.Euler(0, angleY, 0);
        if (IsServer)
        {
            InstantiateBulletRpc();

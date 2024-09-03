@@ -1642,12 +1642,16 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointSet: 0
   attackRange: 5
-  timeAttack: 2
   playerFound: {fileID: 0}
   patrolSpeed: 3
   chaseSpeed: 6
   waypoints: []
   fov: {fileID: -2851631060527253863}
+  stamina:
+    m_InternalValue: 100
+  staminaSpeed: 20
+  isRunning: 0
+  isRegenerating: 0
   bulletPrefab: {fileID: 5666875563176433570, guid: 96927087a891e8c48bc808e93b27d234, type: 3}
   bulletSpawn: {fileID: 507420450951453248}
 --- !u!114 &-2851631060527253863
