@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 public class Enemy : NetworkBehaviour
 {
     public NavMeshAgent agent;
-
+    public AudioPlay tazerSound;
     public Animator anim;
     public bool gameStarted = true;
     public Vector3 walkPoint;
@@ -62,8 +62,8 @@ public class Enemy : NetworkBehaviour
             fov.Scan();
             
             if (isRunning)
-            {
-                ConsumeStamina();
+            {   if(IsServer)
+                ConsumeStaminaRpc();
             }
             yield return new WaitUntil(()=>!isRegenerating);
             if (fov.Objects.Count > 0)
@@ -89,8 +89,8 @@ public class Enemy : NetworkBehaviour
             yield return new WaitForSeconds(fov.scanInterval);
         }
     }
-
-    void ConsumeStamina()
+    [Rpc(SendTo.Server)]
+    void ConsumeStaminaRpc()
     {
         stamina.Value -= staminaSpeed * Time.deltaTime;
         if (stamina.Value <= 0)
@@ -154,7 +154,7 @@ public class Enemy : NetworkBehaviour
         anim.SetBool("run", true);
         anim.SetBool("walk", false);
     }
-
+    
     void Attack(Transform targetTransform)
     {   isRunning = false;
         Transform position = targetTransform;
@@ -168,16 +168,18 @@ public class Enemy : NetworkBehaviour
     }
 
     IEnumerator Shoot(Transform position)
-    {   
+    { 
+        transform.LookAt(position);
        anim.SetTrigger("shoot");
        yield return new WaitForSeconds(1f);
-       transform.LookAt(position);
+       
        Vector3 direction = position.transform.position - bulletSpawn.transform.position;
        direction.Normalize();
        float angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
        bulletSpawn.transform.rotation = Quaternion.Euler(0, angleY, 0);
        if (IsServer)
-       {
+       {  
+           tazerSound.PlayAudioClientRpc();
            InstantiateBulletRpc();
        }
        
@@ -188,16 +190,15 @@ public class Enemy : NetworkBehaviour
 
     [Rpc(SendTo.Server)]
     public void InstantiateBulletRpc()
-    {  Debug.Log("Shoot");
-        
+    {   
         var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
         var bulletNetworkObject = bullet.GetComponent<NetworkObject>();
         bulletNetworkObject.SpawnWithOwnership(OwnerClientId);
         bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 10f, ForceMode.Impulse);
-        
     }
 
   
+    
     
     List<GameObject> GetWaypoints()
     {

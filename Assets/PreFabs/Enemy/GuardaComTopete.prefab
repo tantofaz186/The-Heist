@@ -605,6 +605,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4411302315474281756}
+  - component: {fileID: 6544898432982148185}
   m_Layer: 0
   m_Name: BulletSpawn
   m_TagString: Untagged
@@ -627,6 +628,102 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3522646463288110461}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &6544898432982148185
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525455066487968499}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a21b60754273f0743b6f3c5286286f29, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.585
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 4.5
+  MaxDistance: 16.8
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1583993775824825708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,6 +1575,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3522646463288110461}
   - component: {fileID: -3525884011065926622}
+  - component: {fileID: 8269838671026492401}
+  - component: {fileID: 9149328028431483834}
   - component: {fileID: 6640964632351064669}
   - component: {fileID: -2851631060527253863}
   - component: {fileID: 6469180679517515467}
@@ -1537,6 +1636,31 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &8269838671026492401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219918199060101991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9910fea3e4640a54f9fd68cafedee8a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 6544898432982148185}
+--- !u!114 &9149328028431483834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219918199060101991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76286fb57637b794697b6f1ed50de06a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6640964632351064669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,6 +1674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
+  tazerSound: {fileID: 8269838671026492401}
   anim: {fileID: 0}
   gameStarted: 1
   walkPoint: {x: 0, y: 0, z: 0}
@@ -1567,6 +1692,7 @@ MonoBehaviour:
   isRegenerating: 0
   bulletPrefab: {fileID: 5666875563176433570, guid: 96927087a891e8c48bc808e93b27d234, type: 3}
   bulletSpawn: {fileID: 4411302315474281756}
+  bulletSpawner: {fileID: 9149328028431483834}
 --- !u!114 &-2851631060527253863
 MonoBehaviour:
   m_ObjectHideFlags: 0
