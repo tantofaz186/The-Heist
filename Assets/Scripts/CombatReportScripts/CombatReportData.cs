@@ -37,6 +37,9 @@ namespace CombatReportScripts
 
         [SerializeField]
         public int vezesAtacado;
+
+        [SerializeField]
+        public int pulos;
         
         public override string ToString()
         {
@@ -54,6 +57,7 @@ namespace CombatReportScripts
             serializer.SerializeValue(ref distanciaPercorrida);
             serializer.SerializeValue(ref itensUsados);
             serializer.SerializeValue(ref vezesAtacado);
+            serializer.SerializeValue(ref pulos);
         }
     }
 }

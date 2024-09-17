@@ -19,6 +19,7 @@ public class Timer : NetworkBehaviour
     [SerializeField]
     private float startTime;
 
+    public event Action OnTimerEnd;
     private void Awake()
     {
         instance = this;
@@ -35,15 +36,15 @@ public class Timer : NetworkBehaviour
 
     void CountTime()
     {
-        if (remainingTime.Value > 0)
-        {
-            remainingTime.Value -= 1;
-            timeRan.Value += 1;
-        }
-        if (remainingTime.Value <= 0)
-        {
-            StopGameRpc();
-        }
+        // if (remainingTime.Value > 0)
+        // {
+        //     remainingTime.Value -= 1;
+        //     timeRan.Value += 1;
+        // }
+        // if (remainingTime.Value <= 0)
+        // {
+        //     StopGameRpc();
+        // }
     }
 
     [Rpc(SendTo.Server, RequireOwnership = false)]
@@ -56,6 +57,7 @@ public class Timer : NetworkBehaviour
     void StopGameRpc()
     {
         Debug.Log("StopGameRpc");
+        OnTimerEnd?.Invoke();
         Loader.LoadCombatReportScene();
         remainingTime.Value = 0;
     }
