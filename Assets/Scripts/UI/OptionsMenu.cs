@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,25 @@ public class OptionsMenu : MonoBehaviour
     public AudioMixer audioMixer;
     public TMP_Dropdown resolutionDropdown;
     private Resolution[] resolutions;
+    
+    
+    public static OptionsMenu instance;
+    private void Awake()
+    {
+        if (instance!=null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        
+            
+        
+    }
+
     void Start()
     {   
         GetResolutions();

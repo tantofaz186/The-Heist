@@ -20,8 +20,6 @@ public class Bullet :NetworkBehaviour
     [Rpc(SendTo.Server)]
     void DestroyRpc()
     {
-        
-        GetComponent<NetworkObject>().Despawn();
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 }

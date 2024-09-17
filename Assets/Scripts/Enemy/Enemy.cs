@@ -191,9 +191,13 @@ public class Enemy : NetworkBehaviour
     [Rpc(SendTo.Server)]
     public void InstantiateBulletRpc()
     {   
-        var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-        var bulletNetworkObject = bullet.GetComponent<NetworkObject>();
-        bulletNetworkObject.SpawnWithOwnership(OwnerClientId);
+        GameObject bullet = BulletPool.instance.GetBullet();
+        if(bullet!=null)
+        {
+            bullet.transform.position = bulletSpawn.position;
+            bullet.transform.rotation = bulletSpawn.rotation;
+            bullet.SetActive(true);
+        }
         bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 10f, ForceMode.Impulse);
     }
 

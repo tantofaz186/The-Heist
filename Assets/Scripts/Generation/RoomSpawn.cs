@@ -51,6 +51,7 @@ public class RoomSpawn : NetworkBehaviour
        if (IsServer) SpawnEnemyRpc();
        yield return new WaitForSeconds(2);
        if (IsServer) SpawnItemRpc();
+       if (IsServer) BulletPool.instance.InstantiateBulletsRpc();
    }
 
    [Rpc(SendTo.Server)]
