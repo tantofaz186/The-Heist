@@ -15,13 +15,11 @@ public class Prison : NetworkBehaviour
     }
 
     public NetworkVariable<int> totalPrisoners = new NetworkVariable<int>(0);
-    public NetworkVariable<int> vezesPreso = new NetworkVariable<int>(0);
     public Transform prisonTransform;
 
     public void FindPrison()
     {
         prisonTransform = GameObject.FindGameObjectWithTag("Prison").transform;
-        combatReport = FindObjectOfType<CombatReport>();
     }
 
     [Rpc(SendTo.Server)]
@@ -29,7 +27,6 @@ public class Prison : NetworkBehaviour
     {
         Debug.Log("AddPrisonerRpc");
         totalPrisoners.Value++;
-        vezesPreso.Value++;
         if (totalPrisoners.Value >= NetworkManager.Singleton.ConnectedClientsList.Count)
         {
             StopGameRpc();
@@ -48,13 +45,5 @@ public class Prison : NetworkBehaviour
     {
         Debug.Log("EveryOneInPrison");
         Loader.LoadCombatReportScene();
-    }
-
-    CombatReport combatReport;
-
-    public override void OnDestroy()
-    {
-        if(IsServer) combatReport.data.vezesPreso = vezesPreso.Value;
-        base.OnDestroy();
     }
 }

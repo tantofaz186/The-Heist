@@ -19,6 +19,7 @@ public class PickupObject : NetworkBehaviour, Interactable
 
     private MeshRenderer _renderer;
 
+    private ulong lastOwnerId;
     public NetworkVariable<bool> alreadyCollected = new();
 
     private void Awake()
@@ -88,6 +89,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         NetworkObject senderPlayerObject = NetworkManager.Singleton.ConnectedClients[senderClientId].PlayerObject;
         if (senderPlayerObject == null) return;
         NetworkObject.ChangeOwnership(senderClientId);
+        lastOwnerId = senderClientId;
         if (!item.isRelic)
         {
             TryGrabItemOwnerRpc(senderClientId);
@@ -125,15 +127,9 @@ public class PickupObject : NetworkBehaviour, Interactable
         {
             Inventory.Instance.AddItem(item);
             ParentObjectRpc(senderClientId);
-            AddItemToCombatReportRpc();
         }
     }
 
-    [Rpc(SendTo.Server, RequireOwnership = false)]
-    private void AddItemToCombatReportRpc()
-    {
-        CombatReport.Instance.data.itensColetados++;
-    }
 
     [Rpc(SendTo.Owner)]
     private void TryGrabRelicOwnerRpc(ulong senderClientId)
@@ -149,7 +145,6 @@ public class PickupObject : NetworkBehaviour, Interactable
     [ServerRpc]
     private void ReleaseServerRpc(int index)
     {
-        CombatReport.Instance.data.itensColetados--;
         ReleaseItemOwnerRpc(index);
         NetworkObject.RemoveOwnership();
         UnparentObjectRpc();
@@ -193,9 +188,15 @@ public class PickupObject : NetworkBehaviour, Interactable
         {
             alreadyCollected.Value = true;
             Debug.Log("Relic Dropped");
-            CombatReportController.Instance.AddRelicCollected();
-            CombatReportController.Instance.AddMoneyReceived(item.itemValue);
+            NetworkObject.ChangeOwnership(lastOwnerId);
+            OwnerCollectRpc();
             enabled = false;
         }
+    }
+
+    [Rpc(SendTo.Owner, RequireOwnership = false)]
+    public void OwnerCollectRpc()
+    {
+        NetworkManager.LocalClient.PlayerObject.GetComponent<CombatReportBehaviour>().combatReportData.dinheiroRecebido += item.itemValue;
     }
 }

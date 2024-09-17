@@ -1,17 +1,46 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using CombatReportScripts;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using Unity.Netcode;
 
 public class CombatReportUI : MonoBehaviour
 {
-    
-    public void SetUI(CombatReportData data)
-    {
+    [SerializeField]
+    private List<PlayerCombatReportUI> combatReport;
 
+    private void Awake()
+    {
+        combatReport = FindObjectsOfType<PlayerCombatReportUI>().ToList();
+    }
+
+    public void SetUI(List<CombatReportData> data)
+    {
+        combatReport.ForEach((cr) => cr.Apply(data));
+    }
+
+    private void Start()
+    {
+        StartCoroutine(ShowInList());
+    }
+
+    private IEnumerator ShowInList()
+    {
+        foreach (var combatReportUI in combatReport)
+        {
+            combatReportUI.Hide();
+        }
+
+        while (true)
+        {
+            foreach (var c in combatReport)
+            {
+                c.Show();
+                yield return new WaitForSeconds(3f);
+                c.Hide();
+            }
+
+        }
     }
 }

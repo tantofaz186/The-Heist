@@ -1,7 +1,11 @@
+using System;
+using System.Collections;
+using CombatReportScripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Netcode;
 
+[RequireComponent(typeof(CombatReportBehaviour))]
 public class Movement : NetworkBehaviour, IUseAction
 {
     public PlayerStats playerStats;
@@ -9,7 +13,6 @@ public class Movement : NetworkBehaviour, IUseAction
     public InputAction movement;
 
     private OwnerNetworkAnimator corpo_FSM;
-
     [SerializeField]
     Animator headFSM;
 
@@ -27,17 +30,19 @@ public class Movement : NetworkBehaviour, IUseAction
 
     public LayerMask Ground;
     public static Movement Instance;
+    public CombatReportBehaviour playerCombatReport;
 
     protected void Start()
     {
         corpo_fisico = transform.GetComponent<Rigidbody>();
+        playerCombatReport = GetComponent<CombatReportBehaviour>();
         corpo_fisico.isKinematic = false;
         corpo_FSM = transform.GetComponent<OwnerNetworkAnimator>();
         playerStats = GetComponent<PlayerStats>();
         vel = walkSpeed;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!pausado)
         {
@@ -75,15 +80,11 @@ public class Movement : NetworkBehaviour, IUseAction
         velocity += transform.forward * (valueRead.y * vel * Time.fixedDeltaTime);
         velocity += transform.right * (valueRead.x * vel * Time.fixedDeltaTime);
 
-
+        playerCombatReport.combatReportData.distanciaPercorrida += velocity.magnitude;
         velocity.y = (corpo_fisico.velocity.y < 0) ? corpo_fisico.velocity.y * 1.03f : corpo_fisico.velocity.y;
         corpo_fisico.velocity = velocity;
 
-        if (valueRead.y != 0)
-        {
-            corpo_FSM.Animator.SetBool("movimentando", true);
-        }
-        else if (valueRead.x != 0)
+        if (valueRead.y != 0 || valueRead.x != 0)
         {
             corpo_FSM.Animator.SetBool("movimentando", true);
         }
@@ -102,6 +103,7 @@ public class Movement : NetworkBehaviour, IUseAction
         {
             corpo_fisico.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
             corpo_FSM.SetTrigger("pular");
+            playerCombatReport.combatReportData.pulos++;
         }
     }
 

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using CombatReportScripts;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -15,6 +17,7 @@ public class Inventory : NetworkBehaviour
 
     public static Inventory Instance;
 
+    CombatReportBehaviour playerCombatReport;
     public void AddItem(Item item)
     {
         int emptySlotIndex = CheckEmptySlot();
@@ -23,11 +26,17 @@ public class Inventory : NetworkBehaviour
             items[emptySlotIndex] = item;
             InventoryHud.Instance.AddItem(item, emptySlotIndex);
             Debug.Log("Item Adicionado" + " " + emptySlotIndex);
+            playerCombatReport.combatReportData.itensColetados++;
         }
         else
         {
             Debug.Log("Inventory Full");
         }
+    }
+
+    private void Start()
+    {
+        playerCombatReport = GetComponent<CombatReportBehaviour>();
     }
 
     public void AddRelic(Item item)
@@ -38,6 +47,7 @@ public class Inventory : NetworkBehaviour
             bagWeight += item.itemWeight;
             totalMoney += item.itemValue;
             InventoryHud.Instance.AddRelic(item);
+            playerCombatReport.combatReportData.reliquiasColetadas++;
         }
         else
         {
