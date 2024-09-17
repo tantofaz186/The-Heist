@@ -20,13 +20,13 @@ public class OptionsMenu : MonoBehaviour
     public TMP_Dropdown resolutionDropdown;
     private Resolution[] resolutions;
     void Start()
-    {
+    {   
         GetResolutions();
         MasterVolumeSlider.value = audioMixer.GetFloat("MasterVolume", out float value) ? value : 0;
         MusicSlider.value = audioMixer.GetFloat("MusicVolume", out float val) ? val : 0;
         SfxSlider.value = audioMixer.GetFloat("SfxVolume", out float valu) ? valu : 0;
         brightnessSlider.value = RenderSettings.ambientIntensity;
-        
+        OptionsMenuPanel.SetActive(false);
     }
 
     void GetResolutions()
@@ -41,7 +41,7 @@ public class OptionsMenu : MonoBehaviour
             string option = resolutions[i].width + " x " + resolutions[i].height;
             options.Add(option);
             
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;
             }
@@ -85,26 +85,26 @@ public class OptionsMenu : MonoBehaviour
         audioMixer.SetFloat("SfxVolume", SfxSlider.value);
     }
 
-    void Sound()
+    public void Sound()
     {
         GraphicsPanel.SetActive(false);
         SoundPanel.SetActive(true);
         ControlsPanel.SetActive(false);
     }
-    void Graphics()
+   public void Graphics()
     {
         GraphicsPanel.SetActive(true);
         SoundPanel.SetActive(false);
         ControlsPanel.SetActive(false);
     }
-    void Controls()
+   public void Controls()
     {
         GraphicsPanel.SetActive(false);
         SoundPanel.SetActive(false);
         ControlsPanel.SetActive(true);
     }
 
-    void OnPause()
+    public void OnPause()
     {
         if (menuOpen)
         {
