@@ -20,6 +20,12 @@ public class Bullet :NetworkBehaviour
     [Rpc(SendTo.Server)]
     void DestroyRpc()
     {
+        DeactivateRpc();
+    }
+    
+    [Rpc(SendTo.Everyone)]
+    void DeactivateRpc()
+    {
         gameObject.SetActive(false);
     }
 }
