@@ -36,15 +36,15 @@ public class Timer : NetworkBehaviour
 
     void CountTime()
     {
-        // if (remainingTime.Value > 0)
-        // {
-        //     remainingTime.Value -= 1;
-        //     timeRan.Value += 1;
-        // }
-        // if (remainingTime.Value <= 0)
-        // {
-        //     StopGameRpc();
-        // }
+        if (remainingTime.Value > 0)
+        {
+            remainingTime.Value -= 1;
+            timeRan.Value += 1;
+        }
+        if (remainingTime.Value <= 0)
+        {
+            StopGameRpc();
+        }
     }
 
     [Rpc(SendTo.Server, RequireOwnership = false)]
