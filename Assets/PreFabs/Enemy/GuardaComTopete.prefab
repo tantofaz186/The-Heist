@@ -637,7 +637,7 @@ AudioSource:
   m_GameObject: {fileID: 1525455066487968499}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7509449239339456464, guid: 0d061aa2aa2625a4c872fd14e41ac8a9, type: 2}
   m_audioClip: {fileID: 8300000, guid: a21b60754273f0743b6f3c5286286f29, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.585
@@ -1576,7 +1576,6 @@ GameObject:
   - component: {fileID: 3522646463288110461}
   - component: {fileID: -3525884011065926622}
   - component: {fileID: 8269838671026492401}
-  - component: {fileID: 9149328028431483834}
   - component: {fileID: 6640964632351064669}
   - component: {fileID: -2851631060527253863}
   - component: {fileID: 6469180679517515467}
@@ -1627,7 +1626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3767889067
+  GlobalObjectIdHash: 3035485183
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 1
   SynchronizeTransform: 1
@@ -1649,18 +1648,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 6544898432982148185}
---- !u!114 &9149328028431483834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5219918199060101991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76286fb57637b794697b6f1ed50de06a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6640964632351064669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1692,7 +1679,6 @@ MonoBehaviour:
   isRegenerating: 0
   bulletPrefab: {fileID: 5666875563176433570, guid: 96927087a891e8c48bc808e93b27d234, type: 3}
   bulletSpawn: {fileID: 4411302315474281756}
-  bulletSpawner: {fileID: 9149328028431483834}
 --- !u!114 &-2851631060527253863
 MonoBehaviour:
   m_ObjectHideFlags: 0

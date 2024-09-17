@@ -23,31 +23,53 @@ public class OptionsMenu : MonoBehaviour
     
     
     public static OptionsMenu instance;
-    private void Awake()
-    {
-        if (instance!=null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        
-            
-        
-    }
+   
+    
+    
+    PlayerInputActions inputActions;
 
     void Start()
     {   
         GetResolutions();
-        MasterVolumeSlider.value = audioMixer.GetFloat("MasterVolume", out float value) ? value : 0;
-        MusicSlider.value = audioMixer.GetFloat("MusicVolume", out float val) ? val : 0;
-        SfxSlider.value = audioMixer.GetFloat("SfxVolume", out float valu) ? valu : 0;
+        MasterVolumeSlider.value = audioMixer.GetFloat("MasterVolume", out float value) ? Mathf.Pow(10,value/20) : 0;
+        MusicSlider.value = audioMixer.GetFloat("MusicVolume", out float val) ? Mathf.Pow(10,val/20) : 0;
+        SfxSlider.value = audioMixer.GetFloat("SfxVolume", out float valu) ? Mathf.Pow(10,valu/20) : 0;
         brightnessSlider.value = RenderSettings.ambientIntensity;
         OptionsMenuPanel.SetActive(false);
+        
     }
+
+    private void OnEnable()
+    {
+        inputActions = new PlayerInputActions();
+        inputActions.Enable();
+        inputActions.Player.Menu.performed += OnPause;
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Player.Menu.performed -= OnPause;
+        inputActions.Disable();
+        
+    }
+
+    private void OnPause(InputAction.CallbackContext obj)
+    {
+        OnPause();
+    }
+    public void OnPause()
+         {
+             if (menuOpen)
+             {
+                 OptionsMenuPanel.SetActive(false);
+                 menuOpen = false;
+             }
+             else
+             {
+                 OptionsMenuPanel.SetActive(true);
+                 menuOpen = true;
+             }
+         }
 
     void GetResolutions()
     {
@@ -94,15 +116,15 @@ public class OptionsMenu : MonoBehaviour
     
     public void SetMasterVolume()
     {
-        audioMixer.SetFloat("MasterVolume", MasterVolumeSlider.value);
+        audioMixer.SetFloat("MasterVolume", Mathf.Log10(MasterVolumeSlider.value) * 20);
     }
     public void SetMusicVolume()
     {
-        audioMixer.SetFloat("MusicVolume", MusicSlider.value);
+        audioMixer.SetFloat("MusicVolume", Mathf.Log10(MusicSlider.value) * 20);
     }
     public void SetSfxVolume()
     {
-        audioMixer.SetFloat("SfxVolume", SfxSlider.value);
+        audioMixer.SetFloat("SfxVolume", Mathf.Log10(SfxSlider.value) * 20);
     }
 
     public void Sound()
@@ -124,19 +146,7 @@ public class OptionsMenu : MonoBehaviour
         ControlsPanel.SetActive(true);
     }
 
-    public void OnPause()
-    {
-        if (menuOpen)
-        {
-            OptionsMenuPanel.SetActive(false);
-            menuOpen = false;
-        }
-        else
-        {
-            OptionsMenuPanel.SetActive(true);
-            menuOpen = true;
-        }
-    }
+  
 
     
 }
