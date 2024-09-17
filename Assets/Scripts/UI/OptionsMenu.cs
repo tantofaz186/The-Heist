@@ -63,11 +63,13 @@ public class OptionsMenu : MonoBehaviour
              {
                  OptionsMenuPanel.SetActive(false);
                  menuOpen = false;
+                 Cursor.lockState = CursorLockMode.Locked;
              }
              else
              {
                  OptionsMenuPanel.SetActive(true);
                  menuOpen = true;
+                 Cursor.lockState = CursorLockMode.None;
              }
          }
 
