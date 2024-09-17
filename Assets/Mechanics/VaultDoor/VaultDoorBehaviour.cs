@@ -11,8 +11,10 @@ namespace Mechanics.VaultDoor
         private CodigoFactory codigoFactory;
 
         public Transform door;
-
+        
         public event Action OnAlarmTrigger;
+
+        public AudioPlay vaultSound;
         
         public void Initialize(CodigoFactory codigoFactory)
         {
@@ -47,6 +49,7 @@ namespace Mechanics.VaultDoor
                 int angle = -3;
                 door.transform.Rotate(Vector3.up, angle);
                 totalAngle += angle;
+                vaultSound.PlayAudioClientRpc();
                 yield return null;
             }
         }

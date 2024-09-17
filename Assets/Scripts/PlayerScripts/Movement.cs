@@ -32,6 +32,7 @@ public class Movement : NetworkBehaviour, IUseAction
     public static Movement Instance;
     public CombatReportBehaviour playerCombatReport;
 
+    public AudioListPlay jumpSound;
     protected void Start()
     {
         corpo_fisico = transform.GetComponent<Rigidbody>();
@@ -103,6 +104,7 @@ public class Movement : NetworkBehaviour, IUseAction
         {
             corpo_fisico.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
             corpo_FSM.SetTrigger("pular");
+            jumpSound.PlayAudioClientRpc();
             playerCombatReport.combatReportData.pulos++;
         }
     }
