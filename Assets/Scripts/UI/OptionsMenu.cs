@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class OptionsMenu : MonoBehaviour
 {   [SerializeField] private GameObject OptionsMenuPanel;
@@ -63,7 +64,11 @@ public class OptionsMenu : MonoBehaviour
              {
                  OptionsMenuPanel.SetActive(false);
                  menuOpen = false;
-                 Cursor.lockState = CursorLockMode.Locked;
+                 if (SceneManager.GetActiveScene().name == "GameScene")
+                 {
+                     Cursor.lockState = CursorLockMode.Locked;
+                 }
+                 
              }
              else
              {
