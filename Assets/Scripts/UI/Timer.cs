@@ -12,14 +12,15 @@ public class Timer : NetworkBehaviour
 
     [SerializeField]
     public NetworkVariable<float> totalTime;
-    
+
     [SerializeField]
     private NetworkVariable<float> timeRan;
-    
+
     [SerializeField]
     private float startTime;
 
     public event Action OnTimerEnd;
+
     private void Awake()
     {
         instance = this;

@@ -40,7 +40,11 @@ public class CombatReportUI : MonoBehaviour
                 yield return new WaitForSeconds(3f);
                 c.Hide();
             }
-
         }
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 }

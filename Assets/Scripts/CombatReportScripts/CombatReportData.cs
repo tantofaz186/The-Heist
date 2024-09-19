@@ -49,6 +49,8 @@ namespace CombatReportScripts
 
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
         {
+            serializer.SerializeValue(ref playerID);
+            serializer.SerializeValue(ref playerName);
             serializer.SerializeValue(ref playerColor);
             serializer.SerializeValue(ref reliquiasColetadas);
             serializer.SerializeValue(ref itensColetados);

@@ -33,7 +33,7 @@ namespace UI
 
         public void LoadSettings()
         {
-            settings = SaveSystem.Settings?? new Settings(1);
+            settings = SaveSystem.Settings?? new Settings();
             mouseSensitivitySlider.SetValueWithoutNotify(Math.Clamp(settings.mouseSensitivity, 0.01f, 1f));
         }
 

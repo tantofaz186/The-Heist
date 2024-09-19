@@ -26,7 +26,5 @@ namespace Utils
             playerInputActions.Player.Disable();
             playerInputActions.Disable();
         }
-
-       
     }
 }

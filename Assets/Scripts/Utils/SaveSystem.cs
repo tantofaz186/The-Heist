@@ -1,4 +1,5 @@
 using System.IO;
+using CombatReportScripts;
 using UI;
 using UnityEngine;
 
@@ -26,7 +27,24 @@ namespace Utils
             }
 
             Debug.LogWarning("Settings file not found");
-            return new Settings(1);
+            return new Settings();
+        }
+
+        public static void SaveCombatReport(CombatReportData data)
+        {
+            File.WriteAllText(Application.persistentDataPath + "/combatReport.json", JsonUtility.ToJson(data));
+        }
+
+        public static CombatReportData LoadCombatReport()
+        {
+            if (File.Exists(Application.persistentDataPath + "/combatReport.json"))
+            {
+                CombatReportData data =
+                    JsonUtility.FromJson<CombatReportData>(File.ReadAllText(Application.persistentDataPath + "/combatReport.json"));
+                // File.Delete(Application.persistentDataPath + "/combatReport.json");
+                return data;
+            }
+            return new CombatReportData();
         }
 
         private static Settings settings;

@@ -46,6 +46,7 @@ public class PlayerCombatReportUI : MonoBehaviour
     {
         transform.parent.gameObject.SetActive(true);
     }
+
     public void Apply(List<CombatReportData> combatReports)
     {
         List<Tuple<Color, string>> dataOrdered = GetRelevantData(combatReports);
@@ -64,32 +65,33 @@ public class PlayerCombatReportUI : MonoBehaviour
                 for (int i = 0; i < combatReports.Count; i++)
                 {
                     dataOrdered.Add(new Tuple<Color, string>(combatReports[i].playerColor,
-                        $"{combatReports[i].playerName} : {combatReports[i].vezesPreso}"));
+                        combatReports[i].playerName.IsEmpty ? "" : $"{combatReports[i].playerName} : {combatReports[i].vezesPreso}"));
                 }
-
                 break;
             case CombatReportType.DISTANCIA:
                 combatReports.Sort((cr1, cr2) => cr2.distanciaPercorrida.CompareTo(cr1.distanciaPercorrida));
                 for (int i = 0; i < combatReports.Count; i++)
                 {
                     dataOrdered.Add(new Tuple<Color, string>(combatReports[i].playerColor,
-                        $"{combatReports[i].playerName} : {combatReports[i].distanciaPercorrida:F2} Metros"));
+                        combatReports[i].playerName.IsEmpty ? "" : $"{combatReports[i].playerName} : {combatReports[i].distanciaPercorrida:F2} Metros"));
                 }
+
                 break;
             case CombatReportType.ITEMS:
                 combatReports.Sort((cr1, cr2) => cr2.itensColetados.CompareTo(cr1.itensColetados));
                 for (int i = 0; i < combatReports.Count; i++)
                 {
                     dataOrdered.Add(new Tuple<Color, string>(combatReports[i].playerColor,
-                        $"{combatReports[i].playerName} : {combatReports[i].itensColetados}"));
+                        combatReports[i].playerName.IsEmpty ? "" : $"{combatReports[i].playerName} : {combatReports[i].itensColetados}"));
                 }
+
                 break;
             case CombatReportType.MONEY:
                 combatReports.Sort((cr1, cr2) => cr2.dinheiroRecebido.CompareTo(cr1.dinheiroRecebido));
                 for (int i = 0; i < combatReports.Count; i++)
                 {
                     dataOrdered.Add(new Tuple<Color, string>(combatReports[i].playerColor,
-                        $"{combatReports[i].playerName} : {combatReports[i].dinheiroRecebido}"));
+                        combatReports[i].playerName.IsEmpty ? "" : $"{combatReports[i].playerName} : {combatReports[i].dinheiroRecebido}"));
                 }
                 break;
             default:
@@ -97,8 +99,9 @@ public class PlayerCombatReportUI : MonoBehaviour
                 for (int i = 0; i < combatReports.Count; i++)
                 {
                     dataOrdered.Add(new Tuple<Color, string>(combatReports[i].playerColor,
-                        $"{combatReports[i].playerName} : {combatReports[i].playerID}"));
+                        combatReports[i].playerName.IsEmpty ? "" : $"{combatReports[i].playerName} : {combatReports[i].playerID}"));
                 }
+
                 break;
         }
 
@@ -112,6 +115,7 @@ public class PlayerCombatReportUI : MonoBehaviour
             texts[i].gameObject.SetActive(true);
             texts[i].text = sortedTexts[i];
         }
+
         for (int i = sortedTexts.Count; i < texts.Count; i++)
         {
             texts[i].gameObject.SetActive(false);
@@ -126,7 +130,7 @@ public class PlayerCombatReportUI : MonoBehaviour
             images[i].color = colors[i];
         }
 
-        for (int i = colors.Count; i < images.Count ; i++)
+        for (int i = colors.Count; i < images.Count; i++)
         {
             images[i].gameObject.SetActive(false);
         }

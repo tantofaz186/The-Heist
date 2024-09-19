@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using CombatReportScripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -41,6 +39,7 @@ public class Movement : NetworkBehaviour, IUseAction
         corpo_FSM = transform.GetComponent<OwnerNetworkAnimator>();
         playerStats = GetComponent<PlayerStats>();
         vel = walkSpeed;
+        lastPosition = new Vector2(transform.position.x, transform.position.z);
     }
 
     private void FixedUpdate()
@@ -81,10 +80,12 @@ public class Movement : NetworkBehaviour, IUseAction
         velocity += transform.forward * (valueRead.y * vel * Time.fixedDeltaTime);
         velocity += transform.right * (valueRead.x * vel * Time.fixedDeltaTime);
 
-        playerCombatReport.combatReportData.distanciaPercorrida += velocity.magnitude;
+        
         velocity.y = (corpo_fisico.velocity.y < 0) ? corpo_fisico.velocity.y * 1.03f : corpo_fisico.velocity.y;
         corpo_fisico.velocity = velocity;
-
+        Vector2 current2dPos = new Vector2(transform.position.x, transform.position.z);
+        playerCombatReport.combatReportData.distanciaPercorrida += Vector2.Distance(current2dPos, lastPosition);
+        lastPosition = current2dPos;
         if (valueRead.y != 0 || valueRead.x != 0)
         {
             corpo_FSM.Animator.SetBool("movimentando", true);
@@ -95,6 +96,7 @@ public class Movement : NetworkBehaviour, IUseAction
         }
     }
 
+    private Vector2 lastPosition;
     public void Jump(InputAction.CallbackContext context)
     {
         if (!IsOwner) return;
