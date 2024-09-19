@@ -15,7 +15,7 @@ namespace Utils
             }
 
             DontDestroyOnLoad(gameObject);
-            playerInputActions = new PlayerInputActions();
+            playerInputActions = RebindManager.playerInputActions;
             playerInputActions.Enable();
             playerInputActions.Player.Enable();
         }
@@ -27,9 +27,6 @@ namespace Utils
             playerInputActions.Disable();
         }
 
-        public void RebindKey(InputAction action, string newKey)
-        {
-            action.ChangeBinding(new InputBinding { path = newKey });
-        }
+       
     }
 }
