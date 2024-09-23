@@ -24,11 +24,17 @@ namespace Mechanics.VaultDoor
             base.OnNetworkSpawn();
             StartCoroutine(WaitToSpawn());
         }
-
+        const float timeout = 10.0f;
         private IEnumerator WaitToSpawn()
         {
-            yield return new WaitUntil(() => FindObjectsOfType<CodigoSpawnItem>().Length > 0);
-            possibleItemToSpawn.AddRange(FindObjectsOfType<CodigoSpawnItem>().OrderBy((item) => item.GetInstanceID()));
+            float elapsedTime = 0.0f;
+            yield return new WaitUntil(() =>  FindObjectsOfType<CodigoSpawnItem>().Length > 0);
+            yield return new WaitUntil(() =>
+            {
+                elapsedTime += Time.deltaTime;
+                return FindObjectsOfType<CodigoSpawnItem>().Length >= 4 || elapsedTime >= timeout;
+            });
+            possibleItemToSpawn.AddRange(FindObjectsByType<CodigoSpawnItem>(FindObjectsSortMode.InstanceID));
             if (IsServer)
             {
                 Debug.Log("Gerando código.");

@@ -24,7 +24,7 @@ public class ItemSpawn : NetworkBehaviour
       for(int i = 0; i < itemSpawnPoints.Count; i++)
       {
           int type = itemSpawnPoints[i].GetComponent<itemSpawnType>().spawnType;
-          SpawnItems(type, i);
+          StartCoroutine(SpawnItems(type, i));
         
       }
    }
@@ -32,8 +32,12 @@ public class ItemSpawn : NetworkBehaviour
    
    
    
-   void SpawnItems(int type, int spawnPointIndex)
+   IEnumerator SpawnItems(int type, int spawnPointIndex)
    {
+      for (int i = 0; i < 10*spawnPointIndex; i++)
+      {
+         yield return new WaitForEndOfFrame();
+      }
       switch (type)
       {
          case 0:
