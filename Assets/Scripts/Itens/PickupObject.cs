@@ -1,10 +1,14 @@
 using System.Collections;
 using CombatReportScripts;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Outline))]
+[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(NetworkRigidbody))]
 public class PickupObject : NetworkBehaviour, Interactable
 {
     public Item item;
