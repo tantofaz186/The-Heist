@@ -50,7 +50,7 @@ namespace CombatReportScripts
             {
                 combatReportUI = FindObjectOfType<CombatReportUI>();
                 SetValuesRpc(SaveSystem.LoadCombatReport());
-                if (IsServer) Invoke(nameof(ServerSendDataRpc), 1f);
+                if (IsServer) Invoke(nameof(ServerSendDataRpc), 3f);
             }
             else if (arg0.name == Loader.Scene.GameScene.ToString() && IsServer)
             {
