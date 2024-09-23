@@ -66,7 +66,7 @@ public class Door : NetworkBehaviour, Interactable
             if (isRotatingDoor)
             {
                 float dot = Vector3.Dot(Forward, (UserPosition - transform.position).normalized);
-                Debug.Log(dot);
+                Debug.Log($"Dot: {dot.ToString("N3")}");
                 AnimationCoroutine = StartCoroutine(RotateDoor(dot));
             }
             else
@@ -177,7 +177,7 @@ public class Door : NetworkBehaviour, Interactable
 
     public string getDisplayText()
     {
-        return isOpen.Value ? "Close \"E\"" : "Open \"E\"";
+        return isOpen.Value ? "Close " : "Open ";
     }
 
     public void Interact()
