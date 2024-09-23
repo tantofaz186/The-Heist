@@ -298,6 +298,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -283071680955092727, guid: 9710bbe4e85835b44a710e15609b4194, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 151377042072130820, guid: 9710bbe4e85835b44a710e15609b4194, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1320364217257438827, guid: 9710bbe4e85835b44a710e15609b4194, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -342,7 +350,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParedeMoldura_RP
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -283071680955092727, guid: 9710bbe4e85835b44a710e15609b4194, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1320364217257438827, guid: 9710bbe4e85835b44a710e15609b4194, type: 3}
@@ -357,8 +366,85 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1320364217257438827, guid: 9710bbe4e85835b44a710e15609b4194, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7721125063526247104}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1808530524486268113, guid: 9710bbe4e85835b44a710e15609b4194, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4492751303928576767}
+    - targetCorrespondingSourceObject: {fileID: 1808530524486268113, guid: 9710bbe4e85835b44a710e15609b4194, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9216747434167552259}
+    - targetCorrespondingSourceObject: {fileID: 1808530524486268113, guid: 9710bbe4e85835b44a710e15609b4194, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1009264401883014713}
   m_SourcePrefab: {fileID: 100100000, guid: 9710bbe4e85835b44a710e15609b4194, type: 3}
+--- !u!1 &6930139594435910127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1808530524486268113, guid: 9710bbe4e85835b44a710e15609b4194, type: 3}
+  m_PrefabInstance: {fileID: 8734166124151483710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4492751303928576767
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6930139594435910127}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0687966, y: 4, z: 2.6853454}
+  m_Center: {x: -3.4656017, y: 2, z: -1.1058856}
+--- !u!65 &9216747434167552259
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6930139594435910127}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0875617, y: 4, z: 2.6750503}
+  m_Center: {x: -0.54378086, y: 2, z: -1.100738}
+--- !u!65 &1009264401883014713
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6930139594435910127}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 1.0659533, z: 2.15}
+  m_Center: {x: -2, y: 3.4670234, z: -1.0750003}
 --- !u!4 &7739187001731613525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1320364217257438827, guid: 9710bbe4e85835b44a710e15609b4194, type: 3}
