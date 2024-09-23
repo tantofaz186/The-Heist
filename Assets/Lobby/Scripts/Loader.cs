@@ -16,6 +16,7 @@ public static class Loader
         CombatReportScene,
         TestArea,
         Tutorial,
+        BlankScene,
     }
 
     private static Scene targetScene;
@@ -34,13 +35,13 @@ public static class Loader
 
     public static void LoadCombatReportScene()
     {
-        SceneManager.LoadScene(Scene.CombatReportScene.ToString());
+        SceneManager.LoadScene(Scene.BlankScene.ToString());
         SceneManager.sceneLoaded += LoadCombatReportScene_Multiplayer;
     }
 
     private static void LoadCombatReportScene_Multiplayer(UnityEngine.SceneManagement.Scene arg0, LoadSceneMode arg1)
     {
-        if (arg0.name == Scene.CombatReportScene.ToString())
+        if (arg0.name == Scene.BlankScene.ToString())
         {
             SceneManager.sceneLoaded -= LoadCombatReportScene_Multiplayer;
             NetworkManager.Singleton.SceneManager.LoadScene(Scene.CombatReportScene.ToString(), LoadSceneMode.Single);

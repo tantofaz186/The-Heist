@@ -36,6 +36,7 @@ namespace CombatReportScripts
             else
             {
                 Instance = this;
+
                 SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
 
                 DontDestroyOnLoad(this);
@@ -47,17 +48,18 @@ namespace CombatReportScripts
             }
         }
 
+        int called = 0;
         private void SceneManagerOnsceneLoaded(Scene arg0, LoadSceneMode arg1)
         {
             if (arg0.name == Loader.Scene.CombatReportScene.ToString())
             {
+                Debug.Log($"Called {++called}");
                 combatReportUI = FindObjectOfType<CombatReportUI>();
                 SetValuesRpc(SaveSystem.LoadCombatReport());
                 if (IsServer) StartCoroutine(WaitForReady());
             }
             else if (arg0.name == Loader.Scene.GameScene.ToString() && IsServer)
             {
-                numberOfPlayers = NetworkManager.Singleton.ConnectedClients.Count;
                 readyClients.Value = 0;
                 player1 =
                     player2 =
@@ -76,17 +78,13 @@ namespace CombatReportScripts
                 player3.Value,
                 player4.Value,
             };
-            Debug.Log(player1.Value);
-            Debug.Log(player1.Value.playerName);
-            Debug.Log(player1.Value.playerName.ToString());
-            Debug.Log(new String(player1.Value.playerName.ToString()));
-            
             combatReportUI.SetUI(playersData);
         }
 
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void SetValuesRpc(CombatReportData _data)
         {
+            Debug.Log($"{_data.playerID} : {_data.playerName}");
             switch (_data.playerID)
             {
                 case 0:
@@ -110,7 +108,11 @@ namespace CombatReportScripts
 
         private IEnumerator WaitForReady()
         {
-            yield return new WaitUntil(() => readyClients.Value == numberOfPlayers);
+            yield return new WaitUntil(() =>
+            {
+                Debug.Log($"Waiting for players ready {readyClients.Value} of {NetworkManager.Singleton.ConnectedClients.Count} players ready.");
+                return readyClients.Value == NetworkManager.Singleton.ConnectedClients.Count;
+            });
             ServerSendDataRpc();
         }
 
