@@ -196,7 +196,7 @@ public class Enemy : NetworkBehaviour
         if(bullet!=null)
         {
             bullet.transform.position = bulletSpawn.position;
-            bullet.transform.forward = bulletSpawn.forward;
+            bullet.transform.rotation = bulletSpawn.rotation;
             ActivateBulletRpc(index);
         }
         bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 10f, ForceMode.Impulse);
