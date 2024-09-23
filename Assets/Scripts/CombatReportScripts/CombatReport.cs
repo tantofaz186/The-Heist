@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
@@ -17,6 +18,8 @@ namespace CombatReportScripts
         NetworkVariable<CombatReportData> player2 = new();
         NetworkVariable<CombatReportData> player3 = new();
         NetworkVariable<CombatReportData> player4 = new();
+        NetworkVariable<int> readyClients = new();
+        private int numberOfPlayers;
 
         [SerializeField]
         CombatReportUI combatReportUI;
@@ -50,10 +53,12 @@ namespace CombatReportScripts
             {
                 combatReportUI = FindObjectOfType<CombatReportUI>();
                 SetValuesRpc(SaveSystem.LoadCombatReport());
-                if (IsServer) Invoke(nameof(ServerSendDataRpc), 3f);
+                if (IsServer) StartCoroutine(WaitForReady());
             }
             else if (arg0.name == Loader.Scene.GameScene.ToString() && IsServer)
             {
+                numberOfPlayers = NetworkManager.Singleton.ConnectedClients.Count;
+                readyClients.Value = 0;
                 player1 =
                     player2 =
                         player3 =
@@ -100,6 +105,13 @@ namespace CombatReportScripts
                     Debug.LogError($"Player ID not found : {_data.playerID}");
                     break;
             }
+            readyClients.Value++;
+        }
+
+        private IEnumerator WaitForReady()
+        {
+            yield return new WaitUntil(() => readyClients.Value == numberOfPlayers);
+            ServerSendDataRpc();
         }
 
         #if UNITY_EDITOR
