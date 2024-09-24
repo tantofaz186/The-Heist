@@ -24,24 +24,25 @@ public class BulletPool : NetworkBehaviour
         }
     }
 
-    [Rpc(SendTo.Server)]
+    [Rpc(SendTo.Everyone)]
     public void InstantiateBulletsRpc()
     {
         for (int i = 0; i < poolSize; i++)
         {
+            
             var obj = Instantiate(bulletPrefab, transform.position, transform.rotation);
-            var instanceNetworkObject = obj.GetComponent<NetworkObject>();
-            instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+            if (IsServer)
+            {
+                var instanceNetworkObject = obj.GetComponent<NetworkObject>();
+                            instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+            }
+            
             obj.SetActive(false);
-            AddBulletToPoolRpc(obj);
+            bulletPool.Add(obj);
         }
     }
-
-    [Rpc(SendTo.Everyone)]
-    void AddBulletToPoolRpc(GameObject obj)
-    {
-        bulletPool.Add(obj);
-    }
+    
+    
     
     
     public GameObject GetBullet(out int index)
