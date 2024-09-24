@@ -8,7 +8,7 @@ public class BulletPool : NetworkBehaviour
 {
     public static BulletPool instance;
 
-    [SerializeField] private List<GameObject> bulletPool = new List<GameObject>();
+    [SerializeField] NetworkVariable<List<GameObject>> bulletPool= new ();
     [SerializeField] private int poolSize = 10;
     [SerializeField] private GameObject bulletPrefab;
 
@@ -31,14 +31,10 @@ public class BulletPool : NetworkBehaviour
         {
             
             var obj = Instantiate(bulletPrefab, transform.position, transform.rotation);
-            if (IsServer)
-            {
-                var instanceNetworkObject = obj.GetComponent<NetworkObject>();
-                            instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
-            }
-            
+            var instanceNetworkObject = obj.GetComponent<NetworkObject>();
+            instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
             obj.SetActive(false);
-            bulletPool.Add(obj);
+            bulletPool.Value.Add(obj);
         }
     }
     
@@ -47,12 +43,12 @@ public class BulletPool : NetworkBehaviour
     
     public GameObject GetBullet(out int index)
     {
-        for (int i = 0; i < bulletPool.Count; i++)
+        for (int i = 0; i < bulletPool.Value.Count; i++)
         {
-            if (!bulletPool[i].activeInHierarchy)
+            if (!bulletPool.Value[i].activeInHierarchy)
             {
                 index = i;
-                return bulletPool[i];
+                return bulletPool.Value[i];
             }
         }
         index = -1;
@@ -61,6 +57,6 @@ public class BulletPool : NetworkBehaviour
 
     public GameObject GetBulletByIndex(int index)
     {
-        return bulletPool[index];
+        return bulletPool.Value[index];
     }
 }
