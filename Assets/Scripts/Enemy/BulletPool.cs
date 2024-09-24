@@ -33,8 +33,14 @@ public class BulletPool : NetworkBehaviour
             var instanceNetworkObject = obj.GetComponent<NetworkObject>();
             instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
             obj.SetActive(false);
-            bulletPool.Add(obj);
+            AddBulletToPoolRpc(obj);
         }
+    }
+
+    [Rpc(SendTo.Everyone)]
+    void AddBulletToPoolRpc(GameObject obj)
+    {
+        bulletPool.Add(obj);
     }
     
     
