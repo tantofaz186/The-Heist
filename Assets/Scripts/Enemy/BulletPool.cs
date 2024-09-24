@@ -38,22 +38,16 @@ public class BulletPool : NetworkBehaviour
     }
     
     
-    public GameObject GetBullet(out int index)
+    public GameObject GetBullet()
     {
         for (int i = 0; i < bulletPool.Count; i++)
         {
             if (!bulletPool[i].activeInHierarchy)
             {
-                index = i;
                 return bulletPool[i];
             }
         }
-        index = -1;
         return null;
     }
 
-    public GameObject GetBulletByIndex(int index)
-    {
-        return bulletPool[index];
-    }
 }

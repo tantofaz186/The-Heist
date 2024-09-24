@@ -191,22 +191,14 @@ public class Enemy : NetworkBehaviour
     [Rpc(SendTo.Server)]
     public void InstantiateBulletRpc()
     {
-        int index;
-        GameObject bullet = BulletPool.instance.GetBullet(out index);
+        GameObject bullet = BulletPool.instance.GetBullet();
         if(bullet!=null)
         {
             bullet.transform.position = bulletSpawn.position;
             bullet.transform.forward = bulletSpawn.forward;
-            ActivateBulletRpc(index);
+            bullet.SetActive(true);
         }
         bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 10f, ForceMode.Impulse);
-    }
-
-    [Rpc(SendTo.Everyone, RequireOwnership = false)]
-    private void ActivateBulletRpc(int index)
-    {
-        GameObject bullet = BulletPool.instance.GetBulletByIndex(index);
-        bullet.SetActive(true);
     }
 
     List<GameObject> GetWaypoints()
