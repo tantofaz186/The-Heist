@@ -32,7 +32,7 @@ namespace Mechanics.VaultDoor
             yield return new WaitUntil(() =>
             {
                 elapsedTime += Time.deltaTime;
-                return FindObjectsOfType<CodigoSpawnItem>().Length >= 4 || elapsedTime >= timeout;
+                return (FindObjectsOfType<CodigoSpawnItem>().Length >= 4 && elapsedTime >= timeout/2f)|| elapsedTime >= timeout;
             });
             possibleItemToSpawn.AddRange(FindObjectsByType<CodigoSpawnItem>(FindObjectsSortMode.InstanceID));
             if (IsServer)
