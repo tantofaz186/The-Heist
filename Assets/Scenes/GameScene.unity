@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657832, g: 0.49641222, b: 0.57481664, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2062,6 +2062,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hallways:
   - {fileID: 5132577278816812498, guid: e0541b6858476b24088249e748c89212, type: 3}
+  - {fileID: 1716476272914899772, guid: 4c0ab875276e5d3438b1ffc361ca2bbc, type: 3}
+  - {fileID: 1716476272914899772, guid: 3651177326aec5041bed85ed3a2ead52, type: 3}
   mapCenter: {fileID: 649739658}
   roomSpawnpoints: []
   themeRooms:
