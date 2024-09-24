@@ -137,7 +137,10 @@ public class RoomSpawn : NetworkBehaviour
        bool inList = false;
        if (themeRoomsCheck.Count <= 0)
        {
-           themeRoomsCheck = new List<int>(){0,1,2,3};
+           for (int i = 0; i < themeRooms.Count; i++)
+           {
+               themeRoomsCheck.Add(i);
+           }
           
        }
            
@@ -172,8 +175,10 @@ public class RoomSpawn : NetworkBehaviour
        bool inList = false;
        if (normalRoomsCheck.Count <= 0)
        {
-           normalRoomsCheck = new List<int>(){0,1,2,3};
-          
+           for (int i = 0; i < normalRooms.Count; i++)
+           {
+              normalRoomsCheck.Add(i);
+           }
        }
            
        

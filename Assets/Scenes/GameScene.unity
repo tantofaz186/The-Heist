@@ -2134,6 +2134,7 @@ MonoBehaviour:
   hallways:
   - {fileID: 1716476272914899772, guid: 4c0ab875276e5d3438b1ffc361ca2bbc, type: 3}
   - {fileID: 1716476272914899772, guid: 3651177326aec5041bed85ed3a2ead52, type: 3}
+  - {fileID: 5132577278816812498, guid: e0541b6858476b24088249e748c89212, type: 3}
   mapCenter: {fileID: 649739658}
   roomSpawnpoints: []
   themeRooms:
@@ -2152,14 +2153,13 @@ MonoBehaviour:
   - Rooms:
     - {fileID: 8770255870503394882, guid: b7e9366575f7af34aa647e3c19774e1f, type: 3}
     - {fileID: 8288673120125745419, guid: c912a27229a97a6488b98d943ba5cec0, type: 3}
-  - Rooms:
-    - {fileID: 8288673120125745419, guid: 626083418e37d1a4ca3f415c2be285c3, type: 3}
   themeRoomsCheck: 00000000010000000200000003000000
   normalRooms:
   - Rooms:
-    - {fileID: 8288673120125745419, guid: b7e04c766bfa81441bb80e03133b80cb, type: 3}
+    - {fileID: 8288673120125745419, guid: 626083418e37d1a4ca3f415c2be285c3, type: 3}
   normalRoomsCheck: 00000000010000000200000003000000
-  securityRoom: {fileID: 7889637662567156224, guid: ec099160dfd798940994e2b20c097f62, type: 3}
+  vaultRoom: {fileID: 7889637662567156224, guid: ec099160dfd798940994e2b20c097f62, type: 3}
+  prison: {fileID: 8288673120125745419, guid: b7e04c766bfa81441bb80e03133b80cb, type: 3}
   playerSpawnPoints: []
   bake: {fileID: 1592956864}
   enemySpawn: {fileID: 655053269}
@@ -4558,7 +4558,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.06666667
+  m_VoxelSize: 0.2
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
