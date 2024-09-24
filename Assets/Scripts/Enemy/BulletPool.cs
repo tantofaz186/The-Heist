@@ -8,7 +8,7 @@ public class BulletPool : NetworkBehaviour
 {
     public static BulletPool instance;
 
-    [SerializeField] NetworkVariable<GameObject>[] bulletPool = new NetworkVariable<GameObject>[10];
+    [SerializeField] private List<GameObject> bulletPool = new List<GameObject>();
     [SerializeField] private int poolSize = 10;
     [SerializeField] private GameObject bulletPrefab;
 
@@ -24,31 +24,28 @@ public class BulletPool : NetworkBehaviour
         }
     }
 
-    [Rpc(SendTo.Everyone)]
+    [Rpc(SendTo.Server)]
     public void InstantiateBulletsRpc()
     {
         for (int i = 0; i < poolSize; i++)
         {
-            
             var obj = Instantiate(bulletPrefab, transform.position, transform.rotation);
             var instanceNetworkObject = obj.GetComponent<NetworkObject>();
             instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
             obj.SetActive(false);
-            bulletPool[i].Value = obj;
+            bulletPool.Add(obj);
         }
     }
     
     
-    
-    
     public GameObject GetBullet(out int index)
     {
-        for (int i = 0; i < bulletPool.Length; i++)
+        for (int i = 0; i < bulletPool.Count; i++)
         {
-            if (!bulletPool[i].Value.activeInHierarchy)
+            if (!bulletPool[i].activeInHierarchy)
             {
                 index = i;
-                return bulletPool[i].Value;
+                return bulletPool[i];
             }
         }
         index = -1;
@@ -57,6 +54,6 @@ public class BulletPool : NetworkBehaviour
 
     public GameObject GetBulletByIndex(int index)
     {
-        return bulletPool[index].Value;
+        return bulletPool[index];
     }
 }
