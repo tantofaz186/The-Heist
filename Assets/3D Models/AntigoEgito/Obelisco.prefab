@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1817828305431240330}
   - component: {fileID: 7630294622196620628}
   - component: {fileID: 8007720198433633592}
-  - component: {fileID: 8378337506441179098}
+  - component: {fileID: 2826800716489340979}
   m_Layer: 0
   m_Name: Obelisco
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4397309460343038144}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.018005, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 46787e5706aae2a4593a6004243574e9, type: 2}
+  - {fileID: 2100000, guid: fa8c143fda5c0bd429c97c0a59ac0aa7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8378337506441179098
-MeshCollider:
+--- !u!65 &2826800716489340979
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,7 +102,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8096114487788298262, guid: df14623aa50a22547962e8e3a1bb57ca, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 3.991507, z: 1}
+  m_Center: {x: 0.0029239058, y: 1.9997249, z: 0.0014851689}
