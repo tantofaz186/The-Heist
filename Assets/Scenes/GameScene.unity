@@ -896,6 +896,77 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407119815}
   m_CullTransparentMesh: 1
+--- !u!1 &427534001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 427534004}
+  - component: {fileID: 427534003}
+  - component: {fileID: 427534002}
+  m_Layer: 16
+  m_Name: Post-process Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &427534002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427534001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: bdfbad0eda8cd224c82fb1ca4dcab031, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
+--- !u!65 &427534003
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427534001}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &427534004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427534001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.9060335, y: -27.410133, z: 45.966896}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &447467745
 GameObject:
   m_ObjectHideFlags: 0
@@ -2061,6 +2132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hallways:
+  - {fileID: 1716476272914899772, guid: 4c0ab875276e5d3438b1ffc361ca2bbc, type: 3}
+  - {fileID: 1716476272914899772, guid: 3651177326aec5041bed85ed3a2ead52, type: 3}
   - {fileID: 5132577278816812498, guid: e0541b6858476b24088249e748c89212, type: 3}
   mapCenter: {fileID: 649739658}
   roomSpawnpoints: []
@@ -2083,9 +2156,10 @@ MonoBehaviour:
   themeRoomsCheck: 00000000010000000200000003000000
   normalRooms:
   - Rooms:
-    - {fileID: 8288673120125745419, guid: b7e04c766bfa81441bb80e03133b80cb, type: 3}
+    - {fileID: 8288673120125745419, guid: 626083418e37d1a4ca3f415c2be285c3, type: 3}
   normalRoomsCheck: 00000000010000000200000003000000
-  securityRoom: {fileID: 7889637662567156224, guid: ec099160dfd798940994e2b20c097f62, type: 3}
+  vaultRoom: {fileID: 7889637662567156224, guid: ec099160dfd798940994e2b20c097f62, type: 3}
+  prison: {fileID: 8288673120125745419, guid: b7e04c766bfa81441bb80e03133b80cb, type: 3}
   playerSpawnPoints: []
   bake: {fileID: 1592956864}
   enemySpawn: {fileID: 655053269}
@@ -2165,6 +2239,19 @@ MonoBehaviour:
   quadros:
   - {fileID: 5571576866317203237, guid: 1fb9173481bd179369614659d17ba5d9, type: 3}
   - {fileID: 7644241830624530724, guid: 9a136018e11274ca58f27eea74ed206c, type: 3}
+  rings:
+  - {fileID: 509773701853694132, guid: baf585a7cfdd541468b0753c2e3b80fe, type: 3}
+  - {fileID: 509773701853694132, guid: aea43c5f0dfb2ba439241252cec5f7cd, type: 3}
+  - {fileID: 509773701853694132, guid: 64066d1431d49504eb4d22341659308f, type: 3}
+  necklaces:
+  - {fileID: 509773701853694132, guid: 99624ae38f0afbd48a706e1c29bff88f, type: 3}
+  - {fileID: 509773701853694132, guid: f285c90679229994d980e4a931f0dee1, type: 3}
+  pans:
+  - {fileID: 1107443715168144209, guid: 98b6a93c2521f1b44afc5dc6619d73a1, type: 3}
+  - {fileID: 1107443715168144209, guid: 98b6a93c2521f1b44afc5dc6619d73a1, type: 3}
+  - {fileID: 1107443715168144209, guid: 98b6a93c2521f1b44afc5dc6619d73a1, type: 3}
+  - {fileID: 1107443715168144209, guid: 98b6a93c2521f1b44afc5dc6619d73a1, type: 3}
+  - {fileID: 1107443715168144209, guid: 2132dc5f12f50604587d47a2136bb025, type: 3}
 --- !u!114 &655053269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4471,7 +4558,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.06666667
+  m_VoxelSize: 0.2
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
@@ -5300,6 +5387,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 427534004}
   - {fileID: 705507995}
   - {fileID: 1482767226}
   - {fileID: 655053266}
