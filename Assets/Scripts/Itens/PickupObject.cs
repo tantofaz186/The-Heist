@@ -26,6 +26,11 @@ public class PickupObject : NetworkBehaviour, Interactable
     private ulong lastOwnerId;
     public NetworkVariable<bool> alreadyCollected = new();
 
+    public void Start()
+    {
+        if (IsServer) SetDefaultRigidbodyRpc();
+    }
+
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -34,6 +39,16 @@ public class PickupObject : NetworkBehaviour, Interactable
         outline = GetComponent<Outline>();
         outline.enabled = false;
         StartCoroutine(setActions());
+    }
+
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
+    public void SetDefaultRigidbodyRpc()
+    {
+        m_Rigidbody.isKinematic = true;
+        if (TryGetComponent<Portrait>(out _))
+        {
+            m_Rigidbody.useGravity = false;
+        }
     }
 
     public IEnumerator setActions()
@@ -121,6 +136,7 @@ public class PickupObject : NetworkBehaviour, Interactable
     {
         _renderer.enabled = _enabled;
         m_Rigidbody.isKinematic = !_enabled;
+        m_Rigidbody.useGravity = _enabled;
         m_Collider.isTrigger = !_enabled;
     }
 
@@ -133,7 +149,6 @@ public class PickupObject : NetworkBehaviour, Interactable
             ParentObjectRpc(senderClientId);
         }
     }
-
 
     [Rpc(SendTo.Owner)]
     private void TryGrabRelicOwnerRpc(ulong senderClientId)
