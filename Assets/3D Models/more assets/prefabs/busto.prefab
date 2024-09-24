@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4723764963842419720
+--- !u!1 &9183818672187183662
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4860679125206834030}
-  - component: {fileID: 7015308596605055728}
+  - component: {fileID: 7149648965112478545}
+  - component: {fileID: 1621312836266209267}
   m_Layer: 0
-  m_Name: necklace 1 Spawn
+  m_Name: necklace Spawn
   m_TagString: ItemSpawnPoints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4860679125206834030
+--- !u!4 &7149648965112478545
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4723764963842419720}
+  m_GameObject: {fileID: 9183818672187183662}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.092, y: 0.0898, z: 0}
+  m_LocalPosition: {x: -0.013100001, y: 0.0677, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3467912488395989785}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7015308596605055728
+--- !u!114 &1621312836266209267
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4723764963842419720}
+  m_GameObject: {fileID: 9183818672187183662}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f88b9442c5d49b4b91cd220aa176cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnType: 1
+  spawnType: 4
 --- !u!1001 &4011081595758216434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,7 +106,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: d7d1b23ec9b2aa1419df96208247bd42, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4860679125206834030}
+      addedObject: {fileID: 7149648965112478545}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d7d1b23ec9b2aa1419df96208247bd42, type: 3}
       insertIndex: -1
