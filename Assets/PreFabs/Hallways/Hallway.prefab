@@ -5275,6 +5275,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6373350861803321327}
     m_Modifications:
+    - target: {fileID: 6581085820814239842, guid: da9a6946408c7a64888a90c4e7fe0ac6, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581085820814239842, guid: da9a6946408c7a64888a90c4e7fe0ac6, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581085820814239842, guid: da9a6946408c7a64888a90c4e7fe0ac6, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8161355030829878654, guid: da9a6946408c7a64888a90c4e7fe0ac6, type: 3}
       propertyPath: m_Name
       value: ComplementoParede (5)
