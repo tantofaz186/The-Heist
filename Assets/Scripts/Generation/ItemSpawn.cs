@@ -34,7 +34,7 @@ public class ItemSpawn : NetworkBehaviour
    
    IEnumerator SpawnItems(int type, int spawnPointIndex)
    {
-      for (int i = 0; i < 10*spawnPointIndex; i++)
+      for (int i = 0; i < spawnPointIndex; i++)
       {
          yield return new WaitForEndOfFrame();
       }
