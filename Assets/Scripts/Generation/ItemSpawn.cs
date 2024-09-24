@@ -16,6 +16,7 @@ public class ItemSpawn : NetworkBehaviour
    [SerializeField] private List<GameObject> quadros;
 [SerializeField] private List<GameObject> rings;
 [SerializeField] private List<GameObject> necklaces;
+[SerializeField] private List<GameObject> pans;
    [Rpc(SendTo.Server)]
    public void SpawnItemsRpc()
    {
@@ -52,8 +53,12 @@ public class ItemSpawn : NetworkBehaviour
             break;
          case 3:
             SortRings(spawnPointIndex);
-            break;case 4:
+            break;
+         case 4:
             SortNeckaces(spawnPointIndex);
+            break;
+         case 5:
+            SortPans(spawnPointIndex);
             break;
       }
    }
@@ -69,6 +74,14 @@ public class ItemSpawn : NetworkBehaviour
    {
       int rnd = Random.Range(0, necklaces.Count);
       var instance = Instantiate(necklaces[rnd],itemSpawnPoints[i].transform);
+      var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+      instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+   }
+   
+   private void SortPans(int i)
+   {
+      int rnd = Random.Range(0, pans.Count);
+      var instance = Instantiate(pans[rnd],itemSpawnPoints[i].transform);
       var instanceNetworkObject = instance.GetComponent<NetworkObject>();
       instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
    }
