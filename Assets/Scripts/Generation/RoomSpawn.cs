@@ -19,7 +19,8 @@ public class RoomSpawn : NetworkBehaviour
    [SerializeField]private List<int> themeRoomsCheck = new();
    [SerializeField] private List<RoomTypes> normalRooms = new();
    [SerializeField]private List<int> normalRoomsCheck = new();
-   [SerializeField] private GameObject securityRoom;
+   [SerializeField] private GameObject vaultRoom;
+   [SerializeField] private GameObject prison;
    [SerializeField] public List<GameObject> playerSpawnPoints = new();
    
     
@@ -109,7 +110,8 @@ public class RoomSpawn : NetworkBehaviour
 
    void SortRooms()
    {    
-       SpawnSecurity();
+       SpawnVault();
+       SpawnPrison();
        for (int n = 0; n < roomSpawnpoints.Count; n++)
        {    
            int type = roomSpawnpoints[n].GetComponent<SpawnInfo>().spawnType;
@@ -198,17 +200,17 @@ public class RoomSpawn : NetworkBehaviour
        }
    }
 
-   void SpawnSecurity()
+   void SpawnVault()
    {
        int rnd = Random.Range(0, roomSpawnpoints.Count);
        int roomType =roomSpawnpoints[rnd].GetComponent<SpawnInfo>().spawnType;
        if (roomType == 1)
        {
-           SpawnSecurity();
+           SpawnVault();
        }
        else
        {
-           var instance = Instantiate(securityRoom, roomSpawnpoints[rnd].transform.position, roomSpawnpoints[rnd].transform.rotation);
+           var instance = Instantiate(vaultRoom, roomSpawnpoints[rnd].transform.position, roomSpawnpoints[rnd].transform.rotation);
                   var instanceNetworkObject = instance.GetComponent<NetworkObject>();
                   instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
            
@@ -216,7 +218,24 @@ public class RoomSpawn : NetworkBehaviour
        }
        
    }
-   
+   void SpawnPrison()
+   {
+       int rnd = Random.Range(0, roomSpawnpoints.Count);
+       int roomType =roomSpawnpoints[rnd].GetComponent<SpawnInfo>().spawnType;
+       if (roomType == 0)
+       {
+           SpawnPrison();
+       }
+       else
+       {
+           var instance = Instantiate(prison, roomSpawnpoints[rnd].transform.position, roomSpawnpoints[rnd].transform.rotation);
+           var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+           instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+           
+           roomSpawnpoints.Remove(roomSpawnpoints[rnd]);
+       }
+       
+   }
    
 }
 [Serializable]
