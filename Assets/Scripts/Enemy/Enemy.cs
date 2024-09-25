@@ -159,7 +159,6 @@ public class Enemy : NetworkBehaviour
     {   isRunning = false;
         Transform position = targetTransform;
         agent.SetDestination(transform.position);
-        
         if (!shooting)
         {  
             shooting = true;
@@ -168,15 +167,13 @@ public class Enemy : NetworkBehaviour
     }
 
     IEnumerator Shoot(Transform position)
-    { 
+    {
+        var aux = agent.speed;
+        agent.speed = 0f;
         transform.LookAt(position);
        anim.SetTrigger("shoot");
        yield return new WaitForSeconds(1f);
-       
-       Vector3 direction = position.transform.position - bulletSpawn.transform.position;
-       direction.Normalize();
-       float angleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-       bulletSpawn.transform.rotation = Quaternion.Euler(0, angleY, 0);
+
        if (IsServer)
        {  
            tazerSound.PlayAudioClientRpc();
@@ -185,7 +182,7 @@ public class Enemy : NetworkBehaviour
        
        yield return new WaitForSeconds(2f);
        shooting = false;
-       
+       agent.speed = aux;
     }
 
     [Rpc(SendTo.Server)]
