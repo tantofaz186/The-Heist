@@ -9,7 +9,7 @@ public class CombatReportUI : MonoBehaviour
 {
     [SerializeField]
     private List<PlayerCombatReportUI> combatReport;
-
+    bool ready = false;
     private void Awake()
     {
         combatReport = FindObjectsOfType<PlayerCombatReportUI>().ToList();
@@ -18,6 +18,7 @@ public class CombatReportUI : MonoBehaviour
     public void SetUI(List<CombatReportData> data)
     {
         combatReport.ForEach((cr) => cr.Apply(data));
+        ready = true;
     }
 
     private void Start()
@@ -27,6 +28,7 @@ public class CombatReportUI : MonoBehaviour
 
     private IEnumerator ShowInList()
     {
+        yield return new WaitUntil(() => ready);
         foreach (var combatReportUI in combatReport)
         {
             combatReportUI.Hide();
