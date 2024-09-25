@@ -44,6 +44,7 @@ namespace Utils
                 // File.Delete(Application.persistentDataPath + "/combatReport.json");
                 return data;
             }
+            Debug.LogError("CombatReport file not found");
             return new CombatReportData();
         }
 
