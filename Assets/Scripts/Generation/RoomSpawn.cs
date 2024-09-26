@@ -46,13 +46,12 @@ public class RoomSpawn : NetworkBehaviour
        yield return new WaitUntil(() => bake.surface.navMeshData != null || bake.surface != null);
        bake.surface.BuildNavMesh();
        Prison.instance.FindPrison();
-       yield return new WaitForSeconds(1);
-       if (IsServer) SpawnDoorRpc();       
-       yield return new WaitForSeconds(1);
-       if (IsServer) SpawnEnemyRpc();
-       yield return new WaitForSeconds(2);
-       if (IsServer) SpawnItemRpc();
-       if (IsServer) BulletPool.instance.InstantiateBulletsRpc();
+       if (IsServer)
+       {
+           SpawnDoorRpc();
+           SpawnEnemyRpc();
+           SpawnItemRpc();
+       }
    }
 
    [Rpc(SendTo.Server)]

@@ -24,7 +24,7 @@ namespace Mechanics.VaultDoor
             base.OnNetworkSpawn();
             StartCoroutine(WaitToSpawn());
         }
-        const float timeout = 10.0f;
+        const float timeout = 5.0f;
         private IEnumerator WaitToSpawn()
         {
             float elapsedTime = 0.0f;
