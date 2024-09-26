@@ -15,33 +15,28 @@ public class Enemy : NetworkBehaviour
     public AudioPlay tazerSound;
     public Animator anim;
     public bool gameStarted = true;
-    public Vector3 walkPoint;
-    [SerializeField] bool walkPointSet;
+
+    [SerializeField]
+    bool walkPointSet;
+
     public float attackRange;
-   
-    private bool shooting = false;
-   // public event Action<GameObject> OnAttack;
-    private float tempSpeed;
+
+    private bool shooting;
     public GameObject playerFound;
     public float patrolSpeed = 3f;
     public float chaseSpeed = 6f;
-    public List<GameObject> waypoints = new List<GameObject>();
     public FOV fov;
-
+    public float radiusToPickRandomLocation = 10f;
     public NetworkVariable<float> stamina = new NetworkVariable<float>(100f);
     public float staminaSpeed;
-    
-    [SerializeField]private bool isRunning;
-   [SerializeField] private bool isRegenerating;
 
-    public GameObject bulletPrefab;
     public Transform bulletSpawn;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         fov = GetComponent<FOV>();
-        waypoints = GetWaypoints();
     }
 
     GameObject FindPlayer(FOV sensor)
@@ -51,8 +46,10 @@ public class Enemy : NetworkBehaviour
 
     private void Start()
     {
+        StopAgent();
+        GetComponent<Rigidbody>().isKinematic = true;
         StartCoroutine(FovScan());
-        tempSpeed = agent.speed;
+        StartCoroutine(StateMachineBehaviour());
     }
 
     private IEnumerator FovScan()
@@ -60,147 +57,165 @@ public class Enemy : NetworkBehaviour
         while (gameStarted)
         {
             fov.Scan();
-            
-            if (isRunning)
-            {   if(IsServer)
-                ConsumeStaminaRpc();
-            }
-            yield return new WaitUntil(()=>!isRegenerating);
-            if (fov.Objects.Count > 0)
+            playerFound = fov.Objects.Count > 0 ? FindPlayer(fov) : null;
+
+            yield return new WaitForSeconds(fov.scanInterval);
+        }
+    }
+
+    private IEnumerator StateMachineBehaviour()
+    {
+        while (gameStarted)
+        {
+            if (Tired()) StartCoroutine(RegenerateStamina());
+            yield return new WaitWhile(Tired);
+
+            yield return new WaitUntil(() => Arrived() || playerFound != null);
+            if (playerFound)
             {
-                playerFound = FindPlayer(fov);
-                if (playerFound)
+                Transform target = playerFound.transform;
+                if (IsServer) StartCoroutine(ConsumeStamina());
+                yield return new WaitUntil(() =>
                 {
-                    
-                    if (Vector3.Distance(transform.position, playerFound.transform.position) < attackRange)
-                    {   
-                        Attack(playerFound.transform);
-                    }
-                    else
-                    {
-                        Chase(playerFound.transform);
-                    }
+                    Chase(target);
+                    return playerFound == null || Tired() || CanAttackTarget(target);
+                });
+                if (IsServer) StopCoroutine(ConsumeStamina());
+                if (CanAttackTarget(target))
+                {
+                    shooting = true;
+                    Attack(target);
+                    yield return new WaitUntil(AttackEnd);
                 }
             }
             else
             {
                 Patrol();
             }
-            yield return new WaitForSeconds(fov.scanInterval);
-        }
-    }
-    [Rpc(SendTo.Server)]
-    void ConsumeStaminaRpc()
-    {
-        stamina.Value -= staminaSpeed * Time.deltaTime;
-        if (stamina.Value <= 0)
-        {
-            
-            StartCoroutine(RegenerateStamina());
         }
     }
 
-    IEnumerator RegenerateStamina()
-    {   isRegenerating = true;
-        agent.SetDestination(transform.position);
-        anim.SetBool("tired", true);
-        yield return new WaitForSeconds(3f);
-        stamina.Value = 100f;
-        anim.SetBool("tired", false);
-        isRegenerating = false;
-        
-        
-    }
-    
-    
-    
-    public void CheckLocation(Vector3 target)
-    {
-        walkPointSet = true;
-        walkPoint = target;
-    }
+    #region State Machine
 
     void Patrol()
-    {   if (shooting)return;
-        isRunning = false;
-        if (!walkPointSet) SearchWalk();
-        if (walkPointSet) agent.SetDestination(walkPoint);
+    {
+        agent.SetDestination(PickRandomNavmeshLocation(radiusToPickRandomLocation));
         agent.speed = patrolSpeed;
         anim.SetBool("walk", true);
         anim.SetBool("run", false);
-        Vector3 distance = transform.position - walkPoint;
-
-        if (distance.magnitude < 1f)
-        {
-            walkPointSet = false;
-        }
     }
 
-    void SearchWalk()
-    {   
-        int rnd = Random.Range(0, waypoints.Count);;
-        walkPoint = waypoints[rnd].transform.position;
-        if (Physics.Raycast(walkPoint, -transform.up, 2f))
-        {
-            walkPointSet = true;
-        }
-    }
-
-    void Chase(Transform _playerPos)
-    {   if (shooting)return;
-        isRunning = true;
-        agent.SetDestination(_playerPos.transform.position);
+    void Chase(Transform target)
+    {
         agent.speed = chaseSpeed;
         anim.SetBool("run", true);
         anim.SetBool("walk", false);
+        agent.SetDestination(target.position);
+    }
+
+    void Attack(Transform targetTransform)
+    {
+        StopAgent();
+        StartCoroutine(Shoot(targetTransform));
+    }
+
+    IEnumerator Shoot(Transform target)
+    {
+        StopAgent();
+        transform.LookAt(target.position);
+        bulletSpawn.LookAt(target.position);
+        anim.SetTrigger("shoot");
+        yield return new WaitForSeconds(1f);
+
+        if (IsServer)
+        {
+            tazerSound.PlayAudioClientRpc();
+            InstantiateBulletRpc();
+        }
+
+        yield return new WaitForSeconds(2f);
+        shooting = false;
+    }
+    bool CanAttackTarget(Transform target)
+    {
+        return Vector3.Distance(transform.position, target.position) <= attackRange && !shooting;
+    }
+
+    bool AttackEnd()
+    {
+        return !shooting;
+    }
+
+    bool Tired()
+    {
+        return stamina.Value <= 0;
     }
     
-    void Attack(Transform targetTransform)
-    {   isRunning = false;
-        Transform position = targetTransform;
-        agent.SetDestination(transform.position);
-        if (!shooting)
-        {  
-            shooting = true;
-            StartCoroutine(Shoot(position));
-        }
-    }
-
-    IEnumerator Shoot(Transform position)
-    {
-        var aux = agent.speed;
-        agent.speed = 0f;
-        transform.LookAt(position);
-       anim.SetTrigger("shoot");
-       yield return new WaitForSeconds(1f);
-
-       if (IsServer)
-       {  
-           tazerSound.PlayAudioClientRpc();
-           InstantiateBulletRpc();
-       }
-       
-       yield return new WaitForSeconds(2f);
-       shooting = false;
-       agent.speed = aux;
-    }
-
     [Rpc(SendTo.Server)]
-    public void InstantiateBulletRpc()
+    void InstantiateBulletRpc()
     {
         GameObject bullet = BulletPool.instance.GetBullet();
-        if(bullet!=null)
+        if (bullet != null)
         {
             bullet.transform.position = bulletSpawn.position;
             bullet.transform.forward = bulletSpawn.forward;
             bullet.SetActive(true);
+            Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+            bulletRb.velocity = Vector3.zero;
+            bulletRb.AddForce(bullet.transform.forward * 10f, ForceMode.Impulse);
         }
-        bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 10f, ForceMode.Impulse);
     }
 
-    List<GameObject> GetWaypoints()
+    #endregion
+
+    #region Navmesh
+
+    private Vector3 PickRandomNavmeshLocation(float radius)
     {
-        return GameObject.FindGameObjectsWithTag("Waypoints").ToList();
-      
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        randomDirection += transform.position;
+        NavMeshHit hit;
+        Vector3 finalPosition = Vector3.zero;
+        if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
+        {
+            finalPosition = hit.position;
+        }
+
+        return finalPosition;
     }
+
+    bool Arrived()
+    {
+        return agent.remainingDistance <= 1f;
+    }
+
+    void StopAgent()
+    {
+        agent.SetDestination(transform.position);
+        agent.velocity = Vector3.zero;
+    }
+
+    #endregion
+
+    #region Stamina
+
+    IEnumerator ConsumeStamina()
+    {
+        yield return new WaitUntil(() =>
+        {
+            stamina.Value -= staminaSpeed * Time.deltaTime;
+            return stamina.Value <= 0;
+        });
+    }
+
+    IEnumerator RegenerateStamina()
+    {
+        StopAgent();
+        anim.SetBool("tired", true);
+        yield return new WaitForSeconds(3f);
+        if (IsServer) stamina.Value = 100f;
+        anim.SetBool("tired", false);
+    }
+
+    #endregion
 }

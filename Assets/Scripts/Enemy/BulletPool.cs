@@ -23,31 +23,39 @@ public class BulletPool : NetworkBehaviour
             Destroy(gameObject);
         }
     }
-
-    [Rpc(SendTo.Server)]
-    public void InstantiateBulletsRpc()
+    
+    public override void OnNetworkSpawn()
     {
+        base.OnNetworkSpawn();
         for (int i = 0; i < poolSize; i++)
         {
             var obj = Instantiate(bulletPrefab, transform.position, transform.rotation);
-            var instanceNetworkObject = obj.GetComponent<NetworkObject>();
-            instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+            if (IsServer)
+            {
+                var instanceNetworkObject = obj.GetComponent<NetworkObject>();
+                instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+            }
             obj.SetActive(false);
             bulletPool.Add(obj);
         }
     }
-    
-    
+
     public GameObject GetBullet()
     {
         for (int i = 0; i < bulletPool.Count; i++)
         {
             if (!bulletPool[i].activeInHierarchy)
             {
+                ActivateBulletRpc(i);
                 return bulletPool[i];
             }
         }
         return null;
     }
 
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
+    private void ActivateBulletRpc(int i)
+    {
+        bulletPool[i].SetActive(true);
+    }
 }

@@ -1626,7 +1626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3035485183
+  GlobalObjectIdHash: 3767889067
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 1
   SynchronizeTransform: 1
@@ -1664,20 +1664,16 @@ MonoBehaviour:
   tazerSound: {fileID: 8269838671026492401}
   anim: {fileID: 0}
   gameStarted: 1
-  walkPoint: {x: 0, y: 0, z: 0}
   walkPointSet: 0
   attackRange: 5
   playerFound: {fileID: 0}
   patrolSpeed: 3
   chaseSpeed: 6
-  waypoints: []
   fov: {fileID: -2851631060527253863}
+  radiusToPickRandomLocation: 10
   stamina:
     m_InternalValue: 100
   staminaSpeed: 20
-  isRunning: 0
-  isRegenerating: 0
-  bulletPrefab: {fileID: 5666875563176433570, guid: 96927087a891e8c48bc808e93b27d234, type: 3}
   bulletSpawn: {fileID: 4411302315474281756}
 --- !u!114 &-2851631060527253863
 MonoBehaviour:
@@ -1693,13 +1689,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   viewAngle: 50
   viewRadius: 20
-  viewHeight: 2
+  viewHeight: 3
   playerMask:
     serializedVersion: 2
     m_Bits: 128
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 16449
   meshColor: {r: 1, g: 0, b: 0, a: 1}
   scanInterval: 0.033333335
   scanFrequency: 30
@@ -1748,7 +1744,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0

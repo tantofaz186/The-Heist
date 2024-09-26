@@ -10,7 +10,6 @@ public class FOV : MonoBehaviour
     public float viewHeight;
     public LayerMask playerMask;
     public LayerMask obstacleMask;
-    
 
     public Color meshColor = Color.red;
 
@@ -24,7 +23,7 @@ public class FOV : MonoBehaviour
 
     const float TimeToLosePlayer = 1.5f;
     private float timeToLosePlayer;
-    
+
     public List<GameObject> Objects => objects;
 
     [SerializeField]
@@ -44,13 +43,17 @@ public class FOV : MonoBehaviour
             objects.Clear();
             timeToLosePlayer = TimeToLosePlayer;
         }
+
         count = Physics.OverlapSphereNonAlloc(transform.position, viewRadius, colliders, playerMask, QueryTriggerInteraction.Collide);
         for (int i = 0; i < count; i++)
         {
-            GameObject obj = colliders[i].gameObject;
+            GameObject obj = colliders[i].GetComponentInChildren<SkinnedMeshRenderer>().gameObject;
             if (InSight(obj))
             {
-                objects.Add(obj);
+                if (!objects.Contains(obj))
+                {
+                    objects.Add(obj);
+                }
             }
         }
     }
@@ -61,7 +64,7 @@ public class FOV : MonoBehaviour
         origin.y -= 1f;
         Vector3 dest = obj.transform.position;
         Vector3 direction = dest - origin;
-        if (direction.y < 0 || direction.y > viewHeight)
+        if (Mathf.Abs(direction.y) > viewHeight)
         {
             return false;
         }
@@ -158,13 +161,11 @@ public class FOV : MonoBehaviour
         return mesh;
     }
 
-    /*
     private void OnValidate()
     {
         mesh = CreateWedgeMesh();
         scanInterval = 1.0f / scanFrequency;
     }
-    */
 
     private void OnDrawGizmos()
     {
