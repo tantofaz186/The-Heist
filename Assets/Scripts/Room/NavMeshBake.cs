@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Unity.AI.Navigation;
 public class NavMeshBake : MonoBehaviour

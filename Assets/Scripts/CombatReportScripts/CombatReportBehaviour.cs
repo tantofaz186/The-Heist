@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using QFSW.QC.Actions;
 using Unity.Netcode;
-using UnityEngine.InputSystem;
 using Utils;
 
 namespace CombatReportScripts

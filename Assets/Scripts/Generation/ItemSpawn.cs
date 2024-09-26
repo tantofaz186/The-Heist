@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Mechanics.VaultDoor;
 using Unity.Netcode;
 using UnityEngine;
 

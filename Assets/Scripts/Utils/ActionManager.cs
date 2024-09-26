@@ -1,5 +1,3 @@
-using UnityEngine.InputSystem;
-
 namespace Utils
 {
     public class ActionManager : Singleton<ActionManager>
