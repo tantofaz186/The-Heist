@@ -21,8 +21,14 @@ public class Bullet :NetworkBehaviour
     }
     
     [Rpc(SendTo.Everyone)]
-    void DeactivateRpc()
+    public void DeactivateRpc()
     {
         gameObject.SetActive(false);
+    }
+
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
+    public void ActivateRpc()
+    {
+        gameObject.SetActive(true);
     }
 }

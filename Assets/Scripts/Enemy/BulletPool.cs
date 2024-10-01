@@ -6,13 +6,18 @@ public class BulletPool : NetworkBehaviour
 {
     public static BulletPool instance;
 
-    [SerializeField] private List<GameObject> bulletPool = new List<GameObject>();
-    [SerializeField] private int poolSize = 10;
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField]
+    private List<GameObject> bulletPool = new List<GameObject>();
+
+    [SerializeField]
+    private int poolSize = 10;
+
+    [SerializeField]
+    private GameObject bulletPrefab;
 
     private void Awake()
     {
-        if(instance==null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -21,19 +26,17 @@ public class BulletPool : NetworkBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+        if (!IsServer) return;
         for (int i = 0; i < poolSize; i++)
         {
-            var obj = Instantiate(bulletPrefab, transform.position, transform.rotation);
-            if (IsServer)
-            {
-                var instanceNetworkObject = obj.GetComponent<NetworkObject>();
-                instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
-            }
-            obj.SetActive(false);
+            var obj = Instantiate(bulletPrefab, transform);
+            var instanceNetworkObject = obj.GetComponent<NetworkObject>();
+            instanceNetworkObject.Spawn();
+            obj.GetComponent<Bullet>().DeactivateRpc();
             bulletPool.Add(obj);
         }
     }
@@ -44,16 +47,13 @@ public class BulletPool : NetworkBehaviour
         {
             if (!bulletPool[i].activeInHierarchy)
             {
-                ActivateBulletRpc(i);
+                bulletPool[i].GetComponent<Bullet>().ActivateRpc();
+                bulletPool[i].SetActive(true);
+
                 return bulletPool[i];
             }
         }
-        return null;
-    }
 
-    [Rpc(SendTo.Everyone, RequireOwnership = false)]
-    private void ActivateBulletRpc(int i)
-    {
-        bulletPool[i].SetActive(true);
+        return null;
     }
 }
