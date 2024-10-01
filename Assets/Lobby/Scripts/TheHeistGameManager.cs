@@ -55,9 +55,6 @@ public class TheHeistGameManager : NetworkBehaviour
             Debug.Log("Spawned " + playerTransform.name + " for client " + clientId);
         }
     }
-
-   
-    
 }
 
 [Serializable]
