@@ -43,10 +43,15 @@ public class Enemy : NetworkBehaviour
 
     private void Start()
     {
-        StopAgent();
-        GetComponent<Rigidbody>().isKinematic = true;
-        StartCoroutine(FovScan());
-        StartCoroutine(StateMachineBehaviour());
+        if (IsServer)
+        {
+            StopAgent();
+            GetComponent<Rigidbody>().isKinematic = true;
+            StartCoroutine(FovScan());
+            StartCoroutine(StateMachineBehaviour());
+        }
+        else
+            enabled = false;
     }
 
     private IEnumerator FovScan()
@@ -98,15 +103,13 @@ public class Enemy : NetworkBehaviour
     {
         agent.SetDestination(PickRandomNavmeshLocation(radiusToPickRandomLocation));
         agent.speed = patrolSpeed;
-        anim.SetBool("walk", true);
-        anim.SetBool("run", false);
+        SetAnimationWalkRpc();
     }
 
     void Chase(Transform target)
     {
         agent.speed = chaseSpeed;
-        anim.SetBool("run", true);
-        anim.SetBool("walk", false);
+        SetAnimationRunRpc();
         agent.SetDestination(target.position);
     }
 
@@ -119,9 +122,9 @@ public class Enemy : NetworkBehaviour
     IEnumerator Shoot(Transform target)
     {
         StopAgent();
-        transform.LookAt(target.position);
-        bulletSpawn.LookAt(target.position);
-        anim.SetTrigger("shoot");
+        // transform.LookAt(target);
+        bulletSpawn.LookAt(target);
+        SetAnimationShootRpc();
         yield return new WaitForSeconds(1f);
 
         if (IsServer)
@@ -133,6 +136,7 @@ public class Enemy : NetworkBehaviour
         yield return new WaitForSeconds(2f);
         shooting = false;
     }
+
     bool CanAttackTarget(Transform target)
     {
         return Vector3.Distance(transform.position, target.position) <= attackRange && !shooting;
@@ -147,7 +151,7 @@ public class Enemy : NetworkBehaviour
     {
         return stamina.Value <= 0;
     }
-    
+
     [Rpc(SendTo.Server)]
     void InstantiateBulletRpc()
     {
@@ -159,6 +163,7 @@ public class Enemy : NetworkBehaviour
             bullet.SetActive(true);
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             bulletRb.velocity = Vector3.zero;
+            bulletRb.Sleep();
             bulletRb.AddForce(bullet.transform.forward * 10f, ForceMode.Impulse);
         }
     }
@@ -208,10 +213,46 @@ public class Enemy : NetworkBehaviour
     IEnumerator RegenerateStamina()
     {
         StopAgent();
-        anim.SetBool("tired", true);
+        SetAnimationTiredTrueRpc();
         yield return new WaitForSeconds(3f);
         if (IsServer) stamina.Value = 100f;
+        SetAnimationTiredFalseRpc();
+    }
+
+    #endregion
+
+    #region Animations
+
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
+    public void SetAnimationTiredTrueRpc()
+    {
+        anim.SetBool("tired", true);
+    }
+
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
+    public void SetAnimationTiredFalseRpc()
+    {
         anim.SetBool("tired", false);
+    }
+
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
+    public void SetAnimationShootRpc()
+    {
+        anim.SetTrigger("shoot");
+    }
+
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
+    public void SetAnimationRunRpc()
+    {
+        anim.SetBool("run", true);
+        anim.SetBool("walk", false);
+    }
+
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
+    public void SetAnimationWalkRpc()
+    {
+        anim.SetBool("walk", true);
+        anim.SetBool("run", false);
     }
 
     #endregion
