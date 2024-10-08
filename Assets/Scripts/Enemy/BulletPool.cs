@@ -36,8 +36,9 @@ public class BulletPool : NetworkBehaviour
             var obj = Instantiate(bulletPrefab, transform);
             var instanceNetworkObject = obj.GetComponent<NetworkObject>();
             instanceNetworkObject.Spawn();
-            obj.GetComponent<Bullet>().DeactivateRpc();
             bulletPool.Add(obj);
+            obj.GetComponent<Bullet>().DeactivateRpc();
+            
         }
     }
 
