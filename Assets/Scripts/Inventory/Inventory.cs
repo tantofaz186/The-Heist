@@ -23,6 +23,7 @@ public class Inventory : NetworkBehaviour
         if (emptySlotIndex > -1)
         {
             items[emptySlotIndex] = item;
+            itemsInHand[emptySlotIndex] = item.itemPrefab;
             InventoryHud.Instance.AddItem(item, emptySlotIndex);
             Debug.Log("Item Adicionado" + " " + emptySlotIndex);
             playerCombatReport.combatReportData.itensColetados++;
@@ -32,6 +33,8 @@ public class Inventory : NetworkBehaviour
             Debug.Log("Inventory Full");
         }
     }
+    
+    
 
     private void Start()
     {

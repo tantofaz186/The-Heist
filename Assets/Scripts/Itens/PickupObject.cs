@@ -92,7 +92,7 @@ public class PickupObject : NetworkBehaviour, Interactable
 
     public string getDisplayText()
     {
-        return "Pick \"E\"";
+        return "Pick";
     }
 
     public void Interact()
@@ -129,6 +129,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         m_IsGrabbed.Value = true;
         m_Collider.enabled = false;
         SomeRpc(false);
+        
     }
 
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
@@ -138,6 +139,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         m_Rigidbody.isKinematic = !_enabled;
         m_Rigidbody.useGravity = _enabled;
         m_Collider.isTrigger = !_enabled;
+        
     }
 
     [Rpc(SendTo.Owner)]
@@ -147,6 +149,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         {
             Inventory.Instance.AddItem(item);
             ParentObjectRpc(senderClientId);
+            ItemSelect.Instance.UpdateBaseItem();
         }
     }
 
@@ -184,6 +187,7 @@ public class PickupObject : NetworkBehaviour, Interactable
     public void ReleaseItemOwnerRpc(int index)
     {
         Inventory.Instance.RemoveItem(index);
+        ItemSelect.Instance.UpdateBaseItem();
     }
 
     [ServerRpc]
