@@ -1,3 +1,5 @@
+using System;
+using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 
@@ -30,7 +32,20 @@ public class ItemEditor : Editor
             Item item = (target as Item)!;
             if(item.itemPrefab != null)
             {
-                Instantiate(item.itemPrefab);
+                GameObject obj;
+                try
+                {
+                    obj = Instantiate(item.itemPrefab, NetworkManager.Singleton.LocalClient.PlayerObject.transform);
+                }
+                catch
+                {
+                    obj = Instantiate(item.itemPrefab);
+                }
+                
+                if(obj.TryGetComponent<NetworkObject>(out NetworkObject networkObject))
+                {
+                    networkObject.Spawn();
+                }
             }
         }
     }

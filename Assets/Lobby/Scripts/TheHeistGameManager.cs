@@ -47,9 +47,9 @@ public class TheHeistGameManager : NetworkBehaviour
             GameObject playerTransform = Instantiate(playerPrefab.prefabColors[colorIndex], playerspawns[count].transform.position, playerspawns[count].transform.rotation);
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
             count++;
-            
-           
-           // Color colorPlayer = TheHeistGameMultiplayer.Instance.GetPlayerColor(colorIndex);
+
+
+            // Color colorPlayer = TheHeistGameMultiplayer.Instance.GetPlayerColor(colorIndex);
            // SkinnedMeshRenderer playerMesh = playerTransform.transform.GetChild(3).GetComponent<SkinnedMeshRenderer>();
            // playerMesh.material.color = colorPlayer;
             Debug.Log("Spawned " + playerTransform.name + " for client " + clientId);

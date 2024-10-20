@@ -109,8 +109,9 @@ public class PlayerActions : NetworkBehaviour
         {
             if (hit.collider.TryGetComponent(out Interactable interactable))
             {
-                useText.SetText(interactable.getDisplayText());
-                useText.gameObject.SetActive(true);
+                string displayText = interactable.getDisplayText();
+                useText.SetText(displayText);
+                useText.gameObject.SetActive(displayText != "");
             }
             else
                 useText.gameObject.SetActive(false);

@@ -91,8 +91,8 @@ public class PickupObject : NetworkBehaviour, Interactable
     private static int calledTimes = 0;
 
     public string getDisplayText()
-    {
-        return "Pick";
+    { 
+        return m_IsGrabbed.Value ? "" : "Pick";
     }
 
     public void Interact()
@@ -124,12 +124,13 @@ public class PickupObject : NetworkBehaviour, Interactable
     {
         NetworkObject senderPlayerObject = NetworkManager.Singleton.ConnectedClients[senderClientId].PlayerObject;
         Transform playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
+        transform.GetChild(0).gameObject.SetActive(false);
         transform.parent = senderPlayerObject.transform;
-        transform.localPosition = playerTransform.localPosition;
+        transform.position = playerTransform.position;
+        transform.localRotation = item.itemPrefab.transform.rotation;   
         m_IsGrabbed.Value = true;
         m_Collider.enabled = false;
         SomeRpc(false);
-        
     }
 
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
@@ -139,7 +140,6 @@ public class PickupObject : NetworkBehaviour, Interactable
         m_Rigidbody.isKinematic = !_enabled;
         m_Rigidbody.useGravity = _enabled;
         m_Collider.isTrigger = !_enabled;
-        
     }
 
     [Rpc(SendTo.Owner)]
@@ -147,9 +147,8 @@ public class PickupObject : NetworkBehaviour, Interactable
     {
         if (Inventory.Instance.hasEmptySlot())
         {
-            Inventory.Instance.AddItem(item);
+            Inventory.Instance.AddItem(gameObject, item);
             ParentObjectRpc(senderClientId);
-            ItemSelect.Instance.UpdateBaseItem();
         }
     }
 
@@ -187,7 +186,6 @@ public class PickupObject : NetworkBehaviour, Interactable
     public void ReleaseItemOwnerRpc(int index)
     {
         Inventory.Instance.RemoveItem(index);
-        ItemSelect.Instance.UpdateBaseItem();
     }
 
     [ServerRpc]

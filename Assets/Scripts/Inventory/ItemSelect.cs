@@ -6,9 +6,7 @@ public class ItemSelect : Singleton<ItemSelect>, IUseAction
     public BaseItem itemInHand;
 
     public int currentItemIndex { get; private set; }
-    
-    
-    
+
     public void setActions()
     {
         PlayerActions.Instance.PlayerInputActions.Player.Item1.performed += SelectItem1;
@@ -16,6 +14,8 @@ public class ItemSelect : Singleton<ItemSelect>, IUseAction
         PlayerActions.Instance.PlayerInputActions.Player.Item3.performed += SelectItem3;
         PlayerActions.Instance.PlayerInputActions.Player.Item4.performed += SelectItem4;
         PlayerActions.Instance.PlayerInputActions.Player.Click.performed += UseItem;
+        PlayerActions.Instance.PlayerInputActions.Player.Use.performed += UpdateBaseItem;
+        PlayerActions.Instance.PlayerInputActions.Player.Release.performed += UpdateBaseItem;
     }
 
     private void UseItem(InputAction.CallbackContext obj)
@@ -33,6 +33,8 @@ public class ItemSelect : Singleton<ItemSelect>, IUseAction
         PlayerActions.Instance.PlayerInputActions.Player.Item3.performed -= SelectItem3;
         PlayerActions.Instance.PlayerInputActions.Player.Item4.performed -= SelectItem4;
         PlayerActions.Instance.PlayerInputActions.Player.Click.performed -= UseItem;
+        PlayerActions.Instance.PlayerInputActions.Player.Use.performed -= UpdateBaseItem;
+        PlayerActions.Instance.PlayerInputActions.Player.Release.performed -= UpdateBaseItem;
     }
 
     void SelectItem1(InputAction.CallbackContext context)
@@ -59,37 +61,26 @@ public class ItemSelect : Singleton<ItemSelect>, IUseAction
         UpdateBaseItem();
     }
 
-   public  void UpdateBaseItem()
+    public void UpdateBaseItem()
     {
         InventoryHud.Instance.ChangeActiveItem(currentItemIndex);
-       
-        if (Inventory.Instance.items[currentItemIndex] != null)
-        {    int currentItem = Inventory.Instance.items[currentItemIndex].prefabIndex;
-            itemInHand = Inventory.Instance.itemsInHand[Inventory.Instance.items[currentItemIndex].prefabIndex].GetComponent<BaseItem>();
-            ActivateItemRpc(currentItem,NetworkManager.Singleton.LocalClientId);
+        if (itemInHand != null)
+        {
+            itemInHand.HideItemRpc();
+        }
+        if (Inventory.Instance.itemsInHand[currentItemIndex] != null)
+        {
+            itemInHand = Inventory.Instance.itemsInHand[currentItemIndex].GetComponent<BaseItem>();
+            itemInHand.ShowItemRpc();
         }
         else
         {
             itemInHand = null;
-            ActivateItemRpc(-1,NetworkManager.Singleton.LocalClientId);
         }
-        
     }
-
-    [Rpc(SendTo.Everyone)]
-  void  ActivateItemRpc(int current,ulong playerID)
-  {
-      var inventory = NetworkManager.Singleton.ConnectedClients[playerID].PlayerObject.GetComponent<Inventory>();
-      for (int i = 0; i < inventory.itemsInHand.Length; i++)
-      {   if( inventory.itemsInHand[i]!=null)  
-          inventory.itemsInHand[i].SetActive(false);
-      }
-      if (current != -1)
-      {
-          inventory.itemsInHand[current].SetActive(true);
-      }
-  }
-        
     
-
+    private void UpdateBaseItem(InputAction.CallbackContext obj)
+    {
+        UpdateBaseItem();
+    }
 }

@@ -5,25 +5,27 @@ using UnityEngine;
 
 public class Inventory : NetworkBehaviour
 {
-    public static int SLOTS = 4;
+    public const int SLOTS = 4;
     public static int MaxWeight = 10000;
     public Item[] items = new Item[SLOTS];
     public int bagWeight;
     public List<Item> relics = new();
     public int totalMoney;
 
-    public GameObject[] itemsInHand;
+    public GameObject[] itemsInHand = new GameObject[SLOTS];
 
     public static Inventory Instance;
 
     CombatReportBehaviour playerCombatReport;
-    public void AddItem(Item item)
+
+
+    public void AddItem(GameObject go, Item item)
     {
         int emptySlotIndex = CheckEmptySlot();
         if (emptySlotIndex > -1)
         {
             items[emptySlotIndex] = item;
-            itemsInHand[emptySlotIndex] = item.itemPrefab;
+            itemsInHand[emptySlotIndex] = go;
             InventoryHud.Instance.AddItem(item, emptySlotIndex);
             Debug.Log("Item Adicionado" + " " + emptySlotIndex);
             playerCombatReport.combatReportData.itensColetados++;
@@ -39,6 +41,8 @@ public class Inventory : NetworkBehaviour
     private void Start()
     {
         playerCombatReport = GetComponent<CombatReportBehaviour>();
+        items = new Item[SLOTS];
+        itemsInHand = new GameObject[SLOTS];
     }
 
     public void AddRelic(Item item)
@@ -78,6 +82,8 @@ public class Inventory : NetworkBehaviour
 
         Debug.Log($"Item Removido {itemPos}");
         items[itemPos] = null;
+        itemsInHand[itemPos] = null;
+        ItemSelect.Instance.itemInHand = null;
         InventoryHud.Instance.RemoveItem(itemPos);
         return true;
     }
