@@ -28,6 +28,8 @@ public class Enemy : NetworkBehaviour
     public float staminaSpeed;
 
     public Transform bulletSpawn;
+    
+    [SerializeField] Vector3 patrolLocation;
 
     private void Awake()
     {
@@ -101,7 +103,8 @@ public class Enemy : NetworkBehaviour
 
     void Patrol()
     {
-        agent.SetDestination(PickRandomNavmeshLocation(radiusToPickRandomLocation));
+        patrolLocation = PickRandomNavmeshLocation(radiusToPickRandomLocation);
+        agent.SetDestination(patrolLocation);
         agent.speed = patrolSpeed;
         SetAnimationWalkRpc();
     }
@@ -150,6 +153,12 @@ public class Enemy : NetworkBehaviour
     bool Tired()
     {
         return stamina.Value <= 0;
+    }
+    
+    public void ChangePatolLocation(Vector3 newPatrolLocation)
+    {
+        patrolLocation = newPatrolLocation;
+        agent.SetDestination(patrolLocation);
     }
 
     [Rpc(SendTo.Server)]
