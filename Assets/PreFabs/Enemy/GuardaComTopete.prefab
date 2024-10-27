@@ -1584,7 +1584,7 @@ GameObject:
   - component: {fileID: 548747275383972723}
   - component: {fileID: -5217689139977811531}
   - component: {fileID: -3495483110025164087}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: GuardaComTopete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1675,6 +1675,7 @@ MonoBehaviour:
     m_InternalValue: 100
   staminaSpeed: 20
   bulletSpawn: {fileID: 4411302315474281756}
+  patrolLocation: {x: 0, y: 0, z: 0}
 --- !u!114 &-2851631060527253863
 MonoBehaviour:
   m_ObjectHideFlags: 0

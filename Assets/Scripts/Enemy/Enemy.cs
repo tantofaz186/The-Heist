@@ -157,12 +157,14 @@ public class Enemy : NetworkBehaviour
     
     public void ChangePatolLocation(Vector3 newPatrolLocation)
     {
+        fov.ClearObjects();
         patrolLocation = newPatrolLocation;
         agent.SetDestination(patrolLocation);
+        Debug.Log("aaaa");
     }
 
     [Rpc(SendTo.Server)]
-    void InstantiateBulletRpc()
+    void InstantiateBulletRpc() 
     {
         GameObject bullet = BulletPool.instance.GetBullet();
         if (bullet != null)

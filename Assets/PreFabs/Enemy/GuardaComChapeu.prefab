@@ -1671,7 +1671,7 @@ GameObject:
   - component: {fileID: 548747275383972723}
   - component: {fileID: -5217689139977811531}
   - component: {fileID: 251815012208102304}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: GuardaComChapeu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1713,7 +1713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1748399967
+  GlobalObjectIdHash: 311371267
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 1
   SynchronizeTransform: 1
@@ -1762,6 +1762,7 @@ MonoBehaviour:
     m_InternalValue: 100
   staminaSpeed: 20
   bulletSpawn: {fileID: 507420450951453248}
+  patrolLocation: {x: 0, y: 0, z: 0}
 --- !u!114 &-2851631060527253863
 MonoBehaviour:
   m_ObjectHideFlags: 0

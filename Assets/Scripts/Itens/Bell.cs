@@ -1,14 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
 public class Bell : BaseItem
-{   NetworkVariable<bool> used = new NetworkVariable<bool>(false);
-    [SerializeField] float radius = 10f;
+{
+    private bool used;
+    [SerializeField] float radius = 50f;
     public override void UseItem()
     {
-        if(!used.Value)
+        if(!used)
         {
             RingBell();
         }
@@ -16,11 +18,21 @@ public class Bell : BaseItem
 
     private void RingBell()
     {
-        used.Value = true;
+       
+    Debug.Log("tentei");
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius,layerMask: LayerMask.GetMask("Enemy"));
         foreach (var hitCollider in hitColliders)
         {
             hitCollider.GetComponent<Enemy>().ChangePatolLocation(transform.position);
+            Debug.Log("Chamei");
         }
+
+        used = true;
+        Invoke(nameof(ResetUse),3);
+    }
+
+    private void ResetUse()
+    {
+        used = false;
     }
 }

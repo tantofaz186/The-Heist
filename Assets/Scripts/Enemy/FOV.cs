@@ -32,13 +32,18 @@ public class FOV : MonoBehaviour
         scanInterval = 1.0f / scanFrequency;
         timeToLosePlayer = TimeToLosePlayer;
     }
+    
+    public void ClearObjects()
+    {
+        objects.Clear();
+    }
 
     public void Scan()
     {
         timeToLosePlayer -= Time.deltaTime;
         if (timeToLosePlayer <= 0)
         {
-            objects.Clear();
+            ClearObjects();
             timeToLosePlayer = TimeToLosePlayer;
         }
 
