@@ -6,7 +6,7 @@ public class Lantern : BaseItem
 {   
     public bool isOn;
     public GameObject _light;
-
+    
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();

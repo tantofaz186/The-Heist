@@ -91,7 +91,7 @@ public class PickupObject : NetworkBehaviour, Interactable
     private static int calledTimes = 0;
 
     public string getDisplayText()
-    { 
+    {
         return m_IsGrabbed.Value ? "" : "Pick";
     }
 
@@ -124,7 +124,6 @@ public class PickupObject : NetworkBehaviour, Interactable
     {
         NetworkObject senderPlayerObject = NetworkManager.Singleton.ConnectedClients[senderClientId].PlayerObject;
         Transform playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
-        transform.GetChild(0).gameObject.SetActive(false);
         transform.parent = senderPlayerObject.transform;
         transform.position = playerTransform.position;
         transform.localRotation = item.itemPrefab.transform.rotation;   
@@ -149,6 +148,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         {
             Inventory.Instance.AddItem(gameObject, item);
             ParentObjectRpc(senderClientId);
+            ItemSelect.Instance.UpdateBaseItem();
         }
     }
 

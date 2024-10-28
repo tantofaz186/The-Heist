@@ -20,6 +20,7 @@ public class PlayerStats : NetworkBehaviour
     Movement movement;
 
     CombatReportBehaviour playerCombatReport;
+    public int mapPieces;
 
     public override void OnNetworkSpawn()
     {

@@ -28,6 +28,8 @@ public class Enemy : NetworkBehaviour
     public float staminaSpeed;
 
     public Transform bulletSpawn;
+    
+    [SerializeField] Vector3 patrolLocation;
 
     private void Awake()
     {
@@ -101,7 +103,8 @@ public class Enemy : NetworkBehaviour
 
     void Patrol()
     {
-        agent.SetDestination(PickRandomNavmeshLocation(radiusToPickRandomLocation));
+        patrolLocation = PickRandomNavmeshLocation(radiusToPickRandomLocation);
+        agent.SetDestination(patrolLocation);
         agent.speed = patrolSpeed;
         SetAnimationWalkRpc();
     }
@@ -151,9 +154,17 @@ public class Enemy : NetworkBehaviour
     {
         return stamina.Value <= 0;
     }
+    
+    public void ChangePatolLocation(Vector3 newPatrolLocation)
+    {
+        fov.ClearObjects();
+        patrolLocation = newPatrolLocation;
+        agent.SetDestination(patrolLocation);
+        Debug.Log("aaaa");
+    }
 
     [Rpc(SendTo.Server)]
-    void InstantiateBulletRpc()
+    void InstantiateBulletRpc() 
     {
         GameObject bullet = BulletPool.instance.GetBullet();
         if (bullet != null)
