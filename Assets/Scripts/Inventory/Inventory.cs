@@ -27,7 +27,7 @@ public class Inventory : NetworkBehaviour
             items[emptySlotIndex] = item;
             itemsInHand[emptySlotIndex] = go;
             InventoryHud.Instance.AddItem(item, emptySlotIndex);
-            Debug.Log("Item Adicionado" + " " + emptySlotIndex);
+            Debug.Log("Item Adicionado" + " " + emptySlotIndex + " : " + item.itemName);
             playerCombatReport.combatReportData.itensColetados++;
         }
         else
