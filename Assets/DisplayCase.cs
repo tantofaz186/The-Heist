@@ -8,40 +8,41 @@ using Utils;
 
 public class DisplayCase : NetworkBehaviour, Interactable, IUseAction
 {
-    
     NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false);
     NetworkVariable<bool> unlocked = new NetworkVariable<bool>(false);
-    [SerializeField]
-    Transform displayCaseDoorTransform;
-    private void TryOpenDisplayCase(InputAction.CallbackContext obj)
+
+    public void TryOpenDisplayCase(InputAction.CallbackContext obj)
     {
         if (!unlocked.Value)
         {
             int index = Inventory.Instance.items.ToList().FindIndex((i) => i.itemName == "DisplayCaseKey");
+            Debug.Log($"index : {index}");
             if (index > -1)
             {
                 UnlockServerRpc();
+                Debug.Log("Unlocking Display Case");
                 Inventory.Instance.RemoveItem(index);
             }
         }
+
         TryOpenServerRpc();
     }
 
     [Rpc(SendTo.Server)]
     public void TryOpenServerRpc()
     {
-        if(!unlocked.Value) return;
-        StartCoroutine(MoveDisplayCase(true));
+        if (unlocked.Value) return;
+        Debug.Log("Opening Display Case");
+        DisableDisplayCase();
         isOpen.Value = true;
-        Invoke(nameof(CloseServerRpc), 5f);
     }
 
-    [Rpc(SendTo.Server)]
-    public void CloseServerRpc()
-    {
-        StartCoroutine(MoveDisplayCase(false));
-        isOpen.Value = false;
-    }
+    // [Rpc(SendTo.Server)]
+    // public void CloseServerRpc()
+    // {
+    //     StartCoroutine(MoveDisplayCase(false));
+    //     isOpen.Value = false;
+    // }
 
     [Rpc(SendTo.Server)]
     public void UnlockServerRpc()
@@ -49,43 +50,29 @@ public class DisplayCase : NetworkBehaviour, Interactable, IUseAction
         unlocked.Value = true;
     }
 
-    
-    private IEnumerator MoveDisplayCase(bool open)
+    private void DisableDisplayCase()
     {
-        float time = 0;
-        float duration = 1;
-        
-        Vector3 openedPosition = displayCaseDoorTransform.position;
-        openedPosition.y = displayCaseDoorTransform.localScale.y;
-        Vector3 closedPosition = displayCaseDoorTransform.position;
-        closedPosition.y = 0;
-        while (time < duration)
+        MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer renderer in renderers)
         {
-            gameObject.transform.position = Vector3.Lerp(openedPosition, closedPosition,  (open ? 0 : 1)- time / duration);
-            time += Time.deltaTime;
-            yield return null;
-        } 
+            if(renderer.name == "base_reliquias") continue;
+            renderer.enabled = false;
+        }
     }
 
     public string getDisplayText()
     {
-        return isOpen.Value ? "Close " : "Open ";
+        return isOpen.Value ? "" : "Open ";
     }
 
     public void Interact()
     {
-        if (isOpen.Value)
-        {
-            CloseServerRpc();
-        }
-        else
-        {
-            TryOpenServerRpc();
-        }
+        TryOpenServerRpc();
     }
 
     public void setActions()
     {
+        Debug.Log("Setting actions for Display Case");
         PlayerActions.Instance.PlayerInputActions.Player.Use.performed += TryOpenDisplayCase;
     }
 
@@ -108,16 +95,18 @@ public class DisplayCase : NetworkBehaviour, Interactable, IUseAction
             {
                 DisplayCase displayCase = (target as DisplayCase)!;
                 displayCase.UnlockServerRpc();
-            }            
+            }
+
             if (GUILayout.Button("Open"))
             {
                 DisplayCase displayCase = (target as DisplayCase)!;
                 displayCase.TryOpenServerRpc();
             }
+
             if (GUILayout.Button("Close"))
             {
                 DisplayCase displayCase = (target as DisplayCase)!;
-                displayCase.CloseServerRpc();
+                // displayCase.CloseServerRpc();
             }
         }
     }
