@@ -8,9 +8,11 @@ using Utils;
 
 public class DisplayCase : NetworkBehaviour, Interactable, IUseAction
 {
+    
     NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false);
     NetworkVariable<bool> unlocked = new NetworkVariable<bool>(false);
-
+    [SerializeField]
+    Transform displayCaseDoorTransform;
     private void TryOpenDisplayCase(InputAction.CallbackContext obj)
     {
         if (!unlocked.Value)
@@ -29,7 +31,7 @@ public class DisplayCase : NetworkBehaviour, Interactable, IUseAction
     public void TryOpenServerRpc()
     {
         if(!unlocked.Value) return;
-        StartCoroutine(RotateDisplayCase(90));
+        StartCoroutine(MoveDisplayCase(true));
         isOpen.Value = true;
         Invoke(nameof(CloseServerRpc), 5f);
     }
@@ -37,7 +39,7 @@ public class DisplayCase : NetworkBehaviour, Interactable, IUseAction
     [Rpc(SendTo.Server)]
     public void CloseServerRpc()
     {
-        StartCoroutine(RotateDisplayCase(-90));
+        StartCoroutine(MoveDisplayCase(false));
         isOpen.Value = false;
     }
 
@@ -47,20 +49,22 @@ public class DisplayCase : NetworkBehaviour, Interactable, IUseAction
         unlocked.Value = true;
     }
 
-    private IEnumerator RotateDisplayCase(float angle)
+    
+    private IEnumerator MoveDisplayCase(bool open)
     {
         float time = 0;
         float duration = 1;
-        Quaternion startRotation = gameObject.transform.rotation;
-        Quaternion endRotation = Quaternion.Euler(0, angle, 0) * startRotation;
+        
+        Vector3 openedPosition = displayCaseDoorTransform.position;
+        openedPosition.y = displayCaseDoorTransform.localScale.y;
+        Vector3 closedPosition = displayCaseDoorTransform.position;
+        closedPosition.y = 0;
         while (time < duration)
         {
-            gameObject.transform.rotation = Quaternion.Slerp(startRotation, endRotation, time / duration);
+            gameObject.transform.position = Vector3.Lerp(openedPosition, closedPosition, time / duration * (open ? 1 : -1));
             time += Time.deltaTime;
             yield return null;
-        }
-
-        gameObject.transform.rotation = endRotation;
+        } 
     }
 
     public string getDisplayText()
