@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3947967712476162588}
   - component: {fileID: -6786249943097199485}
   - component: {fileID: 3591155961279999845}
+  - component: {fileID: 6009895419490910303}
   m_Layer: 10
   m_Name: DisplayCaseKey
   m_TagString: Item
@@ -238,3 +239,18 @@ MonoBehaviour:
   bakeValues: []
   outlineMaskMaterial: {fileID: 0}
   outlineFillMaterial: {fileID: 0}
+--- !u!114 &6009895419490910303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509773701853694132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839b7291ebb39c248b9c2118ada207e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 340a5db631a798548a406ba2981dcc50, type: 2}
+  meshRenderer: {fileID: 0}
+  visualEffect: {fileID: 0}
