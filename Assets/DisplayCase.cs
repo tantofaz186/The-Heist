@@ -61,7 +61,7 @@ public class DisplayCase : NetworkBehaviour, Interactable, IUseAction
         closedPosition.y = 0;
         while (time < duration)
         {
-            gameObject.transform.position = Vector3.Lerp(openedPosition, closedPosition, time / duration * (open ? 1 : -1));
+            gameObject.transform.position = Vector3.Lerp(openedPosition, closedPosition,  (open ? 0 : 1)- time / duration);
             time += Time.deltaTime;
             yield return null;
         } 
