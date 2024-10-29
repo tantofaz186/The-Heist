@@ -94,8 +94,8 @@ public class ItemSpawn : NetworkBehaviour
         }
     }
 
-    bool spawnedDisplayCase = false;
-    bool spawnedDisplayCaseKey = false;
+    NetworkVariable<bool> spawnedDisplayCase = new NetworkVariable<bool>(false);
+    NetworkVariable<bool> spawnedDisplayCaseKey = new NetworkVariable<bool>(false);
     private void SortMap(int i)
     {
         var instance = Instantiate(map, itemSpawnPoints[i].transform);
@@ -105,19 +105,19 @@ public class ItemSpawn : NetworkBehaviour
 
     private void SortDisplayCase(int i)
     {
-        if (spawnedDisplayCase) return;
+        if (spawnedDisplayCase.Value) return;
         var instance = Instantiate(displayCase, itemSpawnPoints[i].transform);
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
-        spawnedDisplayCase = true;
+        spawnedDisplayCase.Value = true;
     }    
     private void SortDisplayCaseKey(int i)
     {
-        if (spawnedDisplayCaseKey) return;
+        if (spawnedDisplayCaseKey.Value) return;
         var instance = Instantiate(displayCaseKey, itemSpawnPoints[i].transform);
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
-        spawnedDisplayCaseKey = true;
+        spawnedDisplayCaseKey.Value = true;
     }
 
     private void SortRings(int i)
