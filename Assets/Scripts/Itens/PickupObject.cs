@@ -149,6 +149,10 @@ public class PickupObject : NetworkBehaviour, Interactable
             Inventory.Instance.AddItem(gameObject, item);
             ParentObjectRpc(senderClientId);
             ItemSelect.Instance.UpdateBaseItem();
+            if (TryGetComponent(out BaseItem baseItem))
+            {
+                baseItem.OnPick(senderClientId);
+            }
         }
     }
 
@@ -165,7 +169,7 @@ public class PickupObject : NetworkBehaviour, Interactable
 
     [ServerRpc]
     private void ReleaseServerRpc(int index)
-    {
+    {   
         ReleaseItemOwnerRpc(index);
         NetworkObject.RemoveOwnership();
         UnparentObjectRpc();
@@ -173,7 +177,10 @@ public class PickupObject : NetworkBehaviour, Interactable
 
     [Rpc(SendTo.Server, RequireOwnership = false)]
     private void UnparentObjectRpc()
-    {
+    {   if (TryGetComponent(out BaseItem baseItem))
+        {
+            baseItem.OnDrop();
+        }
         transform.parent = null;
         m_IsGrabbed.Value = false;
         _renderer.enabled = true;

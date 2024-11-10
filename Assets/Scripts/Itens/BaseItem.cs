@@ -15,6 +15,8 @@ public abstract class BaseItem : NetworkBehaviour
 
     private NetworkObject spawnedObjectVfx;
     public abstract void UseItem();
+    public virtual void OnPick(ulong playerId){}
+    public virtual void OnDrop(){}
 
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
     public void ShowItemRpc()

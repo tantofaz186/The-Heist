@@ -43,7 +43,9 @@ public class ItemSpawn : NetworkBehaviour
     private GameObject displayCase;    
     [SerializeField]
     private GameObject displayCaseKey;
-
+    
+    int mapCount = 0;
+    
     [Rpc(SendTo.Server)]
     public void SpawnItemsRpc()
     {
@@ -98,9 +100,11 @@ public class ItemSpawn : NetworkBehaviour
     NetworkVariable<bool> spawnedDisplayCaseKey = new NetworkVariable<bool>(false);
     private void SortMap(int i)
     {
+        if(mapCount>=4) return;
         var instance = Instantiate(map, itemSpawnPoints[i].transform);
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+        mapCount++;
     }
 
     private void SortDisplayCase(int i)
