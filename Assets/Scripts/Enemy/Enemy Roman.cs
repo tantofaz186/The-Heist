@@ -6,10 +6,11 @@ using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(FOV))]
-public class Enemy : NetworkBehaviour
+public class EnemyRoman : NetworkBehaviour
 {
     public NavMeshAgent agent;
-    public AudioPlay tazerSound;
+    public AudioPlay attackSound;
+    public AudioPlay chargeSound;
     public Animator anim;
     public bool gameStarted = true;
 
@@ -26,8 +27,8 @@ public class Enemy : NetworkBehaviour
     public float radiusToPickRandomLocation = 10f;
     public NetworkVariable<float> stamina = new NetworkVariable<float>(100f);
     public float staminaSpeed;
-
-    public Transform bulletSpawn;
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private Collider hitCollider;
     
     [SerializeField] Vector3 patrolLocation;
 
@@ -36,6 +37,7 @@ public class Enemy : NetworkBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         fov = GetComponent<FOV>();
+        rb = GetComponent<Rigidbody>();
     }
 
     GameObject FindPlayer(FOV sensor)
@@ -119,25 +121,28 @@ public class Enemy : NetworkBehaviour
     void Attack(Transform targetTransform)
     {
         StopAgent();
-        StartCoroutine(Shoot(targetTransform));
+        StartCoroutine(RomanAttack(targetTransform));
     }
 
-    IEnumerator Shoot(Transform target)
+    IEnumerator RomanAttack(Transform target)
     {
         StopAgent();
-        // transform.LookAt(target);
-        bulletSpawn.LookAt(target);
-        SetAnimationShootRpc();
-        yield return new WaitForSeconds(1f);
-
+        transform.LookAt(target);
         if (IsServer)
         {
-            tazerSound.PlayAudioClientRpc();
-            InstantiateBulletRpc();
+            chargeSound.PlayAudioClientRpc();
         }
-
-        yield return new WaitForSeconds(2f);
-        shooting = false;
+        SetAnimationChargeRpc();
+        yield return new WaitForSeconds(2f); 
+        SetAnimationDashRpc();
+        if (IsServer)
+        {
+            attackSound.PlayAudioClientRpc();
+        }
+        rb.AddForce(Vector3.forward*100f, ForceMode.VelocityChange);
+        yield return new WaitForSeconds(1.5f);
+        Tired();
+        AttackEnd();
     }
 
     bool CanAttackTarget(Transform target)
@@ -160,23 +165,9 @@ public class Enemy : NetworkBehaviour
         fov.ClearObjects();
         patrolLocation = newPatrolLocation;
         agent.SetDestination(patrolLocation);
+        
     }
-
-    [Rpc(SendTo.Server)]
-    void InstantiateBulletRpc() 
-    {
-        GameObject bullet = BulletPool.instance.GetBullet();
-        if (bullet != null)
-        {
-            bullet.transform.position = bulletSpawn.position;
-            bullet.transform.forward = bulletSpawn.forward;
-            bullet.SetActive(true);
-            Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-            bulletRb.velocity = Vector3.zero;
-            bulletRb.Sleep();
-            bulletRb.AddForce(bullet.transform.forward * 10f, ForceMode.Impulse);
-        }
-    }
+    
 
     #endregion
 
@@ -246,9 +237,14 @@ public class Enemy : NetworkBehaviour
     }
 
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
-    public void SetAnimationShootRpc()
+    public void SetAnimationChargeRpc()
     {
-        anim.SetTrigger("shoot");
+        anim.SetTrigger("dash");
+    }
+    
+    public void SetAnimationDashRpc()
+    {
+        anim.SetTrigger("dash");
     }
 
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
