@@ -7,12 +7,13 @@ public class InventoryHud : Singleton<InventoryHud>
     public GameObject[] borders = new GameObject[4];
     public Slider weighSlider;
     public Text moneyText;
+
     public void AddItem(Item item, int itemPos)
     {
-      slots[itemPos].sprite = item.itemSprite;
-      slots[itemPos].color = new Color(slots[itemPos].color.r, slots[itemPos].color.g, slots[itemPos].color.b, 1f);
-
+        slots[itemPos].sprite = item.itemSprite;
+        slots[itemPos].color = new Color(slots[itemPos].color.r, slots[itemPos].color.g, slots[itemPos].color.b, 1f);
     }
+
     public void RemoveItem(int itemPos)
     {
         Debug.Log($"removed item at pos: {itemPos}");
@@ -22,31 +23,29 @@ public class InventoryHud : Singleton<InventoryHud>
 
     public void AddRelic(Item item)
     {
-        weighSlider.value+= item.itemWeight;
+        weighSlider.value += item.itemWeight;
         CheckColor(weighSlider.value);
-        
     }
 
     void CheckColor(float weight)
     {
-        if (weight<Inventory.MaxWeight/3)
+        if (weight < Inventory.Instance.MaxWeight / 3f)
         {
-            weighSlider.fillRect.GetComponent<Image>().color = new Color(164,164,164,170);
+            weighSlider.fillRect.GetComponent<Image>().color = new Color(164, 164, 164, 170);
         }
-        else if (weight>=Inventory.MaxWeight/3&&weight<=Inventory.MaxWeight/1.5f)
-        {
-            weighSlider.fillRect.GetComponent<Image>().color = new Color(210,187,39,170);
-        }
-        else if (weight>Inventory.MaxWeight/1.5f)
+        else if (weight > Inventory.Instance.MaxWeight / 1.5f)
         {
             weighSlider.fillRect.GetComponent<Image>().color = new Color(307, 36, 31, 170);
         }
-        
+        else
+        {
+            weighSlider.fillRect.GetComponent<Image>().color = new Color(210, 187, 39, 170);
+        }
     }
-    
+
     public void RemoveRelic(Item item)
     {
-        weighSlider.value-= item.itemWeight;
+        weighSlider.value -= item.itemWeight;
         CheckColor(weighSlider.value);
     }
 
@@ -56,8 +55,7 @@ public class InventoryHud : Singleton<InventoryHud>
         {
             VARIABLE.SetActive(false);
         }
+
         borders[current].SetActive(true);
     }
-
-    
 }

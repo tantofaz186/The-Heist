@@ -2,13 +2,17 @@ using System.Collections.Generic;
 using CombatReportScripts;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Inventory : NetworkBehaviour
 {
     public const int SLOTS = 4;
-    public static int MaxWeight = 10000;
+    public int MaxWeight = 100;
     public Item[] items = new Item[SLOTS];
-    public int bagWeight;
+
+    [FormerlySerializedAs("bagWeight")]
+    public int currentWeight;
+
     public List<Item> relics = new();
     public int totalMoney;
 
@@ -17,7 +21,6 @@ public class Inventory : NetworkBehaviour
     public static Inventory Instance;
 
     CombatReportBehaviour playerCombatReport;
-
 
     public void AddItem(GameObject go, Item item)
     {
@@ -35,8 +38,6 @@ public class Inventory : NetworkBehaviour
             Debug.Log("Inventory Full");
         }
     }
-    
-    
 
     private void Start()
     {
@@ -45,27 +46,27 @@ public class Inventory : NetworkBehaviour
         itemsInHand = new GameObject[SLOTS];
     }
 
-    public void AddRelic(Item item)
+    public bool AddRelic(Item item)
     {
-        if (bagWeight + item.itemWeight <= MaxWeight)
+        if (currentWeight + item.itemWeight <= MaxWeight)
         {
             relics.Add(item);
-            bagWeight += item.itemWeight;
+            currentWeight += item.itemWeight;
             totalMoney += item.itemValue;
             InventoryHud.Instance.AddRelic(item);
             playerCombatReport.combatReportData.reliquiasColetadas++;
+            return true;
         }
-        else
-        {
-            Debug.Log("Bag Full");
-        }
+
+        Debug.Log("Bag Full");
+        return false;
     }
 
     public void RemoveRelic()
     {
         if (relics.Count > 0)
         {
-            bagWeight -= relics[^1].itemWeight;
+            currentWeight -= relics[^1].itemWeight;
             totalMoney -= relics[^1].itemValue;
             InventoryHud.Instance.RemoveRelic(relics[^1]);
             relics[^1] = null;
@@ -109,12 +110,13 @@ public class Inventory : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        
+
         if (!IsOwner)
         {
             enabled = false;
             return;
         }
+
         Instance = this;
     }
 }
