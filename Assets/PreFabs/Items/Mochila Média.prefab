@@ -81,6 +81,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: deea62c07c273204fbc3aa447b57632e, type: 3}
       insertIndex: -1
       addedObject: {fileID: -8256197765833620469}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: deea62c07c273204fbc3aa447b57632e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3373337319216017534}
   m_SourcePrefab: {fileID: 100100000, guid: deea62c07c273204fbc3aa447b57632e, type: 3}
 --- !u!1 &620460468574463908 stripped
 GameObject:
@@ -235,3 +238,19 @@ MonoBehaviour:
   outline: {fileID: 0}
   alreadyCollected:
     m_InternalValue: 0
+--- !u!114 &3373337319216017534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620460468574463908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc5a60a53a5f46c8b1310a26c1f95ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 7e5337e9863b4f9f293dcbe856d0e6da, type: 2}
+  meshRenderer: {fileID: 0}
+  visualEffect: {fileID: 0}
+  bagWeight: 600
