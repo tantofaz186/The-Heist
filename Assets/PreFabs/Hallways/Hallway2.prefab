@@ -273,6 +273,7 @@ Transform:
   - {fileID: 5924887396635493748}
   - {fileID: 8673245898976516708}
   - {fileID: 8919980701044274093}
+  - {fileID: 5270264932527746939}
   - {fileID: 4551095571096252627}
   - {fileID: 5454730931011052952}
   - {fileID: 9180823286101612849}
@@ -376,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3338097795
+  GlobalObjectIdHash: 3790715408
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -997,7 +998,7 @@ Transform:
   m_GameObject: {fileID: 4998326932416214177}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -15.96, y: 6.75, z: 11.16}
+  m_LocalPosition: {x: -37, y: 6.75, z: 28.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1028,7 +1029,7 @@ Transform:
   m_GameObject: {fileID: 5015823567264341341}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -4.57, y: 1.11, z: 9.8}
+  m_LocalPosition: {x: -16.33, y: 1.11, z: 20.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1279,6 +1280,102 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8511818940062994553}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &5866055692528512659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5270264932527746939}
+  - component: {fileID: 7326626395388295347}
+  - component: {fileID: 2817453632856457417}
+  m_Layer: 0
+  m_Name: SafeZone
+  m_TagString: SafeZone
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5270264932527746939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5866055692528512659}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.93, y: 1.75, z: -0.07}
+  m_LocalScale: {x: 3.0367, y: 3.574, z: 4.474}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8511818940062994553}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &7326626395388295347
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5866055692528512659}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2817453632856457417
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5866055692528512659}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5974862455195692464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,7 +1401,7 @@ Transform:
   m_GameObject: {fileID: 5974862455195692464}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -14.06, y: 6.75, z: -61.82}
+  m_LocalPosition: {x: -15.63, y: 6.75, z: -59.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2133,6 +2230,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2254653966
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (16)
@@ -2505,6 +2606,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3403330884
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (3)
@@ -3001,6 +3106,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2924194347
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (7)
@@ -3625,6 +3734,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2422627079
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (14)
@@ -3811,6 +3924,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3569943870
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (17)
@@ -4220,6 +4337,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1834418709
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (22)
@@ -4720,6 +4841,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 901414758
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (4)
@@ -4910,6 +5035,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2108457796
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (5)
@@ -5162,6 +5291,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1512562871
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (18)
@@ -5724,6 +5857,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2389653850
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (10)
@@ -6468,6 +6605,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 853411303
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (20)
@@ -7348,6 +7489,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2939290924
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (6)
@@ -7830,6 +7975,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2053852555
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior
@@ -7954,6 +8103,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2788448232
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (19)
@@ -8078,6 +8231,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2952936167
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (13)
@@ -8326,6 +8483,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2330741494
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (11)
@@ -8450,6 +8611,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2813558951
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (23)
@@ -8512,6 +8677,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2337321410
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (15)
@@ -8574,6 +8743,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3935753775
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (2)
@@ -8636,6 +8809,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1119796096
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (24)
@@ -8760,6 +8937,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4175737305
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (12)
@@ -8822,6 +9003,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2123553250
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (25)
@@ -8946,6 +9131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 216841641
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (1)
@@ -9070,6 +9259,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1457494606
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (9)
@@ -10658,6 +10851,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3090105830
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (8)
@@ -11596,6 +11793,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8511818940062994553}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3936207923
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (21)

@@ -686,7 +686,7 @@ Transform:
   m_GameObject: {fileID: 3410104238259796198}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -5.66, y: 6.52, z: 8.14}
+  m_LocalPosition: {x: -15.28, y: 6.52, z: 26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1047,6 +1047,7 @@ Transform:
   - {fileID: 4319658215326511944}
   - {fileID: 5483156044228301746}
   - {fileID: 205850987538141357}
+  - {fileID: 2216085423931182893}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-8787398271096299209
@@ -1300,6 +1301,102 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6373350861803321327}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &7074065026640180710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2216085423931182893}
+  - component: {fileID: 7015683740389090193}
+  - component: {fileID: 3498233894907022552}
+  m_Layer: 0
+  m_Name: SafeZone
+  m_TagString: SafeZone
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2216085423931182893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7074065026640180710}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 11.63, y: 1.66, z: -3.28}
+  m_LocalScale: {x: 3.0367, y: 3.574, z: 4.474}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6373350861803321327}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &7015683740389090193
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7074065026640180710}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3498233894907022552
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7074065026640180710}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7292241271721882815
 GameObject:
   m_ObjectHideFlags: 0
@@ -1443,7 +1540,7 @@ Transform:
   m_GameObject: {fileID: 7436261828523021016}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 8.61, y: 0.333, z: -13.59}
+  m_LocalPosition: {x: -16.32, y: 7.17, z: -35.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2434,6 +2531,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6373350861803321327}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 218097998
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (2)
@@ -2806,6 +2907,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6373350861803321327}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 218097998
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (3)
@@ -2868,6 +2973,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6373350861803321327}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 218097998
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (10)
@@ -3876,6 +3985,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6373350861803321327}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 218097998
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (6)
@@ -4264,6 +4377,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6373350861803321327}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 218097998
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (8)
@@ -4486,6 +4603,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6373350861803321327}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 218097998
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (1)
@@ -5662,6 +5783,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6373350861803321327}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 218097998
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior
@@ -5724,6 +5849,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6373350861803321327}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 218097998
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (9)
@@ -7863,6 +7992,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6373350861803321327}
     m_Modifications:
+    - target: {fileID: 440364178641447797, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 218097998
+      objectReference: {fileID: 0}
     - target: {fileID: 4629894123549885112, guid: 563df8db6e8f1f04e8949392c0bc4a3d, type: 3}
       propertyPath: m_Name
       value: CorredorMaior (7)

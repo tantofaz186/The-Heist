@@ -100,7 +100,7 @@ public class Movement : NetworkBehaviour, IUseAction
     public void Jump(InputAction.CallbackContext context)
     {
         if (!IsOwner) return;
-        bool can_jump = Physics.CheckSphere(transform.GetChild(0).transform.position, 0.5f, Ground,
+        bool can_jump = Physics.CheckSphere(transform.GetChild(0).transform.position, 0.2f, Ground,
             QueryTriggerInteraction.Ignore);
         if (can_jump)
         {

@@ -48,7 +48,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6364449795627543190}
-  m_Mesh: {fileID: -2477511411847689622, guid: 6a9c82fbec32ff545af2de2e1b930166, type: 3}
+  m_Mesh: {fileID: -2228118026411053834, guid: 088b7750da4227f4c94c13a259c7ef77, type: 3}
 --- !u!23 &4851482007001123651
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -69,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7bc9946ea4fd4524c95c8740bfce2264, type: 2}
+  - {fileID: 2100000, guid: 7a990ec87b1465d4d9558af8490fe107, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,8 +110,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.10158823, y: 0.34818706, z: 0.038977962}
-  m_Center: {x: 1.225e-42, y: 0.17409353, z: -0.0016678777}
+  m_Size: {x: 0.225122, y: 0.11840436, z: 0.2611582}
+  m_Center: {x: -1.8186e-41, y: 0.012342311, z: 0.024753094}
 --- !u!114 &8518843070319578785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1756825967
+  GlobalObjectIdHash: 423728273
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1

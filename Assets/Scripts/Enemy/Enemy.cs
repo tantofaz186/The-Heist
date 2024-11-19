@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using Unity.Netcode;
@@ -26,6 +27,7 @@ public class Enemy : NetworkBehaviour
     public float radiusToPickRandomLocation = 10f;
     public NetworkVariable<float> stamina = new NetworkVariable<float>(100f);
     public float staminaSpeed;
+    public float heightOffset = 1.5f;
 
     public Transform bulletSpawn;
     
@@ -125,10 +127,11 @@ public class Enemy : NetworkBehaviour
     IEnumerator Shoot(Transform target)
     {
         StopAgent();
-        // transform.LookAt(target);
-        bulletSpawn.LookAt(target);
+         transform.LookAt(target);
+         Vector3 targetPosition = target.position + Vector3.up * heightOffset;
+        bulletSpawn.LookAt(targetPosition);
         SetAnimationShootRpc();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.7f);
 
         if (IsServer)
         {
@@ -138,6 +141,15 @@ public class Enemy : NetworkBehaviour
 
         yield return new WaitForSeconds(2f);
         shooting = false;
+    }
+
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("SafeZone"))
+        {
+            ChangePatolLocation(PickRandomNavmeshLocation(radiusToPickRandomLocation));
+        }
     }
 
     bool CanAttackTarget(Transform target)
@@ -174,7 +186,7 @@ public class Enemy : NetworkBehaviour
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             bulletRb.velocity = Vector3.zero;
             bulletRb.Sleep();
-            bulletRb.AddForce(bullet.transform.forward * 10f, ForceMode.Impulse);
+            bulletRb.AddForce(bullet.transform.forward * 12f, ForceMode.Impulse);
         }
     }
 

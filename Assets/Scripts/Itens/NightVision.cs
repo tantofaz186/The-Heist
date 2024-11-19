@@ -39,13 +39,13 @@ public class NightVision : BaseItem
     {
         isNightVisionActive = true;
         volume.profile = nightVisionProfile;
-        cam.cullingMask = (1 << 19);
+        cam.cullingMask = LayerMask.GetMask("Default","TransparentFX","Ignore Raycast","Cam","Water","UI","Ground","PlayerLayer", "Keypad","Door","PlayerDontSee","Obstacle","VaultRoom","Roof","Bullet","PostProcessing","Enemy","NightVision");
     }
     void TurnOffNightVision()
     {
         isNightVisionActive = false;
         volume.profile = defaultProfile;
-        cam.cullingMask &= ~(1 << 19);
+        cam.cullingMask = LayerMask.GetMask("Default","TransparentFX","Ignore Raycast","Cam","Water","UI","Ground","PlayerLayer", "Keypad","Door","Item","PlayerDontSee","Obstacle","VaultRoom","Roof","Bullet","PostProcessing","Enemy");
     }
 
     void CoolDown()
