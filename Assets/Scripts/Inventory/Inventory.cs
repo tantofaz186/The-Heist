@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using CombatReportScripts;
 using Unity.Netcode;
 using UnityEngine;
@@ -84,9 +85,14 @@ public class Inventory : NetworkBehaviour
         Debug.Log($"Item Removido {itemPos}");
         items[itemPos] = null;
         itemsInHand[itemPos] = null;
-        ItemSelect.Instance.itemInHand = null;
+        ItemSelect.Instance.ConsumeItem();
         InventoryHud.Instance.RemoveItem(itemPos);
         return true;
+    }    
+    public bool RemoveItem(Item _item)
+    {
+        int index = items.ToList().FindIndex((i) => i == _item);
+        return RemoveItem(index);
     }
 
     int CheckEmptySlot()
