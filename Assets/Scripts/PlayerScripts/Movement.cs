@@ -1,3 +1,4 @@
+using System.Collections;
 using CombatReportScripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -152,6 +153,26 @@ public class Movement : NetworkBehaviour, IUseAction
         PlayerActions.Instance.PlayerInputActions.Player.Run.performed -= Run;
         PlayerActions.Instance.PlayerInputActions.Player.Jump.performed -= Jump;
         PlayerActions.Instance.PlayerInputActions.Player.Crouch.performed -= Crouch;
+    }
+
+
+    public void Slow()
+    {
+        StartCoroutine(nameof(SlowCoroutine));
+    }
+    IEnumerator SlowCoroutine()
+    {    
+       runSpeed *= 0.5f;
+       crouchSpeed *= 0.5f;
+       crouchRun *= 0.5f;
+       walkSpeed *= 0.5f;
+        yield return new WaitForSeconds(3.5f);
+        runSpeed *= 2f;
+        crouchSpeed *= 2f;
+        walkSpeed *= 2f;
+        crouchRun *= 2f;
+        
+        
     }
 
     public override void OnNetworkSpawn()
