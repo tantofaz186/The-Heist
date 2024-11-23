@@ -28,8 +28,8 @@ public class NightVision : BaseItem
         }
     }
 
-    void Start()
-    { 
+    protected override void Start()
+    {
         base.Start();
         volume = GameObject.FindGameObjectWithTag("GlobalVolume").GetComponent<Volume>();
     }

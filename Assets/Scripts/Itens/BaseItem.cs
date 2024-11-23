@@ -1,5 +1,6 @@
 using System;
 using Unity.Netcode;
+using UnityEditor;
 using UnityEngine;
 
 public abstract class BaseItem : NetworkBehaviour
