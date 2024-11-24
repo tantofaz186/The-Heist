@@ -29,6 +29,8 @@ public class Enemy : NetworkBehaviour
     public NetworkVariable<float> stamina = new NetworkVariable<float>(100f);
     public float staminaSpeed;
     public float heightOffset = 1.5f;
+    
+    public AudioListPlay screamSound;
 
     private List<GameObject> waypoints;
 
@@ -83,9 +85,10 @@ public class Enemy : NetworkBehaviour
 
             yield return new WaitUntil(() => Arrived() || playerFound != null);
             if (playerFound)
-            {
+            {   
                 Transform target = playerFound.transform;
                 if (IsServer) StartCoroutine(ConsumeStamina());
+                screamSound.PlayAudioClientRpc();
                 yield return new WaitUntil(() =>
                 {
                     Chase(target);
@@ -190,7 +193,7 @@ public class Enemy : NetworkBehaviour
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             bulletRb.velocity = Vector3.zero;
             bulletRb.Sleep();
-            bulletRb.AddForce(bullet.transform.forward * 7f, ForceMode.Impulse);
+            bulletRb.AddForce(bullet.transform.forward * 10f, ForceMode.Impulse);
         }
     }
 
