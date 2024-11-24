@@ -7,7 +7,7 @@ public class InventoryHud : Singleton<InventoryHud>
     public GameObject[] borders = new GameObject[4];
     public Slider weighSlider;
     public Text moneyText;
-
+    public Image weightImage;
     public void AddItem(Item item, int itemPos)
     {
         slots[itemPos].sprite = item.itemSprite;
@@ -29,22 +29,18 @@ public class InventoryHud : Singleton<InventoryHud>
 
     void CheckColor(float weight)
     {
-        Debug.LogWarning(weighSlider.gameObject);
-
-        Debug.LogWarning(weighSlider.fillRect.gameObject);
         Debug.LogError($"weight: {weight}");
-        Image image = weighSlider.fillRect.GetComponent<Image>();
         if (weight < 0.34f)
         {
-            image.material.color = new Color(164, 164, 164);
+            weightImage.color = new Color(164/255f, 164/255f, 164/255f, 170/255f);
         }
         else if (weight > 0.67f)
         {
-            image.material.color = new Color(307, 36, 31);
+            weightImage.color = new Color(307/255f, 36/255f, 31/255f, 170/255f);
         }
         else
         {
-            image.material.color = new Color(210, 187, 39);
+            weightImage.color = new Color(210/255f, 187/255f, 39/255f, 170/255f);
         }
     }
 
