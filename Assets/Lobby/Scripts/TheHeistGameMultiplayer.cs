@@ -19,6 +19,8 @@ public class TheHeistGameMultiplayer : NetworkBehaviour
 
     [SerializeField]
     List<Color> playerColorList;
+    [SerializeField]
+    List<Material> playerMaterialList;
 
     private NetworkList<PlayerData> playerDataNetworkList;
     private string playerName;
@@ -193,6 +195,10 @@ public class TheHeistGameMultiplayer : NetworkBehaviour
     public PlayerData GetPlayerDataFromPlayerIndex(int playerIndex)
     {
         return playerDataNetworkList[playerIndex];
+    }
+    public Material GetPlayerMaterial(int colorId)
+    {
+        return playerMaterialList[colorId];
     }
 
     public Color GetPlayerColor(int colorId)
