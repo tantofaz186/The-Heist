@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
@@ -29,6 +30,8 @@ public class Enemy : NetworkBehaviour
     public float staminaSpeed;
     public float heightOffset = 1.5f;
 
+    private List<GameObject> waypoints;
+
     public Transform bulletSpawn;
     
     [SerializeField] Vector3 patrolLocation;
@@ -39,6 +42,7 @@ public class Enemy : NetworkBehaviour
         anim = GetComponentInChildren<Animator>();
         fov = GetComponent<FOV>();
     }
+    
 
     GameObject FindPlayer(FOV sensor)
     {
@@ -47,6 +51,7 @@ public class Enemy : NetworkBehaviour
 
     private void Start()
     {
+        waypoints = GetWaypoints();
         if (IsServer)
         {
             StopAgent();
@@ -104,7 +109,7 @@ public class Enemy : NetworkBehaviour
 
     void Patrol()
     {
-        patrolLocation = PickRandomNavmeshLocation(radiusToPickRandomLocation);
+        patrolLocation = PickRandomNavmeshLocation();
         agent.SetDestination(patrolLocation);
         agent.speed = patrolSpeed;
         SetAnimationWalkRpc();
@@ -147,7 +152,7 @@ public class Enemy : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("SafeZone"))
         {
-            ChangePatolLocation(PickRandomNavmeshLocation(radiusToPickRandomLocation));
+            ChangePatolLocation(PickRandomNavmeshLocation());
         }
     }
 
@@ -192,19 +197,25 @@ public class Enemy : NetworkBehaviour
     #endregion
 
     #region Navmesh
-
-    private Vector3 PickRandomNavmeshLocation(float radius)
+    
+    public List<GameObject> GetWaypoints()
     {
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        return GameObject.FindGameObjectsWithTag("Waypoints").ToList();
+    }
+    private Vector3 PickRandomNavmeshLocation(/*float radius*/)
+    {
+        /*Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += transform.position;
         NavMeshHit hit;
         Vector3 finalPosition = Vector3.zero;
         if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
         {
             finalPosition = hit.position;
-        }
-
-        return finalPosition;
+        }*/
+        
+        int rnd = Random.Range(0, waypoints.Count);
+       
+        return  waypoints[rnd].transform.position;
     }
 
     bool Arrived()
@@ -277,4 +288,6 @@ public class Enemy : NetworkBehaviour
     }
 
     #endregion
+    
+   
 }

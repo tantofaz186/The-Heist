@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
@@ -26,6 +27,8 @@ public class Anubis : NetworkBehaviour
     public FOV fov;
     public float radiusToPickRandomLocation = 10f;
     
+    List<GameObject> waypoints;
+    
 
     [SerializeField] private Transform playerPos;
 
@@ -45,6 +48,7 @@ public class Anubis : NetworkBehaviour
 
     private void Start()
     {
+        waypoints = GetWaypoints();
         if (IsServer)
         {
             StopAgent();
@@ -101,7 +105,7 @@ public class Anubis : NetworkBehaviour
 
     void Patrol()
     {
-        patrolLocation = PickRandomNavmeshLocation(radiusToPickRandomLocation);
+        patrolLocation = PickRandomNavmeshLocation();
         agent.SetDestination(patrolLocation);
         agent.speed = patrolSpeed;
         SetAnimationWalkRpc();
@@ -143,7 +147,7 @@ public class Anubis : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("SafeZone"))
         {
-            ChangePatolLocation(PickRandomNavmeshLocation(radiusToPickRandomLocation));
+            ChangePatolLocation(PickRandomNavmeshLocation());
         }
     }
 
@@ -181,18 +185,24 @@ public class Anubis : NetworkBehaviour
 
     #region Navmesh
 
-    private Vector3 PickRandomNavmeshLocation(float radius)
+    public List<GameObject> GetWaypoints()
     {
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        return GameObject.FindGameObjectsWithTag("Waypoints").ToList();
+    }
+    private Vector3 PickRandomNavmeshLocation(/*float radius*/)
+    {
+        /*Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += transform.position;
         NavMeshHit hit;
         Vector3 finalPosition = Vector3.zero;
         if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
         {
             finalPosition = hit.position;
-        }
-
-        return finalPosition;
+        }*/
+        
+        int rnd = Random.Range(0, waypoints.Count);
+       
+        return  waypoints[rnd].transform.position;
     }
 
     bool Arrived()

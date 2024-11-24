@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
@@ -32,6 +33,8 @@ public class EnemyRoman : NetworkBehaviour
     
     [SerializeField] Vector3 patrolLocation;
 
+    private List<GameObject> waypoints;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -47,6 +50,7 @@ public class EnemyRoman : NetworkBehaviour
 
     private void Start()
     {
+        waypoints = GetWaypoints();
         if (IsServer)
         {
             StopAgent();
@@ -105,7 +109,7 @@ public class EnemyRoman : NetworkBehaviour
 
     void Patrol()
     {
-        patrolLocation = PickRandomNavmeshLocation(radiusToPickRandomLocation);
+        patrolLocation = PickRandomNavmeshLocation();
         agent.SetDestination(patrolLocation);
         agent.speed = patrolSpeed;
         SetAnimationWalkRpc();
@@ -172,19 +176,25 @@ public class EnemyRoman : NetworkBehaviour
     #endregion
 
     #region Navmesh
-
-    private Vector3 PickRandomNavmeshLocation(float radius)
+    
+    public List<GameObject> GetWaypoints()
     {
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        return GameObject.FindGameObjectsWithTag("Waypoints").ToList();
+    }
+    private Vector3 PickRandomNavmeshLocation(/*float radius*/)
+    {
+        /*Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += transform.position;
         NavMeshHit hit;
         Vector3 finalPosition = Vector3.zero;
         if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
         {
             finalPosition = hit.position;
-        }
-
-        return finalPosition;
+        }*/
+        
+        int rnd = Random.Range(0, waypoints.Count);
+       
+        return  waypoints[rnd].transform.position;
     }
 
     bool Arrived()
