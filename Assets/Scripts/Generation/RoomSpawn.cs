@@ -33,7 +33,7 @@ public class RoomSpawn : NetworkBehaviour
        if (IsServer)
        {
            SpawnSceneRpc();
-       }
+       }    
 
        StartCoroutine(WaitToBake());
    }
