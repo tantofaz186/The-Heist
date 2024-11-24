@@ -318,6 +318,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LadraoPurple
       objectReference: {fileID: 0}
+    - target: {fileID: 7755822858046534491, guid: 621f4f12290822847af9f9b2fa82d135, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8691151435828864577, guid: 621f4f12290822847af9f9b2fa82d135, type: 3}
       propertyPath: m_LocalPosition.x
       value: 45.9
@@ -503,6 +507,10 @@ PrefabInstance:
     - target: {fileID: 5219918199060101991, guid: 098b160e92811f94b83c13729e23288c, type: 3}
       propertyPath: m_Name
       value: GuardaComChapeu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219918199060101991, guid: 098b160e92811f94b83c13729e23288c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6640964632351064669, guid: 098b160e92811f94b83c13729e23288c, type: 3}
       propertyPath: staminaSpeed
@@ -1027,7 +1035,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1390381005}
   - component: {fileID: 1390381004}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: navmesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1500,6 +1508,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 109716783362100581, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 109716783362100581, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 948245861427658142, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1752009029207010611, guid: e0541b6858476b24088249e748c89212, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1532,6 +1552,14 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 448737153
       objectReference: {fileID: 0}
+    - target: {fileID: 4147463060766721575, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147463060766721575, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4151069002260522172, guid: e0541b6858476b24088249e748c89212, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1560,9 +1588,41 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5174302529348040952, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174302529348040952, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174302529348040952, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5513813390801347138, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5513813390801347138, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5513813390801347138, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5513813390801347138, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5933580186779870489, guid: e0541b6858476b24088249e748c89212, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2741090706
+      objectReference: {fileID: 0}
+    - target: {fileID: 5948647309423130202, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6157112297566269822, guid: e0541b6858476b24088249e748c89212, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -1608,8 +1668,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6515751371829208470, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 6541322252014635189, guid: e0541b6858476b24088249e748c89212, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119595010444536469, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7604403318330286964, guid: e0541b6858476b24088249e748c89212, type: 3}
@@ -1628,12 +1696,21 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8672137286603674193, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672137286603674193, guid: e0541b6858476b24088249e748c89212, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8832854098040930298, guid: e0541b6858476b24088249e748c89212, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2913357721
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5340211577237089205, guid: e0541b6858476b24088249e748c89212, type: 3}
+    - {fileID: 6597656650830347791, guid: e0541b6858476b24088249e748c89212, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
