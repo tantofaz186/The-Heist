@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1402082922881362158}
+  - component: {fileID: 78439441122788178}
   m_Layer: 0
   m_Name: barreira_corrente
   m_TagString: Untagged
@@ -34,6 +35,22 @@ Transform:
   - {fileID: 2771643302002681102}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &78439441122788178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350645826258668605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 3.46, y: 0.67, z: 0.33}
+  m_Center: {x: 0, y: 0.28, z: 0.03}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &8324884887063991
 PrefabInstance:
   m_ObjectHideFlags: 0
