@@ -182,10 +182,10 @@ public class ItemSpawn : NetworkBehaviour
     
     private void SortBagP(int i)
     {
-        
         var instance = Instantiate(bagP, itemSpawnPoints[i].transform);
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+        Debug.Log("bagP");
     }
     
     private void SortBagM(int i)
