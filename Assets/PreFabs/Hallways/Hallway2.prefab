@@ -191,7 +191,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -4424,6 +4424,14 @@ PrefabInstance:
     - target: {fileID: 3325523878211032043, guid: be8d94e6c74be3a4d8893de0751f3380, type: 3}
       propertyPath: m_Name
       value: popcorn_cart
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126544014031077068, guid: be8d94e6c74be3a4d8893de0751f3380, type: 3}
+      propertyPath: m_Size.y
+      value: 1.4445356
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126544014031077068, guid: be8d94e6c74be3a4d8893de0751f3380, type: 3}
+      propertyPath: m_Center.y
+      value: 0.7222678
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

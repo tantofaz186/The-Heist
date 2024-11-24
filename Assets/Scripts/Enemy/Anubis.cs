@@ -134,7 +134,7 @@ public class Anubis : NetworkBehaviour
             InstantiateBulletRpc();
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         shooting = false;
     }
 

@@ -161,16 +161,16 @@ public class Movement : NetworkBehaviour, IUseAction
         StartCoroutine(nameof(SlowCoroutine));
     }
     IEnumerator SlowCoroutine()
-    {    
-       runSpeed *= 0.5f;
-       crouchSpeed *= 0.5f;
-       crouchRun *= 0.5f;
-       walkSpeed *= 0.5f;
+    {    Debug.Log("Slowed");
+       runSpeed /= 3f;
+       crouchSpeed /= 3;
+       crouchRun /= 3;
+       walkSpeed /= 3;
         yield return new WaitForSeconds(3.5f);
-        runSpeed *= 2f;
-        crouchSpeed *= 2f;
-        walkSpeed *= 2f;
-        crouchRun *= 2f;
+        runSpeed *= 3f;
+        crouchSpeed *= 3f;
+        walkSpeed *= 3f;
+        crouchRun *= 3f;
         
         
     }

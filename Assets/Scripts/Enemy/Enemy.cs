@@ -86,9 +86,8 @@ public class Enemy : NetworkBehaviour
                     Chase(target);
                     return playerFound == null || Tired() || CanAttackTarget(target);
                 });
-                if (IsServer) StopCoroutine(ConsumeStamina());
                 if (CanAttackTarget(target))
-                {
+                {   if (IsServer) StopCoroutine(ConsumeStamina());
                     shooting = true;
                     Attack(target);
                     yield return new WaitUntil(AttackEnd);
@@ -131,7 +130,7 @@ public class Enemy : NetworkBehaviour
          Vector3 targetPosition = target.position + Vector3.up * heightOffset;
         bulletSpawn.LookAt(targetPosition);
         SetAnimationShootRpc();
-        yield return new WaitForSeconds(.7f);
+        yield return new WaitForSeconds(1.5f);
 
         if (IsServer)
         {
@@ -186,7 +185,7 @@ public class Enemy : NetworkBehaviour
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             bulletRb.velocity = Vector3.zero;
             bulletRb.Sleep();
-            bulletRb.AddForce(bullet.transform.forward * 12f, ForceMode.Impulse);
+            bulletRb.AddForce(bullet.transform.forward * 7f, ForceMode.Impulse);
         }
     }
 

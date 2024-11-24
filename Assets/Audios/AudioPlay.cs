@@ -7,7 +7,7 @@ public class AudioPlay : NetworkBehaviour
     
     [Rpc(SendTo.Everyone)]
     public void PlayAudioClientRpc()
-    {
+    {   
         audioSource.Play();
     }
 }

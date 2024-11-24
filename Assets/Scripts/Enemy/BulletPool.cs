@@ -51,7 +51,7 @@ public class BulletPool : NetworkBehaviour
             var obj = Instantiate(slowAreaPrefab, transform);
             var instanceNetworkObject = obj.GetComponent<NetworkObject>();
             instanceNetworkObject.Spawn();
-            bulletPool.Add(obj);
+            slowAreaPool.Add(obj);
             obj.GetComponent<SlowArea>().DeactivateRpc();
             
         }

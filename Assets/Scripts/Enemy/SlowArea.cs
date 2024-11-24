@@ -6,18 +6,14 @@ using UnityEngine;
 
 public class SlowArea : NetworkBehaviour
 {
-    
-    
-
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
-        {
+        {     Debug.Log("contact");
             other.gameObject.GetComponent<Movement>().Slow();
         }
     }
 
-  
 
     private void OnEnable()
     {
