@@ -9,7 +9,7 @@ public class Bag : BaseItem
     {
         Debug.Log(playerInventory != null ? "Player Inventory Found" : "Player Inventory Not Found");
         if (playerInventory == null) return;
-        if(playerInventory.MaxWeight > bagWeight) return;
+        if(playerInventory.MaxWeight >= bagWeight) return;
         playerInventory.MaxWeight = Mathf.Max(playerInventory.MaxWeight, bagWeight);
         HideItemRpc();
         playerInventory.RemoveItem(item);

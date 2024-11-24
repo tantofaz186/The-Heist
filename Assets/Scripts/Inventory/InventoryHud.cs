@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +10,38 @@ public class InventoryHud : Singleton<InventoryHud>
     public Slider weighSlider;
     public Text moneyText;
     public Image weightImage;
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(Refresh());
+    }
+
+    public IEnumerator Refresh()
+    {
+        while (enabled)
+        {
+            for (int i = 0; i < Inventory.Instance.items.Length; i++)
+            {
+                if (Inventory.Instance.items[i] == null)
+                {
+                    slots[i].color = new Color(slots[i].color.r, slots[i].color.g, slots[i].color.b, 0f);
+                    slots[i].sprite = null;
+                }
+                else
+                {
+                    slots[i].sprite = Inventory.Instance.items[i].itemSprite;
+                }
+            }
+
+            yield return new WaitForSeconds(3f);
+        }
+    }
+
     public void AddItem(Item item, int itemPos)
     {
         slots[itemPos].sprite = item.itemSprite;
@@ -31,15 +65,15 @@ public class InventoryHud : Singleton<InventoryHud>
     {
         if (weight < 0.34f)
         {
-            weightImage.color = new Color(164/255f, 164/255f, 164/255f, 170/255f);
+            weightImage.color = new Color(164 / 255f, 164 / 255f, 164 / 255f, 170 / 255f);
         }
         else if (weight > 0.67f)
         {
-            weightImage.color = new Color(307/255f, 36/255f, 31/255f, 170/255f);
+            weightImage.color = new Color(307 / 255f, 36 / 255f, 31 / 255f, 170 / 255f);
         }
         else
         {
-            weightImage.color = new Color(210/255f, 187/255f, 39/255f, 170/255f);
+            weightImage.color = new Color(210 / 255f, 187 / 255f, 39 / 255f, 170 / 255f);
         }
     }
 
