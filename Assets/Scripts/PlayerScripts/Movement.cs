@@ -32,6 +32,10 @@ public class Movement : NetworkBehaviour, IUseAction
     public CombatReportBehaviour playerCombatReport;
 
     public AudioListPlay jumpSound;
+    public AudioPlay walkSound;
+    public AudioPlay runSound;
+    bool isPlayingRun = false;
+    bool isPlayingWalk = false;
     protected void Start()
     {
         corpo_fisico = transform.GetComponent<Rigidbody>();
@@ -58,22 +62,47 @@ public class Movement : NetworkBehaviour, IUseAction
         {
             vel = runSpeed;
             corpo_FSM.Animator.SetFloat("mover", 1f);
+            if(!isPlayingRun)
+            {
+                runSound.PlayAudioClientRpc();
+                isPlayingRun = true;
+                isPlayingWalk = false;
+            }
         }
 
         if (isCrouching && running == false)
         {
             vel = crouchSpeed;
             corpo_FSM.Animator.SetFloat("mover", 0f);
+            isPlayingWalk = false;
+            isPlayingRun = false;
         }
         else if (isCrouching && running)
         {
             vel = crouchRun;
             corpo_FSM.Animator.SetFloat("mover", 0f);
+            isPlayingWalk = false;
+            isPlayingRun = false;
         }
         else if (running == false && isCrouching == false)
         {
             vel = walkSpeed;
             corpo_FSM.Animator.SetFloat("mover", 0f);
+            if(!isPlayingWalk)
+            {
+                walkSound.PlayAudioClientRpc();
+                isPlayingWalk = true;
+                isPlayingRun = false;
+            }
+        }
+
+        if (!isPlayingRun)
+        {
+            runSound.PauseAudioClientRpc();
+        }
+        if (!isPlayingWalk)
+        {
+            walkSound.PauseAudioClientRpc();
         }
 
         Vector3 velocity = Vector3.zero;

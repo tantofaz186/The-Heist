@@ -12,7 +12,8 @@ public class buttonVault : MonoBehaviour
     private short digit;
 
     private static List<short> code = new List<short>();
-
+    
+    public AudioPlay buttonAudio;
     private void Start()
     {
         startPosition = transform.localPosition;
@@ -70,6 +71,7 @@ public class buttonVault : MonoBehaviour
         pressed = true;
         var time = 0f;
         var totalTime = 0.4f;
+        buttonAudio.PlayAudioClientRpc();
         targetPosition = startPosition + Vector3.forward * 0.03f;
         while (time < totalTime)
         {

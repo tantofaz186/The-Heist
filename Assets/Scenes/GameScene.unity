@@ -2344,7 +2344,7 @@ MonoBehaviour:
   - {fileID: 3347303742097464921, guid: 6f1fee3f1718f59b6968500896ce2db8, type: 3}
   - {fileID: 148080726377643295, guid: 545222e521b217dddb97a267e21bbd3e, type: 3}
   - {fileID: 620460468574463908, guid: 6683923e3f315b104b23534e6eab2fc9, type: 3}
-  - {fileID: 3365253501342773489, guid: 845ea8ed0122d5c40913c25ea2ec6241, type: 3}
+  - {fileID: 3365253501342773489, guid: 4b88d773cde4ffc418ab3d297104cf78, type: 3}
   relics:
   - {fileID: 5831514968308116420, guid: b55cbb0c60ef1bd4d9c8a5082dee2a16, type: 3}
   - {fileID: 509773701853694132, guid: cff23f4bd8b77dd43a21ef3ac8e17350, type: 3}
@@ -3854,6 +3854,7 @@ MonoBehaviour:
   - {fileID: 1809126546}
   weighSlider: {fileID: 1367945146}
   moneyText: {fileID: 0}
+  weightImage: {fileID: 1776350223}
 --- !u!1 &1367945144
 GameObject:
   m_ObjectHideFlags: 0
@@ -3940,7 +3941,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 2
   m_MinValue: 0
-  m_MaxValue: 10000
+  m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:

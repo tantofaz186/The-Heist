@@ -49,6 +49,8 @@ public abstract class BaseItem : NetworkBehaviour
             var instance = Instantiate(visualEffect, transform.position, Quaternion.identity);
             spawnedObjectVfx = instance.GetComponent<NetworkObject>();
             spawnedObjectVfx.Spawn();
+            spawnedObjectVfx.TrySetParent(transform);
+            spawnedObjectVfx.transform.localPosition = Vector3.zero;
         }
     }
 

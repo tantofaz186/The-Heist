@@ -11,7 +11,6 @@ using Random = UnityEngine.Random;
 public class Anubis : NetworkBehaviour
 {
     public NavMeshAgent agent;
-    public AudioPlay attackSound;
     public Animator anim;
     public bool gameStarted = true;
 
@@ -23,7 +22,7 @@ public class Anubis : NetworkBehaviour
     private bool shooting;
     public GameObject playerFound;
     public float patrolSpeed = 3f;
-    public float chaseSpeed = 3.5f;
+    public float chaseSpeed = 4f;
     public FOV fov;
     public float radiusToPickRandomLocation = 10f;
     
@@ -33,6 +32,8 @@ public class Anubis : NetworkBehaviour
     [SerializeField] private Transform playerPos;
 
     [SerializeField] Vector3 patrolLocation;
+    
+    public AudioListPlay attackAudio;
 
     private void Awake()
     {
@@ -134,9 +135,10 @@ public class Anubis : NetworkBehaviour
         
         if (IsServer)
         {
-            attackSound.PlayAudioClientRpc();
+            attackAudio.PlayAudioClientRpc();
             InstantiateBulletRpc();
         }
+       
 
         yield return new WaitForSeconds(3f);
         shooting = false;
