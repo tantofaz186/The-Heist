@@ -135,6 +135,8 @@ public class PickupObject : NetworkBehaviour, Interactable
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
     private void SomeRpc(bool _enabled)
     {
+        
+        Debug.Log("Called SomeRpc " + _enabled);
         _renderer.enabled = _enabled;
         m_Rigidbody.isKinematic = !_enabled;
         m_Rigidbody.useGravity = _enabled;
@@ -159,9 +161,15 @@ public class PickupObject : NetworkBehaviour, Interactable
     [Rpc(SendTo.Owner)]
     private void TryGrabRelicOwnerRpc(ulong senderClientId)
     {
+        
         if (Inventory.Instance.AddRelic(item))
         {
             ParentObjectRpc(senderClientId);
+        }
+        else if (TryGetComponent<Portrait>(out _))
+        {
+            m_Rigidbody.isKinematic = true;
+            m_Rigidbody.useGravity = false;
         }
     }
 
@@ -180,7 +188,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         {
             baseItem.OnDrop();
         }
-
+        Debug.Log("Called Unparent");
         transform.parent = null;
         m_IsGrabbed.Value = false;
         _renderer.enabled = true;
