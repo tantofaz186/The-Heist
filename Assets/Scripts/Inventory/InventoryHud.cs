@@ -21,25 +21,30 @@ public class InventoryHud : Singleton<InventoryHud>
         slots[itemPos].sprite = null;
     }
 
-    public void AddRelic(Item item)
+    public void ChangeWeight()
     {
-        weighSlider.value += item.itemWeight;
+        weighSlider.value = Inventory.Instance.currentWeight / (float)Inventory.Instance.MaxWeight;
         CheckColor(weighSlider.value);
     }
 
     void CheckColor(float weight)
     {
-        if (weight < Inventory.Instance.MaxWeight / 3f)
+        Debug.LogWarning(weighSlider.gameObject);
+
+        Debug.LogWarning(weighSlider.fillRect.gameObject);
+        Debug.LogError($"weight: {weight}");
+        Image image = weighSlider.fillRect.GetComponent<Image>();
+        if (weight < 0.34f)
         {
-            weighSlider.fillRect.GetComponent<Image>().color = new Color(164, 164, 164, 170);
+            image.material.color = new Color(164, 164, 164);
         }
-        else if (weight > Inventory.Instance.MaxWeight / 1.5f)
+        else if (weight > 0.67f)
         {
-            weighSlider.fillRect.GetComponent<Image>().color = new Color(307, 36, 31, 170);
+            image.material.color = new Color(307, 36, 31);
         }
         else
         {
-            weighSlider.fillRect.GetComponent<Image>().color = new Color(210, 187, 39, 170);
+            image.material.color = new Color(210, 187, 39);
         }
     }
 

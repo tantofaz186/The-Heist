@@ -54,7 +54,7 @@ public class Inventory : NetworkBehaviour
             relics.Add(item);
             currentWeight += item.itemWeight;
             totalMoney += item.itemValue;
-            InventoryHud.Instance.AddRelic(item);
+            InventoryHud.Instance.ChangeWeight();
             playerCombatReport.combatReportData.reliquiasColetadas++;
             return true;
         }
