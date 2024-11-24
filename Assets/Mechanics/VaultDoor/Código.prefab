@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1229321406380218083}
   - component: {fileID: 184757505750481092}
   - component: {fileID: 482372874417571337}
-  - component: {fileID: 8511608238209416191}
   m_Layer: 10
   m_Name: "C\xF3digo"
   m_TagString: Untagged
@@ -69,19 +68,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &8511608238209416191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4026076246764966706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d14b07a281ff4e7e83036ee236742465, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 4819600701605003289}
 --- !u!1 &6120996878857226495
 GameObject:
   m_ObjectHideFlags: 0
