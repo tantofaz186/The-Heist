@@ -11,6 +11,7 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] private GameObject GraphicsPanel;
     [SerializeField] private GameObject SoundPanel;
     [SerializeField] private GameObject ControlsPanel;
+    
     private bool menuOpen = false;
     public Slider brightnessSlider;
     public Slider MasterVolumeSlider;
@@ -149,6 +150,11 @@ public class OptionsMenu : MonoBehaviour
         GraphicsPanel.SetActive(false);
         SoundPanel.SetActive(false);
         ControlsPanel.SetActive(true);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
   
