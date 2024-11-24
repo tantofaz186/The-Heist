@@ -31,6 +31,9 @@ public class Door : NetworkBehaviour, Interactable
     private Vector3 StartPosition;
 
     private Coroutine AnimationCoroutine;
+    
+    public AudioListPlay doorOpening;
+    public AudioListPlay doorClosing;
 
     private void Awake()
     {
@@ -122,12 +125,14 @@ public class Door : NetworkBehaviour, Interactable
     private void ServerCloseRpc()
     {
         isOpen.Value = false;
+        doorClosing.PlayAudioClientRpc();
     }
 
     [Rpc(SendTo.Server)]
     private void ServerOpenRpc()
     {
         isOpen.Value = true;
+        doorOpening.PlayAudioClientRpc();
     }
 
     IEnumerator SlideOpen()

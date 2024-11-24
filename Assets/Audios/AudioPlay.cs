@@ -10,4 +10,10 @@ public class AudioPlay : NetworkBehaviour
     {   
         audioSource.Play();
     }
+    
+    [Rpc(SendTo.Everyone)]
+    public void PauseAudioClientRpc()
+    {   
+        audioSource.Pause();
+    }
 }
