@@ -29,7 +29,6 @@ public class InventoryHud : Singleton<InventoryHud>
 
     void CheckColor(float weight)
     {
-        Debug.LogError($"weight: {weight}");
         if (weight < 0.34f)
         {
             weightImage.color = new Color(164/255f, 164/255f, 164/255f, 170/255f);
