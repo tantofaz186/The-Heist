@@ -8,12 +8,17 @@ public class BulletPool : NetworkBehaviour
 
     [SerializeField]
     private List<GameObject> bulletPool = new List<GameObject>();
-
+    
+    [SerializeField]
+    private List<GameObject> slowAreaPool = new List<GameObject>();
     [SerializeField]
     private int poolSize = 10;
 
     [SerializeField]
     private GameObject bulletPrefab;
+    
+    [SerializeField]
+    private GameObject slowAreaPrefab;
 
     private void Awake()
     {
@@ -40,6 +45,16 @@ public class BulletPool : NetworkBehaviour
             obj.GetComponent<Bullet>().DeactivateRpc();
             
         }
+        
+        for (int i = 0; i < poolSize; i++)
+        {
+            var obj = Instantiate(slowAreaPrefab, transform);
+            var instanceNetworkObject = obj.GetComponent<NetworkObject>();
+            instanceNetworkObject.Spawn();
+            slowAreaPool.Add(obj);
+            obj.GetComponent<SlowArea>().DeactivateRpc();
+            
+        }
     }
 
     public GameObject GetBullet()
@@ -52,6 +67,22 @@ public class BulletPool : NetworkBehaviour
                 bulletPool[i].SetActive(true);
 
                 return bulletPool[i];
+            }
+        }
+
+        return null;
+    }
+    
+    public GameObject GetSlowArea()
+    {
+        for (int i = 0; i < slowAreaPool.Count; i++)
+        {
+            if (!slowAreaPool[i].activeInHierarchy)
+            {
+                slowAreaPool[i].GetComponent<SlowArea>().ActivateRpc();
+                slowAreaPool[i].SetActive(true);
+
+                return slowAreaPool[i];
             }
         }
 

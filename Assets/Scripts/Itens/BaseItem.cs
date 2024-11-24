@@ -1,5 +1,6 @@
 using System;
 using Unity.Netcode;
+using UnityEditor;
 using UnityEngine;
 
 public abstract class BaseItem : NetworkBehaviour
@@ -15,6 +16,8 @@ public abstract class BaseItem : NetworkBehaviour
 
     private NetworkObject spawnedObjectVfx;
     public abstract void UseItem();
+    public virtual void OnPick(ulong playerId){}
+    public virtual void OnDrop(){}
 
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
     public void ShowItemRpc()

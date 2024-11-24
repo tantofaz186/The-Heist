@@ -126,7 +126,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         Transform playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
         transform.parent = senderPlayerObject.transform;
         transform.position = playerTransform.position;
-        transform.localRotation = item.itemPrefab.transform.rotation;   
+        transform.localRotation = item.itemPrefab.transform.rotation;
         m_IsGrabbed.Value = true;
         m_Collider.enabled = false;
         SomeRpc(false);
@@ -149,16 +149,18 @@ public class PickupObject : NetworkBehaviour, Interactable
             Inventory.Instance.AddItem(gameObject, item);
             ParentObjectRpc(senderClientId);
             ItemSelect.Instance.UpdateBaseItem();
+            if (TryGetComponent(out BaseItem baseItem))
+            {
+                baseItem.OnPick(senderClientId);
+            }
         }
     }
 
     [Rpc(SendTo.Owner)]
     private void TryGrabRelicOwnerRpc(ulong senderClientId)
     {
-        if (Inventory.Instance.bagWeight + item.itemWeight <= Inventory.MaxWeight)
+        if (Inventory.Instance.AddRelic(item))
         {
-            Inventory.Instance.AddRelic(item);
-
             ParentObjectRpc(senderClientId);
         }
     }
@@ -174,6 +176,11 @@ public class PickupObject : NetworkBehaviour, Interactable
     [Rpc(SendTo.Server, RequireOwnership = false)]
     private void UnparentObjectRpc()
     {
+        if (TryGetComponent(out BaseItem baseItem))
+        {
+            baseItem.OnDrop();
+        }
+
         transform.parent = null;
         m_IsGrabbed.Value = false;
         _renderer.enabled = true;

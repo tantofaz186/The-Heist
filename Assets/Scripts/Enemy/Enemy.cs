@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
@@ -26,6 +28,9 @@ public class Enemy : NetworkBehaviour
     public float radiusToPickRandomLocation = 10f;
     public NetworkVariable<float> stamina = new NetworkVariable<float>(100f);
     public float staminaSpeed;
+    public float heightOffset = 1.5f;
+
+    private List<GameObject> waypoints;
 
     public Transform bulletSpawn;
     
@@ -37,6 +42,7 @@ public class Enemy : NetworkBehaviour
         anim = GetComponentInChildren<Animator>();
         fov = GetComponent<FOV>();
     }
+    
 
     GameObject FindPlayer(FOV sensor)
     {
@@ -45,6 +51,7 @@ public class Enemy : NetworkBehaviour
 
     private void Start()
     {
+        waypoints = GetWaypoints();
         if (IsServer)
         {
             StopAgent();
@@ -84,9 +91,8 @@ public class Enemy : NetworkBehaviour
                     Chase(target);
                     return playerFound == null || Tired() || CanAttackTarget(target);
                 });
-                if (IsServer) StopCoroutine(ConsumeStamina());
                 if (CanAttackTarget(target))
-                {
+                {   if (IsServer) StopCoroutine(ConsumeStamina());
                     shooting = true;
                     Attack(target);
                     yield return new WaitUntil(AttackEnd);
@@ -103,7 +109,7 @@ public class Enemy : NetworkBehaviour
 
     void Patrol()
     {
-        patrolLocation = PickRandomNavmeshLocation(radiusToPickRandomLocation);
+        patrolLocation = PickRandomNavmeshLocation();
         agent.SetDestination(patrolLocation);
         agent.speed = patrolSpeed;
         SetAnimationWalkRpc();
@@ -125,10 +131,11 @@ public class Enemy : NetworkBehaviour
     IEnumerator Shoot(Transform target)
     {
         StopAgent();
-        // transform.LookAt(target);
-        bulletSpawn.LookAt(target);
+         transform.LookAt(target);
+         Vector3 targetPosition = target.position + Vector3.up * heightOffset;
+        bulletSpawn.LookAt(targetPosition);
         SetAnimationShootRpc();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
 
         if (IsServer)
         {
@@ -138,6 +145,15 @@ public class Enemy : NetworkBehaviour
 
         yield return new WaitForSeconds(2f);
         shooting = false;
+    }
+
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("SafeZone"))
+        {
+            ChangePatolLocation(PickRandomNavmeshLocation());
+        }
     }
 
     bool CanAttackTarget(Transform target)
@@ -160,7 +176,6 @@ public class Enemy : NetworkBehaviour
         fov.ClearObjects();
         patrolLocation = newPatrolLocation;
         agent.SetDestination(patrolLocation);
-        Debug.Log("aaaa");
     }
 
     [Rpc(SendTo.Server)]
@@ -175,26 +190,32 @@ public class Enemy : NetworkBehaviour
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             bulletRb.velocity = Vector3.zero;
             bulletRb.Sleep();
-            bulletRb.AddForce(bullet.transform.forward * 10f, ForceMode.Impulse);
+            bulletRb.AddForce(bullet.transform.forward * 7f, ForceMode.Impulse);
         }
     }
 
     #endregion
 
     #region Navmesh
-
-    private Vector3 PickRandomNavmeshLocation(float radius)
+    
+    public List<GameObject> GetWaypoints()
     {
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        return GameObject.FindGameObjectsWithTag("Waypoints").ToList();
+    }
+    private Vector3 PickRandomNavmeshLocation(/*float radius*/)
+    {
+        /*Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += transform.position;
         NavMeshHit hit;
         Vector3 finalPosition = Vector3.zero;
         if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
         {
             finalPosition = hit.position;
-        }
-
-        return finalPosition;
+        }*/
+        
+        int rnd = Random.Range(0, waypoints.Count);
+       
+        return  waypoints[rnd].transform.position;
     }
 
     bool Arrived()
@@ -267,4 +288,6 @@ public class Enemy : NetworkBehaviour
     }
 
     #endregion
+    
+   
 }

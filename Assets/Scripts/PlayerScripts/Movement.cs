@@ -1,3 +1,4 @@
+using System.Collections;
 using CombatReportScripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -100,7 +101,7 @@ public class Movement : NetworkBehaviour, IUseAction
     public void Jump(InputAction.CallbackContext context)
     {
         if (!IsOwner) return;
-        bool can_jump = Physics.CheckSphere(transform.GetChild(0).transform.position, 0.5f, Ground,
+        bool can_jump = Physics.CheckSphere(transform.GetChild(0).transform.position, 0.2f, Ground,
             QueryTriggerInteraction.Ignore);
         if (can_jump)
         {
@@ -152,6 +153,26 @@ public class Movement : NetworkBehaviour, IUseAction
         PlayerActions.Instance.PlayerInputActions.Player.Run.performed -= Run;
         PlayerActions.Instance.PlayerInputActions.Player.Jump.performed -= Jump;
         PlayerActions.Instance.PlayerInputActions.Player.Crouch.performed -= Crouch;
+    }
+
+
+    public void Slow()
+    {
+        StartCoroutine(nameof(SlowCoroutine));
+    }
+    IEnumerator SlowCoroutine()
+    {    Debug.Log("Slowed");
+       runSpeed /= 3f;
+       crouchSpeed /= 3;
+       crouchRun /= 3;
+       walkSpeed /= 3;
+        yield return new WaitForSeconds(3.5f);
+        runSpeed *= 3f;
+        crouchSpeed *= 3f;
+        walkSpeed *= 3f;
+        crouchRun *= 3f;
+        
+        
     }
 
     public override void OnNetworkSpawn()

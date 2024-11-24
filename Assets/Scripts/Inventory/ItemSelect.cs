@@ -78,7 +78,11 @@ public class ItemSelect : Singleton<ItemSelect>, IUseAction
             itemInHand = null;
         }
     }
-    
+
+    public void ConsumeItem()
+    {
+        UpdateBaseItem();
+    }
     private void UpdateBaseItem(InputAction.CallbackContext obj)
     {
         UpdateBaseItem();

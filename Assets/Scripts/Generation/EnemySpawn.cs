@@ -15,8 +15,8 @@ public class EnemySpawn : NetworkBehaviour
         enemySpawnPoints = GetRoomSpawnEnemy();
         for(int i=0;i<enemySpawnPoints.Count;i++)
         {
-            int rnd = Random.Range(0, enemyList.Count);
-           var instance = Instantiate(enemyList[rnd], enemySpawnPoints[i].transform.position, enemySpawnPoints[i].transform.rotation);
+          
+           var instance = Instantiate(enemyList[i], enemySpawnPoints[i].transform.position, enemySpawnPoints[i].transform.rotation);
            var instanceNetworkObject = instance.GetComponent<NetworkObject>();
            instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
         }
