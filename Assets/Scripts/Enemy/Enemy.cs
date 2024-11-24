@@ -193,7 +193,7 @@ public class Enemy : NetworkBehaviour
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             bulletRb.velocity = Vector3.zero;
             bulletRb.Sleep();
-            bulletRb.AddForce(bullet.transform.forward * 10f, ForceMode.Impulse);
+            bulletRb.AddForce(bullet.transform.forward * 12f, ForceMode.Impulse);
         }
     }
 

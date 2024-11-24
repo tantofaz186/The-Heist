@@ -40,6 +40,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 28fd68f67a15ec048907731470bf902b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 28fd68f67a15ec048907731470bf902b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 28fd68f67a15ec048907731470bf902b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 28fd68f67a15ec048907731470bf902b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -79,6 +91,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 28fd68f67a15ec048907731470bf902b, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 28fd68f67a15ec048907731470bf902b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7bc9946ea4fd4524c95c8740bfce2264, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 28fd68f67a15ec048907731470bf902b, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7bc9946ea4fd4524c95c8740bfce2264, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 28fd68f67a15ec048907731470bf902b, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 6718253217102965088, guid: b5f05b5b11dda6f4fb790e5731a2a316, type: 3}
     - target: {fileID: 919132149155446097, guid: 28fd68f67a15ec048907731470bf902b, type: 3}
       propertyPath: m_Name
       value: FlareGun 1
@@ -137,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1417762701
+  GlobalObjectIdHash: 3478058839
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -202,8 +230,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.19083449, y: 0.34530604, z: 0.5641313}
-  m_Center: {x: 0.000000055879354, y: -0.0055464953, z: -0.19291335}
+  m_Size: {x: 0.16324414, y: 0.15873577, z: 0.16281953}
+  m_Center: {x: 0, y: 0.0785385, z: 0.00047301874}
 --- !u!54 &147855729069665372
 Rigidbody:
   m_ObjectHideFlags: 0
