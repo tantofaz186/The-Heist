@@ -50,6 +50,13 @@ public class PickupObject : NetworkBehaviour, Interactable
             m_Rigidbody.isKinematic = true;
             m_Rigidbody.useGravity = false;
         }
+
+        if (item.itemName == "Anel de Ouro" || item.itemName == "Anel Roxo"|| item.itemName == "Anel de Rubi")
+        {
+            m_Rigidbody.isKinematic = true;
+            m_Rigidbody.useGravity = false;
+        }
+        
     }
 
     public IEnumerator setActions()

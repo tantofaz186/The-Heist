@@ -67,7 +67,6 @@ public class NightVision : BaseItem
     public override void OnDrop()
     {           
             TurnOffNightVision();
-            
     }
     
    
