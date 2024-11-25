@@ -1,11 +1,23 @@
 using Unity.Netcode;
 using UnityEngine.InputSystem;
 
-public class ItemSelect : Singleton<ItemSelect>, IUseAction
+public class ItemSelect : NetworkBehaviour, IUseAction
 {
     public BaseItem itemInHand;
-
+    public static ItemSelect Instance { get; private set; }
     public int currentItemIndex { get; private set; }
+
+    private void Awake()
+    {
+        if (IsOwner)
+        {
+            Instance = this;
+        }
+        else
+        {
+            enabled = false;
+        }
+    }
 
     public void setActions()
     {
