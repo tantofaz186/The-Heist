@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Unity.Netcode;
 public class NightVision : BaseItem
 {
     bool isNightVisionActive = false;
@@ -56,12 +57,20 @@ public class NightVision : BaseItem
     public override void OnPick(ulong playerId)
     {
         base.OnPick(playerId);
-       cam =NetworkManager.SpawnManager.GetPlayerNetworkObject(playerId).GetComponent<PlayerActions>()._camera;
+        GetCameraRpc(playerId);
        
     }
     
     public override void OnDrop()
     {
             TurnOffNightVision();
+            cam = null;
     }
+    
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
+    public void GetCameraRpc(ulong playerId)
+    {
+        cam = NetworkManager.SpawnManager.GetPlayerNetworkObject(playerId).GetComponent<PlayerActions>()._camera;
+    }
+    
 }
