@@ -51,12 +51,11 @@ public class PickupObject : NetworkBehaviour, Interactable
             m_Rigidbody.useGravity = false;
         }
 
-        if (item.itemName == "Anel de Ouro" || item.itemName == "Anel Roxo"|| item.itemName == "Anel de Rubi")
+        if (item.itemName == "Anel de Ouro" || item.itemName == "Anel Roxo" || item.itemName == "Anel de Rubi")
         {
             m_Rigidbody.isKinematic = true;
             m_Rigidbody.useGravity = false;
         }
-        
     }
 
     public IEnumerator setActions()
@@ -143,7 +142,10 @@ public class PickupObject : NetworkBehaviour, Interactable
         {
             transform.localRotation = item.itemPrefab.transform.rotation;
         }
-        catch (Exception _) { } // ignored
+        catch (Exception _)
+        {
+            // ignored
+        }
 
         m_IsGrabbed.Value = true;
         m_Collider.enabled = false;
@@ -250,6 +252,7 @@ public class PickupObject : NetworkBehaviour, Interactable
     [Rpc(SendTo.Owner, RequireOwnership = false)]
     public void OwnerCollectRpc()
     {
-        NetworkManager.LocalClient.PlayerObject.GetComponent<CombatReportBehaviour>().combatReportData.dinheiroRecebido += item.itemValue;
+        NetworkManager.LocalClient.PlayerObject.GetComponent<CombatReportBehaviour>().combatReportData.dinheiroRecebido +=
+            item.itemValue;
     }
 }
