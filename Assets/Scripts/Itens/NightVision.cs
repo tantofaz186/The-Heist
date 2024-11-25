@@ -37,13 +37,15 @@ public class NightVision : BaseItem
 
     
     void TurnOnNightVision()
-    {   if(IsOwner)return;
+    {   
+        if(cam == null)return;
+        
         isNightVisionActive = true;
         volume.profile = nightVisionProfile;
         cam.cullingMask = LayerMask.GetMask("Default","TransparentFX","Ignore Raycast","Cam","Water","UI","Ground","PlayerLayer", "Keypad","Door","PlayerDontSee","Obstacle","VaultRoom","Roof","Bullet","PostProcessing","Enemy","NightVision");
     }
     void TurnOffNightVision()
-    {   if(!IsOwner)return;
+    {   if(cam == null)return;
         isNightVisionActive = false;
         volume.profile = defaultProfile;
         cam.cullingMask = LayerMask.GetMask("Default","TransparentFX","Ignore Raycast","Cam","Water","UI","Ground","PlayerLayer", "Keypad","Door","Item","PlayerDontSee","Obstacle","VaultRoom","Roof","Bullet","PostProcessing","Enemy");
@@ -68,10 +70,6 @@ public class NightVision : BaseItem
             cam = null;
     }
     
-    [Rpc(SendTo.Everyone, RequireOwnership = false)]
-    public void GetCameraRpc(ulong playerId)
-    {
-        cam = NetworkManager.SpawnManager.GetPlayerNetworkObject(playerId).GetComponent<PlayerActions>()._camera;
-    }
+   
     
 }
