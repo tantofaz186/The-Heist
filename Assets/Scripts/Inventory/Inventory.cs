@@ -88,10 +88,16 @@ public class Inventory : NetworkBehaviour
         ItemSelect.Instance.ConsumeItem();
         InventoryHud.Instance.RemoveItem(itemPos);
         return true;
-    }    
+    }
+
     public bool RemoveItem(Item _item)
     {
         int index = items.ToList().FindIndex((i) => i == _item);
+        if (index == -1)
+        {
+            return false;
+        }
+
         return RemoveItem(index);
     }
 

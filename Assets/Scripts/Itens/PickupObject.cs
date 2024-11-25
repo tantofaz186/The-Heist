@@ -88,6 +88,11 @@ public class PickupObject : NetworkBehaviour, Interactable
         }
     }
 
+    public void ForceDropItem()
+    {
+        ReleaseServerRpc(ItemSelect.Instance.currentItemIndex);
+    }
+
     private static int calledTimes = 0;
 
     public string getDisplayText()
@@ -135,7 +140,6 @@ public class PickupObject : NetworkBehaviour, Interactable
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
     private void SomeRpc(bool _enabled)
     {
-        
         Debug.Log("Called SomeRpc " + _enabled);
         _renderer.enabled = _enabled;
         m_Rigidbody.isKinematic = !_enabled;
@@ -161,7 +165,6 @@ public class PickupObject : NetworkBehaviour, Interactable
     [Rpc(SendTo.Owner)]
     private void TryGrabRelicOwnerRpc(ulong senderClientId)
     {
-        
         if (Inventory.Instance.AddRelic(item))
         {
             ParentObjectRpc(senderClientId);
@@ -174,7 +177,7 @@ public class PickupObject : NetworkBehaviour, Interactable
     }
 
     [ServerRpc]
-    private void ReleaseServerRpc(int index)
+    public void ReleaseServerRpc(int index)
     {
         ReleaseItemOwnerRpc(index);
         NetworkObject.RemoveOwnership();
@@ -188,6 +191,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         {
             baseItem.OnDrop();
         }
+
         Debug.Log("Called Unparent");
         transform.parent = null;
         m_IsGrabbed.Value = false;
