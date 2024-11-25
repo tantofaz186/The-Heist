@@ -142,7 +142,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         {
             transform.localRotation = item.itemPrefab.transform.rotation;
         }
-        catch (Exception _)
+        catch
         {
             // ignored
         }
