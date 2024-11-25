@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using CombatReportScripts;
 using Unity.Netcode;
@@ -90,7 +91,7 @@ public class PickupObject : NetworkBehaviour, Interactable
 
     public void ForceDropItem()
     {
-        ReleaseServerRpc(ItemSelect.Instance.currentItemIndex);
+        if (IsOwner) ReleaseServerRpc(ItemSelect.Instance.currentItemIndex);
     }
 
     private static int calledTimes = 0;
@@ -131,7 +132,12 @@ public class PickupObject : NetworkBehaviour, Interactable
         Transform playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
         transform.parent = senderPlayerObject.transform;
         transform.position = playerTransform.position;
-        transform.localRotation = item.itemPrefab.transform.rotation;
+        try
+        {
+            transform.localRotation = item.itemPrefab.transform.rotation;
+        }
+        catch (Exception _) { } // ignored
+
         m_IsGrabbed.Value = true;
         m_Collider.enabled = false;
         SomeRpc(false);
