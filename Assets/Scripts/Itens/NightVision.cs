@@ -7,7 +7,7 @@ public class NightVision : BaseItem
 {
     bool isNightVisionActive = false;
     bool coolDown = false;
-    private NetworkVariable<Camera> cam = new NetworkVariable<Camera>();
+    public Camera cam;
     private Volume volume;
     [SerializeField] VolumeProfile nightVisionProfile;
     [SerializeField] VolumeProfile defaultProfile;
@@ -40,13 +40,13 @@ public class NightVision : BaseItem
     {
         isNightVisionActive = true;
         volume.profile = nightVisionProfile;
-        cam.Value.cullingMask = LayerMask.GetMask("Default","TransparentFX","Ignore Raycast","Cam","Water","UI","Ground","PlayerLayer", "Keypad","Door","PlayerDontSee","Obstacle","VaultRoom","Roof","Bullet","PostProcessing","Enemy","NightVision");
+        cam.cullingMask = LayerMask.GetMask("Default","TransparentFX","Ignore Raycast","Cam","Water","UI","Ground","PlayerLayer", "Keypad","Door","PlayerDontSee","Obstacle","VaultRoom","Roof","Bullet","PostProcessing","Enemy","NightVision");
     }
     void TurnOffNightVision()
     {
         isNightVisionActive = false;
         volume.profile = defaultProfile;
-        cam.Value.cullingMask = LayerMask.GetMask("Default","TransparentFX","Ignore Raycast","Cam","Water","UI","Ground","PlayerLayer", "Keypad","Door","Item","PlayerDontSee","Obstacle","VaultRoom","Roof","Bullet","PostProcessing","Enemy");
+        cam.cullingMask = LayerMask.GetMask("Default","TransparentFX","Ignore Raycast","Cam","Water","UI","Ground","PlayerLayer", "Keypad","Door","Item","PlayerDontSee","Obstacle","VaultRoom","Roof","Bullet","PostProcessing","Enemy");
     }
 
     void CoolDown()
@@ -57,7 +57,7 @@ public class NightVision : BaseItem
     public override void OnPick(ulong playerId)
     {
         base.OnPick(playerId);
-        GetCameraRpc(playerId);
+       cam =NetworkManager.SpawnManager.GetPlayerNetworkObject(playerId).GetComponent<PlayerActions>()._camera;
        
     }
     
@@ -70,7 +70,7 @@ public class NightVision : BaseItem
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
     public void GetCameraRpc(ulong playerId)
     {
-        cam.Value = NetworkManager.SpawnManager.GetPlayerNetworkObject(playerId).GetComponent<PlayerActions>()._camera;
+        cam = NetworkManager.SpawnManager.GetPlayerNetworkObject(playerId).GetComponent<PlayerActions>()._camera;
     }
     
 }
