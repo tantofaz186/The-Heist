@@ -7,8 +7,9 @@ public class ItemSelect : NetworkBehaviour, IUseAction
     public static ItemSelect Instance { get; private set; }
     public int currentItemIndex { get; private set; }
 
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
+        base.OnNetworkSpawn();
         if (IsOwner)
         {
             Instance = this;
