@@ -55,6 +55,7 @@ public class NightVision : BaseItem
 
     public override void OnPick(ulong playerId)
     {
+        base.OnPick(playerId);
         cam =NetworkManager.SpawnManager.GetPlayerNetworkObject(playerId).GetComponent<PlayerActions>()._camera;
     }
     

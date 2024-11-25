@@ -76,7 +76,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         }
     }
 
-    private void DropItem(InputAction.CallbackContext obj)
+    public void DropItem(InputAction.CallbackContext obj)
     {
         if (IsOwner && !item.isRelic && m_IsGrabbed.Value)
         {

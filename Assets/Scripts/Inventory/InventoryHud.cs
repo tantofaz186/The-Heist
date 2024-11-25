@@ -25,10 +25,9 @@ public class InventoryHud : Singleton<InventoryHud>
     {
         while (enabled)
         {
-            
             yield return new WaitForSeconds(3f);
-            if(Inventory.Instance == null) continue;
-            if(Inventory.Instance.items == null) continue;
+            if (Inventory.Instance == null) continue;
+            if (Inventory.Instance.items == null) continue;
             for (int i = 0; i < Inventory.Instance.items.Length; i++)
             {
                 if (Inventory.Instance.items[i] == null)
