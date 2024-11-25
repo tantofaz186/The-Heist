@@ -25,6 +25,8 @@ public class InventoryHud : Singleton<InventoryHud>
     {
         while (enabled)
         {
+            
+            yield return new WaitForSeconds(3f);
             if(Inventory.Instance == null) continue;
             if(Inventory.Instance.items == null) continue;
             for (int i = 0; i < Inventory.Instance.items.Length; i++)
@@ -39,8 +41,6 @@ public class InventoryHud : Singleton<InventoryHud>
                     slots[i].sprite = Inventory.Instance.items[i].itemSprite;
                 }
             }
-
-            yield return new WaitForSeconds(3f);
         }
     }
 
