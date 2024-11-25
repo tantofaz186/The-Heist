@@ -7,17 +7,12 @@ public class Bag : BaseItem
 
     public override void UseItem()
     {
-        Debug.Log(playerInventory != null ? "Player Inventory Found" : "Player Inventory Not Found");
-        if (playerInventory != null)
-        {
-            playerInventory.MaxWeight = Mathf.Max(playerInventory.MaxWeight, bagWeight);
-            HideItemRpc();
-            playerInventory.RemoveItem(item);
-        }
+
     }
 
     public override void OnPick(ulong playerId)
     {
+        base.OnPick(playerId);
         playerInventory = NetworkManager.SpawnManager.GetPlayerNetworkObject(playerId).GetComponent<Inventory>();
     }
 }

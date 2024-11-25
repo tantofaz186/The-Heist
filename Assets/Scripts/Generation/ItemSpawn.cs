@@ -44,6 +44,13 @@ public class ItemSpawn : NetworkBehaviour
     [SerializeField]
     private GameObject displayCaseKey;
     
+    
+    [SerializeField] private GameObject bagP;
+
+    [SerializeField] private GameObject bagM;
+    
+    [SerializeField] private GameObject bagG;
+    
     int mapCount = 0;
     
     [Rpc(SendTo.Server)]
@@ -92,6 +99,15 @@ public class ItemSpawn : NetworkBehaviour
                 break;            
             case 8:
                 SortDisplayCaseKey(spawnPointIndex);
+                break;
+            case 9:
+                SortBagP(spawnPointIndex);
+                break;
+            case 10:
+                SortBagM(spawnPointIndex);
+                break;
+            case 11:
+                SortBagG(spawnPointIndex);
                 break;
         }
     }
@@ -160,6 +176,30 @@ public class ItemSpawn : NetworkBehaviour
     {
         int rnd = Random.Range(0, quadros.Count);
         var instance = Instantiate(quadros[rnd], itemSpawnPoints[i].transform);
+        var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+        instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+    }
+    
+    private void SortBagP(int i)
+    {
+        var instance = Instantiate(bagP, itemSpawnPoints[i].transform);
+        var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+        instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+        Debug.Log("bagP");
+    }
+    
+    private void SortBagM(int i)
+    {
+        
+        var instance = Instantiate(bagM, itemSpawnPoints[i].transform);
+        var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+        instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
+    }
+    
+    private void SortBagG(int i)
+    {
+        
+        var instance = Instantiate(bagG, itemSpawnPoints[i].transform);
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
     }

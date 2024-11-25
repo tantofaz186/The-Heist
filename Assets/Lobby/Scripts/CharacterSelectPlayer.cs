@@ -53,7 +53,7 @@ public class CharacterSelectPlayer : MonoBehaviour
             
             playerNameText.text = playerData.playerName.ToString();
             
-            playerVisual.SetPlayerColor(TheHeistGameMultiplayer.Instance.GetPlayerColor(playerData.colorId));
+            playerVisual.SetPlayerColor(TheHeistGameMultiplayer.Instance.GetPlayerMaterial(playerData.colorId));
         }
         else
             Hide();

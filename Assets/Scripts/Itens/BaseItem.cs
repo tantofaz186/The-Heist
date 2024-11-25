@@ -16,7 +16,18 @@ public abstract class BaseItem : NetworkBehaviour
 
     private NetworkObject spawnedObjectVfx;
     public abstract void UseItem();
-    public virtual void OnPick(ulong playerId){}
+
+    public virtual void OnPick(ulong playerId)
+    {
+        if (IsServer)
+        {
+            if (spawnedObjectVfx.IsSpawned)
+            {
+                Debug.Log($"Entrei aqui");
+                spawnedObjectVfx.Despawn();
+            }
+        }
+    }
     public virtual void OnDrop(){}
 
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
@@ -49,6 +60,8 @@ public abstract class BaseItem : NetworkBehaviour
             var instance = Instantiate(visualEffect, transform.position, Quaternion.identity);
             spawnedObjectVfx = instance.GetComponent<NetworkObject>();
             spawnedObjectVfx.Spawn();
+            spawnedObjectVfx.TrySetParent(transform);
+            spawnedObjectVfx.transform.localPosition = Vector3.zero;
         }
     }
 

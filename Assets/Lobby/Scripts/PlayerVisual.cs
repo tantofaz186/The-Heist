@@ -2,20 +2,17 @@ using UnityEngine;
 
 public class PlayerVisual : MonoBehaviour
 {
-    [SerializeField] private SkinnedMeshRenderer headMeshRenderer;
-    [SerializeField] private SkinnedMeshRenderer bodyMeshRenderer;
+    // [SerializeField] private SkinnedMeshRenderer headMeshRenderer;
+    // [SerializeField] private SkinnedMeshRenderer bodyMeshRenderer;
 
-    private Material material;
+    [SerializeField] private SkinnedMeshRenderer[] bodyparts;
 
-    private void Awake()
+    public void SetPlayerColor(Material color)
     {
-        material = new Material(bodyMeshRenderer.material);
-        //headMeshRenderer.material = material;
-        bodyMeshRenderer.material = material;
-    }
-
-    public void SetPlayerColor(Color color)
-    {
-        material.color = color;
+        foreach (var bodypart in bodyparts)
+        {
+            bodypart.material = color;
+        }
+        
     }
 }
