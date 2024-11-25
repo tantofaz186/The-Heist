@@ -43,6 +43,24 @@ public class InventoryHud : Singleton<InventoryHud>
         }
     }
 
+    public void TryRefresh()
+    {
+        if (Inventory.Instance == null) return;
+        if (Inventory.Instance.items == null) return;
+        for (int i = 0; i < Inventory.Instance.items.Length; i++)
+        {
+            if (Inventory.Instance.items[i] == null)
+            {
+                slots[i].color = new Color(slots[i].color.r, slots[i].color.g, slots[i].color.b, 0f);
+                slots[i].sprite = null;
+            }
+            else
+            {
+                slots[i].sprite = Inventory.Instance.items[i].itemSprite;
+            }
+        }
+    }
+
     public void AddItem(Item item, int itemPos)
     {
         slots[itemPos].sprite = item.itemSprite;
