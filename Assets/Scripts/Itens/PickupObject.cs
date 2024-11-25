@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using CombatReportScripts;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System;
 
 [RequireComponent(typeof(Outline))]
 [RequireComponent(typeof(BoxCollider))]
@@ -50,6 +50,13 @@ public class PickupObject : NetworkBehaviour, Interactable
             m_Rigidbody.isKinematic = true;
             m_Rigidbody.useGravity = false;
         }
+
+        if (item.itemName == "Anel de Ouro" || item.itemName == "Anel Roxo"|| item.itemName == "Anel de Rubi")
+        {
+            m_Rigidbody.isKinematic = true;
+            m_Rigidbody.useGravity = false;
+        }
+        
     }
 
     public IEnumerator setActions()
@@ -91,7 +98,7 @@ public class PickupObject : NetworkBehaviour, Interactable
 
     public void ForceDropItem()
     {
-        ReleaseServerRpc(ItemSelect.Instance.currentItemIndex);
+        if (IsOwner) ReleaseServerRpc(ItemSelect.Instance.currentItemIndex);
     }
 
     private static int calledTimes = 0;
@@ -136,10 +143,8 @@ public class PickupObject : NetworkBehaviour, Interactable
         {
             transform.localRotation = item.itemPrefab.transform.rotation;
         }
-        catch (Exception _)
-        {
-            // ignored
-        }
+        catch (Exception _) { } // ignored
+
         m_IsGrabbed.Value = true;
         m_Collider.enabled = false;
         SomeRpc(false);

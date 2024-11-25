@@ -224,7 +224,7 @@ public class Anubis : NetworkBehaviour
 
     #region Animations
 
-    
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
     public void SetAnimationAttackRpc()
     {
         anim.SetTrigger("shoot");
