@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,25 @@ public class CombatReportUI : MonoBehaviour
 {
     [SerializeField]
     private List<PlayerCombatReportUI> combatReport;
+
     bool ready = false;
+
     private void Awake()
     {
         combatReport = FindObjectsOfType<PlayerCombatReportUI>().ToList();
+    }
+
+    private void UpdateUI()
+    {
+        List<CombatReportData> combatReportUpdated = new List<CombatReportData>()
+        {
+            CombatReport.Instance.player1.Value,
+            CombatReport.Instance.player2.Value,
+            CombatReport.Instance.player3.Value,
+            CombatReport.Instance.player4.Value,
+        };
+        SetUI(combatReportUpdated);
+
     }
 
     public void SetUI(List<CombatReportData> data)
@@ -23,6 +39,7 @@ public class CombatReportUI : MonoBehaviour
     private void Start()
     {
         StartCoroutine(ShowInList());
+        InvokeRepeating(nameof(UpdateUI), 1, 2);
     }
 
     private IEnumerator ShowInList()

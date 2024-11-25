@@ -10,10 +10,10 @@ namespace CombatReportScripts
 {
     public class CombatReport : NetworkBehaviour
     {
-        NetworkVariable<CombatReportData> player1 = new();
-        NetworkVariable<CombatReportData> player2 = new();
-        NetworkVariable<CombatReportData> player3 = new();
-        NetworkVariable<CombatReportData> player4 = new();
+        public NetworkVariable<CombatReportData> player1 = new();
+        public NetworkVariable<CombatReportData> player2 = new();
+        public NetworkVariable<CombatReportData> player3 = new();
+        public NetworkVariable<CombatReportData> player4 = new();
         NetworkVariable<int> readyClients = new();
         private int numberOfPlayers;
 
