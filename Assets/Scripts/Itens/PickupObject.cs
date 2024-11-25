@@ -4,6 +4,7 @@ using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 [RequireComponent(typeof(Outline))]
 [RequireComponent(typeof(BoxCollider))]
@@ -131,7 +132,14 @@ public class PickupObject : NetworkBehaviour, Interactable
         Transform playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
         transform.parent = senderPlayerObject.transform;
         transform.position = playerTransform.position;
-        transform.localRotation = item.itemPrefab.transform.rotation;
+        try
+        {
+            transform.localRotation = item.itemPrefab.transform.rotation;
+        }
+        catch (Exception _)
+        {
+            // ignored
+        }
         m_IsGrabbed.Value = true;
         m_Collider.enabled = false;
         SomeRpc(false);
