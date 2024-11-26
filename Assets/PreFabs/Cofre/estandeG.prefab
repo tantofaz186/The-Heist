@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6496119851848152344}
   - component: {fileID: 7892840934839859901}
   - component: {fileID: 5363213533114420855}
+  - component: {fileID: 4761466729867308024}
   m_Layer: 12
   m_Name: estandeG
   m_TagString: Untagged
@@ -87,6 +88,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4761466729867308024
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5867357137003736994}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.3333879, y: 1.0002908, z: 2.6386461}
+  m_Center: {x: 0, y: 0.5001454, z: 0}
 --- !u!1001 &2456858275104374089
 PrefabInstance:
   m_ObjectHideFlags: 0
