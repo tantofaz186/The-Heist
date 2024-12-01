@@ -1576,15 +1576,15 @@ PrefabInstance:
     - target: {fileID: -5928697058549679153, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: a157f655443062f4b81f12fecff83b35, type: 2}
     - target: {fileID: -4899329587775332657, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: a157f655443062f4b81f12fecff83b35, type: 2}
     - target: {fileID: 443413717285206882, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: a157f655443062f4b81f12fecff83b35, type: 2}
     - target: {fileID: 919132149155446097, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Name
       value: Ladrao_M (1)
@@ -1592,11 +1592,11 @@ PrefabInstance:
     - target: {fileID: 1123054084368432229, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: a157f655443062f4b81f12fecff83b35, type: 2}
     - target: {fileID: 4626793529665947440, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: a157f655443062f4b81f12fecff83b35, type: 2}
     - target: {fileID: 5866666021909216657, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Controller
       value: 
@@ -1604,7 +1604,7 @@ PrefabInstance:
     - target: {fileID: 7196100395706918349, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: a157f655443062f4b81f12fecff83b35, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1874,6 +1874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 685961447}
   - component: {fileID: 685961448}
+  - component: {fileID: 685961449}
   m_Layer: 0
   m_Name: Spot Light (1)
   m_TagString: Untagged
@@ -1958,6 +1959,29 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &685961449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685961446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &702186607
 GameObject:
   m_ObjectHideFlags: 0
@@ -4499,15 +4523,15 @@ PrefabInstance:
     - target: {fileID: -5928697058549679153, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: 8b81c639884f4604c942ea088d6d869e, type: 2}
     - target: {fileID: -4899329587775332657, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: 8b81c639884f4604c942ea088d6d869e, type: 2}
     - target: {fileID: 443413717285206882, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: 8b81c639884f4604c942ea088d6d869e, type: 2}
     - target: {fileID: 919132149155446097, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Name
       value: Ladrao_M (1)
@@ -4515,11 +4539,11 @@ PrefabInstance:
     - target: {fileID: 1123054084368432229, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: 8b81c639884f4604c942ea088d6d869e, type: 2}
     - target: {fileID: 4626793529665947440, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: 8b81c639884f4604c942ea088d6d869e, type: 2}
     - target: {fileID: 5866666021909216657, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Controller
       value: 
@@ -4527,7 +4551,7 @@ PrefabInstance:
     - target: {fileID: 7196100395706918349, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: 8b81c639884f4604c942ea088d6d869e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5847,15 +5871,15 @@ PrefabInstance:
     - target: {fileID: -5928697058549679153, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: b8aac20954d88c34fb32ed307a2d1cc5, type: 2}
     - target: {fileID: -4899329587775332657, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: b8aac20954d88c34fb32ed307a2d1cc5, type: 2}
     - target: {fileID: 443413717285206882, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: b8aac20954d88c34fb32ed307a2d1cc5, type: 2}
     - target: {fileID: 919132149155446097, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Name
       value: Ladrao_M (1)
@@ -5863,11 +5887,11 @@ PrefabInstance:
     - target: {fileID: 1123054084368432229, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: b8aac20954d88c34fb32ed307a2d1cc5, type: 2}
     - target: {fileID: 4626793529665947440, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: b8aac20954d88c34fb32ed307a2d1cc5, type: 2}
     - target: {fileID: 5866666021909216657, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Controller
       value: 
@@ -5875,7 +5899,7 @@ PrefabInstance:
     - target: {fileID: 7196100395706918349, guid: cda79cbe297a5b74ba9406f3417cbdda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a042af5bf37e9fa4580647c87790334c, type: 2}
+      objectReference: {fileID: 2100000, guid: b8aac20954d88c34fb32ed307a2d1cc5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6305,6 +6329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1667379868}
   - component: {fileID: 1667379869}
+  - component: {fileID: 1667379870}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -6389,6 +6414,29 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1667379870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667379867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1680908270
 GameObject:
   m_ObjectHideFlags: 0
@@ -7728,6 +7776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1926796873}
   - component: {fileID: 1926796874}
+  - component: {fileID: 1926796875}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -7812,6 +7861,29 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1926796875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926796872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1935993761
 GameObject:
   m_ObjectHideFlags: 0
@@ -9111,6 +9183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2122025430}
   - component: {fileID: 2122025431}
+  - component: {fileID: 2122025432}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -9195,6 +9268,29 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &2122025432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122025429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &2124965074
 GameObject:
   m_ObjectHideFlags: 0

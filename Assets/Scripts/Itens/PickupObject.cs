@@ -26,6 +26,7 @@ public class PickupObject : NetworkBehaviour, Interactable
 
     private ulong lastOwnerId;
     public NetworkVariable<bool> alreadyCollected = new();
+    public NetworkVariable<int> numberCollected = new(0);
 
     public void Start()
     {
@@ -235,7 +236,8 @@ public class PickupObject : NetworkBehaviour, Interactable
     {
         Inventory.Instance.RemoveRelic();
     }
-
+    
+    
     [Rpc(SendTo.Server, RequireOwnership = false)]
     public void CollectRpc()
     {
@@ -245,9 +247,14 @@ public class PickupObject : NetworkBehaviour, Interactable
             Debug.Log("Relic Dropped");
             NetworkObject.ChangeOwnership(lastOwnerId);
             OwnerCollectRpc();
-            
-            enabled = false;
+            Invoke(nameof(Despawn), 2f);
         }
+    }
+
+    private void Despawn()
+    {
+        numberCollected.Value++;
+        NetworkObject.Despawn();
     }
 
     [Rpc(SendTo.Owner, RequireOwnership = false)]
@@ -257,3 +264,7 @@ public class PickupObject : NetworkBehaviour, Interactable
             item.itemValue;
     }
 }
+
+//avisar que vai fechar o jogo
+//circulos de escolha do lobby estão low rez
+// não pegou a mochila sa garagem inicial
