@@ -263,7 +263,3 @@ public class PickupObject : NetworkBehaviour, Interactable
             item.itemValue;
     }
 }
-
-//avisar que vai fechar o jogo
-//circulos de escolha do lobby estão low rez
-// não pegou a mochila sa garagem inicial
