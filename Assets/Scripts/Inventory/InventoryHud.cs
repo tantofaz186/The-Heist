@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ public class InventoryHud : Singleton<InventoryHud>
     public Image[] slots = new Image[4];
     public GameObject[] borders = new GameObject[4];
     public Slider weighSlider;
-    public Text moneyText;
+    public TextMeshProUGUI fullWeightText;
     public Image weightImage;
 
     private void OnDisable()
@@ -110,5 +111,10 @@ public class InventoryHud : Singleton<InventoryHud>
         }
 
         borders[current].SetActive(true);
+    }
+
+    public void DisplayFullInventoryMessage(bool active)
+    {
+        fullWeightText.gameObject.SetActive(active);
     }
 }

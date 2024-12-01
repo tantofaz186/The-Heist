@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CombatReportScripts;
@@ -37,7 +38,15 @@ public class Inventory : NetworkBehaviour
         else
         {
             Debug.Log("Inventory Full");
+            StartCoroutine(DisplayFullInventoryMessage());
         }
+    }
+
+    private IEnumerator DisplayFullInventoryMessage()
+    {
+        InventoryHud.Instance.DisplayFullInventoryMessage(true);
+        yield return new WaitForSeconds(2);
+        InventoryHud.Instance.DisplayFullInventoryMessage(false);
     }
 
     private void Start()
