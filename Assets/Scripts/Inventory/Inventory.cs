@@ -44,6 +44,7 @@ public class Inventory : NetworkBehaviour
 
     private IEnumerator DisplayFullInventoryMessage()
     {
+        Debug.Log("Bag Full");
         InventoryHud.Instance.DisplayFullInventoryMessage(true);
         yield return new WaitForSeconds(2);
         InventoryHud.Instance.DisplayFullInventoryMessage(false);
@@ -67,8 +68,8 @@ public class Inventory : NetworkBehaviour
             playerCombatReport.combatReportData.reliquiasColetadas++;
             return true;
         }
-
-        Debug.Log("Bag Full");
+        Debug.Log("Inventory Full");
+        StartCoroutine(DisplayFullInventoryMessage());
         return false;
     }
 

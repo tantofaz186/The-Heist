@@ -185,11 +185,8 @@ public class PickupObject : NetworkBehaviour, Interactable
         {
             ParentObjectRpc(senderClientId);
         }
-        else if (TryGetComponent<Portrait>(out _))
-        {
-            m_Rigidbody.isKinematic = true;
-            m_Rigidbody.useGravity = false;
-        }
+
+        SetDefaultRigidbodyRpc();
     }
 
     [Rpc(SendTo.Server, RequireOwnership = false)]
