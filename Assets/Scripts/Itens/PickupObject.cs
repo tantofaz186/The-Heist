@@ -193,18 +193,23 @@ public class PickupObject : NetworkBehaviour, Interactable
     public void ReleaseServerRpc(int index)
     {
         ReleaseItemOwnerRpc(index);
+        OwnerDropRpc();
         NetworkObject.RemoveOwnership();
         UnparentObjectRpc();
     }
 
-    [Rpc(SendTo.Server, RequireOwnership = false)]
-    private void UnparentObjectRpc()
+    [Rpc(SendTo.Owner)]
+    public void OwnerDropRpc()
     {
         if (TryGetComponent(out BaseItem baseItem))
         {
             baseItem.OnDrop();
         }
+    }
 
+    [Rpc(SendTo.Server, RequireOwnership = false)]
+    private void UnparentObjectRpc()
+    {
         Debug.Log("Called Unparent");
         transform.parent = null;
         m_IsGrabbed.Value = false;
