@@ -28,7 +28,8 @@ public abstract class BaseItem : NetworkBehaviour
             }
         }
     }
-    public virtual void OnDrop(){}
+
+    public virtual void OnDrop() { }
 
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
     public void ShowItemRpc()
