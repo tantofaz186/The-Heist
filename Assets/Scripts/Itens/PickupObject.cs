@@ -191,7 +191,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         }
     }
 
-    [ServerRpc]
+    [Rpc(SendTo.Server, RequireOwnership = false)]
     public void ReleaseServerRpc(int index)
     {
         ReleaseItemOwnerRpc(index);
@@ -245,6 +245,7 @@ public class PickupObject : NetworkBehaviour, Interactable
             Debug.Log("Relic Dropped");
             NetworkObject.ChangeOwnership(lastOwnerId);
             OwnerCollectRpc();
+            
             enabled = false;
         }
     }
