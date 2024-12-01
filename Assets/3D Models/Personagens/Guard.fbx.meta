@@ -24,27 +24,7 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Rig_FatEnemy|1_Guard_Patrol' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'DEF_Hips' is inbetween humanoid
-      transforms and has rotation animation that will be discarded.\n\t'DEF_Thigh.L'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'DEF_Thigh.R'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
-      'Rig_FatEnemy|2_Guard_Seek' has import animation warnings that might lower
-      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
-      quality.\n\t'DEF_Hips' is inbetween humanoid transforms and has rotation animation
-      that will be discarded.\n\t'DEF_Thigh.L' is inbetween humanoid transforms and
-      has rotation animation that will be discarded.\n\t'DEF_Thigh.R' is inbetween
-      humanoid transforms and has rotation animation that will be discarded.\n\nClip
-      'Rig_FatEnemy|3_Guard_Recovery' has import animation warnings that might lower
-      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
-      quality.\n\t'DEF_Thigh.L' is inbetween humanoid transforms and has rotation
-      animation that will be discarded.\n\t'DEF_Thigh.R' is inbetween humanoid transforms
-      and has rotation animation that will be discarded.\n\nClip 'Rig_FatEnemy|4_Guard_Shoot'
-      has import animation warnings that might lower retargeting quality:\nNote:
-      Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF_Thigh.L'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'DEF_Thigh.R'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -202,7 +182,7 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
