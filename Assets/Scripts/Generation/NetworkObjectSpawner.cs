@@ -1,9 +1,10 @@
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class NetworkObjectSpawner : MonoBehaviour
+namespace Generation
 {
-    [SerializeField]
-    private List<NetworkObject> networkObjects;
+    public class NetworkObjectSpawner : MonoBehaviour
+    {
+        public NetworkObject networkObjectToSpawn;
+    }
 }
