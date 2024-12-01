@@ -19,14 +19,8 @@ public abstract class BaseItem : NetworkBehaviour
 
     public virtual void OnPick(ulong playerId)
     {
-        if (IsServer)
-        {
-            if (spawnedObjectVfx.IsSpawned)
-            {
-                Debug.Log($"Entrei aqui");
-                spawnedObjectVfx.Despawn();
-            }
-        }
+        HideItemRpc();
+        ShowItemRpc();
     }
 
     public virtual void OnDrop() { }
