@@ -15,11 +15,13 @@ public class InventoryHud : Singleton<InventoryHud>
     private void OnDisable()
     {
         StopAllCoroutines();
+        DisplayFullInventoryMessage(false);
     }
 
     private void Start()
     {
         StartCoroutine(Refresh());
+        DisplayFullInventoryMessage(false);
     }
 
     public IEnumerator Refresh()

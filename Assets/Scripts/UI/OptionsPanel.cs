@@ -15,8 +15,8 @@ public class OptionsPanel : MonoBehaviour
          });
          YesButton.onClick.AddListener(() =>
          {
-            Application.Quit();
             Debug.Log("Quit");
+            Application.Quit();
          });
    }
    

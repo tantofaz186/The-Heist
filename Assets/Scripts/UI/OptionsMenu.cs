@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -11,6 +12,7 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] private GameObject GraphicsPanel;
     [SerializeField] private GameObject SoundPanel;
     [SerializeField] private GameObject ControlsPanel;
+    [SerializeField] private GameObject QuitPanel;
     
     private bool menuOpen = false;
     public Slider brightnessSlider;
@@ -138,18 +140,28 @@ public class OptionsMenu : MonoBehaviour
         GraphicsPanel.SetActive(false);
         SoundPanel.SetActive(true);
         ControlsPanel.SetActive(false);
+        QuitPanel.SetActive(false);
     }
    public void Graphics()
     {
         GraphicsPanel.SetActive(true);
         SoundPanel.SetActive(false);
         ControlsPanel.SetActive(false);
+        QuitPanel.SetActive(false);
     }
    public void Controls()
     {
         GraphicsPanel.SetActive(false);
         SoundPanel.SetActive(false);
         ControlsPanel.SetActive(true);
+        QuitPanel.SetActive(false);
+    }   
+   public void QuitMenu()
+    {
+        GraphicsPanel.SetActive(false);
+        SoundPanel.SetActive(false);
+        ControlsPanel.SetActive(false);
+        QuitPanel.SetActive(true);
     }
 
     public void Quit()
