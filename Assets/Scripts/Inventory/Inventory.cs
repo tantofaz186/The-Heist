@@ -44,9 +44,8 @@ public class Inventory : NetworkBehaviour
 
     private IEnumerator DisplayFullInventoryMessage()
     {
-        Debug.Log("Bag Full");
         InventoryHud.Instance.DisplayFullInventoryMessage(true);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         InventoryHud.Instance.DisplayFullInventoryMessage(false);
     }
 
