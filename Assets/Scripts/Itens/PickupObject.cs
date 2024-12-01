@@ -110,7 +110,7 @@ public class PickupObject : NetworkBehaviour, Interactable
 
     public void Interact()
     {
-        TryGrabServerRpc();
+        if (!m_IsGrabbed.Value) TryGrabServerRpc();
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -236,8 +236,7 @@ public class PickupObject : NetworkBehaviour, Interactable
     {
         Inventory.Instance.RemoveRelic();
     }
-    
-    
+
     [Rpc(SendTo.Server, RequireOwnership = false)]
     public void CollectRpc()
     {
