@@ -18,7 +18,6 @@ public class Bag : BaseItem
         if (playerInventory.MaxWeight >= bagWeight)
         {
             GetComponent<PickupObject>().ForceDropItem();
-            playerInventory.RemoveItem(item);
             InventoryHud.Instance.TryRefresh();
             return;
         }
