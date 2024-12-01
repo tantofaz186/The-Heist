@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,8 +44,7 @@ public class NightVision : BaseItem
 
     void TurnOnNightVision()
     {
-        if (cam == null) return;
-
+        
         isNightVisionActive = true;
         volume.profile = nightVisionProfile;
         cam.cullingMask = LayerMask.GetMask("Default", "TransparentFX", "Ignore Raycast", "Cam", "Water", "UI", "Ground", "PlayerLayer",
@@ -53,11 +53,17 @@ public class NightVision : BaseItem
 
     void TurnOffNightVision()
     {
-        if (cam == null) return;
-        isNightVisionActive = false;
-        volume.profile = defaultProfile;
-        cam.cullingMask = LayerMask.GetMask("Default", "TransparentFX", "Ignore Raycast", "Cam", "Water", "UI", "Ground", "PlayerLayer",
-            "Keypad", "Door", "Item", "PlayerDontSee", "Obstacle", "VaultRoom", "Roof", "Bullet", "PostProcessing", "Enemy");
+        try
+        {
+            
+            isNightVisionActive = false;
+            volume.profile = defaultProfile;
+            cam.cullingMask = LayerMask.GetMask("Default", "TransparentFX", "Ignore Raycast", "Cam", "Water", "UI", "Ground", "PlayerLayer",
+                "Keypad", "Door", "Item", "PlayerDontSee", "Obstacle", "VaultRoom", "Roof", "Bullet", "PostProcessing", "Enemy");
+        } catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
     }
 
     void CoolDown()
