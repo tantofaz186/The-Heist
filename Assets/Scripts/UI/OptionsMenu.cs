@@ -94,7 +94,7 @@ public class OptionsMenu : MonoBehaviour
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width + " x " + resolutions[i].height + " : " + resolutions[i].refreshRateRatio;
+            string option = $"{resolutions[i].width} x  {resolutions[i].height} : {resolutions[i].refreshRateRatio.value:F0}";
             options.Add(option);
 
             if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
