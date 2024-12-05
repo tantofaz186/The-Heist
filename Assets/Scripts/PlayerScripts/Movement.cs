@@ -39,10 +39,8 @@ public class Movement : NetworkBehaviour, IUseAction
     protected void Start()
     {
         corpo_fisico = transform.GetComponent<Rigidbody>();
-        playerCombatReport = GetComponent<CombatReportBehaviour>();
         corpo_fisico.isKinematic = false;
         corpo_FSM = transform.GetComponent<OwnerNetworkAnimator>();
-        playerStats = GetComponent<PlayerStats>();
         vel = walkSpeed;
         lastPosition = new Vector2(transform.position.x, transform.position.z);
     }

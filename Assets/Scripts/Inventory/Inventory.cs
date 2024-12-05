@@ -22,6 +22,7 @@ public class Inventory : NetworkBehaviour
 
     public static Inventory Instance;
 
+    [SerializeField]
     CombatReportBehaviour playerCombatReport;
 
     public void AddItem(GameObject go, Item item)
@@ -42,6 +43,10 @@ public class Inventory : NetworkBehaviour
         }
     }
 
+    public int GetItemIndex(Item item)
+    {
+        return items.ToList().FindIndex((i) => i == item);
+    }
     private IEnumerator DisplayFullInventoryMessage()
     {
         InventoryHud.Instance.DisplayFullInventoryMessage(true);
@@ -51,7 +56,6 @@ public class Inventory : NetworkBehaviour
 
     private void Start()
     {
-        playerCombatReport = GetComponent<CombatReportBehaviour>();
         items = new Item[SLOTS];
         itemsInHand = new GameObject[SLOTS];
     }

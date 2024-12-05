@@ -61,7 +61,6 @@ public class PlayerActions : NetworkBehaviour
 
     public override void OnNetworkDespawn()
     {
-        base.OnNetworkDespawn();
         if (IsOwner)
         {
             foreach (var action in GetComponents<IUseAction>())
@@ -78,6 +77,7 @@ public class PlayerActions : NetworkBehaviour
             }
             playerInputActions.Player.Use.performed -= PLayerInteract;
         }
+        base.OnNetworkDespawn();
     }
 
     private void PLayerInteract(InputAction.CallbackContext obj)
