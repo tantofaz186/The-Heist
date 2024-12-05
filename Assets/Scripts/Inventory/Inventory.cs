@@ -22,6 +22,7 @@ public class Inventory : NetworkBehaviour
 
     public static Inventory Instance;
 
+    [SerializeField]
     CombatReportBehaviour playerCombatReport;
 
     public void AddItem(GameObject go, Item item)
@@ -55,7 +56,6 @@ public class Inventory : NetworkBehaviour
 
     private void Start()
     {
-        playerCombatReport = GetComponent<CombatReportBehaviour>();
         items = new Item[SLOTS];
         itemsInHand = new GameObject[SLOTS];
     }

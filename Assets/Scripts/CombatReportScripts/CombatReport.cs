@@ -51,7 +51,6 @@ namespace CombatReportScripts
             {
                 Debug.Log($"Called {++called}");
                 combatReportUI = FindObjectOfType<CombatReportUI>();
-                SetValuesRpc(SaveSystem.LoadCombatReport());
                 if (IsServer) StartCoroutine(WaitForReady());
             }
             else if (arg0.name == Loader.Scene.GameScene.ToString() && IsServer)
@@ -62,8 +61,25 @@ namespace CombatReportScripts
                         player3 =
                             player4 = new NetworkVariable<CombatReportData>();
             }
+
+            try
+            {
+                SetValuesRpc(NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<CombatReportBehaviour>().combatReportData);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning(e);
+            }
         }
 
+        [Rpc(SendTo.Server, RequireOwnership = false)]
+        public void AskDestroyCombatReportBehaviourRpc()
+        {
+            foreach (NetworkClient connectedClientsValue in NetworkManager.Singleton.ConnectedClients.Values)
+            {
+                connectedClientsValue.PlayerObject.Despawn();
+            }
+        }
         [Rpc(SendTo.Everyone, RequireOwnership = false)]
         public void ServerSendDataRpc()
         {
@@ -75,10 +91,11 @@ namespace CombatReportScripts
                 player4.Value,
             };
             combatReportUI.SetUI(playersData);
+            if (IsServer) AskDestroyCombatReportBehaviourRpc();
         }
 
         [Rpc(SendTo.Server, RequireOwnership = false)]
-        private void SetValuesRpc(CombatReportData _data)
+        public void SetValuesRpc(CombatReportData _data)
         {
             Debug.Log($"{_data.playerID} : {_data.playerName}");
             switch (_data.playerID)

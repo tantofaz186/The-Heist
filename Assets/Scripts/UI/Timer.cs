@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.SceneManagement;
 
 public class Timer : NetworkBehaviour
 {
@@ -17,8 +18,6 @@ public class Timer : NetworkBehaviour
 
     [SerializeField]
     private float startTime;
-
-    public event Action OnTimerEnd;
 
     private void Awake()
     {
@@ -41,6 +40,7 @@ public class Timer : NetworkBehaviour
             remainingTime.Value -= 1;
             timeRan.Value += 1;
         }
+
         if (remainingTime.Value <= 0)
         {
             StopGameRpc();
@@ -57,8 +57,10 @@ public class Timer : NetworkBehaviour
     void StopGameRpc()
     {
         Debug.Log("StopGameRpc");
-        OnTimerEnd?.Invoke();
-        Loader.LoadCombatReportScene();
-        remainingTime.Value = 0;
+        if (IsServer)
+        {
+            Loader.LoadCombatReportScene();
+            remainingTime.Value = 0;
+        }
     }
 }

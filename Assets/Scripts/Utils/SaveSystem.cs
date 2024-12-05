@@ -32,7 +32,7 @@ namespace Utils
 
         public static void SaveCombatReport(CombatReportData data)
         {
-            File.WriteAllText(Application.persistentDataPath + "/combatReport.json", JsonUtility.ToJson(data));
+            File.WriteAllText($"{Application.persistentDataPath}/combatReport.json", JsonUtility.ToJson(data));
         }
 
         public static CombatReportData LoadCombatReport()

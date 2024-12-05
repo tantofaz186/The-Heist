@@ -10,9 +10,10 @@ namespace CombatReportScripts
         {
             base.OnNetworkSpawn();
             ResetData();
+            DontDestroyOnLoad(this);
         }
 
-        private void ResetData()
+        public void ResetData()
         {
             PlayerData data = TheHeistGameMultiplayer.Instance.GetPlayerData();
             combatReportData.playerID = data.clientId;
@@ -33,14 +34,5 @@ namespace CombatReportScripts
                 vezesAtacado = 0,
             };
         }
-        public void Save()
-        {
-            SaveSystem.SaveCombatReport(combatReportData);
-        }
-        private void OnDisable()
-        {
-            Save();
-        }
-
     }
 }
