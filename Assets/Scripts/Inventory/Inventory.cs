@@ -42,6 +42,10 @@ public class Inventory : NetworkBehaviour
         }
     }
 
+    public int GetItemIndex(Item item)
+    {
+        return items.ToList().FindIndex((i) => i == item);
+    }
     private IEnumerator DisplayFullInventoryMessage()
     {
         InventoryHud.Instance.DisplayFullInventoryMessage(true);

@@ -98,7 +98,12 @@ public class PickupObject : NetworkBehaviour, Interactable
 
     public void ForceDropItem()
     {
-        if (IsOwner) ReleaseServerRpc(ItemSelect.Instance.currentItemIndex);
+        if (IsOwner)
+        {
+            int index = Inventory.Instance.GetItemIndex(item);
+            if(index == -1) return;
+            ReleaseServerRpc(index);
+        }
     }
 
     private static int calledTimes = 0;
@@ -244,6 +249,7 @@ public class PickupObject : NetworkBehaviour, Interactable
     {
         if (item.isRelic && !alreadyCollected.Value)
         {
+            gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
             alreadyCollected.Value = true;
             Debug.Log("Relic Dropped");
             NetworkObject.ChangeOwnership(lastOwnerId);
