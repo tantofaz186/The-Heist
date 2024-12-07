@@ -19,11 +19,13 @@ public class EnemyRoman : NetworkBehaviour
     bool walkPointSet;
 
     public float attackRange;
+    public float collideRange;
 
     private bool shooting;
     public GameObject playerFound;
     public float patrolSpeed = 3f;
     public float chaseSpeed = 6f;
+    public float chargeSpeed = 6f;
     public FOV fov;
     public float radiusToPickRandomLocation = 10f;
     public NetworkVariable<float> stamina = new NetworkVariable<float>(100f);
@@ -91,12 +93,12 @@ public class EnemyRoman : NetworkBehaviour
                     return playerFound == null || Tired() || CanAttackTarget(target);
                 });
                 if (IsServer) StopCoroutine(ConsumeStamina());
-                if (CanAttackTarget(target))
+                yield return new WaitUntil(() =>
                 {
                     shooting = true;
                     Attack(target);
-                    yield return new WaitUntil(AttackEnd);
-                }
+                    return playerFound == null || AttackEnd() || Tired();
+                });
             }
             else
             {
@@ -124,18 +126,24 @@ public class EnemyRoman : NetworkBehaviour
 
     void Attack(Transform targetTransform)
     {
-        StopAgent();
-        StartCoroutine(RomanAttack(targetTransform));
+        agent.speed = chargeSpeed;
+        SetAnimationDashRpc();
+        agent.SetDestination(targetTransform.position);
+        if(collideRange >= Vector3.Distance(transform.position, targetTransform.position))
+        {
+            stamina.Value = 0f;
+            shooting = false;
+            
+        }
     }
+    
+    
 
-    IEnumerator RomanAttack(Transform target)
+    /*IEnumerator RomanAttack(Transform target)
     {
         StopAgent();
         transform.LookAt(target);
-        if (IsServer)
-        {
-            chargeSound.PlayAudioClientRpc();
-        }
+       
         SetAnimationDashRpc();
         if (IsServer)
         {
@@ -145,7 +153,7 @@ public class EnemyRoman : NetworkBehaviour
         yield return new WaitForSeconds(1.5f);
         Tired();
         AttackEnd();
-    }
+    }*/
 
     bool CanAttackTarget(Transform target)
     {
@@ -153,12 +161,12 @@ public class EnemyRoman : NetworkBehaviour
     }
 
     bool AttackEnd()
-    {
+    {   
         return !shooting;
     }
 
     bool Tired()
-    {
+    {      
         return stamina.Value <= 0;
     }
     
@@ -242,8 +250,10 @@ public class EnemyRoman : NetworkBehaviour
     public void SetAnimationTiredFalseRpc()
     {
         anim.SetBool("tired", false);
+        anim.SetBool("attack", false);
     }
     
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
     public void SetAnimationDashRpc()
     {   anim.SetBool("attack", true);
         anim.SetBool("run", false);
