@@ -1,37 +1,32 @@
-using System.Collections;
 using System.Linq;
 using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using Utils;
 
-public class DisplayCase : NetworkBehaviour, Interactable, IUseAction
+public class DisplayCase : NetworkBehaviour, Interactable
 {
     NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false);
     NetworkVariable<bool> unlocked = new NetworkVariable<bool>(false);
 
-    public void TryOpenDisplayCase(InputAction.CallbackContext obj)
+    public void TryOpenDisplayCase()
     {
         if (!unlocked.Value)
         {
-            int index = Inventory.Instance.items.ToList().FindIndex((i) => i.itemName == "DisplayCaseKey");
+            int index = Inventory.Instance.items.ToList().FindIndex((i) => i != null && i.itemName == "DisplayCaseKey");
             Debug.Log($"index : {index}");
             if (index > -1)
             {
                 UnlockServerRpc();
                 Debug.Log("Unlocking Display Case");
                 Inventory.Instance.RemoveItem(index);
+                TryOpenServerRpc();
             }
         }
-
-        TryOpenServerRpc();
     }
 
     [Rpc(SendTo.Server)]
     public void TryOpenServerRpc()
     {
-        if (unlocked.Value) return;
         Debug.Log("Opening Display Case");
         DisableDisplayCase();
         isOpen.Value = true;
@@ -55,7 +50,7 @@ public class DisplayCase : NetworkBehaviour, Interactable, IUseAction
         MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
         foreach (MeshRenderer renderer in renderers)
         {
-            if(renderer.name == "base_reliquias") continue;
+            if (renderer.name == "base_reliquias") continue;
             renderer.enabled = false;
         }
     }
@@ -67,18 +62,7 @@ public class DisplayCase : NetworkBehaviour, Interactable, IUseAction
 
     public void Interact()
     {
-        TryOpenServerRpc();
-    }
-
-    public void setActions()
-    {
-        Debug.Log("Setting actions for Display Case");
-        PlayerActions.Instance.PlayerInputActions.Player.Use.performed += TryOpenDisplayCase;
-    }
-
-    public void unsetActions()
-    {
-        PlayerActions.Instance.PlayerInputActions.Player.Use.performed -= TryOpenDisplayCase;
+        TryOpenDisplayCase();
     }
 
     #region editor

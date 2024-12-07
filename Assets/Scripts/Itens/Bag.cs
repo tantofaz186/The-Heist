@@ -23,6 +23,7 @@ public class Bag : BaseItem
         }
 
         playerInventory.MaxWeight = Mathf.Max(playerInventory.MaxWeight, bagWeight);
+        InventoryHud.Instance.SetBackpackImage(item);
         HideItemRpc();
         playerInventory.RemoveItem(item);
     }
