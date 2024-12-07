@@ -10,7 +10,6 @@ namespace CombatReportScripts
         {
             base.OnNetworkSpawn();
             ResetData();
-            DontDestroyOnLoad(this);
         }
 
         public void ResetData()
@@ -33,6 +32,12 @@ namespace CombatReportScripts
                 itensUsados = 0,
                 vezesAtacado = 0,
             };
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            CombatReport.Instance.SetValuesRpc(combatReportData);
+            base.OnNetworkDespawn();
         }
     }
 }

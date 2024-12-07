@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
@@ -61,21 +62,12 @@ namespace CombatReportScripts
                         player3 =
                             player4 = new NetworkVariable<CombatReportData>();
             }
-
-            try
-            {
-                SetValuesRpc(NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<CombatReportBehaviour>().combatReportData);
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogWarning(e);
-            }
         }
 
         [Rpc(SendTo.Server, RequireOwnership = false)]
         public void AskDestroyCombatReportBehaviourRpc()
         {
-            foreach (NetworkClient connectedClientsValue in NetworkManager.Singleton.ConnectedClients.Values)
+            foreach (NetworkClient connectedClientsValue in NetworkManager.Singleton.ConnectedClients.Values.Where(x => x.PlayerObject.IsSpawned))
             {
                 connectedClientsValue.PlayerObject.Despawn();
             }
