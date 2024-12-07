@@ -106688,6 +106688,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Esfinge_Metade
       objectReference: {fileID: 0}
+    - target: {fileID: 7778256076605481230, guid: 3535c33b10c07024d8bdff240ca37529, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 2335990858256739859, guid: d89a12bb73fbfba4b9f9a760da432d50, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -110660,26 +110664,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Esfinge_Metade (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 7960076903941925285, guid: 3535c33b10c07024d8bdff240ca37529, type: 3}
-      propertyPath: m_Center.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7960076903941925285, guid: 3535c33b10c07024d8bdff240ca37529, type: 3}
-      propertyPath: m_Center.z
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7960076903941925285, guid: 3535c33b10c07024d8bdff240ca37529, type: 3}
-      propertyPath: m_Extents.x
-      value: 1.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 7960076903941925285, guid: 3535c33b10c07024d8bdff240ca37529, type: 3}
-      propertyPath: m_Extents.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7960076903941925285, guid: 3535c33b10c07024d8bdff240ca37529, type: 3}
-      propertyPath: m_Extents.z
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -111442,6 +111426,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6969309461478353202}
     m_Modifications:
+    - target: {fileID: 6658211952994114172, guid: 37db472427c06c74099ec78cd3798234, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8646779208686443633, guid: 37db472427c06c74099ec78cd3798234, type: 3}
       propertyPath: m_LocalPosition.x
       value: -34

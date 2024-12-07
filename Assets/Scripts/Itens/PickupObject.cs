@@ -26,7 +26,6 @@ public class PickupObject : NetworkBehaviour, Interactable
 
     private ulong lastOwnerId;
     public NetworkVariable<bool> alreadyCollected = new();
-    public NetworkVariable<int> numberCollected = new(0);
 
     public void Start()
     {
@@ -66,11 +65,10 @@ public class PickupObject : NetworkBehaviour, Interactable
         PlayerActions.Instance.PlayerInputActions.Player.DropRelic.performed += DropRelic;
     }
 
-    public override void OnDestroy()
+    public void OnDisable()
     {
         PlayerActions.Instance.PlayerInputActions.Player.Release.performed -= DropItem;
         PlayerActions.Instance.PlayerInputActions.Player.DropRelic.performed -= DropRelic;
-        base.OnDestroy();
     }
 
     private void DropRelic(InputAction.CallbackContext obj)
@@ -98,7 +96,12 @@ public class PickupObject : NetworkBehaviour, Interactable
 
     public void ForceDropItem()
     {
-        if (IsOwner) ReleaseServerRpc(ItemSelect.Instance.currentItemIndex);
+        if (IsOwner)
+        {
+            int index = Inventory.Instance.GetItemIndex(item);
+            if (index == -1) return;
+            ReleaseServerRpc(index);
+        }
     }
 
     private static int calledTimes = 0;
@@ -244,24 +247,26 @@ public class PickupObject : NetworkBehaviour, Interactable
     {
         if (item.isRelic && !alreadyCollected.Value)
         {
+            gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
             alreadyCollected.Value = true;
             Debug.Log("Relic Dropped");
             NetworkObject.ChangeOwnership(lastOwnerId);
             OwnerCollectRpc();
-            Invoke(nameof(Despawn), 2f);
+            Invoke(nameof(DespawnThis), 2f);
         }
     }
 
-    private void Despawn()
+    private void DespawnThis()
     {
-        numberCollected.Value++;
-        NetworkObject.Despawn();
+        if (IsServer) NetworkObject.Despawn();
     }
 
     [Rpc(SendTo.Owner, RequireOwnership = false)]
     public void OwnerCollectRpc()
     {
-        NetworkManager.LocalClient.PlayerObject.GetComponent<CombatReportBehaviour>().combatReportData.dinheiroRecebido +=
+        var cbt = NetworkManager.LocalClient.PlayerObject.GetComponent<CombatReportBehaviour>();
+        cbt.combatReportData.dinheiroRecebido +=
             item.itemValue;
+        cbt.combatReportData.reliquiasColetadas++;
     }
 }

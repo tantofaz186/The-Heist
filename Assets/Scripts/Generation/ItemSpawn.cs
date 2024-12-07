@@ -37,22 +37,25 @@ public class ItemSpawn : NetworkBehaviour
     private List<GameObject> pans;
 
     [SerializeField]
-    private GameObject map;   
-    
+    private GameObject map;
+
     [SerializeField]
-    private GameObject displayCase;    
+    private GameObject displayCase;
+
     [SerializeField]
     private GameObject displayCaseKey;
-    
-    
-    [SerializeField] private GameObject bagP;
 
-    [SerializeField] private GameObject bagM;
-    
-    [SerializeField] private GameObject bagG;
-    
+    [SerializeField]
+    private GameObject bagP;
+
+    [SerializeField]
+    private GameObject bagM;
+
+    [SerializeField]
+    private GameObject bagG;
+
     int mapCount = 0;
-    
+
     [Rpc(SendTo.Server)]
     public void SpawnItemsRpc()
     {
@@ -68,7 +71,7 @@ public class ItemSpawn : NetworkBehaviour
     {
         for (int i = 0; i < spawnPointIndex; i++)
         {
-            yield return new WaitForEndOfFrame();
+            if (i % 5 == 0) yield return new WaitForEndOfFrame();
         }
 
         switch (type)
@@ -96,7 +99,7 @@ public class ItemSpawn : NetworkBehaviour
                 break;
             case 7:
                 SortDisplayCase(spawnPointIndex);
-                break;            
+                break;
             case 8:
                 SortDisplayCaseKey(spawnPointIndex);
                 break;
@@ -114,9 +117,10 @@ public class ItemSpawn : NetworkBehaviour
 
     NetworkVariable<bool> spawnedDisplayCase = new NetworkVariable<bool>(false);
     NetworkVariable<bool> spawnedDisplayCaseKey = new NetworkVariable<bool>(false);
+
     private void SortMap(int i)
     {
-        if(mapCount>=4) return;
+        if (mapCount >= 4) return;
         var instance = Instantiate(map, itemSpawnPoints[i].transform);
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
@@ -130,7 +134,8 @@ public class ItemSpawn : NetworkBehaviour
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
         spawnedDisplayCase.Value = true;
-    }    
+    }
+
     private void SortDisplayCaseKey(int i)
     {
         if (spawnedDisplayCaseKey.Value) return;
@@ -179,7 +184,7 @@ public class ItemSpawn : NetworkBehaviour
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
     }
-    
+
     private void SortBagP(int i)
     {
         var instance = Instantiate(bagP, itemSpawnPoints[i].transform);
@@ -187,18 +192,16 @@ public class ItemSpawn : NetworkBehaviour
         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
         Debug.Log("bagP");
     }
-    
+
     private void SortBagM(int i)
     {
-        
         var instance = Instantiate(bagM, itemSpawnPoints[i].transform);
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);
     }
-    
+
     private void SortBagG(int i)
     {
-        
         var instance = Instantiate(bagG, itemSpawnPoints[i].transform);
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
         instanceNetworkObject.SpawnWithOwnership(OwnerClientId);

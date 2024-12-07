@@ -3544,7 +3544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1221648278
+  GlobalObjectIdHash: 282280595
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -3591,7 +3591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcd78ce04d7bbd4ca4606ef9b8bc2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 0}
+  playerStats: {fileID: 88759529031686857}
   pausado: 0
   movement:
     m_Name: Movement
@@ -3614,7 +3614,7 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 12353
-  playerCombatReport: {fileID: 0}
+  playerCombatReport: {fileID: 5717207351165305123}
   jumpSound: {fileID: -9197407336986276919}
   walkSound: {fileID: 4813602325190537705}
   runSound: {fileID: 5618321736130774388}
@@ -3650,7 +3650,8 @@ MonoBehaviour:
   injured: 0
   isSafe: 0
   canDrop: 0
-  movement: {fileID: 0}
+  movement: {fileID: 4586447672509110361}
+  playerCombatReport: {fileID: 5717207351165305123}
   mapPieces: 0
 --- !u!114 &-6749964110250010635
 MonoBehaviour:
@@ -3676,6 +3677,7 @@ MonoBehaviour:
   itemsInHand:
   - {fileID: 0}
   - {fileID: 0}
+  playerCombatReport: {fileID: 5717207351165305123}
 --- !u!114 &-5401163062824662830
 MonoBehaviour:
   m_ObjectHideFlags: 0
