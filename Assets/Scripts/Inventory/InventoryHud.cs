@@ -11,6 +11,7 @@ public class InventoryHud : Singleton<InventoryHud>
     public Slider weighSlider;
     public TextMeshProUGUI fullWeightText;
     public Image weightImage;
+    public Image backpackImage;
 
     private void OnDisable()
     {
@@ -118,5 +119,10 @@ public class InventoryHud : Singleton<InventoryHud>
     public void DisplayFullInventoryMessage(bool active)
     {
         fullWeightText.gameObject.SetActive(active);
+    }
+    
+    public void SetBackpackImage(Item item)
+    {
+        backpackImage.sprite = item.itemSprite;
     }
 }
