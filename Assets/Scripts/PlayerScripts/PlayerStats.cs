@@ -19,23 +19,22 @@ public class PlayerStats : NetworkBehaviour
     [SerializeField]
     Movement movement;
 
-    CombatReportBehaviour playerCombatReport;
+    public CombatReportBehaviour playerCombatReport;
     public int mapPieces;
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        if (!IsOwner) enabled = false;
-    }
-
-    void Start()
-    {
-        movement = GetComponent<Movement>();
-        playerCombatReport = GetComponent<CombatReportBehaviour>();
+        if (!IsOwner)
+        {
+            enabled = false;
+            return;
+        }
         dmgGO = GameObject.Find("DamageImage");
         dmgImg = dmgGO.GetComponent<Image>();
         Debug.Log("Start");
     }
+    
 
     void SendToPrison()
     {
