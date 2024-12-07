@@ -136,8 +136,6 @@ public class EnemyRoman : NetworkBehaviour
         {
             chargeSound.PlayAudioClientRpc();
         }
-        SetAnimationChargeRpc();
-        yield return new WaitForSeconds(2f); 
         SetAnimationDashRpc();
         if (IsServer)
         {
@@ -245,16 +243,11 @@ public class EnemyRoman : NetworkBehaviour
     {
         anim.SetBool("tired", false);
     }
-
-    [Rpc(SendTo.Everyone, RequireOwnership = false)]
-    public void SetAnimationChargeRpc()
-    {
-        anim.SetTrigger("dash");
-    }
     
     public void SetAnimationDashRpc()
-    {
-        anim.SetTrigger("dash");
+    {   anim.SetBool("attack", true);
+        anim.SetBool("run", false);
+        anim.SetBool("walk", false);
     }
 
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
