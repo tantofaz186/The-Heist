@@ -1,9 +1,10 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class Bullet :NetworkBehaviour
+public class Bullet : NetworkBehaviour
 {
     Rigidbody rb;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -11,7 +12,7 @@ public class Bullet :NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-         DestroyRpc();
+        DestroyRpc();
     }
 
     [Rpc(SendTo.Server)]
@@ -19,8 +20,8 @@ public class Bullet :NetworkBehaviour
     {
         DeactivateRpc();
     }
-    
-    [Rpc(SendTo.Everyone)]
+
+    [Rpc(SendTo.Everyone, RequireOwnership = false)]
     public void DeactivateRpc()
     {
         gameObject.SetActive(false);
