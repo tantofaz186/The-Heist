@@ -6,6 +6,7 @@ Shader "Unlit/MiniMapShader"
         _Radius ("Radius", Range(0,1)) = 0.5
         _BorderCol ("Border Color", Color) = (0,0,1,1)
         _BorderThickness ("Border Thickness", Range(0,0.05)) = 0.01
+        _AlphaControl ("AlphaControl", Range(0,1)) = 1
     }
     SubShader
     {
@@ -42,6 +43,7 @@ Shader "Unlit/MiniMapShader"
             float1 _Radius;
             float4 _BorderCol;
             float1 _BorderThickness;
+            float1 _AlphaControl;
 
             v2f vert(appdata v)
             {
@@ -54,9 +56,9 @@ Shader "Unlit/MiniMapShader"
             fixed4 frag(v2f i) : SV_Target
             {
                 // sample the texture
-                fixed4 transparent = 0;
+                fixed4 transparent = 0; 
                 fixed4 col = tex2D(_MainTex, i.uv);
-
+                col.a = _AlphaControl;
                 // make border color
                 float2 center = 0.5 * float2(1, 1);
                 float2 uv = i.uv.xy - center;
@@ -68,7 +70,10 @@ Shader "Unlit/MiniMapShader"
                 // apply border
 
                 if (sqrt(pow(radius - _Radius, 2)) <= _BorderThickness)
+                {
                     col = _BorderCol;
+                    col.a = _AlphaControl;
+                }
                 return col;
             }
             ENDCG
