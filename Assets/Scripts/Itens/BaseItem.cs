@@ -28,7 +28,25 @@ public abstract class BaseItem : NetworkBehaviour
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
     public void ShowItemRpc()
     {
-        meshRenderer.enabled = true;
+        switch (item.type)
+        {
+            case Item.ItemType.NightVision:
+                PlayerActions.Instance.nightVision.SetActive(true);
+                break;
+            case Item.ItemType.Flare:
+                PlayerActions.Instance.flare.SetActive(true);
+                break;
+            case Item.ItemType.Key:
+                PlayerActions.Instance.key.SetActive(true);
+                break;
+            case Item.ItemType.Radio:
+                PlayerActions.Instance.radio.SetActive(true);
+                break;
+            case Item.ItemType.Relic:
+
+            default:
+                break;
+        }
     }
 
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
@@ -36,6 +54,27 @@ public abstract class BaseItem : NetworkBehaviour
     {
         Debug.Log($"Tentei esconder");
         meshRenderer.enabled = false;
+        switch (item.type)
+        {
+            case Item.ItemType.NightVision:
+                PlayerActions.Instance.nightVision.SetActive(false);
+                OnDrop();
+                break;
+            case Item.ItemType.Flare:
+                PlayerActions.Instance.flare.SetActive(false);
+                break;
+            case Item.ItemType.Key:
+                PlayerActions.Instance.key.SetActive(false);
+                break;
+            case Item.ItemType.Radio:
+                PlayerActions.Instance.radio.SetActive(false);
+                break;
+            case Item.ItemType.Relic:
+
+            default:
+                break;
+        }
+
         if (IsServer)
         {
             if (spawnedObjectVfx.IsSpawned)

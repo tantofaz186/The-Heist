@@ -25,10 +25,10 @@ public class PlayerActions : NetworkBehaviour
     public Image keySprite;
 
     public Transform drop;
-    public Transform nightVision;
-    public Transform key;
-    public Transform flare;
-    public Transform radio;
+    public GameObject nightVision;
+    public GameObject key;
+    public GameObject flare;
+    public GameObject radio;
     private PlayerInputActions playerInputActions;
     public PlayerInputActions PlayerInputActions => playerInputActions;
 

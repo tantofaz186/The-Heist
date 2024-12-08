@@ -139,27 +139,9 @@ public class PickupObject : NetworkBehaviour, Interactable
     private void ParentObjectRpc(ulong senderClientId)
     {
         NetworkObject senderPlayerObject = NetworkManager.Singleton.ConnectedClients[senderClientId].PlayerObject;
-        Transform playerTransform;
-        switch (item.type)
-        {
-            case Item.itemType.Radio:
-                playerTransform = senderPlayerObject.GetComponent<PlayerActions>().radio;
-                break;
-            case Item.itemType.Flare:
-                playerTransform = senderPlayerObject.GetComponent<PlayerActions>().flare;
-                break;
-            case Item.itemType.Key:
-                playerTransform = senderPlayerObject.GetComponent<PlayerActions>().key;
-                break;
-            case Item.itemType.NightVision:
-                playerTransform = senderPlayerObject.GetComponent<PlayerActions>().nightVision;
-                break;
-            case Item.itemType.Relic:
-                default:
-                playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
-                break;
-             
-        }
+        Transform playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
+
+
         transform.parent = senderPlayerObject.transform;
         transform.position = playerTransform.position;
         try
@@ -239,7 +221,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         _renderer.enabled = true;
         m_Collider.enabled = true;
         SomeRpc(true);
-        m_Rigidbody.AddForce(transform.forward * 0.5f, ForceMode.Impulse);
+        m_Rigidbody.AddForce(transform.forward * 1.5f, ForceMode.Impulse);
     }
 
     [Rpc(SendTo.Owner)]
