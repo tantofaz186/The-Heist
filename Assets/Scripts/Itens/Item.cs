@@ -13,6 +13,16 @@ public class Item : ScriptableObject
     public int itemWeight;
     public GameObject itemPrefab;
     public int prefabIndex;
+    public itemType type;
+    public enum itemType
+    {   
+        Relic,
+        Radio,
+        Flare,
+        Key,
+        NightVision,
+       
+    }
 
     public override string ToString()
     {

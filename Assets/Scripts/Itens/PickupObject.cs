@@ -139,7 +139,27 @@ public class PickupObject : NetworkBehaviour, Interactable
     private void ParentObjectRpc(ulong senderClientId)
     {
         NetworkObject senderPlayerObject = NetworkManager.Singleton.ConnectedClients[senderClientId].PlayerObject;
-        Transform playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
+        Transform playerTransform;
+        switch (item.type)
+        {
+            case Item.itemType.Radio:
+                playerTransform = senderPlayerObject.GetComponent<PlayerActions>().radio;
+                break;
+            case Item.itemType.Flare:
+                playerTransform = senderPlayerObject.GetComponent<PlayerActions>().flare;
+                break;
+            case Item.itemType.Key:
+                playerTransform = senderPlayerObject.GetComponent<PlayerActions>().key;
+                break;
+            case Item.itemType.NightVision:
+                playerTransform = senderPlayerObject.GetComponent<PlayerActions>().nightVision;
+                break;
+            case Item.itemType.Relic:
+                default:
+                playerTransform = senderPlayerObject.GetComponent<PlayerActions>().drop;
+                break;
+             
+        }
         transform.parent = senderPlayerObject.transform;
         transform.position = playerTransform.position;
         try
