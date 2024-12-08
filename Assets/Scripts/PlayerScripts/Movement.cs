@@ -191,6 +191,18 @@ public class Movement : NetworkBehaviour, IUseAction
         StartCoroutine(nameof(SlowCoroutine));
     }
 
+    public void Stun(Vector3 direction)
+    {
+        StartCoroutine(StunCoroutine(direction));
+    }
+
+    public IEnumerator StunCoroutine(Vector3 direction)
+    {
+        pausado = true;
+        corpo_fisico.AddForce(direction, ForceMode.Impulse);
+        yield return new WaitForSeconds(.8f);
+        pausado = false;
+    }
     IEnumerator SlowCoroutine()
     {
         Debug.Log("Slowed");

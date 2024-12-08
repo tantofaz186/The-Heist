@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
+[RequireComponent(typeof(DoorTrigger))]
 public class Door : NetworkBehaviour, Interactable
 {
     public NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false);

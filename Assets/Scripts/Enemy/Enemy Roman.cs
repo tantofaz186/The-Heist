@@ -25,15 +25,20 @@ public class EnemyRoman : NetworkBehaviour
     public GameObject playerFound;
     public float patrolSpeed = 3f;
     public float chaseSpeed = 6f;
-    public float chargeSpeed = 6f;
+    public float chargeSpeed = 20f;
     public FOV fov;
     public float radiusToPickRandomLocation = 10f;
     public NetworkVariable<float> stamina = new NetworkVariable<float>(100f);
     public float staminaSpeed;
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private Collider hitCollider;
-    
-    [SerializeField] Vector3 patrolLocation;
+
+    [SerializeField]
+    private Rigidbody rb;
+
+    [SerializeField]
+    private Collider hitCollider;
+
+    [SerializeField]
+    Vector3 patrolLocation;
 
     private List<GameObject> waypoints;
 
@@ -56,7 +61,7 @@ public class EnemyRoman : NetworkBehaviour
         if (IsServer)
         {
             StopAgent();
-            GetComponent<Rigidbody>().isKinematic = true;
+            GetComponent<Rigidbody>().isKinematic = false;
             StartCoroutine(FovScan());
             StartCoroutine(StateMachineBehaviour());
         }
@@ -119,7 +124,7 @@ public class EnemyRoman : NetworkBehaviour
 
     void Chase(Transform target)
     {
-        agent.speed = chaseSpeed;
+        agent.speed = chargeSpeed;
         SetAnimationRunRpc();
         agent.SetDestination(target.position);
     }
@@ -129,31 +134,17 @@ public class EnemyRoman : NetworkBehaviour
         agent.speed = chargeSpeed;
         SetAnimationDashRpc();
         agent.SetDestination(targetTransform.position);
-        if(collideRange >= Vector3.Distance(transform.position, targetTransform.position))
-        {
-            stamina.Value = 0f;
-            shooting = false;
-            
-        }
     }
-    
-    
 
-    /*IEnumerator RomanAttack(Transform target)
+    public void EndAttack(Collider other, float force)
     {
-        StopAgent();
-        transform.LookAt(target);
-       
-        SetAnimationDashRpc();
-        if (IsServer)
-        {
-            attackSound.PlayAudioClientRpc();
-        }
-        rb.AddForce(Vector3.forward*100f, ForceMode.VelocityChange);
-        yield return new WaitForSeconds(1.5f);
-        Tired();
-        AttackEnd();
-    }*/
+        Vector3 direction = transform.forward * force;
+        rb.AddForce(-direction, ForceMode.Impulse);
+        other.GetComponent<Movement>().Stun(direction);
+        agent.ResetPath();
+        stamina.Value = 0f;
+        shooting = false;
+    }
 
     bool CanAttackTarget(Transform target)
     {
@@ -161,46 +152,36 @@ public class EnemyRoman : NetworkBehaviour
     }
 
     bool AttackEnd()
-    {   
+    {
         return !shooting;
     }
 
     bool Tired()
-    {      
+    {
         return stamina.Value <= 0;
     }
-    
+
     public void ChangePatolLocation(Vector3 newPatrolLocation)
     {
         fov.ClearObjects();
         patrolLocation = newPatrolLocation;
         agent.SetDestination(patrolLocation);
-        
     }
-    
 
     #endregion
 
     #region Navmesh
-    
+
     public List<GameObject> GetWaypoints()
     {
         return GameObject.FindGameObjectsWithTag("Waypoints").ToList();
     }
-    private Vector3 PickRandomNavmeshLocation(/*float radius*/)
+
+    private Vector3 PickRandomNavmeshLocation()
     {
-        /*Vector3 randomDirection = Random.insideUnitSphere * radius;
-        randomDirection += transform.position;
-        NavMeshHit hit;
-        Vector3 finalPosition = Vector3.zero;
-        if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
-        {
-            finalPosition = hit.position;
-        }*/
-        
         int rnd = Random.Range(0, waypoints.Count);
-       
-        return  waypoints[rnd].transform.position;
+
+        return waypoints[rnd].transform.position;
     }
 
     bool Arrived()
@@ -230,8 +211,10 @@ public class EnemyRoman : NetworkBehaviour
     IEnumerator RegenerateStamina()
     {
         StopAgent();
+        agent.speed = 0;
         SetAnimationTiredTrueRpc();
         yield return new WaitForSeconds(3f);
+        agent.speed = patrolSpeed;
         if (IsServer) stamina.Value = 100f;
         SetAnimationTiredFalseRpc();
     }
@@ -252,10 +235,11 @@ public class EnemyRoman : NetworkBehaviour
         anim.SetBool("tired", false);
         anim.SetBool("attack", false);
     }
-    
+
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
     public void SetAnimationDashRpc()
-    {   anim.SetBool("attack", true);
+    {
+        anim.SetBool("attack", true);
         anim.SetBool("run", false);
         anim.SetBool("walk", false);
     }

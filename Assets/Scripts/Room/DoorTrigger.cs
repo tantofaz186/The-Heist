@@ -7,7 +7,7 @@ public class DoorTrigger : NetworkBehaviour
 
    private void OnTriggerEnter(Collider other)
    {
-      if (other.TryGetComponent(out Inventory inventory))
+      if (other.TryGetComponent(out FOV _))
       {
          if (!door.isOpen.Value)
          {
@@ -18,7 +18,7 @@ public class DoorTrigger : NetworkBehaviour
    
    private void OnTriggerExit(Collider other)
    {
-      if (other.TryGetComponent(out Inventory inventory))
+      if (other.TryGetComponent(out FOV _))
       {
          if (door.isOpen.Value)
          {
