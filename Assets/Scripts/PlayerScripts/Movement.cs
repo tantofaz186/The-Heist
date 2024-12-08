@@ -12,6 +12,7 @@ public class Movement : NetworkBehaviour, IUseAction
     public InputAction movement;
 
     private OwnerNetworkAnimator corpo_FSM;
+
     [SerializeField]
     Animator headFSM;
 
@@ -36,6 +37,7 @@ public class Movement : NetworkBehaviour, IUseAction
     public AudioPlay runSound;
     bool isPlayingRun = false;
     bool isPlayingWalk = false;
+
     protected void Start()
     {
         corpo_fisico = transform.GetComponent<Rigidbody>();
@@ -60,7 +62,7 @@ public class Movement : NetworkBehaviour, IUseAction
         {
             vel = runSpeed;
             corpo_FSM.Animator.SetFloat("mover", 1f);
-            if(!isPlayingRun)
+            if (!isPlayingRun)
             {
                 runSound.PlayAudioClientRpc();
                 isPlayingRun = true;
@@ -86,7 +88,7 @@ public class Movement : NetworkBehaviour, IUseAction
         {
             vel = walkSpeed;
             corpo_FSM.Animator.SetFloat("mover", 0f);
-            if(!isPlayingWalk)
+            if (!isPlayingWalk)
             {
                 walkSound.PlayAudioClientRpc();
                 isPlayingWalk = true;
@@ -98,6 +100,7 @@ public class Movement : NetworkBehaviour, IUseAction
         {
             runSound.PauseAudioClientRpc();
         }
+
         if (!isPlayingWalk)
         {
             walkSound.PauseAudioClientRpc();
@@ -108,7 +111,7 @@ public class Movement : NetworkBehaviour, IUseAction
         velocity += transform.forward * (valueRead.y * vel * Time.fixedDeltaTime);
         velocity += transform.right * (valueRead.x * vel * Time.fixedDeltaTime);
 
-        
+
         velocity.y = (corpo_fisico.velocity.y < 0) ? corpo_fisico.velocity.y * 1.03f : corpo_fisico.velocity.y;
         corpo_fisico.velocity = velocity;
         Vector2 current2dPos = new Vector2(transform.position.x, transform.position.z);
@@ -125,6 +128,7 @@ public class Movement : NetworkBehaviour, IUseAction
     }
 
     private Vector2 lastPosition;
+
     public void Jump(InputAction.CallbackContext context)
     {
         if (!IsOwner) return;
@@ -182,24 +186,23 @@ public class Movement : NetworkBehaviour, IUseAction
         PlayerActions.Instance.PlayerInputActions.Player.Crouch.performed -= Crouch;
     }
 
-
     public void Slow()
     {
         StartCoroutine(nameof(SlowCoroutine));
     }
+
     IEnumerator SlowCoroutine()
-    {    Debug.Log("Slowed");
-       runSpeed /= 3f;
-       crouchSpeed /= 3;
-       crouchRun /= 3;
-       walkSpeed /= 3;
+    {
+        Debug.Log("Slowed");
+        runSpeed /= 3f;
+        crouchSpeed /= 3;
+        crouchRun /= 3;
+        walkSpeed /= 3;
         yield return new WaitForSeconds(3.5f);
         runSpeed *= 3f;
         crouchSpeed *= 3f;
         walkSpeed *= 3f;
         crouchRun *= 3f;
-        
-        
     }
 
     public override void OnNetworkSpawn()
@@ -210,6 +213,7 @@ public class Movement : NetworkBehaviour, IUseAction
             enabled = false;
             return;
         }
+
         Instance = this;
     }
 }
