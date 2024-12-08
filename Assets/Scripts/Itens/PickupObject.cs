@@ -71,7 +71,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         PlayerActions.Instance.PlayerInputActions.Player.DropRelic.performed -= DropRelic;
     }
 
-    private void DropRelic(InputAction.CallbackContext obj)
+    public void DropRelic(InputAction.CallbackContext obj)
     {
         if (m_IsGrabbed.Value && IsOwner)
         {
