@@ -753,7 +753,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6373350861803321327}
   - component: {fileID: -8787398271096299209}
-  - component: {fileID: 308535045971846843}
   m_Layer: 6
   m_Name: Hallway
   m_TagString: Ground
@@ -912,25 +911,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &308535045971846843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5132577278816812498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92d8452b07e6d214aa5f8ddb2d1eb946, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lights: []
-  renderers: []
-  renderersLightmapIndex: 
-  renderersLightmapOffsetScale: []
-  texturesColor: []
-  texturesDir: []
-  texturesShadow: []
 --- !u!1 &6200806080763892115
 GameObject:
   m_ObjectHideFlags: 0
@@ -6208,6 +6188,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3626870762291280528, guid: 5683869d4232b0c43b96ad09f70c89f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.6563864
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626870762291280528, guid: 5683869d4232b0c43b96ad09f70c89f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626870762291280528, guid: 5683869d4232b0c43b96ad09f70c89f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19.100834
+      objectReference: {fileID: 0}
     - target: {fileID: 4288878703002550008, guid: 5683869d4232b0c43b96ad09f70c89f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.1008353
@@ -6754,6 +6746,10 @@ PrefabInstance:
     - target: {fileID: 6779198965783941555, guid: f66c254b64f1d1a46b4bb54299bceab8, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 218097998
+      objectReference: {fileID: 0}
+    - target: {fileID: 6944179038800211733, guid: f66c254b64f1d1a46b4bb54299bceab8, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 507903
       objectReference: {fileID: 0}
     - target: {fileID: 7953016208017296510, guid: f66c254b64f1d1a46b4bb54299bceab8, type: 3}
       propertyPath: GlobalObjectIdHash
