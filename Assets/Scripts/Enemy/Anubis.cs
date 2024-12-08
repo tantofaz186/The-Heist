@@ -131,7 +131,13 @@ public class Anubis : NetworkBehaviour
         transform.LookAt(target);
         playerPos = target;
         SetAnimationAttackRpc();
-        yield return new WaitForSeconds(1f);
+        float time = 1f;
+        do {
+            transform.LookAt(target);
+            playerPos = target;
+            time -= Time.deltaTime;
+            yield return null;
+        } while (time > 0);
         
         if (IsServer)
         {
