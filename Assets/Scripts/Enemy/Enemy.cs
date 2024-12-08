@@ -29,14 +29,15 @@ public class Enemy : NetworkBehaviour
     public NetworkVariable<float> stamina = new NetworkVariable<float>(100f);
     public float staminaSpeed;
     public float heightOffset = 1.5f;
-    
+
     public AudioListPlay screamSound;
 
     private List<GameObject> waypoints;
 
     public Transform bulletSpawn;
-    
-    [SerializeField] Vector3 patrolLocation;
+
+    [SerializeField]
+    Vector3 patrolLocation;
 
     private void Awake()
     {
@@ -44,7 +45,6 @@ public class Enemy : NetworkBehaviour
         anim = GetComponentInChildren<Animator>();
         fov = GetComponent<FOV>();
     }
-    
 
     GameObject FindPlayer(FOV sensor)
     {
@@ -85,7 +85,7 @@ public class Enemy : NetworkBehaviour
 
             yield return new WaitUntil(() => Arrived() || playerFound != null);
             if (playerFound)
-            {   
+            {
                 Transform target = playerFound.transform;
                 if (IsServer) StartCoroutine(ConsumeStamina());
                 screamSound.PlayAudioClientRpc();
@@ -95,7 +95,8 @@ public class Enemy : NetworkBehaviour
                     return playerFound == null || Tired() || CanAttackTarget(target);
                 });
                 if (CanAttackTarget(target))
-                {   if (IsServer) StopCoroutine(ConsumeStamina());
+                {
+                    if (IsServer) StopCoroutine(ConsumeStamina());
                     shooting = true;
                     Attack(target);
                     yield return new WaitUntil(AttackEnd);
@@ -134,11 +135,20 @@ public class Enemy : NetworkBehaviour
     IEnumerator Shoot(Transform target)
     {
         StopAgent();
-         transform.LookAt(target);
-         Vector3 targetPosition = target.position + Vector3.up * heightOffset;
+        Vector3 targetPosition = target.position + Vector3.up * heightOffset;
+        transform.LookAt(target);
         bulletSpawn.LookAt(targetPosition);
         SetAnimationShootRpc();
-        yield return new WaitForSeconds(1.5f);
+        float time = 1.5f;
+
+        do
+        {
+            time -= Time.deltaTime;
+            targetPosition = target.position + Vector3.up * heightOffset;
+            transform.LookAt(target);
+            bulletSpawn.LookAt(targetPosition);
+            yield return null;
+        } while (time > 0);
 
         if (IsServer)
         {
@@ -149,7 +159,6 @@ public class Enemy : NetworkBehaviour
         yield return new WaitForSeconds(2f);
         shooting = false;
     }
-
 
     private void OnCollisionEnter(Collision other)
     {
@@ -173,7 +182,7 @@ public class Enemy : NetworkBehaviour
     {
         return stamina.Value <= 0;
     }
-    
+
     public void ChangePatolLocation(Vector3 newPatrolLocation)
     {
         fov.ClearObjects();
@@ -182,7 +191,7 @@ public class Enemy : NetworkBehaviour
     }
 
     [Rpc(SendTo.Server)]
-    void InstantiateBulletRpc() 
+    void InstantiateBulletRpc()
     {
         GameObject bullet = BulletPool.instance.GetBullet();
         if (bullet != null)
@@ -200,12 +209,13 @@ public class Enemy : NetworkBehaviour
     #endregion
 
     #region Navmesh
-    
+
     public List<GameObject> GetWaypoints()
     {
         return GameObject.FindGameObjectsWithTag("Waypoints").ToList();
     }
-    private Vector3 PickRandomNavmeshLocation(/*float radius*/)
+
+    private Vector3 PickRandomNavmeshLocation( /*float radius*/)
     {
         /*Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += transform.position;
@@ -215,10 +225,10 @@ public class Enemy : NetworkBehaviour
         {
             finalPosition = hit.position;
         }*/
-        
+
         int rnd = Random.Range(0, waypoints.Count);
-       
-        return  waypoints[rnd].transform.position;
+
+        return waypoints[rnd].transform.position;
     }
 
     bool Arrived()
@@ -291,6 +301,4 @@ public class Enemy : NetworkBehaviour
     }
 
     #endregion
-    
-   
 }
