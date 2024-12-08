@@ -6679,6 +6679,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GaragemNova
       objectReference: {fileID: 0}
+    - target: {fileID: 2595645110606544242, guid: 5683869d4232b0c43b96ad09f70c89f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4288878703002550008, guid: 5683869d4232b0c43b96ad09f70c89f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.1008353
@@ -6722,13 +6726,162 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2595645110606544242, guid: 5683869d4232b0c43b96ad09f70c89f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5178220303235300631}
+    - targetCorrespondingSourceObject: {fileID: 2595645110606544242, guid: 5683869d4232b0c43b96ad09f70c89f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9201597096605489701}
+    - targetCorrespondingSourceObject: {fileID: 8150983932292305595, guid: 5683869d4232b0c43b96ad09f70c89f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1449287728830927847}
   m_SourcePrefab: {fileID: 100100000, guid: 5683869d4232b0c43b96ad09f70c89f7, type: 3}
+--- !u!1 &241621412749150516 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8150983932292305595, guid: 5683869d4232b0c43b96ad09f70c89f7, type: 3}
+  m_PrefabInstance: {fileID: 8233835582119844751}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1449287728830927847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241621412749150516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424b6720ff5999446843ba414e58a907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CursorMode: 0
+  m_CursorGraphic: {fileID: 0}
+  m_CursorTransform: {fileID: 0}
+  m_CursorSpeed: 400
+  m_ScrollSpeed: 45
+  m_StickAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Stick
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: b0a2c2d6-97b4-445b-aab4-b5ffcaa3e2e1
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_LeftButtonAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Left Button
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 066a7149-92ed-4d3f-9d2e-77b538fd1191
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_MiddleButtonAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Middle Button
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: ca710f37-a9a2-492d-8bf6-649f18377c11
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_RightButtonAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Right Button
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: efd0bd49-cef4-4c9c-9e35-7d30f9bffe50
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_ForwardButtonAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Forward Button
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: b38dafea-7243-4708-870e-3e383760bd0f
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_BackButtonAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Back Button
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: c4f72c1c-d043-40f8-bd76-14a76c36d21d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_ScrollWheelAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Scroll Wheel
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 42f1fd1b-65da-45ba-850d-2344c3317da9
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!4 &5314631988493018487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4288878703002550008, guid: 5683869d4232b0c43b96ad09f70c89f7, type: 3}
   m_PrefabInstance: {fileID: 8233835582119844751}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6215496005649377021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2595645110606544242, guid: 5683869d4232b0c43b96ad09f70c89f7, type: 3}
+  m_PrefabInstance: {fileID: 8233835582119844751}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5178220303235300631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6215496005649377021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!114 &9201597096605489701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6215496005649377021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d49b7c1bcd2e07499844da127be038d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_ForceModuleActive: 0
 --- !u!1001 &8497893202896226150
 PrefabInstance:
   m_ObjectHideFlags: 0
