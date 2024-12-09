@@ -15,11 +15,11 @@ public class PlayerCombatReportUI : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            texts.Add(transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>());
-            images.Add(transform.GetChild(i).GetComponentInChildren<Image>());
-        }
+        // for (int i = 0; i < transform.childCount; i++)
+        // {
+        //     texts.Add(transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>());
+        //     images.Add(transform.GetChild(i).GetComponentInChildren<Image>());
+        // }
     }
 
     public void Start()

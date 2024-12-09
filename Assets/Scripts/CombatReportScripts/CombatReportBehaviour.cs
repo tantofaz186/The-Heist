@@ -9,6 +9,11 @@ namespace CombatReportScripts
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
+            if(!IsOwner)
+            {
+                enabled = false;
+                return;
+            }
             ResetData();
         }
 
@@ -36,7 +41,10 @@ namespace CombatReportScripts
 
         public override void OnNetworkDespawn()
         {
-            CombatReport.Instance.SetValuesRpc(combatReportData);
+            if (IsOwner)
+            {
+                CombatReport.Instance.SetValuesRpc(combatReportData);
+            }
             base.OnNetworkDespawn();
         }
     }
