@@ -91,7 +91,24 @@ public class PlayerCombatReportUI : MonoBehaviour
                     dataOrdered.Add(new Tuple<Color, string>(combatReports[i].playerColor,
                         combatReports[i].playerName.IsEmpty ? "" : $"{combatReports[i].playerName} : {combatReports[i].dinheiroRecebido}"));
                 }
+                break;            
+            case CombatReportType.PULOS:
+                combatReports.Sort((cr1, cr2) => cr2.pulos.CompareTo(cr1.pulos));
+                for (int i = 0; i < combatReports.Count; i++)
+                {
+                    dataOrdered.Add(new Tuple<Color, string>(combatReports[i].playerColor,
+                        combatReports[i].playerName.IsEmpty ? "" : $"{combatReports[i].playerName} : {combatReports[i].pulos}"));
+                }
                 break;
+            case CombatReportType.RELIQUIAS:
+                combatReports.Sort((cr1, cr2) => cr2.reliquiasColetadas.CompareTo(cr1.reliquiasColetadas));
+                for (int i = 0; i < combatReports.Count; i++)
+                {
+                    dataOrdered.Add(new Tuple<Color, string>(combatReports[i].playerColor,
+                        combatReports[i].playerName.IsEmpty ? "" : $"{combatReports[i].playerName} : {combatReports[i].reliquiasColetadas}"));
+                }
+                break;
+            
             default:
                 combatReports.Sort((cr1, cr2) => cr1.playerID.CompareTo(cr2.playerID));
                 for (int i = 0; i < combatReports.Count; i++)
@@ -141,4 +158,8 @@ public enum CombatReportType
     DISTANCIA,
     ITEMS,
     MONEY,
+    PULOS,
+    RELIQUIAS,
+    ATAQUES_RECEBIDOS,
+    
 }
