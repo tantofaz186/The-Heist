@@ -141,7 +141,7 @@ public class EnemyRoman : NetworkBehaviour
     }
     
     public void EndAttack(Collider other, float force)
-    {
+    {   
         Vector3 direction = transform.forward * force;
         rb.AddForce(-direction, ForceMode.Impulse);
         other.GetComponent<Movement>().Stun(direction);

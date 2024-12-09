@@ -38,9 +38,13 @@ public class PlayerStats : NetworkBehaviour
 
     void SendToPrison()
     {
-        transform.position = Prison.instance.prisonTransform.position;
-        playerCombatReport.combatReportData.vezesPreso++;
-        Prison.instance.AddPrisonerRpc();
+        if (IsOwner)
+        {
+            transform.position = Prison.instance.prisonTransform.position;
+                    playerCombatReport.combatReportData.vezesPreso++;
+                    Prison.instance.AddPrisonerRpc();
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -72,7 +76,7 @@ public class PlayerStats : NetworkBehaviour
         if (IsOwner)
         {
             hit = true;
-            playerCombatReport.combatReportData.vezesAtacado++;
+           playerCombatReport.combatReportData.vezesAtacado++;
             dmgImg.color = new Color(dmgImg.color.r, dmgImg.color.g, dmgImg.color.b, 1f);
             yield return new WaitForSeconds(0.3f);
             dmgImg.color = new Color(dmgImg.color.r, dmgImg.color.g, dmgImg.color.b, 0f);
