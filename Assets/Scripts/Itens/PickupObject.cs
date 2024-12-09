@@ -87,7 +87,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         if (IsOwner && !item.isRelic && m_IsGrabbed.Value)
         {
             Debug.Log($"Called {++calledTimes} times");
-            if (Inventory.Instance.items[ItemSelect.Instance.currentItemIndex] == item)
+            if (Inventory.Instance.items[ItemSelect.Instance.currentItemIndex] == item && Inventory.Instance.itemsInHand[ItemSelect.Instance.currentItemIndex] == gameObject)
             {
                 ReleaseServerRpc(ItemSelect.Instance.currentItemIndex);
             }
