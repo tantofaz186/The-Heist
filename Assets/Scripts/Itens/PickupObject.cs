@@ -15,7 +15,7 @@ public class PickupObject : NetworkBehaviour, Interactable
     public Item item;
 
     private Rigidbody m_Rigidbody;
-    private BoxCollider m_Collider;
+    [SerializeField] private BoxCollider m_Collider;
 
     private NetworkVariable<bool> m_IsGrabbed = new NetworkVariable<bool>();
 
@@ -166,7 +166,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         m_Rigidbody.isKinematic = !_enabled;
         m_Rigidbody.useGravity = _enabled;
         m_Collider.isTrigger = !_enabled;
-        m_Collider.enabled = enabled;
+        GetComponent<BoxCollider>().enabled = _enabled;
     }
 
     [Rpc(SendTo.Owner)]
