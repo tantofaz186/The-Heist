@@ -198,14 +198,11 @@ public class Movement : NetworkBehaviour, IUseAction
 
     public IEnumerator StunCoroutine(Vector3 direction)
     {
-        if (IsOwner)
-        {
         pausado = true;
         corpo_fisico.AddForce(direction, ForceMode.Impulse);
         yield return new WaitForSeconds(.8f);
         pausado = false;
-        }
-}
+    }
     IEnumerator SlowCoroutine()
     {
         Debug.Log("Slowed");

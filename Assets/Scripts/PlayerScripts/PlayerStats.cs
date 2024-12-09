@@ -71,8 +71,6 @@ public class PlayerStats : NetworkBehaviour
     {
         if (IsOwner)
         {
-
-
             hit = true;
             playerCombatReport.combatReportData.vezesAtacado++;
             dmgImg.color = new Color(dmgImg.color.r, dmgImg.color.g, dmgImg.color.b, 1f);
