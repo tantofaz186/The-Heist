@@ -13,8 +13,8 @@ public class Item : ScriptableObject
     public int itemWeight;
     public GameObject itemPrefab;
     public int prefabIndex;
-    public itemType type;
-    public enum itemType
+    public ItemType type;
+    public enum ItemType
     {   
         Relic,
         Radio,
