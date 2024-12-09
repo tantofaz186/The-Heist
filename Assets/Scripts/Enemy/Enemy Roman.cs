@@ -88,18 +88,21 @@ public class EnemyRoman : NetworkBehaviour
             yield return new WaitWhile(Tired);
 
             yield return new WaitUntil(() => Arrived() || playerFound != null);
+            
             if (playerFound)
             {
                 Transform target = playerFound.transform;
                 if (IsServer) StartCoroutine(ConsumeStamina());
                 yield return new WaitUntil(() =>
-                {
+                {   
+                    
                     Chase(target);
                     return playerFound == null || Tired() || CanAttackTarget(target);
                 });
                 if (IsServer) StopCoroutine(ConsumeStamina());
                 yield return new WaitUntil(() =>
-                {
+                {   
+                    Debug.Log("StartAttack");
                     shooting = true;
                     Attack(target);
                     return playerFound == null || AttackEnd() || Tired();
@@ -123,14 +126,15 @@ public class EnemyRoman : NetworkBehaviour
     }
 
     void Chase(Transform target)
-    {
+    {   
         agent.speed = chargeSpeed;
         SetAnimationRunRpc();
         agent.SetDestination(target.position);
     }
 
     void Attack(Transform targetTransform)
-    {
+    {   
+       
         agent.speed = chargeSpeed;
         SetAnimationDashRpc();
         agent.SetDestination(targetTransform.position);
@@ -148,7 +152,7 @@ public class EnemyRoman : NetworkBehaviour
 
     bool CanAttackTarget(Transform target)
     {
-        return Vector3.Distance(transform.position, target.position) <= attackRange && !shooting;
+        return Vector3.Distance(transform.position, target.position) <= attackRange ;
     }
 
     bool AttackEnd()
@@ -217,6 +221,7 @@ public class EnemyRoman : NetworkBehaviour
         agent.speed = patrolSpeed;
         if (IsServer) stamina.Value = 100f;
         SetAnimationTiredFalseRpc();
+        Patrol();
     }
 
     #endregion
