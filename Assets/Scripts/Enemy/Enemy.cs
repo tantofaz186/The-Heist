@@ -139,16 +139,21 @@ public class Enemy : NetworkBehaviour
         transform.LookAt(target);
         bulletSpawn.LookAt(targetPosition);
         SetAnimationShootRpc();
-        float time = 1.5f;
+        yield return new WaitForSeconds(1f);
+        transform.LookAt(target);
+        bulletSpawn.LookAt(targetPosition);
+        yield return new WaitForSeconds(.5f);
+        
+        //float time = 1.5f;
 
-        do
+       /* do
         {
             time -= Time.deltaTime;
             targetPosition = target.position + Vector3.up * heightOffset;
             transform.LookAt(target);
             bulletSpawn.LookAt(targetPosition);
             yield return null;
-        } while (time > 0);
+        } while (time > 0);*/
 
         if (IsServer)
         {
