@@ -18,13 +18,12 @@ public class FlareBullet : NetworkBehaviour
         Debug.Log(hitColliders.Length);
         foreach (var hitCollider in hitColliders)
         {
-            hitCollider.TryGetComponent<Enemy>(out var enemy);
-            enemy.ChangePatolLocation(transform.position);
-            hitCollider.TryGetComponent<Anubis>(out var anubis);
-            anubis.ChangePatolLocation(transform.position);
-            hitCollider.TryGetComponent<EnemyRoman>(out var roman);
-            roman.ChangePatolLocation(transform.position);
-            
+            if(hitCollider.TryGetComponent<Enemy>(out var enemy))
+                enemy.ChangePatolLocation(transform.position);
+            if(hitCollider.TryGetComponent<Anubis>(out var anubis))
+                anubis.ChangePatolLocation(transform.position);
+            if(hitCollider.TryGetComponent<EnemyRoman>(out var roman))
+                roman.ChangePatolLocation(transform.position);
         }
     }
     
