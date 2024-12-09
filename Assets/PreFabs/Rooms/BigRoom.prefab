@@ -107276,6 +107276,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BauDoAnubis Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4373383131843792216, guid: e1cbd653f50a00f46a69e066bb88d509, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6606142808801985930, guid: e1cbd653f50a00f46a69e066bb88d509, type: 3}
       propertyPath: m_LocalPosition.x
       value: -26.52
@@ -107316,7 +107320,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7619279987701564634, guid: e1cbd653f50a00f46a69e066bb88d509, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2654117997319625930, guid: e1cbd653f50a00f46a69e066bb88d509, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
