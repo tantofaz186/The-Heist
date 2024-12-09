@@ -14,7 +14,7 @@ public class CombatReportUI : MonoBehaviour
 
     private void Awake()
     {
-        combatReport = FindObjectsOfType<PlayerCombatReportUI>().ToList();
+        //combatReport = FindObjectsOfType<PlayerCombatReportUI>().ToList();
     }
 
     private void UpdateUI()
@@ -27,7 +27,6 @@ public class CombatReportUI : MonoBehaviour
             CombatReport.Instance.player4.Value,
         };
         SetUI(combatReportUpdated);
-
     }
 
     public void SetUI(List<CombatReportData> data)
