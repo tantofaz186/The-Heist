@@ -139,7 +139,7 @@ public class EnemyRoman : NetworkBehaviour
         SetAnimationDashRpc();
         agent.SetDestination(targetTransform.position);
     }
-
+    
     public void EndAttack(Collider other, float force)
     {
         Vector3 direction = transform.forward * force;

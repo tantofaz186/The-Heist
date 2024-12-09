@@ -69,12 +69,17 @@ public class PlayerStats : NetworkBehaviour
 
     IEnumerator TakeDamage()
     {
-        hit = true;
-        playerCombatReport.combatReportData.vezesAtacado++;
-        dmgImg.color = new Color(dmgImg.color.r, dmgImg.color.g, dmgImg.color.b, 1f);
-        yield return new WaitForSeconds(0.3f);
-        dmgImg.color = new Color(dmgImg.color.r, dmgImg.color.g, dmgImg.color.b, 0f);
-        yield return new WaitForSeconds(1.7f);
-        hit = false;
+        if (IsOwner)
+        {
+
+
+            hit = true;
+            playerCombatReport.combatReportData.vezesAtacado++;
+            dmgImg.color = new Color(dmgImg.color.r, dmgImg.color.g, dmgImg.color.b, 1f);
+            yield return new WaitForSeconds(0.3f);
+            dmgImg.color = new Color(dmgImg.color.r, dmgImg.color.g, dmgImg.color.b, 0f);
+            yield return new WaitForSeconds(1.7f);
+            hit = false;
+        }
     }
 }
