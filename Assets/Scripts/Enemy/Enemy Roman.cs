@@ -99,7 +99,10 @@ public class EnemyRoman : NetworkBehaviour
                     Chase(target);
                     return playerFound == null || Tired() || CanAttackTarget(target);
                 });
-                if (IsServer) StopCoroutine(ConsumeStamina());
+                if (IsServer)
+                {
+                    stamina.Value = 10000f;
+                }
                 yield return new WaitUntil(() =>
                 {   
                     Debug.Log("StartAttack");
