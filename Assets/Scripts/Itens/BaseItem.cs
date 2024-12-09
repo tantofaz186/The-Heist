@@ -25,7 +25,7 @@ public abstract class BaseItem : NetworkBehaviour
 
     public virtual void OnDrop() { }
 
-    [Rpc(SendTo.Everyone, RequireOwnership = false)]
+    [Rpc(SendTo.Owner, RequireOwnership = false)]
     public void ShowItemRpc()
     {
         switch (item.type)
@@ -54,27 +54,29 @@ public abstract class BaseItem : NetworkBehaviour
     {
         Debug.Log($"Tentei esconder");
         meshRenderer.enabled = false;
-        switch (item.type)
+        if (IsOwner)
         {
-            case Item.ItemType.NightVision:
-                PlayerActions.Instance.nightVision.SetActive(false);
-                OnDrop();
-                break;
-            case Item.ItemType.Flare:
-                PlayerActions.Instance.flare.SetActive(false);
-                break;
-            case Item.ItemType.Key:
-                PlayerActions.Instance.key.SetActive(false);
-                break;
-            case Item.ItemType.Radio:
-                PlayerActions.Instance.radio.SetActive(false);
-                break;
-            case Item.ItemType.Relic:
+            switch (item.type)
+            {
+                case Item.ItemType.NightVision:
+                    PlayerActions.Instance.nightVision.SetActive(false);
+                    OnDrop();
+                    break;
+                case Item.ItemType.Flare:
+                    PlayerActions.Instance.flare.SetActive(false);
+                    break;
+                case Item.ItemType.Key:
+                    PlayerActions.Instance.key.SetActive(false);
+                    break;
+                case Item.ItemType.Radio:
+                    PlayerActions.Instance.radio.SetActive(false);
+                    break;
+                case Item.ItemType.Relic:
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
-
         if (IsServer)
         {
             if (spawnedObjectVfx.IsSpawned)
