@@ -145,6 +145,13 @@ public class EnemyRoman : NetworkBehaviour
         Vector3 direction = transform.forward * force;
         rb.AddForce(-direction, ForceMode.Impulse);
         other.GetComponent<Movement>().Stun(direction);
+        ServerEndAttackRpc();
+        shooting = false;
+    }
+    
+    [Rpc(SendTo.Server, RequireOwnership = false)]
+    public void ServerEndAttackRpc()
+    {
         agent.ResetPath();
         stamina.Value = 0f;
         shooting = false;
