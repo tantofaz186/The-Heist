@@ -36,6 +36,7 @@ namespace CombatReportScripts
                 distanciaPercorrida = 0,
                 itensUsados = 0,
                 vezesAtacado = 0,
+                pulos = 0,
             };
         }
 
