@@ -166,6 +166,7 @@ public class PickupObject : NetworkBehaviour, Interactable
         m_Rigidbody.isKinematic = !_enabled;
         m_Rigidbody.useGravity = _enabled;
         m_Collider.isTrigger = !_enabled;
+        m_Collider.enabled = enabled;
     }
 
     [Rpc(SendTo.Owner)]
